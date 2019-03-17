@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Hexo博客搭建]]></title>
+    <url>%2F2019%2F03%2F15%2F%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[Hexo-Github博客搭建过程&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇文章用于介绍Hexo个人博客的搭建过程，这也是我搭建本博客后的第一篇文章，分享一下搭建方法，有兴趣的小伙伴也可以自主搭建一个属于自己的博客！ 首先感谢大家的来访支持！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自己本来开始做的是html网页，网页做完之后需要购买服务器和域名（价格不便宜）才能运营，还要定期维护它，对于我个人只是感兴趣做个自己的网页，单单做个html网页就很费力气了，实在是没有精力和时间运营它，所以也没有必要去购买服务器和域名（性价比低），但我做的html网页在我自己的电脑上还是可以运营的（感兴趣的小伙伴可以联系我，一起探讨做html网页的方法）。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其次，现在市面上的博客有很多，如CSDN，博客园等平台，可以直接在上面发表，也有很多优点，但缺点是比较不自由，会受到各种限制和恶心的广告。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以我选择了直接在github page平台上托管我的博客，这样可以安心写作，也不需要定期维护，而且hexo作为一个快速简洁的博客框架，用它来搭建博客也很简单。我在两天内完成了Hexo-Github个人博客的基本搭建（其实搭建不难，自己脑子笨，做的慢些了……）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这里记录一下我的第搭建一个博客，并给大家分享一下搭建的流程，以及在搭建过程中遇到的问题和解决方案。如果你也有搭建个人博客的想法，希望能给你一点经验帮助。 大家都是新手，可以分享经验，互相交流学习的。 搭建经历 2019-3-13：初次看到Hexo-Github搭建个人博客，很感兴趣，便开始了自己博客的搭建； 2019-3-14：完成了个人博客的基本搭建（可以运营），并上传了第一篇文章； 未完待续…… 搭建步骤 安装Git 安装Node.js 安装Hexo 注册Github账号 Github创建个人仓库 生产SSH添加到Github 将hexo部署到Github 设置个人域名 设定主题]]></content>
+      <categories>
+        <category>Hexo</category>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>博客搭建</tag>
+      </tags>
+  </entry>
+</search>
