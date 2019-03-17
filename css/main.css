@@ -1919,7 +1919,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #9a1d59;
+  background: #baffac;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2038,6 +2038,27 @@ pre .javascript .function {
 }
 .post-toc .nav .active-current > a:hover {
   color: #fc6423;
+}
+.chat {
+  margin-top: 10px;
+}
+.chat a {
+  display: inline-block;
+  padding: 0 15px;
+  color: #fc6423;
+  border: 1px solid #fc6423;
+  border-radius: 4px;
+}
+.chat a i {
+  color: #fc6423;
+  font-size: 14px;
+}
+.chat a:hover {
+  color: #fff;
+  background: #fc6423;
+}
+.chat a:hover i {
+  color: #fff;
 }
 .footer {
   font-size: 14px;
