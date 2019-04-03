@@ -102,11 +102,11 @@
 <meta name="keywords" content="python,离散数学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python+离散数学→逻辑演算">
-<meta property="og:url" content="https://hpu-yz.github.io/2019/04/02/逻辑演算 (1)/index.html">
+<meta property="og:url" content="https://hpu-yz.github.io/2019/04/02/逻辑演算/index.html">
 <meta property="og:site_name" content="庸人自扰--个人博客">
 <meta property="og:description" content="前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本篇探讨的是一道逻辑演算推理题。有两种方法，一种是常规的离散数学逻辑演算，另一种则是用python程序来解决。本篇将探究两种方法： python+离散数学→逻辑演算。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-02T13:37:25.499Z">
+<meta property="og:updated_time" content="2019-04-03T04:35:00.807Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python+离散数学→逻辑演算">
 <meta name="twitter:description" content="前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;本篇探讨的是一道逻辑演算推理题。有两种方法，一种是常规的离散数学逻辑演算，另一种则是用python程序来解决。本篇将探究两种方法： python+离散数学→逻辑演算。">
@@ -116,7 +116,7 @@
 
 
 
-  <link rel="canonical" href="https://hpu-yz.github.io/2019/04/02/逻辑演算 (1)/">
+  <link rel="canonical" href="https://hpu-yz.github.io/2019/04/02/逻辑演算/">
 
 
 
@@ -375,7 +375,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hpu-yz.github.io/2019/04/02/逻辑演算 (1)/">
+    <link itemprop="mainEntityOfPage" href="https://hpu-yz.github.io/2019/04/02/逻辑演算/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="庸人自扰">
@@ -418,12 +418,24 @@
                 
               
 
-              <time title="创建时间：2019-04-02 00:00:00 / 修改时间：21:37:25" itemprop="dateCreated datePublished" datetime="2019-04-02T00:00:00+08:00">2019-04-02</time>
+              <time title="创建时间：2019-04-02 00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-02T00:00:00+08:00">2019-04-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-03 12:35:00" itemprop="dateModified" datetime="2019-04-03T12:35:00+08:00">2019-04-03</time>
               
             
           </span>
@@ -466,8 +478,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/04/02/逻辑演算 (1)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/02/逻辑演算 (1)/" itemprop="commentCount"></span>
+                <a href="/2019/04/02/逻辑演算/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/02/逻辑演算/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -475,7 +487,7 @@
 
           
           
-            <span id="/2019/04/02/逻辑演算 (1)/" class="leancloud_visitors" data-flag-title="python+离散数学→逻辑演算">
+            <span id="/2019/04/02/逻辑演算/" class="leancloud_visitors" data-flag-title="python+离散数学→逻辑演算">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -514,8 +526,11 @@
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇探讨的是一道逻辑演算推理题。有两种方法，一种是常规的离散数学逻辑演算，另一种则是用python程序来解决。本篇将探究两种方法： python+离散数学→逻辑演算。<br><a id="more"></a></p>
 <blockquote>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在某次研讨会的中间休息时间，3名与会者根据王教授的口音对他是哪个省市的人判断如下：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲:王教授不是苏州人，是上海人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙:王教授不是上海人，是苏州人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙:王教授既不是上海人，也不是杭州人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;听完这3人的判断后，王教授笑着说，你们3人中有一人说得全对，有一人说对了一半，另一人全不对。试用逻辑演算分析王教授到底是哪里人.</p>
+</blockquote>
+<blockquote>
 <h2 id="常规推理"><a href="#常规推理" class="headerlink" title="常规推理"></a>常规推理</h2></blockquote>
-<p>设命题&nbsp;&nbsp;&nbsp;&nbsp;p:王教授是苏州人；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q:王教授是上海人；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r:王教授是杭州人；</p>
+<p>设命题&nbsp;&nbsp;&nbsp;&nbsp;p:王教授是苏州人；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q:王教授是上海人；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r:王教授是杭州人；</p>
 <p>用p,q,r表示甲乙丙的观点如下：</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲：￢p∧q</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙：p∧￢q</p>
@@ -532,8 +547,7 @@
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙对一半：D2=(q∧￢r) ∨( ￢q∧r)</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙全错：D3=q∧r</p>
 <p>有王教授那句话可以写：</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E=（B1∧C2∧D3）∨(B1∧C3∧D2) ∨(B2∧C1∧D3) ∨(B2∧C3∧D1) ∨</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(B3∧C1∧D2) ∨(B3∧C2∧D1)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E=（B1∧C2∧D3）∨(B1∧C3∧D2) ∨(B2∧C1∧D3) ∨(B2∧C3∧D1) ∨(B3∧C1∧D2) ∨(B3∧C2∧D1)</p>
 <p>是真命题</p>
 <p>而B1∧C2∧D3⇔(￢p∧q) ∧((￢p∧￢q) ∨(p∧q)) ∧(q∧r)</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q) ∧((￢p∧￢q) ∧(q∧r) ∨ (p∧q) ∧(q∧r))</p>
@@ -880,7 +894,7 @@ show_date_time();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常规推理"><span class="nav-number">1.1.</span> <span class="nav-text">常规推理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python程序实现"><span class="nav-number">1.2.</span> <span class="nav-text">python程序实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常规推理"><span class="nav-number">1.2.</span> <span class="nav-text">常规推理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python程序实现"><span class="nav-number">1.3.</span> <span class="nav-text">python程序实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>
