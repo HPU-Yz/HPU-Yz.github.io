@@ -514,7 +514,7 @@ code {
   padding: 2px 4px;
   color: #555;
   background: #eee;
-  border-radius: 10px;
+  border-radius: 50px;
   font-size: 14px;
 }
 pre {
@@ -1935,7 +1935,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #4effff;
+  background: #fff617;
 }
 .links-of-blogroll {
   font-size: 13px;
