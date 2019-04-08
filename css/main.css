@@ -1935,7 +1935,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #8f957a;
+  background: #a67cbe;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3188,9 +3188,15 @@ ul.breadcrumb li+li:last-child {
 .post {
   margin-top: 60px;
   margin-bottom: 60px;
-  padding: 0px;
-  -webkit-box-shadow: 0 0 2px rgba(202,203,203,0.95);
-  -moz-box-shadow: 0 0 2px rgba(202,203,204,0.95);
+  padding: 25px;
+  background: rgba(255,255,255,0.9) none repeat scroll !important;
+  -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
+  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
+}
+.content {
+  border-radius: 20px;
+  padding: 30px 60px 30px 60px;
+  background: rgba(255,255,255,0.8) none repeat scroll !important;
 }
 @-moz-keyframes heartAnimate {
   0%, 100% {
