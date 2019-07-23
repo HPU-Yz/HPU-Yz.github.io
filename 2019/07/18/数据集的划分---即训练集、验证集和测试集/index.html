@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="小zhi子">
 <meta property="og:description" content="前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-23T07:53:16.980Z">
+<meta property="og:updated_time" content="2019-07-23T07:54:46.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据集的划分--训练集、验证集和测试集">
 <meta name="twitter:description" content="前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。">
@@ -439,7 +439,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 15:53:16" itemprop="dateModified" datetime="2019-07-23T15:53:16+08:00">2019-07-23</time>
+                <time title="修改时间：2019-07-23 15:54:46" itemprop="dateModified" datetime="2019-07-23T15:54:46+08:00">2019-07-23</time>
               
             
           </span>
@@ -549,7 +549,8 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。<br><a id="more"></a></p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。</p>
+<a id="more"></a>
 <h2 id="为什么要划分数据集为训练集、验证集和测试集？"><a href="#为什么要划分数据集为训练集、验证集和测试集？" class="headerlink" title="为什么要划分数据集为训练集、验证集和测试集？"></a>为什么要划分数据集为训练集、验证集和测试集？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;做科研，就要提出问题，找到解决方法，并证明其有效性。这里的工作有3个部分，一个是提出问题，一个是找到解决方法，另一个是证明有效性。每一个部分都可以作为科研的对象，研究的越靠前，则越偏向科学，越靠后，则越偏向技术，因此叫做科学与技术。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在人工智能领域，证明一个模型的有效性，就是对于某一问题，有一些数据，而我们提出的模型可以（部分）解决这个问题，那如何来证明呢？这和我们平时的考试也是一样的，证明我们掌握了某类知识，就是去参加考试。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;好，那么如何设计考试，让这个考试可以较为客观的考察出每个人的能力呢（注意，不是让每个人都得最高分）？回想我们的高中阶段，有一些教材，让我们平时学习其基本知识（训练集），有一些模拟考试，让我们知道我们到底掌握的怎么样，然后再改进我们的学习（验证集），最后的高考决定我们的去向（测试集）。这样的类比，是不是就很清楚了。</p>
