@@ -379,6 +379,242 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hpu-yz.github.io/2019/07/22/暑期培训第一次测试题总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小zhi子">
+      <meta itemprop="description" content="Life may sometimes have regret,but the future is still good.Since the choice of the distance,will only trials and hardships.">
+      <meta itemprop="image" content="http://www.qqju.com/pic/tx/tx26190.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小zhi子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/22/暑期培训第一次测试题总结/" class="post-title-link" itemprop="url">暑期培训第一次测试题总结</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-22 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-22T00:00:00+08:00">2019-07-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-23 14:52:57" itemprop="dateModified" datetime="2019-07-23T14:52:57+08:00">2019-07-23</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/测试题，机器学习/" itemprop="url" rel="index"><span itemprop="name">测试题，机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/07/22/暑期培训第一次测试题总结/" class="leancloud_visitors" data-flag-title="暑期培训第一次测试题总结">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">2.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">9 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        
+          
+            <h1 id="Feeling"><a href="#Feeling" class="headerlink" title="Feeling"></a>Feeling</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经过几天的学习，7月22日下午，进行了第一次检测。开始以为会让我们推导一些公式什么的，结果当拿到测试题的时候，一首凉凉送给自己……开始的选择题和填空题还能接受，看到简答题，这都是什么，有种似曾相识的感觉，但就是写不出来。为时四十分钟的考试结束后，不到半个小时成绩就出来了，虽然成绩不那么好，但排名还行，然后学长给我们进行了讲解答疑，发现自己学的有点粗糙，没有注意那些细节性问题和概念，学以致用这方面也是有点差的。面对这次测试，我在这里总结下试题，备录一下，方便日后回顾复习。</p>
+<h2 id="Test-1"><a href="#Test-1" class="headerlink" title="Test 1"></a>Test 1</h2><h3 id="为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set"><a href="#为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set" class="headerlink" title="为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?"></a>为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校验集是用于调整超参数的，从而更好的优化训练模型。测试集是用于在完成神经网络训练过程后,为了客观评价模型在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,而且测试集<strong>不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标</strong>。</p>
+<p>（备注：不清楚这三个数据集概念及其作用的，可看下我以前写的关于这些的一篇文章。传送门：）</p>
+<h2 id="Test-2"><a href="#Test-2" class="headerlink" title="Test 2"></a>Test 2</h2><h3 id="批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？"><a href="#批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？" class="headerlink" title="批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？"></a>批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们要先知道什么是BGD和SGD，从两者的运算方法上，我们就可以得知不同之处。</p>
+<p>（1）批量梯度下降法（Batch Gradient Descent） ：在更新参数时都使用所有的样本来进行更新。</p>
+<ul>
+<li>优点：<strong>全局最优解</strong>，能保证每一次更新权值，都能降低损失函数；易于并行实现。</li>
+<li>缺点：当样本数目很多时，训练过程会很慢。</li>
+</ul>
+<p>（2）随机梯度下降法（Stochastic Gradient Descent）：在更新参数时都使用一个样本来进行更新。每一次跟新参数都用一个样本，更新很多次。如果样本量很大的情况（例如几十万），那么可能只用其中几万条或者几千条的样本，就已经将参数迭代到最优解了，对比上面的批量梯度下降，迭代一次需要用到十几万训练样本，一次迭代不可能最优，如果迭代10次的话就需要遍历训练样本10次，这种方式计算复杂度太高。</p>
+<ul>
+<li>优点：训练速度快；</li>
+<li>缺点：准确度下降，<strong>并不是全局最优</strong>；不易于并行实现。从迭代的次数上来看，随机梯度下降法迭代的次数较多，在解空间的搜索过程看起来很盲目。噪音很多，使得它并不是每次迭代都向着整体最优化方向。</li>
+</ul>
+<h2 id="Test-3"><a href="#Test-3" class="headerlink" title="Test 3"></a>Test 3</h2><h3 id="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"><a href="#当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？" class="headerlink" title="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"></a>当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;废话不多说，直接上图：<br><img src="https://img-blog.csdnimg.cn/20190722174826448.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="Test-4"><a href="#Test-4" class="headerlink" title="Test 4"></a>Test 4</h2><h3 id="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"><a href="#假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？" class="headerlink" title="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"></a>假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于逻辑回归，把权重初始化为0当然也是可以的，但是对于一个神经网络，如果你把权重或者参数都初始化为0，那么梯度下降将不会起作用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果权值全初始化为0，则<strong>无法更新权值</strong>。这是由于前向传播中，所有节点输出值均相同，由于此处使用了sigmod激活函数，所以此处所有神经节点输出都为1/2，而在反向传播每个节点输出值对损失函数的偏导时，涉及到对权值相乘后的求和，该项永远为0，故所乘的结果也必然为0，这样在计算权值对算是函数的偏导时，其偏导必然为0，所有权值偏导都为0，那么就不要指望使用梯度下降法能更新权值了，自然神经网络的训练也就无法进行下去了。</p>
+<p>　　</p>
+<h2 id="Test-5"><a href="#Test-5" class="headerlink" title="Test 5"></a>Test 5</h2><h3 id="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"><a href="#在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？" class="headerlink" title="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"></a>在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;神经网络中的梯度不稳定指的是<strong>梯度消失</strong>和<strong>梯度爆炸</strong>问题。<br>（备注：对于这两种问题的具体解释和为什么会出现这种问题，以及解决方法，这里不具体讨论了，我会在以后的文章中具体解释到的。）</p>
+<h2 id="Test-6"><a href="#Test-6" class="headerlink" title="Test 6"></a>Test 6</h2><h3 id="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"><a href="#为什么在神经网络中使用交叉熵而不是均方差作为误差函数？" class="headerlink" title="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"></a>为什么在神经网络中使用交叉熵而不是均方差作为误差函数？</h3><ol>
+<li><p>神经网络中如果预测值与实际值的误差越大，那么在反向传播训练的过程中，各种参数调整的幅度就要更大，从而使训练更快收敛，如果预测值与实际值的误差小，各种参数调整的幅度就要小，从而减少震荡。</p>
+</li>
+<li><p>使用平方误差损失函数，误差增大参数的梯度会增大，但是当误差很大时，参数的梯度就会又减小了。</p>
+</li>
+<li><p>使用交叉熵损失是函数，误差越大参数的梯度也越大，能够快速收敛。</p>
+</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（备注：对于结论的推导过程会总结在另一篇文章里。）</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hpu-yz.github.io/2019/04/13/小强的花花/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1103,7 +1339,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-24 18:17:32" itemprop="dateModified" datetime="2019-03-24T18:17:32+08:00">2019-03-24</time>
+                <time title="修改时间：2019-06-19 17:48:44" itemprop="dateModified" datetime="2019-06-19T17:48:44+08:00">2019-06-19</time>
               
             
           </span>
@@ -1732,7 +1968,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1765,7 +2001,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1798,7 +2036,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1929,7 +2169,7 @@ show_date_time();
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">29k</span>
+    <span title="站点总字数">31k</span>
   
 
   
@@ -1938,7 +2178,7 @@ show_date_time();
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:48</span>
+    <span title="站点阅读时长">1:56</span>
   
 </div>
 
