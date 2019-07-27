@@ -102,35 +102,40 @@
 
 
 
-  <meta name="description" content="前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;此篇献给傻乎乎的小强，收录了小强最喜爱的华晨宇的歌曲，希望小强傻强有傻福。😄">
-<meta name="keywords" content="音乐">
+  <meta name="description" content="前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;梯度下降法作为机器学习中较常使用的优化算法，其有着三种不同的形式：批量梯度下降（Batch Gradient Descent）、随机梯度下降（Stochastic Gradient Descent）以及小批量梯度下降（Mini-Batch Gradient Descent）。其中小批量梯度下降法也常">
+<meta name="keywords" content="python,机器学习,梯度下降">
 <meta property="og:type" content="article">
-<meta property="og:title" content="小强的花花">
-<meta property="og:url" content="https://hpu-yz.github.io/2019/04/13/小强的花花/index.html">
+<meta property="og:title" content="梯度下降法的三种形式BGD、SGD、MBGD及python实现">
+<meta property="og:url" content="https://hpu-yz.github.io/2019/07/18/梯度下降法的三种形式BGD、SGD、MBGD及python实现/index.html">
 <meta property="og:site_name" content="The Flaneurs">
-<meta property="og:description" content="前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;此篇献给傻乎乎的小强，收录了小强最喜爱的华晨宇的歌曲，希望小强傻强有傻福。😄">
+<meta property="og:description" content="前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;梯度下降法作为机器学习中较常使用的优化算法，其有着三种不同的形式：批量梯度下降（Batch Gradient Descent）、随机梯度下降（Stochastic Gradient Descent）以及小批量梯度下降（Mini-Batch Gradient Descent）。其中小批量梯度下降法也常">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://hpu-yz.github.io/2019/04/13/小强的花花/123.png">
-<meta property="og:image" content="https://hpu-yz.github.io/2019/04/13/小强的花花/456.png">
-<meta property="og:image" content="https://hpu-yz.github.io/2019/04/13/小强的花花/789.png">
-<meta property="og:image" content="https://hpu-yz.github.io/2019/04/13/小强的花花/10.jpg">
-<meta property="og:image" content="https://hpu-yz.github.io/2019/04/13/小强的花花/11.png">
-<meta property="og:image" content="https://hpu-yz.github.io/2019/04/13/小强的花花/12.png">
-<meta property="og:image" content="https://hpu-yz.github.io/2019/04/13/小强的花花/13.png">
-<meta property="og:image" content="https://hpu-yz.github.io/2019/04/13/小强的花花/14.png">
-<meta property="og:image" content="https://hpu-yz.github.io/2019/04/13/小强的花花/小强的花花4.jpg">
-<meta property="og:updated_time" content="2019-04-23T05:52:00.835Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725100634816.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725085658136.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090156368.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725085839458.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019072508594192.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/201907250859587.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090052713.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090216938.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090246509.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090315940.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090345289.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090459507.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090543904.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090635209.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-07-27T02:34:49.574Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小强的花花">
-<meta name="twitter:description" content="前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;此篇献给傻乎乎的小强，收录了小强最喜爱的华晨宇的歌曲，希望小强傻强有傻福。😄">
-<meta name="twitter:image" content="https://hpu-yz.github.io/2019/04/13/小强的花花/123.png">
+<meta name="twitter:title" content="梯度下降法的三种形式BGD、SGD、MBGD及python实现">
+<meta name="twitter:description" content="前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;梯度下降法作为机器学习中较常使用的优化算法，其有着三种不同的形式：批量梯度下降（Batch Gradient Descent）、随机梯度下降（Stochastic Gradient Descent）以及小批量梯度下降（Mini-Batch Gradient Descent）。其中小批量梯度下降法也常">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190725100634816.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://hpu-yz.github.io/2019/04/13/小强的花花/">
+  <link rel="canonical" href="https://hpu-yz.github.io/2019/07/18/梯度下降法的三种形式BGD、SGD、MBGD及python实现/">
 
 
 
@@ -140,7 +145,7 @@
   };
 </script>
 
-  <title>小强的花花 | The Flaneurs</title>
+  <title>梯度下降法的三种形式BGD、SGD、MBGD及python实现 | The Flaneurs</title>
   
 
 
@@ -179,9 +184,6 @@
   </style>
 </noscript>
 
-<link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
-<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
-<script src="\assets\js\Meting.min.js" class="meting-script-marker"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -392,7 +394,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hpu-yz.github.io/2019/04/13/小强的花花/">
+    <link itemprop="mainEntityOfPage" href="https://hpu-yz.github.io/2019/07/18/梯度下降法的三种形式BGD、SGD、MBGD及python实现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="The Flaneurs">
@@ -409,7 +411,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">小强的花花
+          <h1 class="post-title" itemprop="name headline">梯度下降法的三种形式BGD、SGD、MBGD及python实现
 
               
             
@@ -435,7 +437,7 @@
                 
               
 
-              <time title="创建时间：2019-04-13 00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-13T00:00:00+08:00">2019-04-13</time>
+              <time title="创建时间：2019-07-18 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-18T00:00:00+08:00">2019-07-18</time>
             
 
             
@@ -452,7 +454,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-23 13:52:00" itemprop="dateModified" datetime="2019-04-23T13:52:00+08:00">2019-04-23</time>
+                <time title="修改时间：2019-07-27 10:34:49" itemprop="dateModified" datetime="2019-07-27T10:34:49+08:00">2019-07-27</time>
               
             
           </span>
@@ -469,7 +471,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/音乐/" itemprop="url" rel="index"><span itemprop="name">音乐</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/梯度下降/" itemprop="url" rel="index"><span itemprop="name">梯度下降</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/梯度下降/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/梯度下降/机器学习/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
 
                 
                 
@@ -488,8 +504,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/04/13/小强的花花/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/13/小强的花花/" itemprop="commentCount"></span>
+                <a href="/2019/07/18/梯度下降法的三种形式BGD、SGD、MBGD及python实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/18/梯度下降法的三种形式BGD、SGD、MBGD及python实现/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -497,7 +513,7 @@
 
           
           
-            <span id="/2019/04/13/小强的花花/" class="leancloud_visitors" data-flag-title="小强的花花">
+            <span id="/2019/07/18/梯度下降法的三种形式BGD、SGD、MBGD及python实现/" class="leancloud_visitors" data-flag-title="梯度下降法的三种形式BGD、SGD、MBGD及python实现">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -529,7 +545,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">8.7k</span>
+                <span title="本文字数">6.1k</span>
               
 
               
@@ -543,7 +559,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">33 分钟</span>
+                <span title="阅读时长">23 分钟</span>
               
             </div>
           
@@ -562,155 +578,21 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>此篇献给傻乎乎的小强，收录了小强最喜爱的华晨宇的歌曲，希望小强傻强有傻福。😄<br><a id="more"></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br> <img src="/2019/04/13/小强的花花/123.png" alt="华晨宇"></p>
-<h2 id="凭数据说话"><a href="#凭数据说话" class="headerlink" title="凭数据说话"></a>凭数据说话</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014年，武音有史以来在校学生个人节目上春晚第一人。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014年，出道一年十大代言。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014年，继在《花儿与少年》的出色表现火爆银屏后，相继受邀登上《我们都爱笑》《天天向上》《快乐大本营》等众多湖南卫视王牌节目，因他的亮相节目收视率飙升同时段第一名。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014年，首张个人专辑《卡西莫多的礼物》出专辑速度打破了往届纪录。</p>
-<p>2014年，刚出道以最快速度开万人演唱会的第一人。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014年，华语乐坛在千人演出场馆召开发布会的第一人，全部采用演唱会配置。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014年，芒果TV和QQ音乐两平台共计线上演唱会直播门票购买次数超过12万，刷新此前演唱会的在线付费观看人数。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014年，Why nobody fights 开启了新网络媒体音乐版权付费时代，成为当代音乐第一人。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014年，首创音乐故事录音带，时长达到40分钟。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014年，新浪微博客户端首创下拉出现Q版明星形象第一人。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014年，第一位广告打在了“北京世贸天阶的大LED、亚洲超大LED”世贸天阶的艺人。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014年，华晨宇火星北京演唱会门票1分35秒全部抢光！票务网站个人演唱会预定同时在线人数达到75312人的最高记录。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014年成为天娱传媒旗下第一位进行O2O线上付费演唱会直播的艺人。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014年，首位荣登L’Uomo Vogue的内地男歌手。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014年，韩国知名ALO眼镜首位中国代言人。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2015年，2015最具潜力青春男偶TOP10内唯一的纯歌手。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2015年，受邀观礼格莱美。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2015年，个人演唱会连开三场，成为内地第一人！5月23日第一场开票，16万人在线，35秒万张票抢空，创线上售票新记录；5月30日第二场开票，在线人数16万，1分12秒再度秒杀！今日宣布7.31加开第三场。（获大麦网麦盘点2015年度售罄时间最快演唱会）</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2015年，成为华语乐坛在大型游轮上举办发布会第一人。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2015年，上海“火星”演唱会8.1日打破LiveMusic直播264万在线人数记录，成为腾讯视频历史在线人数第一，相当于坐满220个上海大舞台。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2015年，《蜉蝣》蝉联了亚洲榜13周周榜冠军，成为亚洲新歌榜创榜以来第一位连续十周歌曲位居首位的歌手。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2015年，首张数字专辑《终极双主打》上线仅10分钟就以迅猛之势突破10万销量，刷新内地数字专辑上线10分钟的最高销售纪录。一小时后，售卖成绩正式突破30万，以绝对优势打破平台预售的历史纪录。当日24小时购买数量突破35万，再次缔造内地数字专辑数据传奇。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2015年，在数字专发行状态下又发行了个人实体大碟《异类》，有胆量同步发行实体专辑和数字专辑的艺人当属华晨宇第一人。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2015年，国内首位入驻二次元空间A站的艺人。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2015年，福布斯中国名人榜排91名！</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2016年，90后男艺人新媒体人气指数前十内唯一纯歌手（艺人新媒体指数＝参演电视剧每日播放量×A+微博数据×B+贴吧数据×C+豆瓣数据×D+搜索量×E+其他×F）华晨宇A零分的情况下进了前十。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2016年，凭借《异类》《蜉蝣》《国王与乞丐》等五首新歌在亚洲新歌榜共夺得12周周榜冠军，成为获得周榜冠军次数最多的歌手，并荣获““亚洲新歌榜2015冠军王”。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2016年，成为内地乐坛第一位启用四面台开唱的歌手。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2016年，上海站演唱会缔造乐视全屏终端最高9万人付费在线观看纪录。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2016年，出道3年八场万人演唱会！无赞助不赠票，场场爆满。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2016年，三首歌曲荣获亚洲新歌榜年度十大金曲，风头无两。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2016年，《我的滑板鞋2016》占据香港和台湾的热搜NO.1，在Youtube热门排行榜中，《我的滑板鞋2016》排名台湾热门第一，香港热门前三。谷歌、脸书、Instagram、推特、YouTube等境外网络媒体上全面刮起“滑板鞋”飓风，数据惊人。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2016年，成为了MAMA亚洲最佳艺人大奖迄今为止最年轻的获奖者。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017年1月12日，百龄坛特醇X华晨宇首次合作，成为其代言人。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017年3月23日，成为六神公布品牌形象代言人。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017年7月13日，雅诗兰黛确认华晨宇为其品牌大使。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017年7月，成为珠江纯生最新代言人。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017年9月27日，为最火手游王者荣耀创作鲁班七号角色主题曲《智商二五零》。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017年10月13日-14日，2017火星演唱会在北京五棵松体育馆连开两场。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017年是入选福布斯30岁以下精英榜唯一纯歌手。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2018年1月23日，确认作为首位补位歌手加盟《歌手》。 </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2018年4月13日，歌手总决赛歌王之夜以优异表现拿下第二名，整合六季投票率排名华人第一！</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2018年6月，受邀成为三星Galaxy A9 Star系列代言人。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2018年9月8日～9月9日，华晨宇火星演唱会在北京鸟巢举办，成为首位在鸟巢连开两场演唱会的内地歌手。 </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2018年9月成为美拍全新代言人。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;截止2018年11月，华晨宇在15年即三年前发行的个人第二张专辑《异类》在台湾五大金榜华语榜连续进榜50周，其中有30+周排名前三，销售额占20%+。 </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019年凭借2015年专辑异类荣获台湾五大金榜18年度销量冠军，也是首位内地歌手获此殊荣。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019年1月参加2018微博之夜，获得年度最佳歌手奖项！ </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019年1月公布#2018腾讯娱乐白皮书#中 ：2018年现场演唱会热度#2018华晨宇火星演唱会# Top1，2018年华语歌手专业技术口碑榜，@华晨宇yu Top7成为唯一上榜的90后歌手。 </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019年开年重磅电子刊#华晨宇华氏度#屡创佳绩，最终销量高达505797本，创单人电子刊销量最高纪录。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-<h2 id="他对音乐的态度"><a href="#他对音乐的态度" class="headerlink" title="他对音乐的态度"></a>他对音乐的态度</h2><p> <img src="/2019/04/13/小强的花花/456.png" alt="华晨宇"><br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;08042号选手华晨宇，黑框眼镜满脸痘坑人字拖，是我对他的第一印象了。<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-<p>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;记得拿一首没有歌词的歌，点燃了评委尚雯婕的神经，坚持让华晨宇晋级。最后，华晨宇获得了那一届的冠军。<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;到后来一段时间里，在综艺节目中《花儿与少年》，不善于沟通的华晨宇被称为“巨婴”，一时间网上批判声音不断。<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;二十岁出头的年轻人，在娱乐圈中或者张狂或者乖巧，都正常的很。却总是会被贴上一个标签，或坏或好。<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于不了解的人，第一印象格外重要，作为明星，一点点的细节都会被镜头凸显放大。<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;华晨宇被贴上的标签：“巨婴”、“怪异”、“孤独”。怪和不讨喜一度成为了华晨宇的代名词，我也一度这样认为。<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直到某一天，认真的听完了华晨宇的一首歌才觉得，一个年轻人怪一点，又有什么错。<br>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-<table>
-<thead>
-<tr>
-<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不讨好这个世界，才是他音乐最大的特点。华晨宇性格、音乐、人生态度——就是一个艺术品。华晨宇总能演绎出不一样的歌曲，每一首歌都能给人带来最大的惊喜。而《天籁之战》更是让这种惊喜翻倍。;每一首华晨宇改编过的歌曲，都赋予了一种新的灵魂，如果没有听过原唱，不知道名字，当把两首歌放在一起，你绝对不会想到这是同一首歌。认认真真听完华晨宇改编的所有歌曲，想要用千言万语来形容，最终却只汇聚为两个字——鬼才。不管是古典、饶舌、深情款款的情歌、暗黑系的摇滚，只要经过了华晨宇的改编，都只有一种名字——华晨宇的音乐。;而听过华晨宇演绎出来的版本，我瞬间爱上了这首歌词简单到不需要背词的歌。华晨宇打碎了原曲的音乐结构构造了一首新生的歌曲，加入的艾米纳rap元素，更是让听者炸裂，疯狂。面对困难度极高的挑战，不带半点敷衍，释放出的巨大能量，这是华晨宇对音乐的态度。每一首改编歌曲中都深深烙印上了华晨宇的影子。​</th>
-<th><img src="/2019/04/13/小强的花花/789.png" alt="华晨宇"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th><img src="/2019/04/13/小强的花花/10.jpg" alt="华晨宇"></th>
-<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;华晨宇的独特之处就在于，你认识他的时候就认为他的作品已经100分了，可后来每一次呈现出来的作品都要在加1分。每一次的作品，每一次的演唱，都能富裕一首歌新的生命。也许，只有华晨宇自己才能超越华晨宇。2018年《歌手》中，我仿佛看见了五年前那个懵懵懂懂的大男孩的影子，他变了，他没变。</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;他的脑袋里藏着一个令人琢磨不透却又异常纯粹的宇宙， 那些奇异的旋律诞生在此，始终和着内心的声音。 不需要太多话语，音乐就是华晨宇最精确的语言， 是他与世界交流的最佳方式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-<table>
-<thead>
-<tr>
-<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;或许很多人说他不是走大众音乐路线的。哥哥（张国荣）当初在的时候，多少人也是看不起他的才华，我认识哥哥的作品的时候，太难过了，一边看电影听歌一边心痛得要死。所以当听到华晨宇的歌，以及看到他对音乐的态度以后，我只是不想错过这样一个认认真真对待音乐又有自己独到见解的歌手而已。华晨宇是很尊敬哥哥的，我觉得很好啊，你看他做音乐的态度和那个时候哥哥唱歌拍电影的态度多像啊。我作为一个普通人只是希望自己能看到更多好听好看的作品，所以才不想错过认识每一个我觉得在这些方面有天赋的人的机会。如果错过了，就真的太让人难过了。</th>
-<th><img src="/2019/04/13/小强的花花/11.png" alt="华晨宇"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th><img src="/2019/04/13/小强的花花/12.png" alt="华晨宇"></th>
-<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;等大家都看透了流量明星，这个娱乐圈浮躁的时代都过去了，华晨宇肯定会火的，而且是爆火的那种火。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;他的音乐绝对不小众相信我。包括他的颜值绝对是在线的，只是说能不能欣赏他的长相。其实现在华语乐坛挺缺他这个风格和性格的歌手的。而且他的现场绝对没得讲，多少人都是看live或者live的视频入坑的。</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;华晨宇，他教会了我对音乐的理解，和对人生的态度。 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;音乐方面：以前我听歌是走歌词路线的，只要曲调不难听，歌词写的感同身受的歌曲是我的偏爱类型，也听摇滚，但是只是为了追求一种撕裂与绝望的宣泄。后来“不幸”遇上华晨宇，整个颠覆了我的听歌逻辑，我第一次只通过旋律和音色就感受到情绪，歌词仿佛只是成为了一首歌曲的注释。 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我从花花翻唱的《我》里竟然能感受到我之前从不了解的哥哥的那份孑然和孤傲，我也会在《齐天》中为终成大圣虽身有傲骨却心生迷茫的悟空而落泪。在歌词之外，我更懂了怎样去感受音乐的其他魅力，而这正是因华晨宇而开始的。</th>
-<th><img src="/2019/04/13/小强的花花/13.png" alt="华晨宇"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th><img src="/2019/04/13/小强的花花/14.png" alt="华晨宇"></th>
-<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    一个坚持自我不忘初心，对音乐十分专注较真的人是不会被音乐抛弃的。他天赋使然，加上后天努力，这种魅力和态度真的能把人圈的死死的！就是喜欢这样的他，清楚自己想要的，然后坚决地去执行。坚持初心这种东西说起来很容易，能够做到的人真没几个，然而华晨宇做到了，这才是一个优质偶像应该具备的品质。</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;【如今这个时代，互联网很发达，时不时唱一首歌，会很容易火遍全网络，这种传播速度太快了，会让人觉得成功太容易了。】清醒且不浮躁，是艺人最难得的品质之一。我庆幸你能在复杂纷乱的圈子始终保持着通透清澈的心，也感动你能在这个快餐时代依然坚持自己的步调。其多不易，唯有你知。​​</th>
-<th><img src="/2019/04/13/小强的花花/小强的花花4.jpg" alt="华晨宇"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="歌单"><a href="#歌单" class="headerlink" title="歌单"></a>歌单</h2>
-    <div id="aplayer-PLvSATFs" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="861777" data-server="netease" data-type="artist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="1700px" data-preload="auto" data-theme="#555"></div>
-<h2 id="嘿嘿"><a href="#嘿嘿" class="headerlink" title="嘿嘿"></a>嘿嘿</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>小强最喜欢中的最爱<br>
-    <div id="aplayer-kskpJfxC" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="29004400" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#555"></div></p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;梯度下降法作为机器学习中较常使用的优化算法，其有着三种不同的形式：批量梯度下降（Batch Gradient Descent）、随机梯度下降（Stochastic Gradient Descent）以及小批量梯度下降（Mini-Batch Gradient Descent）。其中小批量梯度下降法也常用在深度学习中进行模型的训练。接下来，我们将对这三种不同的梯度下降法进行理解。<br><a id="more"></a><br>为了便于理解，这里我们将使用只含有一个特征的线性回归来展开。</p>
+<p>此时线性回归的假设函数为：<br><img src="https://img-blog.csdnimg.cn/20190725100634816.png" alt><br>对应的<strong>目标函数（代价函数）</strong>即为：<br> <img src="https://img-blog.csdnimg.cn/20190725085658136.png" alt><br>下图为 J(θ0,θ1)与参数 θ0,θ1 的关系的图：<br><img src="https://img-blog.csdnimg.cn/20190725090156368.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="1、批量梯度下降（Batch-Gradient-Descent，BGD）"><a href="#1、批量梯度下降（Batch-Gradient-Descent，BGD）" class="headerlink" title="1、批量梯度下降（Batch Gradient Descent，BGD）"></a>1、批量梯度下降（Batch Gradient Descent，BGD）</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>批量梯度下降法</strong>是最原始的形式，它是指在<strong>每一次迭代时</strong>使用<strong>所有样本</strong>来进行梯度的更新。从数学上理解如下：<br>  （1）对目标函数求偏导：<br>  <img src="https://img-blog.csdnimg.cn/20190725085839458.png" alt><br>  其中 i=1,2,…,m 表示样本数， j=0,1 表示特征数，这里我们使用了偏置项 x(i)0=1。<br>  （2）每次迭代对参数进行更新：<br>  <img src="https://img-blog.csdnimg.cn/2019072508594192.png" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>注意这里更新时存在一个求和函数，即为对所有样本进行计算处理，可与下文SGD法进行比较。</strong><br>  伪代码形式为：<br>  <img src="https://img-blog.csdnimg.cn/201907250859587.png" alt><br>  <strong>优点</strong>：<br>  （1）一次迭代是对所有样本进行计算，此时利用矩阵进行操作，实现了并行。<br>  （2）由全数据集确定的方向能够更好地代表样本总体，从而更准确地朝向极值所在的方向。当目标函数为凸函数时，BGD一定能够得到全局最优。<br>  <strong>缺点</strong>：<br>  （1）当样本数目 mm 很大时，每迭代一步都需要对所有样本计算，训练过程会很慢。<br>  从迭代的次数上来看，BGD迭代的次数相对较少。其迭代的收敛曲线示意图可以表示如下：<br>  <img src="https://img-blog.csdnimg.cn/20190725090052713.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="批量梯度下降法的python实现"><a href="#批量梯度下降法的python实现" class="headerlink" title="批量梯度下降法的python实现"></a>批量梯度下降法的python实现</h2><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">import</span> matplotlib.pyplot as plt</span><br><span class="line"><span class="built_in">import</span> random</span><br><span class="line"><span class="comment">##样本数据</span></span><br><span class="line"><span class="attr">x_train</span> = [<span class="number">150</span>,<span class="number">200</span>,<span class="number">250</span>,<span class="number">300</span>,<span class="number">350</span>,<span class="number">400</span>,<span class="number">600</span>]</span><br><span class="line"><span class="attr">y_train</span> = [<span class="number">6450</span>,<span class="number">7450</span>,<span class="number">8450</span>,<span class="number">9450</span>,<span class="number">11450</span>,<span class="number">15450</span>,<span class="number">18450</span>]</span><br><span class="line"><span class="comment">#样本个数</span></span><br><span class="line"><span class="attr">m</span> = len(x_train)</span><br><span class="line"><span class="comment">#步长</span></span><br><span class="line"><span class="attr">alpha</span> = <span class="number">0.00001</span></span><br><span class="line"><span class="comment">#循环次数</span></span><br><span class="line"><span class="attr">cnt</span> = <span class="number">0</span></span><br><span class="line"><span class="comment">#假设函数为 y=theta0+theta1*x</span></span><br><span class="line">def h(x):</span><br><span class="line">    return theta0 + theta1*x</span><br><span class="line"><span class="attr">theta0</span> = <span class="number">0</span></span><br><span class="line"><span class="attr">theta1</span> = <span class="number">0</span></span><br><span class="line"><span class="comment">#导数</span></span><br><span class="line"><span class="attr">diff0=0</span></span><br><span class="line"><span class="attr">diff1=0</span></span><br><span class="line"><span class="comment">#误差</span></span><br><span class="line"><span class="attr">error0=0</span>           </span><br><span class="line"><span class="attr">error1=0</span>          </span><br><span class="line"><span class="comment">#每次迭代theta的值</span></span><br><span class="line"><span class="attr">retn0</span> = []         </span><br><span class="line"><span class="attr">retn1</span> = []         </span><br><span class="line"></span><br><span class="line"><span class="comment">#退出迭代的条件</span></span><br><span class="line"><span class="attr">epsilon=0.00001</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#批量梯度下降</span></span><br><span class="line">while <span class="number">1</span>:</span><br><span class="line">    <span class="attr">cnt=cnt+1</span></span><br><span class="line">    <span class="attr">diff0=0</span></span><br><span class="line">    <span class="attr">diff1=0</span></span><br><span class="line">    <span class="comment">#梯度下降</span></span><br><span class="line">    for i <span class="keyword">in</span> range(m):</span><br><span class="line">        diff0+=h(x_train[i])-y_train[i]</span><br><span class="line">        diff1+=(h(x_train[i])-y_train[i])*x_train[i]</span><br><span class="line">    <span class="attr">theta0=theta0-alpha/m*diff0</span></span><br><span class="line">    <span class="attr">theta1=theta1-alpha/m*diff1</span></span><br><span class="line">    retn0.append(theta0)</span><br><span class="line">    retn1.append(theta1)</span><br><span class="line">    <span class="attr">error1=0</span></span><br><span class="line">    <span class="comment">#计算迭代误差</span></span><br><span class="line">    for i <span class="keyword">in</span> range(len(x_train)):</span><br><span class="line">        error1 += ((theta0 + theta1 * x_train[i])-y_train[i]) ** <span class="number">2</span> / <span class="number">2</span></span><br><span class="line">    <span class="comment">#判断是否已收敛</span></span><br><span class="line">    <span class="keyword">if</span> abs(error1 - error0) &lt; epsilon:</span><br><span class="line">        break</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="attr">error0</span> = error1</span><br><span class="line"><span class="comment"># 画图表现</span></span><br><span class="line">plt.title('BGD')</span><br><span class="line">plt.plot(range(len(retn0)),retn0,<span class="attr">label='theta0')</span></span><br><span class="line">plt.plot(range(len(retn1)),retn1,<span class="attr">label='theta1')</span></span><br><span class="line">plt.legend()          <span class="comment">#显示上面的label</span></span><br><span class="line">plt.xlabel('time')</span><br><span class="line">plt.ylabel('theta')</span><br><span class="line">plt.show()</span><br><span class="line">plt.plot(x_train,y_train,'bo')</span><br><span class="line">plt.plot(x_train,[h(x) for x <span class="keyword">in</span> x_train],<span class="attr">color='k',label='BGD')</span></span><br><span class="line">plt.legend()</span><br><span class="line">plt.xlabel('area')</span><br><span class="line">plt.ylabel('price')</span><br><span class="line">print(<span class="string">"批量梯度下降法：theta0=&#123;&#125;,theta1=&#123;&#125;"</span>.format(theta0,theta1))</span><br><span class="line">print(<span class="string">"批量梯度下降法循环次数：&#123;&#125;"</span>.format(cnt))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="2、随机梯度下降（Stochastic-Gradient-Descent，SGD）"><a href="#2、随机梯度下降（Stochastic-Gradient-Descent，SGD）" class="headerlink" title="2、随机梯度下降（Stochastic Gradient Descent，SGD）"></a>2、随机梯度下降（Stochastic Gradient Descent，SGD）</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;nbsp<strong>;随机梯度下降法</strong>不同于批量梯度下降，随机梯度下降是<strong>每次迭代</strong>使用<strong>一个样本</strong>来对参数进行更新。使得训练速度加快。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于一个样本的目标函数为：<br>  <img src="https://img-blog.csdnimg.cn/20190725090216938.png" alt><br>  （1）对目标函数求偏导：<br>  <img src="https://img-blog.csdnimg.cn/20190725090246509.png" alt><br>  （2）参数更新：<br>  <img src="https://img-blog.csdnimg.cn/20190725090315940.png" alt><br>  <strong>注意，这里不再有求和符号</strong><br>  伪代码形式为：<br>  <img src="https://img-blog.csdnimg.cn/20190725090345289.png" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>优点</strong>：<br>  （1）由于不是在全部训练数据上的损失函数，而是在每轮迭代中，随机优化某一条训练数据上的损失函数，这样每一轮参数的更新速度大大加快。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>缺点</strong>：<br>  （1）准确度下降。由于即使在目标函数为强凸函数的情况下，SGD仍旧无法做到线性收敛。<br>  （2）可能会收敛到局部最优，由于单个样本并不能代表全体样本的趋势。<br>  （3）不易于并行实现。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>解释一下为什么SGD收敛速度比BGD要快：</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;答：这里我们假设有30W个样本，对于BGD而言，每次迭代需要计算30W个样本才能对参数进行一次更新，需要求得最小值可能需要多次迭代（假设这里是10）；而对于SGD，每次更新参数只需要一个样本，因此若使用这30W个样本进行参数更新，则参数会被更新（迭代）30W次，而这期间，SGD就能保证能够收敛到一个合适的最小值上了。也就是说，在收敛时，BGD计算了 10×30W 次，而SGD只计算了 1×30W 次。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从迭代的次数上来看，SGD迭代的次数较少，在解空间的搜索过程看起来很盲目。其迭代的收敛曲线示意图可以表示如下：<br>  <img src="https://img-blog.csdnimg.cn/20190725090459507.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="随机梯度下降法的python实现"><a href="#随机梯度下降法的python实现" class="headerlink" title="随机梯度下降法的python实现"></a>随机梯度下降法的python实现</h2><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">import</span> matplotlib.pyplot as plt</span><br><span class="line"><span class="built_in">import</span> random</span><br><span class="line"><span class="comment">##样本数据</span></span><br><span class="line"><span class="attr">x_train</span> = [<span class="number">150</span>,<span class="number">200</span>,<span class="number">250</span>,<span class="number">300</span>,<span class="number">350</span>,<span class="number">400</span>,<span class="number">600</span>]</span><br><span class="line"><span class="attr">y_train</span> = [<span class="number">6450</span>,<span class="number">7450</span>,<span class="number">8450</span>,<span class="number">9450</span>,<span class="number">11450</span>,<span class="number">15450</span>,<span class="number">18450</span>]</span><br><span class="line"><span class="comment">#样本个数</span></span><br><span class="line"><span class="attr">m</span> = len(x_train)</span><br><span class="line"><span class="comment">#步长</span></span><br><span class="line"><span class="attr">alpha</span> = <span class="number">0.00001</span></span><br><span class="line"><span class="comment">#循环次数</span></span><br><span class="line"><span class="attr">cnt</span> = <span class="number">0</span></span><br><span class="line"><span class="comment">#假设函数为 y=theta0+theta1*x</span></span><br><span class="line">def h(x):</span><br><span class="line">    return theta0 + theta1*x</span><br><span class="line"><span class="attr">theta0</span> = <span class="number">0</span></span><br><span class="line"><span class="attr">theta1</span> = <span class="number">0</span></span><br><span class="line"><span class="comment">#导数</span></span><br><span class="line"><span class="attr">diff0=0</span></span><br><span class="line"><span class="attr">diff1=0</span></span><br><span class="line"><span class="comment">#误差</span></span><br><span class="line"><span class="attr">error0=0</span>           </span><br><span class="line"><span class="attr">error1=0</span>          </span><br><span class="line"><span class="comment">#每次迭代theta的值</span></span><br><span class="line"><span class="attr">retn0</span> = []         </span><br><span class="line"><span class="attr">retn1</span> = []         </span><br><span class="line"></span><br><span class="line"><span class="comment">#退出迭代的条件</span></span><br><span class="line"><span class="attr">epsilon=0.00001</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#随机梯度下降</span></span><br><span class="line">for i <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    <span class="attr">cnt=cnt+1</span></span><br><span class="line">    <span class="attr">diff0=0</span></span><br><span class="line">    <span class="attr">diff1=0</span></span><br><span class="line">    <span class="attr">j</span> = random.randint(<span class="number">0</span>, m - <span class="number">1</span>)</span><br><span class="line">    <span class="attr">diff0=h(x_train[j])-y_train[j]</span></span><br><span class="line">    <span class="attr">diff1=(h(x_train[j])-y_train[j])*x_train[j]</span></span><br><span class="line">    <span class="attr">theta0=theta0-alpha/m*diff0</span></span><br><span class="line">    <span class="attr">theta1=theta1-alpha/m*diff1</span></span><br><span class="line">    retn0.append(theta0)</span><br><span class="line">    retn1.append(theta1)</span><br><span class="line">    <span class="attr">error1=0</span></span><br><span class="line">    <span class="comment">#计算迭代的误差</span></span><br><span class="line">    for i <span class="keyword">in</span> range(len(x_train)):</span><br><span class="line">        error1 += ((theta0 + theta1 * x_train[i])-y_train[i]) ** <span class="number">2</span> / <span class="number">2</span></span><br><span class="line">    <span class="comment">#判断是否已收敛</span></span><br><span class="line">    <span class="keyword">if</span> abs(error1 - error0) &lt; epsilon:</span><br><span class="line">        break</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="attr">error0</span> = error1</span><br><span class="line"><span class="comment"># 画图表现        </span></span><br><span class="line">plt.title('SGD')</span><br><span class="line">plt.plot(range(len(retn0)),retn0,<span class="attr">label='theta0')</span></span><br><span class="line">plt.plot(range(len(retn1)),retn1,<span class="attr">label='theta1')</span></span><br><span class="line">plt.legend()          <span class="comment">#显示上面的label</span></span><br><span class="line">plt.xlabel('time')</span><br><span class="line">plt.ylabel('theta')</span><br><span class="line">plt.show()</span><br><span class="line">plt.plot(x_train,y_train,'bo')</span><br><span class="line">plt.plot(x_train,[h(x) for x <span class="keyword">in</span> x_train],<span class="attr">color='k',label='SGD')</span></span><br><span class="line">plt.legend()</span><br><span class="line">plt.xlabel('area')</span><br><span class="line">plt.ylabel('price')</span><br><span class="line">print(<span class="string">"随机梯度下降法：theta0=&#123;&#125;,theta1=&#123;&#125;"</span>.format(theta0,theta1))</span><br><span class="line">print(<span class="string">"随机梯度下降法循环次数：&#123;&#125;"</span>.format(cnt))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="3、小批量梯度下降（Mini-Batch-Gradient-Descent-MBGD）"><a href="#3、小批量梯度下降（Mini-Batch-Gradient-Descent-MBGD）" class="headerlink" title="3、小批量梯度下降（Mini-Batch Gradient Descent, MBGD）"></a>3、小批量梯度下降（Mini-Batch Gradient Descent, MBGD）</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>小批量梯度下降</strong>，是对批量梯度下降以及随机梯度下降的一个折中办法。其思想是：<strong>每次迭代</strong> 使用 <strong>batch_size 个样本</strong>来对参数进行更新。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里我们假设 batchsize=10，样本数 m=1000 。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;伪代码形式为：<br>  <img src="https://img-blog.csdnimg.cn/20190725090543904.png" alt><br>  <strong>优点</strong>：<br>  （1）通过矩阵运算，每次在一个batch上优化神经网络参数并不会比单个数据慢太多。<br>  （2）每次使用一个batch可以大大减小收敛所需要的迭代次数，同时可以使收敛到的结果更加接近梯度下降的效果。(比如上例中的30W，设置batch_size=100时，需要迭代3000次，远小于SGD的30W次)<br>  （3）可实现并行化。<br>  <strong>缺点</strong>：<br>  （1）batch_size的不当选择可能会带来一些问题。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>batcha_size的选择带来的影响：</strong><br>  （1）在合理地范围内，增大batch_size的好处：<br>    a. 内存利用率提高了，大矩阵乘法的并行化效率提高。<br>    b. 跑完一次 epoch（全数据集）所需的迭代次数减少，对于相同数据量的处理速度进一步加快。<br>    c. 在一定范围内，一般来说 Batch_Size 越大，其确定的下降方向越准，引起训练震荡越小。<br>  （2）盲目增大batch_size的坏处：<br>    a. 内存利用率提高了，但是内存容量可能撑不住了。<br>    b. 跑完一次 epoch（全数据集）所需的迭代次数减少，要想达到相同的精度，其所花费的时间大大增加了，从而对参数的修正也就显得更加缓慢。<br>    c. Batch_Size 增大到一定程度，其确定的下降方向已经基本不再变化。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下图显示了三种梯度下降算法的收敛过程：<br>  <img src="https://img-blog.csdnimg.cn/20190725090635209.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h2><p><strong>Batch gradient descent:</strong> Use all examples in each iteration；</p>
+<p><strong>Stochastic gradient descent:</strong> Use 1 example in each iteration；</p>
+<p><strong>Mini-batch gradient descent:</strong> Use b examples in each iteration.</p>
 
       
     </div>
@@ -773,7 +655,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://hpu-yz.github.io/2019/04/13/小强的花花/" title="小强的花花">https://hpu-yz.github.io/2019/04/13/小强的花花/</a>
+    <a href="https://hpu-yz.github.io/2019/07/18/梯度下降法的三种形式BGD、SGD、MBGD及python实现/" title="梯度下降法的三种形式BGD、SGD、MBGD及python实现">https://hpu-yz.github.io/2019/07/18/梯度下降法的三种形式BGD、SGD、MBGD及python实现/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-Hans" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -786,7 +668,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/音乐/" rel="tag"><i class="fa fa-tag"></i> 音乐</a>
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/机器学习/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+          
+            <a href="/tags/梯度下降/" rel="tag"><i class="fa fa-tag"></i> 梯度下降</a>
           
         </div>
       
@@ -799,8 +685,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/02/逻辑演算/" rel="next" title="python+离散数学→逻辑演算">
-                <i class="fa fa-chevron-left"></i> python+离散数学→逻辑演算
+              <a href="/2019/04/13/小强的花花/" rel="next" title="小强的花花">
+                <i class="fa fa-chevron-left"></i> 小强的花花
               </a>
             
           </div>
@@ -809,8 +695,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/18/梯度下降法的三种形式BGD、SGD、MBGD及python实现/" rel="prev" title="梯度下降法的三种形式BGD、SGD、MBGD及python实现">
-                梯度下降法的三种形式BGD、SGD、MBGD及python实现 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/18/数据集的划分--训练集、验证集和测试集/" rel="prev" title="数据集的划分--训练集、验证集和测试集">
+                数据集的划分--训练集、验证集和测试集 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1107,7 +993,7 @@ show_date_time();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#凭数据说话"><span class="nav-number">1.1.</span> <span class="nav-text">凭数据说话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#他对音乐的态度"><span class="nav-number">1.2.</span> <span class="nav-text">他对音乐的态度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#歌单"><span class="nav-number">1.3.</span> <span class="nav-text">歌单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#嘿嘿"><span class="nav-number">1.4.</span> <span class="nav-text">嘿嘿</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、批量梯度下降（Batch-Gradient-Descent，BGD）"><span class="nav-number">1.1.</span> <span class="nav-text">1、批量梯度下降（Batch Gradient Descent，BGD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#批量梯度下降法的python实现"><span class="nav-number">1.2.</span> <span class="nav-text">批量梯度下降法的python实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、随机梯度下降（Stochastic-Gradient-Descent，SGD）"><span class="nav-number">1.3.</span> <span class="nav-text">2、随机梯度下降（Stochastic Gradient Descent，SGD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机梯度下降法的python实现"><span class="nav-number">1.4.</span> <span class="nav-text">随机梯度下降法的python实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、小批量梯度下降（Mini-Batch-Gradient-Descent-MBGD）"><span class="nav-number">1.5.</span> <span class="nav-text">3、小批量梯度下降（Mini-Batch Gradient Descent, MBGD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、总结"><span class="nav-number">1.6.</span> <span class="nav-text">4、总结</span></a></li></ol></li></ol></div>
             
 
           </div>
