@@ -102,24 +102,37 @@
 
 
 
-  <meta name="description" content="Life may sometimes have regret,but the future is still good.Since the choice of the distance,will only trials and hardships.">
-<meta name="keywords" content="Hexo,博客，python，C语言,机器学习，人工智能">
-<meta property="og:type" content="website">
-<meta property="og:title" content="The Flaneurs">
-<meta property="og:url" content="https://hpu-yz.github.io/categories/Hexo/index.html">
+  <meta name="description" content="前言目前推荐系统中用的最多的就是矩阵分解方法，在Netflix Prize推荐系统大赛中取得突出效果。以用户-项目评分矩阵为例，矩阵分解就是预测出评分矩阵中的缺失值，然后根据预测值以某种方式向用户推荐。今天以“用户-项目评分矩阵R（M×N）”说明矩阵分解方式的原理以及python实现。">
+<meta name="keywords" content="python,机器学习,人工智能,推荐系统,矩阵分解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系统之矩阵分解(MF)及其python实现">
+<meta property="og:url" content="https://hpu-yz.github.io/2019/07/23/推荐系统之矩阵分解(MF)及其python实现/index.html">
 <meta property="og:site_name" content="The Flaneurs">
-<meta property="og:description" content="Life may sometimes have regret,but the future is still good.Since the choice of the distance,will only trials and hardships.">
+<meta property="og:description" content="前言目前推荐系统中用的最多的就是矩阵分解方法，在Netflix Prize推荐系统大赛中取得突出效果。以用户-项目评分矩阵为例，矩阵分解就是预测出评分矩阵中的缺失值，然后根据预测值以某种方式向用户推荐。今天以“用户-项目评分矩阵R（M×N）”说明矩阵分解方式的原理以及python实现。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190727200249638.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019072720060093.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019072720192687.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190727202015695.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190727202620356.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190727202652714.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190727203202194.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190727203315849.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190727203526974.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190727203554346.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190727203756990.png">
+<meta property="og:updated_time" content="2019-07-27T12:53:51.652Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The Flaneurs">
-<meta name="twitter:description" content="Life may sometimes have regret,but the future is still good.Since the choice of the distance,will only trials and hardships.">
+<meta name="twitter:title" content="推荐系统之矩阵分解(MF)及其python实现">
+<meta name="twitter:description" content="前言目前推荐系统中用的最多的就是矩阵分解方法，在Netflix Prize推荐系统大赛中取得突出效果。以用户-项目评分矩阵为例，矩阵分解就是预测出评分矩阵中的缺失值，然后根据预测值以某种方式向用户推荐。今天以“用户-项目评分矩阵R（M×N）”说明矩阵分解方式的原理以及python实现。">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190727200249638.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70">
 
 
 
 
 
 
-  <link rel="canonical" href="https://hpu-yz.github.io/categories/Hexo/">
+  <link rel="canonical" href="https://hpu-yz.github.io/2019/07/23/推荐系统之矩阵分解(MF)及其python实现/">
 
 
 
@@ -129,7 +142,7 @@
   };
 </script>
 
-  <title>分类: Hexo | The Flaneurs</title>
+  <title>推荐系统之矩阵分解(MF)及其python实现 | The Flaneurs</title>
   
 
 
@@ -177,7 +190,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -270,7 +283,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -358,83 +371,395 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Hexo<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hpu-yz.github.io/2019/07/23/推荐系统之矩阵分解(MF)及其python实现/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="The Flaneurs">
+      <meta itemprop="description" content="Life may sometimes have regret,but the future is still good.Since the choice of the distance,will only trials and hardships.">
+      <meta itemprop="image" content="http://www.qqju.com/pic/tx/tx26190.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="The Flaneurs">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/03/15/搭建(2)/" itemprop="url">
-            
-              <span itemprop="name">Hexo博客搭建</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">推荐系统之矩阵分解(MF)及其python实现
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-15T00:00:00+08:00" content="2019-03-15">
-          03-15
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-23 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-23T00:00:00+08:00">2019-07-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-27 20:53:51" itemprop="dateModified" datetime="2019-07-27T20:53:51+08:00">2019-07-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/人工智能/" itemprop="url" rel="index"><span itemprop="name">人工智能</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/人工智能/推荐系统/" itemprop="url" rel="index"><span itemprop="name">推荐系统</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/人工智能/推荐系统/矩阵分解/" itemprop="url" rel="index"><span itemprop="name">矩阵分解</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/人工智能/推荐系统/矩阵分解/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/07/23/推荐系统之矩阵分解(MF)及其python实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/23/推荐系统之矩阵分解(MF)及其python实现/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/2019/07/23/推荐系统之矩阵分解(MF)及其python实现/" class="leancloud_visitors" data-flag-title="推荐系统之矩阵分解(MF)及其python实现">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">2.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">11 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>目前推荐系统中用的最多的就是矩阵分解方法，在Netflix Prize推荐系统大赛中取得突出效果。以用户-项目评分矩阵为例，矩阵分解就是预测出评分矩阵中的缺失值，然后根据预测值以某种方式向用户推荐。今天以“用户-项目评分矩阵R（M×N）”说明矩阵分解方式的原理以及python实现。<br><a id="more"></a></p>
+<h1 id="一、矩阵分解"><a href="#一、矩阵分解" class="headerlink" title="一、矩阵分解"></a>一、矩阵分解</h1><h2 id="1-案例引入"><a href="#1-案例引入" class="headerlink" title="1.案例引入"></a>1.案例引入</h2><p>有如下R(5,4)的打分矩阵：（“-”表示用户没有打分）</p>
+<p>其中打分矩阵R(n,m)是n行和m列，n表示user个数，m行表示item个数<br><img src="https://img-blog.csdnimg.cn/20190727200249638.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>那么，如何根据目前的矩阵R（5,4）如何对未打分的商品进行评分的预测（如何得到分值为0的用户的打分值）？</p>
+<p>——矩阵分解的思想可以解决这个问题，其实这种思想可以看作是有监督的机器学习问题（回归问题）。</p>
+<p>矩阵分解的过程中，,矩阵R可以近似表示为矩阵P与矩阵Q的乘积：<br><img src="https://img-blog.csdnimg.cn/2019072720060093.png" alt><br>矩阵P(n,k)表示n个user和k个特征之间的关系矩阵，这k个特征是一个中间变量，矩阵Q(k,m)的转置是矩阵Q(m,k)，矩阵Q(m,k)表示m个item和K个特征之间的关系矩阵，这里的k值是自己控制的，可以使用交叉验证的方法获得最佳的k值。为了得到近似的R(n,m)，必须求出矩阵P和Q，如何求它们呢？</p>
+<h2 id="2-推导步骤"><a href="#2-推导步骤" class="headerlink" title="2.推导步骤"></a>2.推导步骤</h2><ol>
+<li>首先令：<br><img src="https://img-blog.csdnimg.cn/2019072720192687.png" alt="式子1"><ol start="2">
+<li>对于式子1的左边项，表示的是r^ 第i行，第j列的元素值，对于如何衡量，我们分解的好坏呢，式子2，给出了衡量标准，也就是损失函数，平方项损失，最后的目标，就是每一个元素(非缺失值)的e(i,j)的总和最小值<br><img src="https://img-blog.csdnimg.cn/20190727202015695.png" alt="式子2"></li>
+</ol>
+</li>
+<li>使用梯度下降法获得修正的p和q分量：</li>
+</ol>
+<ul>
+<li><strong>求解损失函数的负梯度</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727202620356.png" alt></li>
+<li><strong>根据负梯度的方向更新变量</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727202652714.png" alt><ol start="4">
+<li>不停迭代直到算法最终收敛（直到sum(e^2) &lt;=阈值，即梯度下降结束条件：f(x)的真实值和预测值小于自己设定的阈值）</li>
+</ol>
+</li>
+</ul>
+<ol start="5">
+<li>为了防止过拟合，增加正则化项</li>
+</ol>
+<h2 id="3-加入正则项的损失函数求解"><a href="#3-加入正则项的损失函数求解" class="headerlink" title="3.加入正则项的损失函数求解"></a>3.加入正则项的损失函数求解</h2><ol>
+<li><p>通常在求解的过程中，为了能够有较好的泛化能力，会在损失函数中加入正则项，以对参数进行约束，加入正则L2范数的损失函数为：<br><img src="https://img-blog.csdnimg.cn/20190727203202194.png" alt><br>对正则化不清楚的，公式可化为：<br><img src="https://img-blog.csdnimg.cn/20190727203315849.png" alt></p>
+<ol start="2">
+<li>使用梯度下降法获得修正的p和q分量：<br>-<strong>求解损失函数的负梯度</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727203526974.png" alt></li>
+</ol>
+<ul>
+<li><strong>根据负梯度的方向更新变量</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727203554346.png" alt><h2 id="4-预测"><a href="#4-预测" class="headerlink" title="4.预测"></a>4.预测</h2>预测利用上述的过程，我们可以得到矩阵和，这样便可以为用户 i 对商品  j 进行打分：<br><img src="https://img-blog.csdnimg.cn/20190727203756990.png" alt><h1 id="二、python代码实现"><a href="#二、python代码实现" class="headerlink" title="二、python代码实现"></a>二、python代码实现</h1></li>
+</ul>
+<p>以下是根据上文的评分例子做的一个矩阵分解算法，并且附有代码详解。</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">def matrix_factorization(R,P,Q,K,steps=<span class="number">5000</span>,alpha=<span class="number">0</span>.<span class="number">0002</span>,beta=<span class="number">0</span>.<span class="number">02</span>): <span class="comment">#矩阵因子分解函数，steps：梯度下降次数；alpha：步长；beta：β。</span></span><br><span class="line">    Q=Q.T                 <span class="comment"># .T操作表示矩阵的转置</span></span><br><span class="line">    <span class="literal">result</span>=[]</span><br><span class="line">    <span class="keyword">for</span> step <span class="keyword">in</span> <span class="built_in">range</span>(steps): <span class="comment">#梯度下降</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(len(R)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(len(R[i])):</span><br><span class="line">                    eij=R[i][j]-numpy.dot(P[i,:],Q[:,j])       <span class="comment"># .DOT表示矩阵相乘</span></span><br><span class="line">                    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(K):</span><br><span class="line">                      <span class="keyword">if</span> R[i][j]&gt;<span class="number">0</span>:        <span class="comment">#限制评分大于零</span></span><br><span class="line">                        P[i][k]=P[i][k]+alpha*(<span class="number">2</span>*eij*Q[k][j]-beta*P[i][k])   <span class="comment">#增加正则化，并对损失函数求导，然后更新变量P</span></span><br><span class="line">                        Q[k][j]=Q[k][j]+alpha*(<span class="number">2</span>*eij*P[i][k]-beta*Q[k][j])   <span class="comment">#增加正则化，并对损失函数求导，然后更新变量Q</span></span><br><span class="line">        eR=numpy.dot(P,Q)  </span><br><span class="line">        e=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(len(R)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(len(R[i])):</span><br><span class="line">              <span class="keyword">if</span> R[i][j]&gt;<span class="number">0</span>:</span><br><span class="line">                    e=e+pow(R[i][j]-numpy.dot(P[i,:],Q[:,j]),<span class="number">2</span>)      <span class="comment">#损失函数求和</span></span><br><span class="line">                    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(K):</span><br><span class="line">                        e=e+(beta/<span class="number">2</span>)*(pow(P[i][k],<span class="number">2</span>)+pow(Q[k][j],<span class="number">2</span>)) <span class="comment">#加入正则化后的损失函数求和</span></span><br><span class="line">        <span class="literal">result</span>.append(e)</span><br><span class="line">        <span class="keyword">if</span> e&lt;<span class="number">0</span>.<span class="number">001</span>:           <span class="comment">#判断是否收敛，0.001为阈值</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> P,Q.T,<span class="literal">result</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == '__main__':   <span class="comment">#主函数</span></span><br><span class="line">    R=[                 <span class="comment">#原始矩阵</span></span><br><span class="line">        [<span class="number">5</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">1</span>],</span><br><span class="line">        [<span class="number">4</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>],</span><br><span class="line">        [<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">5</span>],</span><br><span class="line">        [<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">4</span>],</span><br><span class="line">        [<span class="number">0</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">4</span>]</span><br><span class="line">    ]</span><br><span class="line">    R=numpy.<span class="built_in">array</span>(R)</span><br><span class="line">    N=len(R)    <span class="comment">#原矩阵R的行数</span></span><br><span class="line">    M=len(R[<span class="number">0</span>]) <span class="comment">#原矩阵R的列数</span></span><br><span class="line">    K=<span class="number">3</span>    <span class="comment">#K值可根据需求改变</span></span><br><span class="line">    P=numpy.random.rand(N,K) <span class="comment">#随机生成一个 N行 K列的矩阵</span></span><br><span class="line">    Q=numpy.random.rand(M,K) <span class="comment">#随机生成一个 M行 K列的矩阵</span></span><br><span class="line">    nP,nQ,<span class="literal">result</span>=matrix_factorization(R,P,Q,K)</span><br><span class="line">    print(R)         <span class="comment">#输出原矩阵</span></span><br><span class="line">    <span class="type">R_MF</span>=numpy.dot(nP,nQ.T)</span><br><span class="line">    print(<span class="type">R_MF</span>)      <span class="comment">#输出新矩阵</span></span><br><span class="line">    <span class="comment">#画图</span></span><br><span class="line">    plt.plot(<span class="built_in">range</span>(len(<span class="literal">result</span>)),<span class="literal">result</span>)</span><br><span class="line">    plt.xlabel(<span class="string">"time"</span>)</span><br><span class="line">    plt.ylabel(<span class="string">"loss"</span>)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
       
     </div>
 
+    
+
+    
+    
+    
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>写作是一种学习，感谢赞助！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="The Flaneurs 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="The Flaneurs 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>The Flaneurs</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://hpu-yz.github.io/2019/07/23/推荐系统之矩阵分解(MF)及其python实现/" title="推荐系统之矩阵分解(MF)及其python实现">https://hpu-yz.github.io/2019/07/23/推荐系统之矩阵分解(MF)及其python实现/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-Hans" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/机器学习/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+          
+            <a href="/tags/人工智能/" rel="tag"><i class="fa fa-tag"></i> 人工智能</a>
+          
+            <a href="/tags/推荐系统/" rel="tag"><i class="fa fa-tag"></i> 推荐系统</a>
+          
+            <a href="/tags/矩阵分解/" rel="tag"><i class="fa fa-tag"></i> 矩阵分解</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/22/暑期培训第一次测试题总结/" rel="next" title="暑期培训第一次测试题总结">
+                <i class="fa fa-chevron-left"></i> 暑期培训第一次测试题总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/24/多种相似度计算的python实现/" rel="prev" title="多种相似度计算的python实现">
+                多种相似度计算的python实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
 
         </div>
         
@@ -454,8 +779,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -697,6 +1031,23 @@ show_date_time();
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一、矩阵分解"><span class="nav-number">2.</span> <span class="nav-text">一、矩阵分解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-案例引入"><span class="nav-number">2.1.</span> <span class="nav-text">1.案例引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-推导步骤"><span class="nav-number">2.2.</span> <span class="nav-text">2.推导步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-加入正则项的损失函数求解"><span class="nav-number">2.3.</span> <span class="nav-text">3.加入正则项的损失函数求解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-预测"><span class="nav-number">2.4.</span> <span class="nav-text">4.预测</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、python代码实现"><span class="nav-number">3.</span> <span class="nav-text">二、python代码实现</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -875,6 +1226,10 @@ show_date_time();
 
 
   
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
 
   
 
@@ -920,6 +1275,8 @@ show_date_time();
 
 
 
+
+  
 
 
   
