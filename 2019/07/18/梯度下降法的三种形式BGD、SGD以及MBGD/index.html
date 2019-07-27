@@ -102,24 +102,40 @@
 
 
 
-  <meta name="description" content="Life may sometimes have regret,but the future is still good.Since the choice of the distance,will only trials and hardships.">
-<meta name="keywords" content="Hexo,博客，python，C语言,机器学习，人工智能">
-<meta property="og:type" content="website">
-<meta property="og:title" content="The Flaneurs">
-<meta property="og:url" content="https://hpu-yz.github.io/categories/Hexo/博客搭建/index.html">
+  <meta name="description" content="前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;梯度下降法作为机器学习中较常使用的优化算法，其有着三种不同的形式：批量梯度下降（Batch Gradient Descent）、随机梯度下降（Stochastic Gradient Descent）以及小批量梯度下降（Mini-Batch Gradient Descent）。其中小批量梯度下降法也常">
+<meta name="keywords" content="梯度下降，机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="梯度下降法的三种形式BGD、SGD以及MBGD">
+<meta property="og:url" content="https://hpu-yz.github.io/2019/07/18/梯度下降法的三种形式BGD、SGD以及MBGD/index.html">
 <meta property="og:site_name" content="The Flaneurs">
-<meta property="og:description" content="Life may sometimes have regret,but the future is still good.Since the choice of the distance,will only trials and hardships.">
+<meta property="og:description" content="前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;梯度下降法作为机器学习中较常使用的优化算法，其有着三种不同的形式：批量梯度下降（Batch Gradient Descent）、随机梯度下降（Stochastic Gradient Descent）以及小批量梯度下降（Mini-Batch Gradient Descent）。其中小批量梯度下降法也常">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725100634816.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725085658136.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090156368.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725085839458.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019072508594192.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/201907250859587.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090052713.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090216938.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090246509.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090315940.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090345289.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090459507.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090543904.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190725090635209.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-07-27T13:02:22.548Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The Flaneurs">
-<meta name="twitter:description" content="Life may sometimes have regret,but the future is still good.Since the choice of the distance,will only trials and hardships.">
+<meta name="twitter:title" content="梯度下降法的三种形式BGD、SGD以及MBGD">
+<meta name="twitter:description" content="前言&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;梯度下降法作为机器学习中较常使用的优化算法，其有着三种不同的形式：批量梯度下降（Batch Gradient Descent）、随机梯度下降（Stochastic Gradient Descent）以及小批量梯度下降（Mini-Batch Gradient Descent）。其中小批量梯度下降法也常">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190725100634816.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://hpu-yz.github.io/categories/Hexo/博客搭建/">
+  <link rel="canonical" href="https://hpu-yz.github.io/2019/07/18/梯度下降法的三种形式BGD、SGD以及MBGD/">
 
 
 
@@ -129,7 +145,7 @@
   };
 </script>
 
-  <title>分类: 博客搭建 | The Flaneurs</title>
+  <title>梯度下降法的三种形式BGD、SGD以及MBGD | The Flaneurs</title>
   
 
 
@@ -177,7 +193,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -270,7 +286,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -358,83 +374,339 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>博客搭建<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hpu-yz.github.io/2019/07/18/梯度下降法的三种形式BGD、SGD以及MBGD/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="The Flaneurs">
+      <meta itemprop="description" content="Life may sometimes have regret,but the future is still good.Since the choice of the distance,will only trials and hardships.">
+      <meta itemprop="image" content="http://www.qqju.com/pic/tx/tx26190.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="The Flaneurs">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/03/15/搭建(2)/" itemprop="url">
-            
-              <span itemprop="name">Hexo博客搭建</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">梯度下降法的三种形式BGD、SGD以及MBGD
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-15T00:00:00+08:00" content="2019-03-15">
-          03-15
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-18 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-18T00:00:00+08:00">2019-07-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-27 21:02:22" itemprop="dateModified" datetime="2019-07-27T21:02:22+08:00">2019-07-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/梯度下降，机器学习/" itemprop="url" rel="index"><span itemprop="name">梯度下降，机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/07/18/梯度下降法的三种形式BGD、SGD以及MBGD/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/18/梯度下降法的三种形式BGD、SGD以及MBGD/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/2019/07/18/梯度下降法的三种形式BGD、SGD以及MBGD/" class="leancloud_visitors" data-flag-title="梯度下降法的三种形式BGD、SGD以及MBGD">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">11 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;梯度下降法作为机器学习中较常使用的优化算法，其有着三种不同的形式：批量梯度下降（Batch Gradient Descent）、随机梯度下降（Stochastic Gradient Descent）以及小批量梯度下降（Mini-Batch Gradient Descent）。其中小批量梯度下降法也常用在深度学习中进行模型的训练。接下来，我们将对这三种不同的梯度下降法进行理解。<br><a id="more"></a></p>
+<p>为了便于理解，这里我们将使用只含有一个特征的线性回归来展开。</p>
+<p>此时线性回归的假设函数为：<br><img src="https://img-blog.csdnimg.cn/20190725100634816.png" alt><br>其中 i=1,2,…,m 表示样本数。<br>对应的<strong>目标函数（代价函数）</strong>即为：<br> <img src="https://img-blog.csdnimg.cn/20190725085658136.png" alt><br>下图为 J(θ0,θ1)与参数 θ0,θ1 的关系的图：<br><img src="https://img-blog.csdnimg.cn/20190725090156368.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="1、批量梯度下降（Batch-Gradient-Descent，BGD）"><a href="#1、批量梯度下降（Batch-Gradient-Descent，BGD）" class="headerlink" title="1、批量梯度下降（Batch Gradient Descent，BGD）"></a>1、批量梯度下降（Batch Gradient Descent，BGD）</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>批量梯度下降法</strong>是最原始的形式，它是指在<strong>每一次迭代时</strong>使用<strong>所有样本</strong>来进行梯度的更新。从数学上理解如下：<br>  （1）对目标函数求偏导：<br>  <img src="https://img-blog.csdnimg.cn/20190725085839458.png" alt><br>  其中 i=1,2,…,m 表示样本数， j=0,1 表示特征数，这里我们使用了偏置项 x(i)0=1。<br>  （2）每次迭代对参数进行更新：<br>  <img src="https://img-blog.csdnimg.cn/2019072508594192.png" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>注意这里更新时存在一个求和函数，即为对所有样本进行计算处理，可与下文SGD法进行比较。</strong><br>  伪代码形式为：<br>  <img src="https://img-blog.csdnimg.cn/201907250859587.png" alt><br>  <strong>优点</strong>：<br>  （1）一次迭代是对所有样本进行计算，此时利用矩阵进行操作，实现了并行。<br>  （2）由全数据集确定的方向能够更好地代表样本总体，从而更准确地朝向极值所在的方向。当目标函数为凸函数时，BGD一定能够得到全局最优。<br>  <strong>缺点</strong>：<br>  （1）当样本数目 mm 很大时，每迭代一步都需要对所有样本计算，训练过程会很慢。<br>  从迭代的次数上来看，BGD迭代的次数相对较少。其迭代的收敛曲线示意图可以表示如下：<br>  <img src="https://img-blog.csdnimg.cn/20190725090052713.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="2、随机梯度下降（Stochastic-Gradient-Descent，SGD）"><a href="#2、随机梯度下降（Stochastic-Gradient-Descent，SGD）" class="headerlink" title="2、随机梯度下降（Stochastic Gradient Descent，SGD）"></a>2、随机梯度下降（Stochastic Gradient Descent，SGD）</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>随机梯度下降法</strong>不同于批量梯度下降，随机梯度下降是<strong>每次迭代</strong>使用<strong>一个样本</strong>来对参数进行更新。使得训练速度加快。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于一个样本的目标函数为：<br>  <img src="https://img-blog.csdnimg.cn/20190725090216938.png" alt><br>  （1）对目标函数求偏导：<br>  <img src="https://img-blog.csdnimg.cn/20190725090246509.png" alt><br>  （2）参数更新：<br>  <img src="https://img-blog.csdnimg.cn/20190725090315940.png" alt><br>  <strong>注意，这里不再有求和符号</strong><br>  伪代码形式为：<br>  <img src="https://img-blog.csdnimg.cn/20190725090345289.png" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>优点</strong>：<br>  （1）由于不是在全部训练数据上的损失函数，而是在每轮迭代中，随机优化某一条训练数据上的损失函数，这样每一轮参数的更新速度大大加快。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>缺点</strong>：<br>  （1）准确度下降。由于即使在目标函数为强凸函数的情况下，SGD仍旧无法做到线性收敛。<br>  （2）可能会收敛到局部最优，由于单个样本并不能代表全体样本的趋势。<br>  （3）不易于并行实现。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>解释一下为什么SGD收敛速度比BGD要快：</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;答：这里我们假设有30W个样本，对于BGD而言，每次迭代需要计算30W个样本才能对参数进行一次更新，需要求得最小值可能需要多次迭代（假设这里是10）；而对于SGD，每次更新参数只需要一个样本，因此若使用这30W个样本进行参数更新，则参数会被更新（迭代）30W次，而这期间，SGD就能保证能够收敛到一个合适的最小值上了。也就是说，在收敛时，BGD计算了 10×30W 次，而SGD只计算了 1×30W 次。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从迭代的次数上来看，SGD迭代的次数较少，在解空间的搜索过程看起来很盲目。其迭代的收敛曲线示意图可以表示如下：<br>  <img src="https://img-blog.csdnimg.cn/20190725090459507.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="3、小批量梯度下降（Mini-Batch-Gradient-Descent-MBGD）"><a href="#3、小批量梯度下降（Mini-Batch-Gradient-Descent-MBGD）" class="headerlink" title="3、小批量梯度下降（Mini-Batch Gradient Descent, MBGD）"></a>3、小批量梯度下降（Mini-Batch Gradient Descent, MBGD）</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>小批量梯度下降</strong>，是对批量梯度下降以及随机梯度下降的一个折中办法。其思想是：<strong>每次迭代</strong> 使用 <strong>batch_size 个样本</strong>来对参数进行更新。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里我们假设 batchsize=10，样本数 m=1000 。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;伪代码形式为：<br>  <img src="https://img-blog.csdnimg.cn/20190725090543904.png" alt><br>  <strong>优点</strong>：<br>  （1）通过矩阵运算，每次在一个batch上优化神经网络参数并不会比单个数据慢太多。<br>  （2）每次使用一个batch可以大大减小收敛所需要的迭代次数，同时可以使收敛到的结果更加接近梯度下降的效果。(比如上例中的30W，设置batch_size=100时，需要迭代3000次，远小于SGD的30W次)<br>  （3）可实现并行化。<br>  <strong>缺点</strong>：<br>  （1）batch_size的不当选择可能会带来一些问题。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>batcha_size的选择带来的影响：</strong><br>  （1）在合理地范围内，增大batch_size的好处：<br>    a. 内存利用率提高了，大矩阵乘法的并行化效率提高。<br>    b. 跑完一次 epoch（全数据集）所需的迭代次数减少，对于相同数据量的处理速度进一步加快。<br>    c. 在一定范围内，一般来说 Batch_Size 越大，其确定的下降方向越准，引起训练震荡越小。<br>  （2）盲目增大batch_size的坏处：<br>    a. 内存利用率提高了，但是内存容量可能撑不住了。<br>    b. 跑完一次 epoch（全数据集）所需的迭代次数减少，要想达到相同的精度，其所花费的时间大大增加了，从而对参数的修正也就显得更加缓慢。<br>    c. Batch_Size 增大到一定程度，其确定的下降方向已经基本不再变化。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下图显示了三种梯度下降算法的收敛过程：<br>  <img src="https://img-blog.csdnimg.cn/20190725090635209.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h2><p><strong>Batch gradient descent:</strong> Use all examples in each iteration；</p>
+<p><strong>Stochastic gradient descent:</strong> Use 1 example in each iteration；</p>
+<p><strong>Mini-batch gradient descent:</strong> Use b examples in each iteration.</p>
 
       
     </div>
 
+    
+
+    
+    
+    
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>写作是一种学习，感谢赞助！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="The Flaneurs 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="The Flaneurs 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>The Flaneurs</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://hpu-yz.github.io/2019/07/18/梯度下降法的三种形式BGD、SGD以及MBGD/" title="梯度下降法的三种形式BGD、SGD以及MBGD">https://hpu-yz.github.io/2019/07/18/梯度下降法的三种形式BGD、SGD以及MBGD/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-Hans" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/梯度下降，机器学习/" rel="tag"><i class="fa fa-tag"></i> 梯度下降，机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/18/数据集的划分--训练集、验证集和测试集/" rel="next" title="数据集的划分--训练集、验证集和测试集">
+                <i class="fa fa-chevron-left"></i> 数据集的划分--训练集、验证集和测试集
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/19/K-means聚类算法原理及python实现/" rel="prev" title="K-means算法原理及python实现">
+                K-means算法原理及python实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
 
         </div>
         
@@ -454,8 +726,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -701,6 +982,23 @@ show_date_time();
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、批量梯度下降（Batch-Gradient-Descent，BGD）"><span class="nav-number">1.1.</span> <span class="nav-text">1、批量梯度下降（Batch Gradient Descent，BGD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、随机梯度下降（Stochastic-Gradient-Descent，SGD）"><span class="nav-number">1.2.</span> <span class="nav-text">2、随机梯度下降（Stochastic Gradient Descent，SGD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、小批量梯度下降（Mini-Batch-Gradient-Descent-MBGD）"><span class="nav-number">1.3.</span> <span class="nav-text">3、小批量梯度下降（Mini-Batch Gradient Descent, MBGD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、总结"><span class="nav-number">1.4.</span> <span class="nav-text">4、总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -879,6 +1177,10 @@ show_date_time();
 
 
   
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
 
   
 
@@ -924,6 +1226,8 @@ show_date_time();
 
 
 
+
+  
 
 
   

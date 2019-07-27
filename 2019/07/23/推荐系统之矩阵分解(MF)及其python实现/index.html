@@ -121,7 +121,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190727203526974.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190727203554346.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190727203756990.png">
-<meta property="og:updated_time" content="2019-07-27T12:53:51.652Z">
+<meta property="og:updated_time" content="2019-07-27T13:02:22.552Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="推荐系统之矩阵分解(MF)及其python实现">
 <meta name="twitter:description" content="前言目前推荐系统中用的最多的就是矩阵分解方法，在Netflix Prize推荐系统大赛中取得突出效果。以用户-项目评分矩阵为例，矩阵分解就是预测出评分矩阵中的缺失值，然后根据预测值以某种方式向用户推荐。今天以“用户-项目评分矩阵R（M×N）”说明矩阵分解方式的原理以及python实现。">
@@ -451,7 +451,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-27 20:53:51" itemprop="dateModified" datetime="2019-07-27T20:53:51+08:00">2019-07-27</time>
+                <time title="修改时间：2019-07-27 21:02:22" itemprop="dateModified" datetime="2019-07-27T21:02:22+08:00">2019-07-27</time>
               
             
           </span>
@@ -595,28 +595,23 @@
 <p>——矩阵分解的思想可以解决这个问题，其实这种思想可以看作是有监督的机器学习问题（回归问题）。</p>
 <p>矩阵分解的过程中，,矩阵R可以近似表示为矩阵P与矩阵Q的乘积：<br><img src="https://img-blog.csdnimg.cn/2019072720060093.png" alt><br>矩阵P(n,k)表示n个user和k个特征之间的关系矩阵，这k个特征是一个中间变量，矩阵Q(k,m)的转置是矩阵Q(m,k)，矩阵Q(m,k)表示m个item和K个特征之间的关系矩阵，这里的k值是自己控制的，可以使用交叉验证的方法获得最佳的k值。为了得到近似的R(n,m)，必须求出矩阵P和Q，如何求它们呢？</p>
 <h2 id="2-推导步骤"><a href="#2-推导步骤" class="headerlink" title="2.推导步骤"></a>2.推导步骤</h2><ol>
-<li>首先令：<br><img src="https://img-blog.csdnimg.cn/2019072720192687.png" alt="式子1"><ol start="2">
+<li>首先令：<br><img src="https://img-blog.csdnimg.cn/2019072720192687.png" alt="式子1"></li>
 <li>对于式子1的左边项，表示的是r^ 第i行，第j列的元素值，对于如何衡量，我们分解的好坏呢，式子2，给出了衡量标准，也就是损失函数，平方项损失，最后的目标，就是每一个元素(非缺失值)的e(i,j)的总和最小值<br><img src="https://img-blog.csdnimg.cn/20190727202015695.png" alt="式子2"></li>
-</ol>
-</li>
-<li>使用梯度下降法获得修正的p和q分量：</li>
-</ol>
-<ul>
+<li>使用梯度下降法获得修正的p和q分量：<ul>
 <li><strong>求解损失函数的负梯度</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727202620356.png" alt></li>
-<li><strong>根据负梯度的方向更新变量</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727202652714.png" alt><ol start="4">
-<li>不停迭代直到算法最终收敛（直到sum(e^2) &lt;=阈值，即梯度下降结束条件：f(x)的真实值和预测值小于自己设定的阈值）</li>
-</ol>
-</li>
+<li><strong>根据负梯度的方向更新变量</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727202652714.png" alt></li>
 </ul>
-<ol start="5">
-<li>为了防止过拟合，增加正则化项</li>
+</li>
+<li><p>不停迭代直到算法最终收敛（直到sum(e^2) &lt;=阈值，即梯度下降结束条件：f(x)的真实值和预测值小于自己设定的阈值）</p>
+</li>
+<li><p>为了防止过拟合，增加正则化项</p>
+</li>
 </ol>
 <h2 id="3-加入正则项的损失函数求解"><a href="#3-加入正则项的损失函数求解" class="headerlink" title="3.加入正则项的损失函数求解"></a>3.加入正则项的损失函数求解</h2><ol>
-<li><p>通常在求解的过程中，为了能够有较好的泛化能力，会在损失函数中加入正则项，以对参数进行约束，加入正则L2范数的损失函数为：<br><img src="https://img-blog.csdnimg.cn/20190727203202194.png" alt><br>对正则化不清楚的，公式可化为：<br><img src="https://img-blog.csdnimg.cn/20190727203315849.png" alt></p>
-<ol start="2">
-<li>使用梯度下降法获得修正的p和q分量：<br>-<strong>求解损失函数的负梯度</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727203526974.png" alt></li>
-</ol>
+<li>通常在求解的过程中，为了能够有较好的泛化能力，会在损失函数中加入正则项，以对参数进行约束，加入正则L2范数的损失函数为：<br><img src="https://img-blog.csdnimg.cn/20190727203202194.png" alt><br>对正则化不清楚的，公式可化为：<br><img src="https://img-blog.csdnimg.cn/20190727203315849.png" alt></li>
+<li><p>使用梯度下降法获得修正的p和q分量：</p>
 <ul>
+<li><strong>求解损失函数的负梯度</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727203526974.png" alt></li>
 <li><strong>根据负梯度的方向更新变量</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727203554346.png" alt><h2 id="4-预测"><a href="#4-预测" class="headerlink" title="4.预测"></a>4.预测</h2>预测利用上述的过程，我们可以得到矩阵和，这样便可以为用户 i 对商品  j 进行打分：<br><img src="https://img-blog.csdnimg.cn/20190727203756990.png" alt><h1 id="二、python代码实现"><a href="#二、python代码实现" class="headerlink" title="二、python代码实现"></a>二、python代码实现</h1></li>
 </ul>
 <p>以下是根据上文的评分例子做的一个矩阵分解算法，并且附有代码详解。</p>
@@ -806,7 +801,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -869,7 +864,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -920,7 +917,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">17</span>
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1075,7 +1074,7 @@ show_date_time();
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">53k</span>
+    <span title="站点总字数">56k</span>
   
 
   
@@ -1084,7 +1083,7 @@ show_date_time();
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">3:22</span>
+    <span title="站点阅读时长">3:33</span>
   
 </div>
 
