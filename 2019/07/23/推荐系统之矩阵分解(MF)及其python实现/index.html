@@ -65,7 +65,9 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目前推荐系统中用的最多的就是矩阵分解方法，在Netflix Prize推荐系统大赛中取得突出效果。以用户-项目评分矩阵为例，矩阵分解就是预测出评分矩阵中的缺失值，然后根据预测值以某种方式向用户推荐。今天以“用户-项目评分矩阵R（M×N）”说明矩阵分解方式的原理以及python实现。<br><a id="more"></a></p>
+        <meta name="referrer" content="no-referrer">
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目前推荐系统中用的最多的就是矩阵分解方法，在Netflix Prize推荐系统大赛中取得突出效果。以用户-项目评分矩阵为例，矩阵分解就是预测出评分矩阵中的缺失值，然后根据预测值以某种方式向用户推荐。今天以“用户-项目评分矩阵R（M×N）”说明矩阵分解方式的原理以及python实现。<br><a id="more"></a></p>
 <h1 id="一、矩阵分解"><a href="#一、矩阵分解" class="headerlink" title="一、矩阵分解"></a>一、矩阵分解</h1><h2 id="1-案例引入"><a href="#1-案例引入" class="headerlink" title="1.案例引入"></a>1.案例引入</h2><p>有如下R(5,4)的打分矩阵：（“-”表示用户没有打分）</p>
 <p>其中打分矩阵R(n,m)是n行和m列，n表示user个数，m行表示item个数<br><img src="https://img-blog.csdnimg.cn/20190727200249638.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>那么，如何根据目前的矩阵R（5,4）如何对未打分的商品进行评分的预测（如何得到分值为0的用户的打分值）？</p>
 <p>——矩阵分解的思想可以解决这个问题，其实这种思想可以看作是有监督的机器学习问题（回归问题）。</p>
@@ -97,7 +99,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2019/07/23/推荐系统之矩阵分解(MF)及其python实现/" data-id="cjyr7jryr0006g0uhdabhbewi" class="article-share-link">分享</a>
+      <a data-url="https://hpu-yz.github.io/2019/07/23/推荐系统之矩阵分解(MF)及其python实现/" data-id="cjyr7oii1000x28uh6vm6nmus" class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推荐系统/">推荐系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/矩阵分解/">矩阵分解</a></li></ul>
 
