@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Gallery]]></title>
+    <url>%2F2019%2F07%2F31%2Fcsdn_export_md%2F</url>
+    <content type="text"><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[多种相似度计算的python实现]]></title>
     <url>%2F2019%2F07%2F24%2F%E5%A4%9A%E7%A7%8D%E7%9B%B8%E4%BC%BC%E5%BA%A6%E8%AE%A1%E7%AE%97%E7%9A%84python%E5%AE%9E%E7%8E%B0%2F</url>
     <content type="text"><![CDATA[前言&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中有很多地方要计算相似度，比如聚类分析和协同过滤。计算相似度的有许多方法，其中有欧几里德距离(欧式距离)、曼哈顿距离、Jaccard系数和皮尔逊相关度等等。我们这里把一些常用的相似度计算方法，用python进行实现以下。大家都是初学者，我认为把公式先写下来，然后再写代码去实现比较好。 欧几里德距离(欧式距离)几个数据集之间的相似度一般是基于每对对象间的距离计算。最常用的当然是欧几里德距离，其公式为：12345678910111213#-*-coding:utf-8 -*-#计算欧几里德距离：def euclidean(p,q):#如果两数据集数目不同，计算两者之间都对应有的数same = 0for i in p: if i in q: same +=1#计算欧几里德距离,并将其标准化e = sum([(p[i] - q[i])**2 for i in range(same)])return 1/(1+e**.5) 我们用数据集可以去算一下： 123p = [1,3,2,3,4,3]q = [1,3,4,3,2,3,4,3]print euclidean(p,q) 得出结果是：0.261203874964 皮尔逊相关度几个数据集中出现异常值的时候，欧几里德距离就不如皮尔逊相关度‘稳定’，它会在出现偏差时倾向于给出更好的结果。其公式为： 123456789101112131415161718192021222324252627-*-coding:utf-8 -*-#计算皮尔逊相关度：def pearson(p,q):#只计算两者共同有的 same = 0 for i in p: if i in q: same +=1 n = same #分别求p，q的和 sumx = sum([p[i] for i in range(n)]) sumy = sum([q[i] for i in range(n)]) #分别求出p，q的平方和 sumxsq = sum([p[i]**2 for i in range(n)]) sumysq = sum([q[i]**2 for i in range(n)]) #求出p，q的乘积和 sumxy = sum([p[i]*q[i] for i in range(n)]) # print sumxy #求出pearson相关系数 up = sumxy - sumx*sumy/n down = ((sumxsq - pow(sumxsq,2)/n)*(sumysq - pow(sumysq,2)/n))**.5 #若down为零则不能计算，return 0 if down == 0 :return 0 r = up/down return r 用同样的数据集去计算： 123p = [1,3,2,3,4,3]q = [1,3,4,3,2,3,4,3]print pearson(p,q) 得出结果是：0.00595238095238 曼哈顿距离曼哈顿距离是另一种相似度计算方法，不是经常需要，但是我们仍然学会如何用python去实现，其公式为： 1234567891011121314#-*-coding:utf-8 -*-#计算曼哈顿距离：def manhattan(p,q):#只计算两者共同有的 same = 0 for i in p: if i in q: same += 1#计算曼哈顿距离 n = same vals = range(n) distance = sum(abs(p[i] - q[i]) for i in vals) return distance 用以上的数据集去计算： 123p = [1,3,2,3,4,3]q = [1,3,4,3,2,3,4,3]print manhattan(p,q) 得出结果为4 小结&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里只讲述了三种相似度的计算方法，事实上还有很多种，由于我也是刚学，其他的方法还不是很了解，以后碰到了再补上。一般情况下，这三种方法是最常用的，足够我们使用了。]]></content>
