@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="Hexo,博客，python，C语言,机器学习，人工智能">
+  
+  
+    <meta name="description" content="Life may sometimes have regret,but the future is still good.Since the choice of the distance,will only trials and hardships.">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    浅谈机器学习-分类和聚类的区别 |
+    
+    Flaneur</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-浅谈机器学习-分类和聚类的区别" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浅谈机器学习-分类和聚类的区别
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/08/01/浅谈机器学习-分类和聚类的区别/" class="article-date">
+  <time datetime="2019-07-31T16:00:00.000Z" itemprop="datePublished">2019-08-01</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a> / <a class="article-category-link" href="/categories/机器学习/分类/">分类</a> / <a class="article-category-link" href="/categories/机器学习/分类/聚类/">聚类</a>
+  </div>
+
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <meta name="referrer" content="no-referrer">
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习中有两类的大问题，一个是分类，一个是聚类。在我们的生活中，我们常常没有过多的去区分这两个概念，觉得聚类就是分类，分类也差不多就是聚类，下面，我们就具体来研究下分类与聚类之间在数据挖掘中本质的区别。</p>
+<a id="more"></a>
+<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>分类有如下几种说法，但表达的意思是相同的。</p>
+<ul>
+<li>分类（classification）:分类任务就是通过学习得到一个目标函数f，把每个属性集x映射到一个预先定义的类标号y中。</li>
+<li>分类是根据一些给定的已知类别标号的样本，训练某种学习机器（即得到某种目标函数），使它能够对未知类别的样本进行分类。这属于supervised learning（监督学习）。</li>
+<li>分类：通过学习来得到样本属性与类标号之间的关系。<br>用自己的话来说，就是我们根据已知的一些样本（包括属性与类标号）来得到分类模型（即得到样本属性与类标号之间的函数），然后通过此目标函数来对只包含属性的样本数据进行分类。</li>
+</ul>
+<p><strong>分类算法的局限</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类作为一种监督学习方法，要求必须事先明确知道各个类别的信息，并且断言所有待分类项都有一个类别与之对应。但是很多时候上述条件得不到满足，尤其是在处理海量数据的时候，如果通过预处理使得数据满足分类算法的要求，则代价非常大，这时候可以考虑使用聚类算法。</p>
+<h1 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h1><p>聚类的相关的一些概念如下</p>
+<ul>
+<li>聚类指事先并不知道任何样本的类别标号，希望通过某种算法来把一组未知类别的样本划分成若干类别，聚类的时候，我们并不关心某一类是什么，我们需要实现的目标只是把相似的东西聚到一起，这在机器学习中被称作 unsupervised learning （无监督学习）</li>
+<li>通常，人们根据样本间的某种距离或者相似性来定义聚类，即把相似的（或距离近的）样本聚为同一类，而把不相似的（或距离远的）样本归在其他类。</li>
+<li>聚类的目标：组内的对象相互之间时相似的（相关的），而不同组中的对象是不同的（不相关的）。组内的相似性越大，组间差别越大，聚类就越好。</li>
+</ul>
+<h1 id="分类与聚类的比较"><a href="#分类与聚类的比较" class="headerlink" title="分类与聚类的比较"></a>分类与聚类的比较</h1><ul>
+<li>分类：有训练数据，且训练数据包含输入和输出（有监督学习），已知分类的类别（即训练数据的输出）。学习出一个模型，用该模型对未分好类（预测数据）的数据进行预测分类（已知的类别中）。</li>
+<li>聚类：训练数据只有输入（无监督学习）。训练过程即预测过程（聚类过程），且不知道类别，甚至不知道有多少个类别，类别的数量需要指定（K-means）,也可以直接通过算法学习出来（DBSCAN）。只能通过特征的相似性对样本分类。该过程即聚类。</li>
+<li>聚类分析是研究如何在没有训练的条件下把样本划分为若干类。</li>
+<li>在分类中，对于目标数据库中存在哪些类是知道的，要做的就是将每一条记录分别属于哪一类标记出来。</li>
+<li>聚类需要解决的问题是将已给定的若干无标记的模式聚集起来使之成为有意义的聚类，聚类是在预先不知道目标数据库到底有多少类的情况下，希望将所有的记录组成不同的类或者说聚类，并且使得在这种分类情况下，以某种度量（例如：距离）为标准的相似性，在同一聚类之间最小化，而在不同聚类之间最大化。</li>
+<li>与分类不同，无监督学习不依赖预先定义的类或带类标记的训练实例，需要由聚类学习算法自动确定标记，而分类学习的实例或数据样本有类别标记。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hpu-yz.github.io/2019/08/01/浅谈机器学习-分类和聚类的区别/" data-id="cjysglaae000du8uhpc2fc7th" class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分类/">分类</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/聚类/">聚类</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2019/08/01/浅谈机器学习-回归与分类的区别/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">浅谈机器学习-回归与分类的区别</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 Flaneur</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/favicon.ico" alt="Flaneur"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
