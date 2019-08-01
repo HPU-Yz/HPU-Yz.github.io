@@ -65,7 +65,9 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN算法即K-Nearest Neighbor，也是机器学习十大经典算法之一。前文讲解了K-means算法，今天我们就继续讲KNN算法，两者看起来挺相似的，但区别还是很大的，看完本片文章你就会明白了。<br><a id="more"></a></p>
+        <meta name="referrer" content="no-referrer">
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN算法即K-Nearest Neighbor，也是机器学习十大经典算法之一。前文讲解了K-means算法，今天我们就继续讲KNN算法，两者看起来挺相似的，但区别还是很大的，看完本片文章你就会明白了。<br><a id="more"></a></p>
 <h1 id="一、引入"><a href="#一、引入" class="headerlink" title="一、引入"></a>一、引入</h1><p>问题：确定绿色圆是属于红色三角形、还是蓝色正方形？<br><img src="https://img-blog.csdnimg.cn/20190729110829508.png" alt><br>KNN的思想：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从上图中我们可以看到，图中的数据集是良好的数据，即都打好了label，一类是蓝色的正方形，一类是红色的三角形，那个绿色的圆形是我们待分类的数据。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果K=3，那么离绿色点最近的有2个红色三角形和1个蓝色的正方形，这3个点投票，于是绿色的这个待分类点属于红色的三角形<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果K=5，那么离绿色点最近的有2个红色三角形和3个蓝色的正方形，这5个点投票，于是绿色的这个待分类点属于蓝色的正方形<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;即如果一个样本在特征空间中的k个最相邻的样本中，大多数属于某一个类别，则该样本也属于这个类别。我们可以看到，KNN本质是基于一种数据统计的方法！其实很多机器学习算法也是基于数据统计的。</p>
 <h1 id="二、KNN算法"><a href="#二、KNN算法" class="headerlink" title="二、KNN算法"></a>二、KNN算法</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN即K-最近邻分类算法（K-Nearest Neighbor），是一种memory-based learning，也叫instance-based learning，属于lazy learning。即它没有明显的前期训练过程，而是程序开始运行时，把数据集加载到内存后，不需要进行训练，就可以开始分类了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN也是一种监督学习算法，通过计算新数据与训练数据特征值之间的距离，然后选取K(K&gt;=1)个距离最近的邻居进行分类判(投票法)或者回归。若K=1，新数据被简单分配给其近邻的类。</p>
 <h2 id="2-步骤"><a href="#2-步骤" class="headerlink" title="2.步骤"></a>2.步骤</h2><p>1）计算测试数据与各个训练数据之间的距离；</p>
@@ -108,7 +110,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2019/07/20/K-最近邻分类算法(KNN)及python实现/" data-id="cjyr7oigc000028uhfomfhrst" class="article-share-link">分享</a>
+      <a data-url="https://hpu-yz.github.io/2019/07/20/K-最近邻分类算法(KNN)及python实现/" data-id="cjys4ad8g0000i8uhcm14kvpx" class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/KNN/">KNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
 
