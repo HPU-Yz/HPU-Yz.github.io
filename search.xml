@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[浅谈机器学习-回归与分类的区别]]></title>
+    <url>%2F2019%2F08%2F01%2F%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%9B%9E%E5%BD%92%E4%B8%8E%E5%88%86%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB%2F</url>
+    <content type="text"><![CDATA[前言&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习的主要任务便是聚焦于两个问题：分类和回归。本文将浅谈下两者的区别。 区别&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归会给出一个具体的结果，例如房价的数据，根据位置、周边、配套等等这些维度，给出一个房价的预测。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类相信大家都不会陌生，生活中会见到很多的应用，比如垃圾邮件识别、信用卡发放等等，就是基于数据集，作出二分类或者多分类的选择。 浅层： 两者的的预测目标变量类型不同，回归问题是连续变量，分类问题离散变量。中层： 回归问题是定量问题，分类问题是定性问题。高层： 回归与分类的根本区别在于输出空间是否为一个度量空间。 解释分类和回归的区别在于输出变量的类型。 定量输出称为回归，或者说是连续变量预测；定性输出称为分类，或者说是离散变量预测。 举个例子：预测明天的气温是多少度，这是一个回归任务；预测明天是阴、晴还是雨，就是一个分类任务。 应用场景不同1.回归问题的应用场景 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归问题通常是用来预测一个值，如预测房价、未来的天气情况等等，例如一个产品的实际价格为500元，通过回归分析预测值为499元，我们认为这是一个比较好的回归分析。一个比较常见的回归算法是线性回归算法（LR）。另外，回归分析用在神经网络上，其最上层是不需要加上softmax函数的，而是直接对前一层累加即可。回归是对真实值的一种逼近预测。 2.分类问题的应用场景 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类问题是用于将事物打上一个标签，通常结果为离散值。例如判断一幅图片上的动物是一只猫还是一只狗，分类通常是建立在回归之上，分类的最后一层通常要使用softmax函数进行判断其所属类别。分类并没有逼近的概念，最终正确结果只有一个，错误的就是错误的，不会有相近的概念。最常见的分类方法是逻辑回归，或者叫逻辑分类。 本质&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类模型和回归模型本质一样，都是要建立映射关系。在实际操作中，我们确实常常将回归问题和分类问题互相转化，即分类模型可将回归模型的输出离散化，回归模型也可将分类模型的输出连续化。（分类问题回归化：逻辑回归；回归问题分类化：年龄预测问题——&gt;年龄段分类问题）]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>回归</category>
+        <category>分类</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>回归</tag>
+        <tag>分类</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[多种相似度计算的python实现]]></title>
     <url>%2F2019%2F07%2F24%2F%E5%A4%9A%E7%A7%8D%E7%9B%B8%E4%BC%BC%E5%BA%A6%E8%AE%A1%E7%AE%97%E7%9A%84python%E5%AE%9E%E7%8E%B0%2F</url>
     <content type="text"><![CDATA[前言&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中有很多地方要计算相似度，比如聚类分析和协同过滤。计算相似度的有许多方法，其中有欧几里德距离(欧式距离)、曼哈顿距离、Jaccard系数和皮尔逊相关度等等。我们这里把一些常用的相似度计算方法，用python进行实现以下。大家都是初学者，我认为把公式先写下来，然后再写代码去实现比较好。 欧几里德距离(欧式距离)几个数据集之间的相似度一般是基于每对对象间的距离计算。最常用的当然是欧几里德距离，其公式为：12345678910111213#-*-coding:utf-8 -*-#计算欧几里德距离：def euclidean(p,q):#如果两数据集数目不同，计算两者之间都对应有的数same = 0for i in p: if i in q: same +=1#计算欧几里德距离,并将其标准化e = sum([(p[i] - q[i])**2 for i in range(same)])return 1/(1+e**.5) 我们用数据集可以去算一下： 123p = [1,3,2,3,4,3]q = [1,3,4,3,2,3,4,3]print euclidean(p,q) 得出结果是：0.261203874964 皮尔逊相关度几个数据集中出现异常值的时候，欧几里德距离就不如皮尔逊相关度‘稳定’，它会在出现偏差时倾向于给出更好的结果。其公式为： 123456789101112131415161718192021222324252627-*-coding:utf-8 -*-#计算皮尔逊相关度：def pearson(p,q):#只计算两者共同有的 same = 0 for i in p: if i in q: same +=1 n = same #分别求p，q的和 sumx = sum([p[i] for i in range(n)]) sumy = sum([q[i] for i in range(n)]) #分别求出p，q的平方和 sumxsq = sum([p[i]**2 for i in range(n)]) sumysq = sum([q[i]**2 for i in range(n)]) #求出p，q的乘积和 sumxy = sum([p[i]*q[i] for i in range(n)]) # print sumxy #求出pearson相关系数 up = sumxy - sumx*sumy/n down = ((sumxsq - pow(sumxsq,2)/n)*(sumysq - pow(sumysq,2)/n))**.5 #若down为零则不能计算，return 0 if down == 0 :return 0 r = up/down return r 用同样的数据集去计算： 123p = [1,3,2,3,4,3]q = [1,3,4,3,2,3,4,3]print pearson(p,q) 得出结果是：0.00595238095238 曼哈顿距离曼哈顿距离是另一种相似度计算方法，不是经常需要，但是我们仍然学会如何用python去实现，其公式为： 1234567891011121314#-*-coding:utf-8 -*-#计算曼哈顿距离：def manhattan(p,q):#只计算两者共同有的 same = 0 for i in p: if i in q: same += 1#计算曼哈顿距离 n = same vals = range(n) distance = sum(abs(p[i] - q[i]) for i in vals) return distance 用以上的数据集去计算： 123p = [1,3,2,3,4,3]q = [1,3,4,3,2,3,4,3]print manhattan(p,q) 得出结果为4 小结&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里只讲述了三种相似度的计算方法，事实上还有很多种，由于我也是刚学，其他的方法还不是很了解，以后碰到了再补上。一般情况下，这三种方法是最常用的，足够我们使用了。]]></content>
