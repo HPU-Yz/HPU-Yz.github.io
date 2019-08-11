@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="Hexo,博客，python，C语言,机器学习，人工智能">
+  
+  
+    <meta name="description" content="Life may sometimes have regret,but the future is still good.Since the choice of the distance,will only trials and hardships.">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    人工神经网络（ANN） |
+    
+    Flaneur</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-人工神经网络（ANN）" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      人工神经网络（ANN）
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/07/26/人工神经网络（ANN）/" class="article-date">
+  <time datetime="2019-07-25T16:00:00.000Z" itemprop="datePublished">2019-07-26</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a> / <a class="article-category-link" href="/categories/机器学习/BP算法/">BP算法</a> / <a class="article-category-link" href="/categories/机器学习/BP算法/人工神经网络（ANN）/">人工神经网络（ANN）</a>
+  </div>
+
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初学人工智能不久，今天碰上了人工神经网（ANN），开始学的时候很懵，一大堆理论、公式、推导…..作为一名小白，还是很痛苦的，不过经过摸索，大概了 解了什么是ANN，公式的推导以及一些其他问题，下面我就总结下自己的理解，一方面作为自己的笔记，日后方便巩固；另一方面，也可以分享给其他有意者。</p>
+<a id="more"></a>
+<h1 id="一、什么是神经网络"><a href="#一、什么是神经网络" class="headerlink" title="一、什么是神经网络"></a>一、什么是神经网络</h1><h2 id="1-单层神经网络"><a href="#1-单层神经网络" class="headerlink" title="1.单层神经网络"></a>1.单层神经网络</h2><p>首先以单层神经元为例解释人工神经元是如何工作的<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjMwMjYzZC5wbmc" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x1,x2,…, xN：神经元的输入。这些可以从输入层实际观测或者是一个隐藏层的中间值（隐藏层即介于输入与输出之间的所有节点组成的一层。后面讲到多层神经网络是会再跟大家解释的）。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X0：偏置单元。这是常值添加到激活函数的输入（类似数学里y＝ax+b中使直线不过原点的常数b）。即截距项，通常有＋1值。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w0,w1,w2,…,wN：对应每个输入的权重。甚至偏置单元也是有权重的。</p>
+<p>a:神经元的输出。计算如下：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjQ2NzM2Zi5wbmc" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;式子里的f是已知的激活函数，f使神经网络（单层乃至多层）非常灵活并且具有能估计复杂的非线性关系的能力。在简单情况下可以是一个高斯函数、逻辑函数、双曲线函数或者甚至上是一个线性函数。利用神经网络可让其实现三个基本功能：与、或、非（AND, OR, NOT）。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里引入一个例子：and功能实现如下<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjc3YjA2Yy5wbmc" alt><br>神经元输出：a = f( -1.5 + x1 + x2 )</p>
+<p>这样大家就很容易理解其工作原理，其实就是对输入值赋予不同权重，经过激活函数输出的过程。</p>
+<h2 id="2-多层神经网络"><a href="#2-多层神经网络" class="headerlink" title="2.多层神经网络"></a>2.多层神经网络</h2><h3 id="2-1-网络结构"><a href="#2-1-网络结构" class="headerlink" title="2.1 网络结构"></a>2.1 网络结构</h3><p>清楚了单层神经网络，多层神经网络也好理解了，就相当于多个单层的叠加成多层的过程。<br><img src="https://img-blog.csdnimg.cn/20190811204232448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br><strong>神经网络分为三种类型的层</strong>：</p>
+<p>输入层：神经网络最左边的一层，通过这些神经元输入需要训练观察的样本，即初始输入数据的一层。</p>
+<p>隐藏层：介于输入与输出之间的所有节点组成的一层。帮助神经网络学习数据间的复杂关系，即对数据进行处理的层。</p>
+<p>输出层：由前两层得到神经网络最后一层，即最后结果输出的一层。</p>
+<h3 id="2-2-传递函数-激活函数"><a href="#2-2-传递函数-激活函数" class="headerlink" title="2.2 传递函数/激活函数"></a>2.2 传递函数/激活函数</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前面每一层输入经过线性变换wx+b后还用到了sigmoid函数，在神经网络的结构中被称为传递函数或者激活函数。除了sigmoid，还有tanh、relu等别的激活函数。激活函数使线性的结果非线性化。</p>
+<h3 id="2-3-为什么需要传递函数"><a href="#2-3-为什么需要传递函数" class="headerlink" title="2.3 为什么需要传递函数"></a>2.3 为什么需要传递函数</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单理解上，如果不加激活函数，无论多少层隐层，最终的结果还是原始输入的线性变化，这样一层隐层就可以达到结果，就没有多层感知器的意义了。所以每个隐层都会配一个激活函数，提供非线性变化。</p>
+<h1 id="二、BP算法"><a href="#二、BP算法" class="headerlink" title="二、BP算法"></a>二、BP算法</h1><h2 id="1-BP算法基本思想"><a href="#1-BP算法基本思想" class="headerlink" title="1.BP算法基本思想"></a>1.BP算法基本思想</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP算法全称叫作误差反向传播(error Back Propagation，或者也叫作误差逆传播)算法。其算法基本思想为：在上述的前馈网络中，输入信号经输入层输入，通过隐层计算由输出层输出，输出值与标记值比较，若有误差，将误差反向由输出层向输入层传播，在这个过程中，利用梯度下降算法对神经元权值进行调整。</p>
+<h2 id="2-BP算法的推导"><a href="#2-BP算法的推导" class="headerlink" title="2.BP算法的推导"></a>2.BP算法的推导</h2><h3 id="2-1-数学基础理论"><a href="#2-1-数学基础理论" class="headerlink" title="2.1 数学基础理论"></a>2.1 数学基础理论</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP算法中核心的数学工具就是微积分的<strong>链式求导法则</strong>。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMjQxMzk3LWMwN2Q1ODFjOTJkYWViZWMucG5n" alt></p>
+<h3 id="2-2推导过程"><a href="#2-2推导过程" class="headerlink" title="2.2推导过程"></a>2.2推导过程</h3><p><img src="https://img-blog.csdnimg.cn/20190811205148228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<ol>
+<li><strong>正向传播求损失，反向传播回传误差</strong></li>
+<li>根据误差信号修正每层的权重 </li>
+<li>f是激活函数；f(netj)是隐层的输出； f(netk）是输出层的输出O; d是target</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结合BP网络结构，误差由输出展开至输入的过程如下：<br><img src="https://img-blog.csdnimg.cn/20190811205328707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>有了误差E，通过求偏导就可以求得最优的权重。（不要忘记学习率） </p>
+<p><img src="https://img-blog.csdnimg.cn/2019081120540142.png" alt></p>
+<h2 id="3-举例说明"><a href="#3-举例说明" class="headerlink" title="3. 举例说明"></a>3. 举例说明</h2><p><img src="https://img-blog.csdnimg.cn/20190811205641720.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>图中元素：<br>两个输入；<br>隐层: b1, w1, w2, w3, w4 (都有初始值）<br>输出层：b2, w5, w6, w7, w8（赋了初始值）</p>
+<h3 id="3-1-前向传播"><a href="#3-1-前向传播" class="headerlink" title="3.1 前向传播"></a>3.1 前向传播</h3><p><img src="https://img-blog.csdnimg.cn/20190811205743162.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>则误差：<br><img src="https://img-blog.csdnimg.cn/20190811205806851.png" alt></p>
+<h3 id="3-2-反向传播"><a href="#3-2-反向传播" class="headerlink" title="3.2 反向传播"></a>3.2 反向传播</h3><p><img src="https://img-blog.csdnimg.cn/20190811205859442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>参数更新：<br><img src="https://img-blog.csdnimg.cn/20190811205921617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>求误差对w1的偏导 ：<br><img src="https://img-blog.csdnimg.cn/20190811205940706.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>注意，w1对两个输出的误差都有影响<br>通过以上过程可以更新所有权重，就可以再次迭代更新了，直到满足条件。</p>
+<h1 id="三、python代码实现"><a href="#三、python代码实现" class="headerlink" title="三、python代码实现"></a>三、python代码实现</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上述例子，用python可写出如下代码，并附有详解：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import math</span><br><span class="line">a=np.array([0.05,0.1])           #a1,a2的输入值</span><br><span class="line">weight1=np.array([[0.15,0.25],[0.2,0.3]])   #a1对b1,b2的权重，a2对b1，b2的权重</span><br><span class="line">weight2=np.array([[0.4,0.5],[0.45,0.55]])     #b1对c1,c2的权重，b2对c1，c2的权重</span><br><span class="line">target=np.array([0.01,0.99])</span><br><span class="line">d1=0.35   #输入层的偏置（1）的权重</span><br><span class="line">d2=0.6    #隐藏层的偏置（1）的权重</span><br><span class="line">β=0.5    #学习效率</span><br><span class="line"></span><br><span class="line"><span class="section">#一：前向传播</span></span><br><span class="line"></span><br><span class="line"><span class="section">#计算输入层到隐藏层的输入值，得矩阵netb1,netb2</span></span><br><span class="line">netb=np.dot(a,weight1)+d1</span><br><span class="line"></span><br><span class="line"><span class="section">#计算隐藏层的输出值,得到矩阵outb1,outb2</span></span><br><span class="line">m=[]</span><br><span class="line">for i in range(len(netb)):</span><br><span class="line"><span class="code">    outb=1.0 / (1.0 + math.exp(-netb[i]))</span></span><br><span class="line"><span class="code">    m.append(outb)</span></span><br><span class="line">m=np.array(m)</span><br><span class="line"></span><br><span class="line"><span class="section">#计算隐藏层到输出层的输入值，得矩阵netc1,netc2</span></span><br><span class="line">netc=np.dot(m,weight2)+d2</span><br><span class="line"></span><br><span class="line"><span class="section">#计算隐藏层的输出值,得到矩阵outc1,outc2</span></span><br><span class="line">n=[]</span><br><span class="line">for i in range(len(netc)):</span><br><span class="line"><span class="code">    outc=1.0 / (1.0 + math.exp(-netc[i]))</span></span><br><span class="line"><span class="code">    n.append(outc)</span></span><br><span class="line">n=np.array(n)</span><br><span class="line"></span><br><span class="line"><span class="section">#二：反向传播</span></span><br><span class="line">count=0 #计数</span><br><span class="line">e=0     #误差  </span><br><span class="line">E=[]    #统计误差</span><br><span class="line"><span class="section">#梯度下降</span></span><br><span class="line">while True:</span><br><span class="line">  count+=1</span><br><span class="line">  </span><br><span class="line">  #总误差对w1-w4的偏导</span><br><span class="line">  pd1=(-(target[<span class="string">0</span>]-n[<span class="string">0</span>])<span class="emphasis">*n[0]*</span>(1-n[<span class="string">0</span>])<span class="emphasis">*weight2[0][0]-(target[1]-n[1])*</span>n[<span class="string">1</span>]<span class="emphasis">*(1-n[1])*</span>weight2[<span class="string">0</span>][<span class="symbol">1</span>])<span class="emphasis">*m[0]*</span>(1-m[0])*a[0]</span><br><span class="line">  pd2=(-(target[<span class="string">0</span>]-n[<span class="string">0</span>])<span class="emphasis">*n[0]*</span>(1-n[<span class="string">0</span>])<span class="emphasis">*weight2[0][0]-(target[1]-n[1])*</span>n[<span class="string">1</span>]<span class="emphasis">*(1-n[1])*</span>weight2[<span class="string">0</span>][<span class="symbol">1</span>])<span class="emphasis">*m[0]*</span>(1-m[0])*a[1]</span><br><span class="line">  pd3=(-(target[<span class="string">0</span>]-n[<span class="string">0</span>])<span class="emphasis">*n[0]*</span>(1-n[<span class="string">0</span>])<span class="emphasis">*weight2[1][0]-(target[1]-n[1])*</span>n[<span class="string">1</span>]<span class="emphasis">*(1-n[1])*</span>weight2[<span class="string">0</span>][<span class="symbol">1</span>])<span class="emphasis">*m[0]*</span>(1-m[0])*a[0]                          </span><br><span class="line">  pd4=(-(target[<span class="string">0</span>]-n[<span class="string">0</span>])<span class="emphasis">*n[0]*</span>(1-n[<span class="string">0</span>])<span class="emphasis">*weight2[1][1]-(target[1]-n[1])*</span>n[<span class="string">1</span>]<span class="emphasis">*(1-n[1])*</span>weight2[<span class="string">0</span>][<span class="symbol">1</span>])<span class="emphasis">*m[0]*</span>(1-m[0])*a[1]</span><br><span class="line">  weight1[<span class="string">0</span>][<span class="symbol">0</span>]=weight1[<span class="string">0</span>][<span class="symbol">0</span>]-β*pd1</span><br><span class="line">  weight1[<span class="string">1</span>][<span class="symbol">0</span>]=weight1[<span class="string">1</span>][<span class="symbol">0</span>]-β*pd2</span><br><span class="line">  weight1[<span class="string">0</span>][<span class="symbol">1</span>]=weight1[<span class="string">0</span>][<span class="symbol">1</span>]-β*pd3</span><br><span class="line">  weight1[<span class="string">1</span>][<span class="symbol">1</span>]=weight1[<span class="string">1</span>][<span class="symbol">1</span>]-β*pd4</span><br><span class="line"></span><br><span class="line">  #总误差对w5-w8的偏导</span><br><span class="line">  pd5=-(target[0]-n[0])<span class="emphasis">*n[0]*</span>(1-n[0])*m[0]</span><br><span class="line">  pd6=-(target[0]-n[0])<span class="emphasis">*n[0]*</span>(1-n[0])*m[1]</span><br><span class="line">  pd7=-(target[1]-n[1])<span class="emphasis">*n[1]*</span>(1-n[1])*m[0]</span><br><span class="line">  pd8=-(target[1]-n[1])<span class="emphasis">*n[1]*</span>(1-n[1])*m[1]</span><br><span class="line">  weight2[<span class="string">0</span>][<span class="symbol">0</span>]=weight2[<span class="string">0</span>][<span class="symbol">0</span>]-β*pd5</span><br><span class="line">  weight2[<span class="string">1</span>][<span class="symbol">0</span>]=weight2[<span class="string">1</span>][<span class="symbol">0</span>]-β*pd6</span><br><span class="line">  weight2[<span class="string">0</span>][<span class="symbol">1</span>]=weight2[<span class="string">0</span>][<span class="symbol">1</span>]-β*pd7</span><br><span class="line">  weight2[<span class="string">1</span>][<span class="symbol">1</span>]=weight2[<span class="string">1</span>][<span class="symbol">1</span>]-β*pd8</span><br><span class="line">  </span><br><span class="line">  netb=np.dot(a,weight1)+d1</span><br><span class="line">  m=[]</span><br><span class="line">  for i in range(len(netb)):</span><br><span class="line"><span class="code">    outb=1.0 / (1.0 + math.exp(-netb[i]))</span></span><br><span class="line"><span class="code">    m.append(outb)</span></span><br><span class="line">  m=np.array(m)</span><br><span class="line">  netc=np.dot(m,weight2)+d2</span><br><span class="line">  n=[]</span><br><span class="line">  for i in range(len(netc)):</span><br><span class="line"><span class="code">    outc=1.0 / (1.0 + math.exp(-netc[i]))</span></span><br><span class="line"><span class="code">    n.append(outc)</span></span><br><span class="line">  n=np.array(n)</span><br><span class="line">  </span><br><span class="line">  #计算总误差</span><br><span class="line">  for j in range(len(n)):</span><br><span class="line"><span class="code">    e += (target[j]-n[j])**2/2</span></span><br><span class="line">  E.append(e)</span><br><span class="line">  #判断</span><br><span class="line">  if e<span class="xml"><span class="tag">&lt;<span class="name">0.0000001:</span></span></span></span><br><span class="line"><span class="xml">    break</span></span><br><span class="line"><span class="xml">  else:</span></span><br><span class="line"><span class="xml">      e=0</span></span><br><span class="line"><span class="xml">print(count)</span></span><br><span class="line"><span class="xml">print(e)</span></span><br><span class="line"><span class="xml">print(n)</span></span><br><span class="line"><span class="xml">plt.plot(range(len(E)),E,label='error')</span></span><br><span class="line"><span class="xml">plt.legend() </span></span><br><span class="line"><span class="xml">plt.xlabel('time')</span></span><br><span class="line"><span class="xml">plt.ylabel('error')</span></span><br><span class="line"><span class="xml">plt.show()</span></span><br></pre></td></tr></table></figure>
+<h1 id="四、BP神经网络的优缺点"><a href="#四、BP神经网络的优缺点" class="headerlink" title="四、BP神经网络的优缺点"></a>四、BP神经网络的优缺点</h1><p><strong>BP神经网络的优点：</strong></p>
+<ol>
+<li>非线性映射能力</li>
+<li>泛化能力  </li>
+<li>容错能力，允许输入样本中带有较大误差甚至个别错误。反应正确规律的知识来自全体样本，个别样本中的误差不能左右对权矩阵的调整</li>
+</ol>
+<p><strong>BP神经网络的缺陷：</strong></p>
+<ol>
+<li>需要的参数过多，而且参数的选择没有有效的方法。确定一个BP神经网络需要知道：网络的层数、每一层神经元的个数和权值。权值可以通过学习得到，如果，隐层神经元数量太多会引起过学习，如果隐层神经元个数太少会引起欠学习。此外学习率的选择也是需要考虑。目前来说，对于参数的确定缺少一个简单有效的方法，所以导致算法很不稳定；</li>
+<li>属于监督学习，对于样本有较大依赖性，网络学习的逼近和推广能力与样本有很大关系，如果样本集合代表性差，样本矛盾多，存在冗余样本，网络就很难达到预期的性能；</li>
+<li>由于权值是随机给定的，所以BP神经网络具有不可重现性；</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hpu-yz.github.io/2019/07/26/人工神经网络（ANN）/" data-id="cjz7112rb00164guhmii3y9ve" class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BP算法/">BP算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/人工神经网络（ANN）/">人工神经网络（ANN）</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2019/08/01/浅谈机器学习-分类和聚类的区别/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            浅谈机器学习-分类和聚类的区别
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/07/24/多种相似度计算的python实现/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">多种相似度计算的python实现</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 Flaneur</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/favicon.ico" alt="Flaneur"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
