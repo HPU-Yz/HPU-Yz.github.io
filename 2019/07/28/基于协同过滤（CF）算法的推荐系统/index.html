@@ -65,7 +65,8 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着计算机领域技术的高速发展，电子商务时代的普及，个性化的推荐系统深入生活应用的各个方面。个性化推荐算法是推荐系统中最核心的技术，在很大程度上决定了电子商务推荐系统性能的优劣。而协同过滤推荐是个性化推荐系统应用最为广泛的技术，协同过滤推荐主要分为基于用户的协同过滤推荐、基于项目的协同过滤推荐和基于模型的协同过滤推荐。<br><a id="more"></a></p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着计算机领域技术的高速发展，电子商务时代的普及，个性化的推荐系统深入生活应用的各个方面。个性化推荐算法是推荐系统中最核心的技术，在很大程度上决定了电子商务推荐系统性能的优劣。而协同过滤推荐是个性化推荐系统应用最为广泛的技术，协同过滤推荐主要分为基于用户的协同过滤推荐、基于项目的协同过滤推荐和基于模型的协同过滤推荐。</p>
+<a id="more"></a>
 <h1 id="一、协同过滤算法描述"><a href="#一、协同过滤算法描述" class="headerlink" title="一、协同过滤算法描述"></a>一、协同过滤算法描述</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大数据时代产生了海量的数据，里面蕴含了丰富的价值。但是，大数据体量之大、种类之繁以及产生速率之快，海量的数据并不都是有价值的，用户从海量的数据中提取有用的、针对性的信息需要花费很大的时间成本。比如，当你面对如此多的电影列表，你想找到一部最符合自己兴趣的电影，因为电影数量之多，你不可能把所有的电影简介都看一遍。那么怎么解决这个问题呢？电影平台搜集你过去看过的全部电影，分析了解你对什么类型电影感兴趣，然后针对性的把你感兴趣的电影主动的罗列给你，你不用花费太多的精力便可快速找到满足自己需求的电影。推荐算法便是为解决这类实际需求而诞生了。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 推荐系统应用数据分析技术，找出用户最可能喜欢的东西推荐给用户，现在很多电子商务网站都有这个应用。目前用的比较多、比较成熟的推荐算法是协同过滤（Collaborative Filtering，简称CF）推荐算法，CF的基本思想是根据用户之前的喜好以及其他兴趣相近的用户的选择来给用户推荐物品。<br><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2hpLmNzZG4ubmV0L2F0dGFjaG1lbnQvMjAxMjAzLzE2LzBfMTMzMTkwOTY5MFhVcEkuZ2lm" alt><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如图所示，在CF中，用m×n的矩阵表示用户对物品的喜好情况，一般用打分表示用户对物品的喜好程度，分数越高表示越喜欢这个物品，0表示没有买过该物品。图中行表示一个用户，列表示一个物品，Uij表示用户i对物品j的打分情况。CF分为两个过程，一个为预测过程，另一个为推荐过程。预测过程是预测用户对没有购买过的物品的可能打分值，推荐是根据预测阶段的结果推荐用户最可能喜欢的一个或Top-N个物品。</p>
 <h1 id="二、协同过滤的实现"><a href="#二、协同过滤的实现" class="headerlink" title="二、协同过滤的实现"></a>二、协同过滤的实现</h1><p>要实现协同过滤的推荐算法，要进行以下三个步骤：</p>
@@ -117,7 +118,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2019/07/28/基于协同过滤（CF）算法的推荐系统/" data-id="cjzal38t2002z98uhvwqb4ahk" class="article-share-link">分享</a>
+      <a data-url="https://hpu-yz.github.io/2019/07/28/基于协同过滤（CF）算法的推荐系统/" data-id="cjzalcmlt0014u4uh4bdf1r4v" class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/协同过滤（CF）/">协同过滤（CF）</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推荐系统/">推荐系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
 
