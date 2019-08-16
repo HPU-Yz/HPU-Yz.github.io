@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="Hexo,博客，python，C语言,机器学习，人工智能">
+  
+  
+    <meta name="description" content="Life may sometimes have regret,but the future is still good.Since the choice of the distance,will only trials and hardships.">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    卷积神经网络（CNN） |
+    
+    Flaneur</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-卷积神经网络（CNN）" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      卷积神经网络（CNN）
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/07/30/卷积神经网络（CNN）/" class="article-date">
+  <time datetime="2019-07-29T16:00:00.000Z" itemprop="datePublished">2019-07-30</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/机器学习/">机器学习</a> / <a class="article-category-link" href="/categories/机器学习/卷积神经网络（CNN）/">卷积神经网络（CNN）</a>
+  </div>
+
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CNN，即卷积神经网络，主要用于图像识别，分类。这篇卷积神经网络是前面介绍的多层神经网络的进一步深入，它将深度学习的思想引入到了神经网络当中，通过卷积运算来由浅入深的提取图像的不同层次的特征，而利用神经网络的训练过程让整个网络自动调节卷积核的参数，从而无监督的产生了最适合的分类特征。</p>
+<a id="more"></a>
+<h1 id="一、卷积神经网络的网络结构"><a href="#一、卷积神经网络的网络结构" class="headerlink" title="一、卷积神经网络的网络结构"></a>一、卷积神经网络的网络结构</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;卷积神经网络主要由这几类层构成：输入层、卷积层，ReLU层、池化（Pooling）层和全连接层（全连接层和常规神经网络中的一样）。通过将这些层叠加起来，就可以构建一个完整的卷积神经网络。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在实际应用中往往将卷积层与ReLU层共同称之为卷积层，所以卷积层经过卷积操作也是要经过激活函数的。具体说来，卷积层和全连接层（CONV/FC）对输入执行变换操作的时候，不仅会用到激活函数，还会用到很多参数，即神经元的权值w和偏差b；而ReLU层和池化层则是进行一个固定不变的函数操作。卷积层和全连接层中的参数会随着梯度下降被训练，这样卷积神经网络计算出的分类评分就能和训练集中的每个图像的标签吻合了。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy81NzA4NjI0LTExYjJmODM1ZGMyM2NiZGUucG5n" alt></p>
+<h1 id="二、卷积层"><a href="#二、卷积层" class="headerlink" title="二、卷积层"></a>二、卷积层</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;卷积层是构建卷积神经网络的核心层，它产生了网络中大部分的计算量。注意是计算量而不是参数量。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;先简单给大家介绍一下什么叫做卷积，那么白话解释一下啥叫卷积，很形象，就是“卷”，你假象一下，你把毛巾卷起来，成为一个圆柱体的卷，就是这个意思，抽象的说，就是将原来的对象变小一些，但又能保证原来图像中的信息尽量多的保留下来，可以看看下面这个卷积过程图。看看这个图，大概理解卷积是一个什么样子的过程就可以了，用映射两个字我认为是比较恰当的。</p>
+<h2 id="1-卷积过程"><a href="#1-卷积过程" class="headerlink" title="1.卷积过程"></a>1.卷积过程</h2><p>二维卷积：即滤波器的每个格子与滤波器选中数据的格子相乘。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL21tYml6LnFwaWMuY24vbW1iaXpfZ2lmL0JQNkhRTjZST3B4bTJEbWh4QnQ3ZXJsZUVTZEx1WFNZN1lPcDZsUmZkWTdvUUlnS3pGSGt2cTQxQXhnWnNPZVh5dElaS2VYSWozVUJ0aWIwb3d5NHl2Zy8w" alt></p>
+<p>三维卷积：三维数据的话，滤波器的也是三维。同时对每个维度进行卷积，最后将每个维度的卷积结果相加，输出二维。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yNTA5NTU3LTUwY2M2M2EyOTU1N2I2MzAucG5n" alt></p>
+<h2 id="2-过滤器"><a href="#2-过滤器" class="headerlink" title="2.过滤器"></a>2.过滤器</h2><p><strong>过滤器的作用是：寻找图片的特征</strong>。<br>这就涉及到CNN要做的工作了。每一个过滤器中的数值，都是算法自己学习来的，不需要我们费心去设置。</p>
+<p>需要我们做的有：</p>
+<p>① <strong>设置过滤器的大小</strong>（用字母“F”表示）</p>
+<p>一般情况下，我们的过滤器大小是3×3，即F=3。</p>
+<p>当然，你还可以设置成5×5，都是可以的。</p>
+<p>只不过，需要注意的是：过滤器的尺寸越大，得到的图像细节就越少，最终得到的特征图的尺寸也更小。</p>
+<p>② <strong>设置过滤器滑动的步幅数</strong>（用字母“S”表示）</p>
+<p>一般情况下，过滤器滑动的步幅是1，即每次过滤器向右或向下滑动1个像素单位。</p>
+<p>当然，你也可以将步幅设置为2或更多，但是通常情况下，我们会使用S=1或S=2。</p>
+<p>③ <strong>设置过滤器的个数</strong>（用字母“K”表示）</p>
+<p>以下，我们分别给大家展示了4种过滤器。所以你可以理解为K=4，如下图：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2FpcG9ydGFsLm5ldC93cC1jb250ZW50L3VwbG9hZHMvMjAxNy8xMi80JUU3JUE3JThEJUU4JUJGJTg3JUU2JUJCJUE0JUU1JTk5JUE4LnBuZw" alt></p>
+<p>当然，你可以设置任意个数。</p>
+<p>再次强调：不要在意过滤器里面的数值，那是算法自己学习来的，不需要我们操心，我们只要把过滤器的个数设置好，就可以了。</p>
+<p>所以，一张图片，在经过4种过滤器的提取后，会得到4种不同的特征图片：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2FpcG9ydGFsLm5ldC93cC1jb250ZW50L3VwbG9hZHMvMjAxNy8xMi8yMiVFNSU5QiU5QiVFNyVBNyU4RCVFOCVCRiU4NyVFNiVCQiVBNCVFNSU5OSVBOC0lRTYlOTUlODglRTYlOUUlOUMuanBn" alt></p>
+<p>从上面的例子我们能够看到，“卷积”输出的结果，是包含“宽、高、深”3个维度的：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2FpcG9ydGFsLm5ldC93cC1jb250ZW50L3VwbG9hZHMvMjAxNy8xMi8yNCVFNSVBRSVCRCVFOSVBQiU5OCVFNiVCNyVCMS5wbmc" alt></p>
+<p>实际上，在CNN中，所有图片都是包含有“宽、高、深”。</p>
+<p>像输入的图片——萌狗，它也是包含3个维度，只不过，它的深度是1，所以在我们的图片中没有明显地体现出来：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2FpcG9ydGFsLm5ldC93cC1jb250ZW50L3VwbG9hZHMvMjAxNy8xMi8yNiVFOSVCQiU5MSVFNyU5OSVCRCVFNSU5QiVCRS0lRTYlQjclQjElRTUlQkElQTYuanBn" alt></p>
+<p>所以，我们要记住，经过“卷积”层的处理后，图片含有深度，这个“深度”，等于过滤器的个数。</p>
+<p>例如，上面我们采用了4种过滤器，那么，输出的结果，深度就为4。</p>
+<p>④ <strong>设置是否补零</strong>（用字母“P”表示）</p>
+<p>何为“补零”？</p>
+<p>当我们采用了3×3大小的过滤器，直接在原始图片滑过。</p>
+<p>从结果中可以看到，最终得到的“特征图片”比“原始图片”小了一圈：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2FpcG9ydGFsLm5ldC93cC1jb250ZW50L3VwbG9hZHMvMjAxNy8xMi8yNyVFOCVBMSVBNSVFOSU5QiVCNi0lRTUlOUIlQkUlRTUlODMlOEYlRTUlOEYlOTglRTUlQjAlOEYucG5n" alt></p>
+<p>为什么会出现这种情况？</p>
+<p>原因很简单：过滤器将原始图片中，每3*3=9个像素点，提取为1个像素点</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2FpcG9ydGFsLm5ldC93cC1jb250ZW50L3VwbG9hZHMvMjAxNy8xMi8yOCVFNyVCQyVBOSVFNSVCMCU4RiVFNSU4RSU5RiVFNSU5QiVBMC5wbmc" alt></p>
+<p>所以，当过滤器遍历整个图片后，得到的特征图片会比原始图片更小。</p>
+<p>当然，你也可以得到一个和原始图片大小一样的特征图，这就需要采用“在原始图片外围补零”的方法：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2FpcG9ydGFsLm5ldC93cC1jb250ZW50L3VwbG9hZHMvMjAxNy8xMi8yOSVFOCVBMSVBNSVFOSU5QiVCNi5qcGc" alt><br>下面，我们来看看“补零”后的效果：</p>
+<p><img src="https://img-blog.csdnimg.cn/201908151547000.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<p>如何确定“补零”的圈数，才能保证图片大小一致？<br>假设你的过滤器大小为F，滑动步幅S=1，想要实现这一目标，补零的个数应为：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2FpcG9ydGFsLm5ldC93cC1jb250ZW50L3VwbG9hZHMvMjAxNy8xMi8zMSVFOCVBMSVBNSVFOSU5QiVCNiVFNSU4NSVBQyVFNSVCQyU4Ri5wbmc" alt></p>
+<p>举个例子：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在上图中，因为我们使用的是3*3大小的过滤器，而且每次滑动时，都是向右或向下移动1格。</p>
+<p>所以，为了使特征图片与原始图片保持一致，需要补零P=(3-1)/2=1，即在原始图片外围，补1圈零。</p>
+<p>如果你使用的过滤器大小为5*5，那么补零P=(5-1)/2=2，即在原始图片外围，补2圈零。</p>
+<p>当然，是否需要“补零”，由你自己来决定，<strong>“补零”并不是硬性规定。</strong></p>
+<h2 id="3-卷积层（Conv-Layer）的输出张量（图像）的大小计算"><a href="#3-卷积层（Conv-Layer）的输出张量（图像）的大小计算" class="headerlink" title="3.卷积层（Conv Layer）的输出张量（图像）的大小计算"></a>3.卷积层（Conv Layer）的输出张量（图像）的大小计算</h2><p>定义如下：</p>
+<p>O=输出图像的尺寸。</p>
+<p>I=输入图像的尺寸。</p>
+<p>K=卷积层的核尺寸</p>
+<p>N=核数量</p>
+<p>S=移动步长</p>
+<p>P =填充数</p>
+<p>输出图像尺寸的计算公式如下：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWcyMDE4LmNuYmxvZ3MuY29tL2Jsb2cvMTA5MzYzNy8yMDE4MDkvMTA5MzYzNy0yMDE4MDkyNTIxMjEyNjQxOC0yMjU3NzY3LnBuZw" alt><br>输出图像的通道数等于核数量N。</p>
+<p>示例：AlexNet中输入图像的尺寸为227<em>227</em>3.第一个卷积层有96个尺寸为11<em>11</em>3的核。步长为4，填充为0.<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWcyMDE4LmNuYmxvZ3MuY29tL2Jsb2cvMTA5MzYzNy8yMDE4MDkvMTA5MzYzNy0yMDE4MDkyNTIxMjE0ODI4OC0xODkxNjg3MjQ5LnBuZw" alt><br>输出的图像为55<em>55</em>96（每个核对应1个通道）</p>
+<h2 id="4-卷积层作用"><a href="#4-卷积层作用" class="headerlink" title="4. 卷积层作用"></a>4. 卷积层作用</h2><ol>
+<li><p><strong>滤波器的作用或者说是卷积的作用</strong>。卷积层的参数是有一些可学习的滤波器集合构成的。每个滤波器在空间上（宽度和高度）都比较小，但是深度和输入数据一致（这一点很重要，后面会具体介绍）。直观地来说，网络会让滤波器学习到当它看到某些类型的视觉特征时就激活，具体的视觉特征可能是某些方位上的边界，或者在第一层上某些颜色的斑点，甚至可以是网络更高层上的蜂巢状或者车轮状图案。</p>
+</li>
+<li><p><strong>可以被看做是神经元的一个输出</strong>。神经元只观察输入数据中的一小部分，并且和空间上左右两边的所有神经元共享参数（因为这些数字都是使用同一个滤波器得到的结果）。</p>
+</li>
+<li><p><strong>降低参数的数量</strong>。这个由于卷积具有“权值共享”这样的特性，可以降低参数数量，达到降低计算开销，防止由于参数过多而造成过拟合。</p>
+</li>
+</ol>
+<h1 id="三、激活函数"><a href="#三、激活函数" class="headerlink" title="三、激活函数"></a>三、激活函数</h1><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MDg2NjU0LTFkMTM1ZGU0YzU3YzE4YWU" alt></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如上图所示，一个filter或者神经元的内部计算过程，我们可以看到通过卷积并加上bias后（其实在感知机那个时代到这一步就可以了，模型就具备了线性分类的能力，但是大千世界我们的分类问题很少是线性函数可以拟合的，所以我们就需要拟合非线性函数），filter还做了一次函数映射运算，这里的函数 f 就是我们的非线性激活函数，它的作用是：使模型不再是线性组合，具有可以逼近任意函数的能力。下图就是我们经常使用激活函数 ReLU，还有sigmoid函数或者tanh函数这些，读者可以自行搜索。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy82MDg2NjU0LWMxZTY3NzYwNWQ2YWZiZDM" alt></p>
+<p>如果是负数，出来的结果就是0</p>
+<p>如果是正数或零，出来的结果仍是自己本身</p>
+<p>举个例子：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;假设经过“过滤器”提取后，得到的“特征图片”其像素值如左下图，那么，经过ReLU处理后，得到的“新的”特征图片会呈现右下图形态：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3dy5haXBvcnRhbC5uZXQvd3AtY29udGVudC91cGxvYWRzLzIwMTcvMTIvMzglRTUlOUIlQkUlRTclODklODdSZWx1LnBuZw" alt></p>
+<p>回到我们之前的例子中，在“卷积”的后面，再加上一步“ReLU计算”，即为：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3dy5haXBvcnRhbC5uZXQvd3AtY29udGVudC91cGxvYWRzLzIwMTcvMTIvMzklRTYlOUUlQjYlRTYlOUUlODQxLnBuZw" alt></p>
+<h1 id="四、池化层"><a href="#四、池化层" class="headerlink" title="四、池化层"></a>四、池化层</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;有时图像太大，即使我们参数不太多，但图像的像素实在太多，导致卷积操作后，我们得到的结果仍然过大。我们需要减少训练参数的数量，它被要求在随后的卷积层之间周期性地引进池化层。池化的一个目的是减少图像的空间大小。池化在每一个纵深维度上独自完成，因此图像的纵深保持不变。</p>
+<h2 id="1-池化过程"><a href="#1-池化过程" class="headerlink" title="1.池化过程"></a>1.池化过程</h2><p><strong>所谓“池化”，就是在保留图片主要信息的前提下，将图片的尺寸缩小。</strong>  </p>
+<p>池化的类型有很多种，诸如“最大池化”、“平均池化”、“求和池化”等等，它们的运算原理基本一致。</p>
+<p>因为“最大池化”更为常用，所以我们重点介绍“最大池化”的运算过程。</p>
+<p>假设经过ReLU处理后，我们得到的特征图片，如下图：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3dy5haXBvcnRhbC5uZXQvd3AtY29udGVudC91cGxvYWRzLzIwMTcvMTIvNDAlRTYlOUMlODAlRTUlQTQlQTclRTYlQjElQTAlRTUlOEMlOTYtMDEuanBn" alt></p>
+<p>在对特征图片进行“池化”处理时，与“卷积”类似，需要我们设置2个超参数：</p>
+<p>过滤器大小（F）和 滑动的步幅数（S）<br>这里，假设我们设置F=2，S=2，那么，“最大池化”为：</p>
+<p>在每2*2（即4个）像素区域内，保留像素值最大的那一个，其余3个像素值抛弃。<br>如下图：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3dy5haXBvcnRhbC5uZXQvd3AtY29udGVudC91cGxvYWRzLzIwMTcvMTIvNDElRTYlOUMlODAlRTUlQTQlQTclRTYlQjElQTAlRTUlOEMlOTYlRTglQkYlOTAlRTclQUUlOTcucG5n" alt></p>
+<p>这样，经过“池化”处理，就将一个4<em>4大小的图片，缩小为2</em>2大小的图片了。</p>
+<p>当然，在“池化”过程中，你也可以将超参数设置为F=3、S=2，只不过“F=2、S=2”更为常用。</p>
+<p>回到我们之前的例子中，在“ReLU计算”的后面，再加上一步“最大池化”，即为：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3dy5haXBvcnRhbC5uZXQvd3AtY29udGVudC91cGxvYWRzLzIwMTcvMTIvNDIlRTYlOUUlQjYlRTYlOUUlODQyLnBuZw" alt></p>
+<h2 id="2-池化层（MaxPool-Layer）的输出张量（图像）的大小计算"><a href="#2-池化层（MaxPool-Layer）的输出张量（图像）的大小计算" class="headerlink" title="2.池化层（MaxPool Layer）的输出张量（图像）的大小计算"></a>2.池化层（MaxPool Layer）的输出张量（图像）的大小计算</h2><p>定义如下：</p>
+<p>O=输出图像的尺寸。<br>I=输入图像的尺寸。<br>S=移动步长<br>PS=池化层尺寸</p>
+<p>输出图像尺寸的计算公式如下：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWcyMDE4LmNuYmxvZ3MuY29tL2Jsb2cvMTA5MzYzNy8yMDE4MDkvMTA5MzYzNy0yMDE4MDkyNTIxMjIzNTAxMS0yNTk2OTY1NDIucG5n" alt><br>不同于卷积层，池化层的输出通道数不改变。</p>
+<p>示例：每1层卷积层后的池化层的池化层尺寸为3<em>3，步长为2。根据前面卷积层的输出为55</em>55<em>96。池化层的输出图像尺寸如下：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWcyMDE4LmNuYmxvZ3MuY29tL2Jsb2cvMTA5MzYzNy8yMDE4MDkvMTA5MzYzNy0yMDE4MDkyNTIxMjI0MzU3NS04Njc0MDE5NTYucG5n" alt><br>输出尺寸为27</em>27*96。</p>
+<h2 id="3-池化的作用和特点："><a href="#3-池化的作用和特点：" class="headerlink" title="3.池化的作用和特点："></a>3.池化的作用和特点：</h2><ol>
+<li>降维，减少网络的参数，达到防止过拟合的效果</li>
+<li>可以实现平移、旋转的不变性</li>
+<li>只改变图像尺寸，不改变图像深度</li>
+<li>没有需要训练的参数</li>
+</ol>
+<h1 id="五、卷积和池化的叠加"><a href="#五、卷积和池化的叠加" class="headerlink" title="五、卷积和池化的叠加"></a>五、卷积和池化的叠加</h1><p>有的时候，我们会进行多次卷积和池化，所以，更一般的形式：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3dy5haXBvcnRhbC5uZXQvd3AtY29udGVudC91cGxvYWRzLzIwMTcvMTIvNDMtJUU2JTlFJTg0JUU2JTlFJUI2LSVFNiU4RCVBMi5wbmc" alt></p>
+<p>举个例子：</p>
+<p>★ 你可以构建2层“卷积 + ReLU”，如下：</p>
+<p>输入图片 → 卷积 → ReLU → 卷积 → ReLU → 池化</p>
+<p>★ 也可以构建2层“卷积 + ReLU + 池化”：</p>
+<p>输入图片 → 卷积 → ReLU → 池化 → 卷积 → ReLU → 池化</p>
+<p>当然，你还可以构建更多网络层，这里就不一一列举了。</p>
+<h1 id="六、全连接层"><a href="#六、全连接层" class="headerlink" title="六、全连接层"></a>六、全连接层</h1><p>经过上面一系列的处理，此时得到的图片，已经可以被视为一串串简单的数字（即像素值）。</p>
+<p>将这一个个的像素值，塞到我们早已接触过的表达式中：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3dy5haXBvcnRhbC5uZXQvd3AtY29udGVudC91cGxvYWRzLzIwMTcvMTIvNDclRTglQTElQTglRTglQkUlQkUlRTUlQkMlOEYucG5n" alt></p>
+<p><strong>x是谁？</strong></p>
+<p>在计算机“眼中”的世界，图像是这样的：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3dy5haXBvcnRhbC5uZXQvd3AtY29udGVudC91cGxvYWRzLzIwMTcvMTIvN2RvZy0lRTklQkIlOTElRTclOTklQkQtJUU1JTgzJThGJUU3JUI0JUEwLTEuanBn" alt></p>
+<p>那一个格子、一个格子中的数字，就是x。</p>
+<p><strong>y是谁？</strong></p>
+<p>我们给每张图片打上的标签：这张图是“猫”、那张图是“狗”…… 统统这些标签，就是y。</p>
+<p><strong>θ又是什么？</strong></p>
+<p>当你给计算机很多组、很多组（x,y）时，它会自己去学习寻找x与y之间的关系，这个“关系”，就是θ。</p>
+<p>当你拥有了θ，下一次，即使拿到一张没有打过标签的图片，你也可以通过已知的θ和x，知道y的取值，从而“知道图片里画的是什么？”。</p>
+<p><strong>具体过程：</strong></p>
+<p>首先，需要把卷积后得到的图片，其中的像素值“展开”。</p>
+<p>为了方便大家理解，假设我们卷积后，得到了2张2*2的图片，如果把它们的像素值“展开”，得到的效果为：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3dy5haXBvcnRhbC5uZXQvd3AtY29udGVudC91cGxvYWRzLzIwMTcvMTIvNDhGQy0wNy5qcGc" alt></p>
+<p>这样，我们就拿到了x。展开后所得到的 </p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3dy5haXBvcnRhbC5uZXQvd3AtY29udGVudC91cGxvYWRzLzIwMTcvMTIvNDgtJUU4JUExJUE1LmpwZw" alt><br>就是x。</p>
+<p>在训练的最初，我们拥有每张图片的标签，即“我们已经拥有了y值”。</p>
+<p>所以，在模型的最后，我们需要让计算机努力找到x-y之间的关系。</p>
+<p>而寻找的办法，就需要依靠“全连接神经网络”：<br><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3dy5haXBvcnRhbC5uZXQvd3AtY29udGVudC91cGxvYWRzLzIwMTcvMTIvNDlGQy5wbmc" alt><br>所谓“全连接”，是指下一层的每一个神经元（即图中的“□”），与上一层的神经元全部相连，这里为了表达得更清晰，已经省去了中间的连接符。实际上，更多的时候，你会看到下面这样的图片：<br><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3dy5haXBvcnRhbC5uZXQvd3AtY29udGVudC91cGxvYWRzLzIwMTcvMTIvNTBGQy0xMC5qcGc" alt><br>过，本文的重点不在于讲解“全连接神经网络”，本文的核心在于卷积神经网络（CNN）。</p>
+<p>这里，你只需要记住2点：</p>
+<p>① “全连接神经网络”可以帮助我们学习到参数θ。有了它，下一次再给计算机“看”图片时，计算机便会自动识别出图中的景象。</p>
+<p>② 模型得到的最终结果，表示“图片为某种类别的概率”。注意：这里的概率之和，永远为1。</p>
+<p>例如：<img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3dy5haXBvcnRhbC5uZXQvd3AtY29udGVudC91cGxvYWRzLzIwMTcvMTIvNTFGQyVFNyVCQiU5MyVFNiU5RSU5Qy5wbmc" alt><br>即计算机“判断”，最初输入的图片为“狗”。</p>
+<p>我们将CNN的所有流程，整合起来，即：<br><img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3dy5haXBvcnRhbC5uZXQvd3AtY29udGVudC91cGxvYWRzLzIwMTcvMTIvNTIlRTYlOTUlQjQlRTUlOTAlODglRTUlOUIlQkUlRUYlQkMlODglRTklODclODclRTclOTQlQTglRUYlQkMlODkuanBn" alt></p>
+<h1 id="六、纵观"><a href="#六、纵观" class="headerlink" title="六、纵观"></a>六、纵观</h1><p>其实卷积神经网络(CNN)与人工神经网络(ANN)的大概思路是一样的，包括两个阶段：</p>
+<p>第一阶段，向前传播阶段：</p>
+<p>a）从样本集中取一个样本(X,Yp)，将X输入网络；</p>
+<p>b）计算相应的实际输出Op。</p>
+<p>在此阶段，信息从输入层经过逐级的变换，传送到输出层。这个过程也是网络在完成训练后正常运行时执行的过程。在此过程中，网络执行的是计算（实际上就是输入与每层的权值矩阵相点乘，得到最后的输出结果）：</p>
+<p>Op=Fn（…（F2（F1（XpW（1））W（2））…）W（n））</p>
+<p>第二阶段，向后传播阶段</p>
+<p>a）算实际输出Op与相应的理想输出Yp的差；</p>
+<p>b）按极小化误差的方法反向传播调整权矩阵。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hpu-yz.github.io/2019/07/30/卷积神经网络（CNN）/" data-id="cjzddj7el0043rouhcdwcqd27" class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/卷积神经网络（CNN）/">卷积神经网络（CNN）</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2019/08/01/浅谈机器学习-回归与分类的区别/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            浅谈机器学习-回归与分类的区别
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/07/28/基于协同过滤（CF）算法的推荐系统/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">基于协同过滤（CF）算法的推荐系统</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 Flaneur</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/favicon.ico" alt="Flaneur"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
