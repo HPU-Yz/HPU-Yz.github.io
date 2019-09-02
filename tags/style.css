@@ -1,0 +1,161 @@
+<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>@charset UTF-8;
+
+#header {
+margin-bottom:0;
+}
+
+#content {
+width:1400px;
+}
+
+.block {
+margin-top:31px;
+overflow:hidden;
+}
+
+.left-id {
+float:left;
+overflow:hidden;
+width:258px;
+background-color:rgba(255,255,255,0.5);
+border:1px solid #e3e4e5;
+border-radius:25px;
+padding:18px 12px 0;
+}
+
+
+
+.main {
+float:right;
+width:976px;
+overflow:hidden;
+margin-right:-20px;
+}
+
+.card-dh{
+float:left;
+width:466px;
+height:128px;
+overflow:hidden;
+background-color:rgba(255,255,255,0.5);
+border-radius:25px;
+border-color:#f44336;
+border-style:solid;
+border-width:1px 1px 3px;
+margin:0 20px 12px 0;
+}
+
+
+
+.tx {
+float:left;
+width:80px;
+height:80px;
+border-radius:80px;
+margin:19px 0 0 19px;
+}
+
+.V {
+position:absolute;
+transform:translate3d(-26px,72px,0);
+-webkit-transform:translate3d(-26px,72px,0);
+-moz-transform:translate3d(-26px,72px,0);
+-o-transform:translate3d(-26px,72px,0);
+}
+
+
+.Dh-content {
+float:left;
+width:293px;
+height:99px;
+overflow:hidden;
+margin:18px 0 0 16px;
+}
+
+
+.name {
+display:block;
+font-size:19px;
+font-weight:700;
+color:#444;
+width:100%;
+}
+
+.ms {
+display:block;
+height:25px;
+margin-top:4px;
+font-size:13px;
+overflow:hidden;
+-o-text-overflow:ellipsis;
+text-overflow:ellipsis;
+color:rgba(9, 9, 9, 0.6);
+}
+
+.logo {
+width:10rem;
+height:10rem;
+border-radius:50%;
+-moz-border-radius:50%;
+-webkit-border-radius:50%;
+box-shadow:0 0 0 2px #ececec,0 0 0 3px rgba(244,67,54,1);
+}
+
+img {
+-webkit-transition:0 .7s ease-out;
+transition:transform .7s ease-out;
+-moz-transition:0 .7s ease-out;
+}
+
+img:hover {
+transform:rotateZ(360deg);
+-webkit-transform:rotateZ(360deg);
+-moz-transform:rotateZ(360deg);
+}
+
+body {
+background:url(https://desk-fd.zol-img.com.cn/t_s1024x768c5/g5/M00/01/0E/ChMkJ1bKweiIV_mhAATtcBLkAWIAALGfwEtOPgABO2I662.jpg) no-repeat center center fixed;
+-webkit-background-size:cover;
+-moz-background-size:cover;
+-o-background-size:cover;
+background-size:cover;
+}
+::-webkit-scrollbar-thumb {
+background-color:#018EE8;
+height:50px;
+outline-offset:-2px;
+outline:2px solid #fff;
+-webkit-border-radius:4px;
+border:2px solid #fff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background-color:#FB4446;
+height:50px;
+-webkit-border-radius:4px;
+}
+
+::-webkit-scrollbar {
+width:8px;
+height:8px;
+}
+
+::-webkit-scrollbar-track-piece {
+background-color:#fff;
+-webkit-border-radius:0;
+}
+
+@media screen and max-width1262px {
+#content {
+width:956px;
+}
+
+
+
+
+
+
+
+
+
+
