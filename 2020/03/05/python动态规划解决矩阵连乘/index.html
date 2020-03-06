@@ -48,8 +48,8 @@
 
     
       <div class="article-meta">
-        <a href="/2020/03/06/python动态规划解决矩阵连乘/" class="article-date">
-  <time datetime="2020-03-05T16:00:00.000Z" itemprop="datePublished">2020-03-06</time>
+        <a href="/2020/03/05/python动态规划解决矩阵连乘/" class="article-date">
+  <time datetime="2020-03-04T16:00:00.000Z" itemprop="datePublished">2020-03-05</time>
 </a>
         
   <div class="article-category">
@@ -71,10 +71,10 @@
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>动态规划，自顶向下分解，自底向上求解。</p>
 <a id="more"></a>
 <h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划算法与分治法类似，其基本思想也就是将待求解的问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解，简单概括为自顶向下分解，自底向上求解。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与分治法不同的是，适合于用动态规划法求解的问题，经分解得到的子问题往往不是相互独立的，换句话说，就是前面解决过的子问题，在后面的子问题中又碰到了前面解决过的子问题，子问题之间是有联系的。如果用分治法，有些同样的子问题会被重复计算几次，这样就很浪费时间了。所以动态规划是为了解决分治法的弊端而提出的，动态规划的基本思想就是，用一个表来记录所有已经解决过的子问题的答案，不管该子问题在以后是否会被用到，只要它被计算过，就将其结果填入表中，以后碰到同样的子问题，就可以从表中直接调用该子问题的答案，而不需要再计算一次。具体的动态规划的算法多种多样，但他们都具有相同的填表式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划的适用场合，一般适用于解最优化问题，例如矩阵连乘问题、最长公共子序列、背包问题等等。</p>
-<h2 id="矩阵连乘问题描述"><a href="#矩阵连乘问题描述" class="headerlink" title="矩阵连乘问题描述"></a>矩阵连乘问题描述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;给定n个矩阵：A1,A2,…,An，其中Ai与Ai+1是可乘的，i=1，2…，n-1。确定计算矩阵连乘积的计算次序，使得依此次序计算矩阵连乘积需要的数乘次数最少。输入数据为矩阵个数和每个矩阵规模，输出结果为计算矩阵连乘积的计算次序和最少数乘次数。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若A是一个p <em> q的矩阵，B是一个q </em> r的矩阵，则其乘积C=AB是一个p <em> r的矩阵。数乘次数是p </em> q * r.</p>
-<h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>A(3 <em> 5)A(5 </em> 7)A(7 * 2)的连乘次数和括号划分有关系吗？</p>
+<h2 id="矩阵连乘问题描述"><a href="#矩阵连乘问题描述" class="headerlink" title="矩阵连乘问题描述"></a>矩阵连乘问题描述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;给定n个矩阵：A1,A2,…,An，其中Ai与Ai+1是可乘的，i=1，2…，n-1。确定计算矩阵连乘积的计算次序，使得依此次序计算矩阵连乘积需要的数乘次数最少。输入数据为矩阵个数和每个矩阵规模，输出结果为计算矩阵连乘积的计算次序和最少数乘次数。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若A是一个p × q的矩阵，B是一个q × r的矩阵，则其乘积C=AB是一个p × r的矩阵。数乘次数是p × q × r.</p>
+<h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>A(3 × 5)A(5 × 7)A(7 × 2)的连乘次数和括号划分有关系吗？</p>
 <blockquote>
-<p>(A(3 <em> 5)A(5 </em> 7))A(7 <em> 2)             相乘次数： (3 </em> 5 <em> 7)+(3 </em> 7 <em> 2) = 147<br> A(3 </em> 5)(A(5 <em> 7)A(7 </em> 2))             相乘次数： (5 <em> 7 </em> 2)+(3 <em> 5 </em> 2) = 100</p>
+<p>(A(3 × 5)A(5 × 7))A(7 × 2)             相乘次数： (3 × 5 <em> 7)+(3 × 7 × 2) = 147<br>A(3 × 5)(A(5 × 7)A(7 × 2))             相乘次数： (5 × 7 </em> 2)+(3 × 5 × 2) = 100</p>
 </blockquote>
 <p>答案很明显是有关系的。</p>
 <h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><blockquote>
@@ -82,7 +82,7 @@
 </blockquote>
 <p>建立递归关系（状态转移方程）</p>
 <blockquote>
-<p>设 Ai…Aj相乘 的最小数乘次数存储于m[i][j]中。<br>S[i][j]存储最佳断开位置。<br>A1：P0 <em> P1<br>A2：P1 </em> P2<br>A3：P2 <em> P3<br>…<br>Ai：Pi-1 </em> Pi<br>Ai+1：Pi <em> Pi+1<br> …<br> An：Pn-1 </em> Pn<br> P0 <em> P1 </em> P2 … * Pn——n+1个</p>
+<p>设 Ai…Aj相乘 的最小数乘次数存储于m[i][j]中。<br>S[i][j]存储最佳断开位置。<br>A1：P0 × P1<br>A2：P1 × P2<br>A3：P2 × P3<br>…<br>Ai：Pi-1 × Pi<br>Ai+1：Pi × Pi+1<br> …<br> An：Pn-1 × Pn<br> P0 × P1 × P2 … × Pn——n+1个</p>
 </blockquote>
 <p>当i=j时，m[i][j] = 0;<br>当i&lt;j时，m[i][j] = m[i][k]+m[k+1][j]+Pi-1PkPj<br>k在i，j之间取值，取值范围为i&lt;=k&lt;j<br>有递推关系如下：<br><img src="https://img-blog.csdnimg.cn/20200305183034898.png" alt><br>动态规划的最优子结构性质是：</p>
 <blockquote>
@@ -94,7 +94,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2020/03/06/python动态规划解决矩阵连乘/" data-id="ck7fg87640000tsuh92smfohe" class="article-share-link">分享</a>
+      <a data-url="https://hpu-yz.github.io/2020/03/05/python动态规划解决矩阵连乘/" data-id="ck7fgp7a00004x0uhjh9vexhj" class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动态规划/">动态规划</a></li></ul>
 
