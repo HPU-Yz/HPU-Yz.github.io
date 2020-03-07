@@ -1,16 +1,15 @@
-<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>/*
-	Parallelism by HTML5 UP
+/*
+	Phantom by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-/* Main */
+/* Tiles */
 
-	#main {
-		opacity: 1 !important;
-		overflow-x: auto !important;
+	body.is-preload .tiles article {
+		-moz-transform: none;
+		-webkit-transform: none;
+		-ms-transform: none;
+		transform: none;
+		opacity: 1;
 	}
-
-		#main .item.thumb img {
-			opacity: 1 !important;
-		}

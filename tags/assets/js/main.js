@@ -1,5 +1,5 @@
-<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>/*
-	Parallelism by HTML5 UP
+/*
+	Phantom by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
@@ -7,77 +7,17 @@
 (function($) {
 
 	var	$window = $(window),
-		$body = $('body'),
-		$wrapper = $('#wrapper'),
-		$main = $('#main'),
-		settings = {
-
-			// Keyboard shortcuts.
-				keyboardShortcuts: {
-
-					// If true, enables scrolling via keyboard shortcuts.
-						enabled: true,
-
-					// Sets the distance to scroll when using the left/right arrow keys.
-						distance: 50
-
-				},
-
-			// Scroll wheel.
-				scrollWheel: {
-
-					// If true, enables scrolling via the scroll wheel.
-						enabled: true,
-
-					// Sets the scroll wheel factor. (Ideally) a value between 0 and 1 (lower = slower scroll, higher = faster scroll).
-						factor: 1
-
-				},
-
-			// Scroll zones.
-				scrollZones: {
-
-					// If true, enables scrolling via scroll zones on the left/right edges of the scren.
-						enabled: true,
-
-					// Sets the speed at which the page scrolls when a scroll zone is active (higher = faster scroll, lower = slower scroll).
-						speed: 15
-
-				}
-
-		};
+		$body = $('body');
 
 	// Breakpoints.
 		breakpoints({
-			xlarge:  [ '1281px',  '1680px' ],
-			large:   [ '981px',   '1280px' ],
-			medium:  [ '737px',   '980px'  ],
-			small:   [ '481px',   '736px'  ],
-			xsmall:  [ null,      '480px'  ],
+			xlarge:   [ '1281px',  '1680px' ],
+			large:    [ '981px',   '1280px' ],
+			medium:   [ '737px',   '980px'  ],
+			small:    [ '481px',   '736px'  ],
+			xsmall:   [ '361px',   '480px'  ],
+			xxsmall:  [ null,      '360px'  ]
 		});
-
-	// Tweaks/fixes.
-
-		// Mobile: Revert to native scrolling.
-			if (browser.mobile) {
-
-				// Disable all scroll-assist features.
-					settings.keyboardShortcuts.enabled = false;
-					settings.scrollWheel.enabled = false;
-					settings.scrollZones.enabled = false;
-
-				// Re-enable overflow on main.
-					$main.css('overflow-x', 'auto');
-
-			}
-
-		// IE: Fix min-height/flexbox.
-			if (browser.name == 'ie')
-				$wrapper.css('height', '100vh');
-
-		// iOS: Compensate for address bar.
-			if (browser.os == 'ios')
-				$wrapper.css('min-height', 'calc(100vh - 30px)');
 
 	// Play initial animations on page load.
 		$window.on('load', function() {
@@ -86,72 +26,160 @@
 			}, 100);
 		});
 
-	// Items.
+	// Touch?
+		if (browser.mobile)
+			$body.addClass('is-touch');
 
-		// Assign a random "delay" class to each thumbnail item.
-			$('.item.thumb').each(function() {
-				$(this).addClass('delay-' + Math.floor((Math.random() * 6) + 1));
+	// Forms.
+		var $form = $('form');
+
+		// Auto-resizing textareas.
+			$form.find('textarea').each(function() {
+
+				var $this = $(this),
+					$wrapper = $('<div class="textarea-wrapper"></div>'),
+					$submits = $this.find('input[type="submit"]');
+
+				$this
+					.wrap($wrapper)
+					.attr('rows', 1)
+					.css('overflow', 'hidden')
+					.css('resize', 'none')
+					.on('keydown', function(event) {
+
+						if (event.keyCode == 13
+						&&	event.ctrlKey) {
+
+							event.preventDefault();
+							event.stopPropagation();
+
+							$(this).blur();
+
+						}
+
+					})
+					.on('blur focus', function() {
+						$this.val($.trim($this.val()));
+					})
+					.on('input blur focus --init', function() {
+
+						$wrapper
+							.css('height', $this.height());
+
+						$this
+							.css('height', 'auto')
+							.css('height', $this.prop('scrollHeight') + 'px');
+
+					})
+					.on('keyup', function(event) {
+
+						if (event.keyCode == 9)
+							$this
+								.select();
+
+					})
+					.triggerHandler('--init');
+
+				// Fix.
+					if (browser.name == 'ie'
+					||	browser.mobile)
+						$this
+							.css('max-height', '10em')
+							.css('overflow-y', 'auto');
+
 			});
 
-		// IE: Fix thumbnail images.
-			if (browser.name == 'ie')
-				$('.item.thumb').each(function() {
+	// Menu.
+		var $menu = $('#menu');
 
-					var $this = $(this),
-						$img = $this.find('img');
+		$menu.wrapInner('<div class="inner"></div>');
 
-					$this
-						.css('background-image', 'url(' + $img.attr('src') + ')')
-						.css('background-size', 'cover')
-						.css('background-position', 'center');
+		$menu._locked = false;
 
-					$img
-						.css('opacity', '0');
+		$menu._lock = function() {
 
-				});
+			if ($menu._locked)
+				return false;
 
-	// Poptrox.
-		$main.poptrox({
-			onPopupOpen: function() { $body.addClass('is-poptrox-visible'); },
-			onPopupClose: function() { $body.removeClass('is-poptrox-visible'); },
-			overlayColor: '#1a1f2c',
-			overlayOpacity: 0.75,
-			popupCloserText: '',
-			popupLoaderText: '',
-			selector: '.item.thumb a.image',
-			caption: function($a) {
-				return $a.prev('h2').html();
-			},
-			usePopupDefaultStyling: false,
-			usePopupCloser: false,
-			usePopupCaption: true,
-			usePopupNav: true,
-			windowMargin: 50
-		});
+			$menu._locked = true;
 
-		breakpoints.on('>small', function() {
-			$main[0]._poptrox.windowMargin = 50;
-		});
+			window.setTimeout(function() {
+				$menu._locked = false;
+			}, 350);
 
-		breakpoints.on('<=small', function() { $main[0]._poptrox.windowmargin="0;" }); keyboard shortcuts. if (settings.keyboardshortcuts.enabled) (function() $window keypress event. .on('keydown', function(event) var scrolled="false;" ($body.hasclass('is-poptrox-visible')) return; switch (event.keycode) left arrow. case 37: $main.scrollleft($main.scrollleft() - settings.keyboardshortcuts.distance); break; right 39: + page up. 33: $window.width() 100); down, space. 34: 32: home. 36: $main.scrollleft(0); end. 35: $main.scrollleft($main.width()); } scrolled? (scrolled) prevent default. event.preventdefault(); event.stoppropagation(); stop link scroll. $main.stop(); })(); scroll wheel. (settings.scrollwheel.enabled) based on code by @miorel @pieterv of facebook (thanks guys :) github.com fixed-data-table blob master src vendor_upstream dom normalizewheel.js normalizewheel="function(event)" pixelstep="10," lineheight="40," pageheight="800," sx="0," sy="0," px="0," py="0;" legacy. ('detail' in event) else ('wheeldelta' -120; ('wheeldeltay' ('wheeldeltax' side scrolling ff with dommousescroll. ('axis' event && event.axis="==" event.horizontal_axis) calculate. * pixelstep; ('deltay' ('deltax' ((px || py) event.deltamode) (event.deltamode="=" 1) fallback spin cannot be determined. (px !sx) < ? -1 : 1; (py !sy) return. return spinx: sx, spiny: sy, pixelx: px, pixely: }; wheel $body.on('wheel', disable (breakpoints.active('<="small'))" calculate delta, direction. n="normalizeWheel(event.originalEvent)," x="(n.pixelX" !="0" n.pixelx n.pixely), delta="Math.min(Math.abs(x)," 150) settings.scrollwheel.factor, direction="x"> 0 ? 1 : -1;
+			return true;
 
-						// Scroll page.
-							$main.scrollLeft($main.scrollLeft() + (delta * direction));
+		};
 
-					});
+		$menu._show = function() {
 
-			})();
+			if ($menu._lock())
+				$body.addClass('is-menu-visible');
 
-	// Scroll zones.
-		if (settings.scrollZones.enabled)
-			(function() {
+		};
 
-				var	$left = $('<div class="scrollZone left"></div>'),
-					$right = $('<div class="scrollZone right"></div>'),
-					$zones = $left.add($right),
-					paused = false,
-					intervalId = null,
-					direction,
-					activate = function(d) {
+		$menu._hide = function() {
 
-						// Disable on </=small',>
+			if ($menu._lock())
+				$body.removeClass('is-menu-visible');
+
+		};
+
+		$menu._toggle = function() {
+
+			if ($menu._lock())
+				$body.toggleClass('is-menu-visible');
+
+		};
+
+		$menu
+			.appendTo($body)
+			.on('click', function(event) {
+				event.stopPropagation();
+			})
+			.on('click', 'a', function(event) {
+
+				var href = $(this).attr('href');
+
+				event.preventDefault();
+				event.stopPropagation();
+
+				// Hide.
+					$menu._hide();
+
+				// Redirect.
+					if (href == '#menu')
+						return;
+
+					window.setTimeout(function() {
+						window.location.href = href;
+					}, 350);
+
+			})
+			.append('<a class="close" href="#menu">Close</a>');
+
+		$body
+			.on('click', 'a[href="#menu"]', function(event) {
+
+				event.stopPropagation();
+				event.preventDefault();
+
+				// Toggle.
+					$menu._toggle();
+
+			})
+			.on('click', function(event) {
+
+				// Hide.
+					$menu._hide();
+
+			})
+			.on('keydown', function(event) {
+
+				// Hide on escape.
+					if (event.keyCode == 27)
+						$menu._hide();
+
+			});
+
+})(jQuery);
