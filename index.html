@@ -1,802 +1,311 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" class="loading">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
-  
-    <meta name="keywords" content="Hexo,博客，python，C语言,机器学习，人工智能">
-  
-  
-    <meta name="description" content="走最远的路，爬最高的山，看最美的风景。">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Flaneur</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Flaneur,"> 
+    <meta name="description" content="走最远的路，爬最高的山，看最美的风景。,"> 
+    <meta name="author" content="Flaneur"> 
+    <link rel="alternative" href="atom.xml" title="Flaneur" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
     
-    Flaneur</title>
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-  
-  <script src="/js/pace.min.js"></script>
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
 </head>
 </html>
-<body>
-<main class="content">
-  <section class="jumbotron">
-  <div class="video">
-    
-      <div class="video-frame">
-        <img src="http://source.zhwangart.com/hexo/themes/ocean/overlay-hero.png" alt="Decorative image frame">
-      </div>
-    
-    <div class="video-media">
-      <video playsinline autoplay loop muted data-autoplay poster="http://source.zhwangart.com/hexo/themes/ocean/ocean.png" x5-video-player-type="h5">
-        <source src="http://source.zhwangart.com/hexo/themes/ocean/ocean.mp4" type="video/mp4">
-        <source src="http://source.zhwangart.com/hexo/themes/ocean/ocean.ogv" type="video/ogg">
-        <source src="http://source.zhwangart.com/hexo/themes/ocean/ocean.webm" type="video/webm">
-        <p>Your user agent does not support the HTML5 Video element.</p>
-      </video>
-      <div class="video-overlay"></div>
-    </div>
-    <div class="video-inner text-center text-white">
-      <h1><a href="/">Flaneur</a></h1>
-      <p>爬最高的山 | 走最远的路 | 看最美的风景</p>
-      <div><img src="/images/shark.svg" class="brand" alt="Flaneur"></div>
-    </div>
-    <div class="video-learn-more">
-      <a class="anchor" href="#landingpage"><i class="fe fe-mouse"></i></a>
-    </div>
-  </div>
-</section>
-
-<div id="landingpage">
-  <section class="outer">
-  <article class="articles">
-    
-    <h1 class="page-type-title"></h1>
-
-    
-      
-        <article id="post-Python爬虫--爬取豆瓣 TOP250 电影排行榜" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-      <header class="article-header">
+<body class="loading">
+    <span id="config-title" style="display:none">Flaneur</span>
+    <div id="loader"></div>
+    <div class="nav">
+    <ul id="menu-menu" class="menu">
         
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/20/Python爬虫--爬取豆瓣 TOP250 电影排行榜/">Python爬虫--爬取豆瓣 TOP250 电影排行榜</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/20/Python爬虫--爬取豆瓣 TOP250 电影排行榜/" class="article-date">
-  <time datetime="2020-03-19T16:00:00.000Z" itemprop="datePublished">2020-03-20</time>
-</a>
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="//" title="首页" target="_blank" rel="noopener">首页</a>
+        </li>
         
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a> / <a class="article-category-link" href="/categories/python/爬虫/">爬虫</a>
-  </div>
-
-      </div>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-      
-
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本篇讲介绍一个简单的Python爬虫案例–爬取豆瓣 TOP250 电影排行榜。<br></p>
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/categories/" title="分类" target="_blank" rel="noopener">分类</a>
+        </li>
         
-          <a class="article-more-link" href="/2020/03/20/Python爬虫--爬取豆瓣 TOP250 电影排行榜/">阅读全文...</a>
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/tags/" title="标签" target="_blank" rel="noopener">标签</a>
+        </li>
         
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2020/03/20/Python爬虫--爬取豆瓣 TOP250 电影排行榜/" data-id="ck8ld8x2a0008ykuh1maldb0r" class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        <article id="post-【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-      <header class="article-header">
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/archives/" title="归档" target="_blank" rel="noopener">归档</a>
+        </li>
         
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/18/【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”/">【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/18/【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”/" class="article-date">
-  <time datetime="2020-03-17T16:00:00.000Z" itemprop="datePublished">2020-03-18</time>
-</a>
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/about/" title="关于" target="_blank" rel="noopener">关于</a>
+        </li>
         
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/生活/">生活</a>
-  </div>
-
-      </div>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-      
-
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这是法国名著《小王子》中一个有名的寓言故事，这个童话，实在太有智慧灵性了。人与人之间，不也是一样道理吗？我不得不承认，我被触动了。<br></p>
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/links/" title="友链" target="_blank" rel="noopener">友链</a>
+        </li>
         
-          <a class="article-more-link" href="/2020/03/18/【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”/">阅读全文...</a>
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/valine/" title="留言板" target="_blank" rel="noopener">留言板</a>
+        </li>
         
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2020/03/18/【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”/" data-id="ck8ld8x3t000bykuhxsot1shj" class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活/">生活</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        <article id="post-python动态规划解决矩阵连乘" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/03/05/python动态规划解决矩阵连乘/">python动态规划解决矩阵连乘</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/05/python动态规划解决矩阵连乘/" class="article-date">
-  <time datetime="2020-03-04T16:00:00.000Z" itemprop="datePublished">2020-03-05</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/动态规划/">动态规划</a> / <a class="article-category-link" href="/categories/动态规划/python/">python</a>
-  </div>
-
-      </div>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-      
-
-      
-        <meta name="referrer" content="no-referrer">
-
-
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>动态规划，自顶向下分解，自底向上求解。</p>
-        
-          <a class="article-more-link" href="/2020/03/05/python动态规划解决矩阵连乘/">阅读全文...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2020/03/05/python动态规划解决矩阵连乘/" data-id="ck8ld8x1x0006ykuhudm160uc" class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动态规划/">动态规划</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        <article id="post-朴素贝叶斯算法" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/08/05/朴素贝叶斯算法/">朴素贝叶斯算法</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/08/05/朴素贝叶斯算法/" class="article-date">
-  <time datetime="2019-08-04T16:00:00.000Z" itemprop="datePublished">2019-08-05</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/机器学习/">机器学习</a> / <a class="article-category-link" href="/categories/机器学习/朴素贝叶斯算法/">朴素贝叶斯算法</a>
-  </div>
-
-      </div>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-      
-
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是流行的十大算法之一，该算法是有监督的学习算法，解决的是分类问题，如客户是否流失、是否值得投资、信用等级评定等多分类问题。<strong>该算法的优点在于简单易懂、学习效率高、在某些领域的分类问题中能够与决策树、神经网络相媲美。</strong>但由于该算法以自变量之间的独立（条件特征独立）性和连续变量的正态性假设为前提，就会导致算法精度在某种程度上受影响。</p>
-        
-          <a class="article-more-link" href="/2019/08/05/朴素贝叶斯算法/">阅读全文...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2019/08/05/朴素贝叶斯算法/" data-id="ck8ld8x4x000vykuhi2pa3129" class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/朴素贝叶斯算法/">朴素贝叶斯算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        <article id="post-浅谈机器学习-分类和聚类的区别" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/08/01/浅谈机器学习-分类和聚类的区别/">浅谈机器学习-分类和聚类的区别</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/08/01/浅谈机器学习-分类和聚类的区别/" class="article-date">
-  <time datetime="2019-07-31T16:00:00.000Z" itemprop="datePublished">2019-08-01</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/机器学习/">机器学习</a> / <a class="article-category-link" href="/categories/机器学习/分类/">分类</a> / <a class="article-category-link" href="/categories/机器学习/分类/聚类/">聚类</a>
-  </div>
-
-      </div>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-      
-
-      
-        <meta name="referrer" content="no-referrer">
-
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习中有两类的大问题，一个是分类，一个是聚类。在我们的生活中，我们常常没有过多的去区分这两个概念，觉得聚类就是分类，分类也差不多就是聚类，下面，我们就具体来研究下分类与聚类之间在数据挖掘中本质的区别。</p>
-        
-          <a class="article-more-link" href="/2019/08/01/浅谈机器学习-分类和聚类的区别/">阅读全文...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2019/08/01/浅谈机器学习-分类和聚类的区别/" data-id="ck8ld8x570012ykuh7hijql0d" class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分类/">分类</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/聚类/">聚类</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        <article id="post-浅谈机器学习-回归与分类的区别" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/08/01/浅谈机器学习-回归与分类的区别/">浅谈机器学习-回归与分类的区别</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/08/01/浅谈机器学习-回归与分类的区别/" class="article-date">
-  <time datetime="2019-07-31T16:00:00.000Z" itemprop="datePublished">2019-08-01</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/机器学习/">机器学习</a> / <a class="article-category-link" href="/categories/机器学习/回归/">回归</a> / <a class="article-category-link" href="/categories/机器学习/回归/分类/">分类</a>
-  </div>
-
-      </div>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-      
-
-      
-        <meta name="referrer" content="no-referrer">
-
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习的主要任务便是聚焦于两个问题：分类和回归。本文将浅谈下两者的区别。<br></p>
-        
-          <a class="article-more-link" href="/2019/08/01/浅谈机器学习-回归与分类的区别/">阅读全文...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2019/08/01/浅谈机器学习-回归与分类的区别/" data-id="ck8ld8x5g0017ykuhx5zd6md6" class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分类/">分类</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/回归/">回归</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        <article id="post-卷积神经网络（CNN）" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/07/30/卷积神经网络（CNN）/">卷积神经网络（CNN）</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/07/30/卷积神经网络（CNN）/" class="article-date">
-  <time datetime="2019-07-29T16:00:00.000Z" itemprop="datePublished">2019-07-30</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/机器学习/">机器学习</a> / <a class="article-category-link" href="/categories/机器学习/卷积神经网络（CNN）/">卷积神经网络（CNN）</a>
-  </div>
-
-      </div>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-      
-
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CNN，即卷积神经网络，主要用于图像识别，分类。这篇卷积神经网络是前面介绍的多层神经网络的进一步深入，它将深度学习的思想引入到了神经网络当中，通过卷积运算来由浅入深的提取图像的不同层次的特征，而利用神经网络的训练过程让整个网络自动调节卷积核的参数，从而无监督的产生了最适合的分类特征。</p>
-        
-          <a class="article-more-link" href="/2019/07/30/卷积神经网络（CNN）/">阅读全文...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2019/07/30/卷积神经网络（CNN）/" data-id="ck8ld8x46000gykuh6g9xzzyf" class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/卷积神经网络（CNN）/">卷积神经网络（CNN）</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        <article id="post-基于协同过滤（CF）算法的推荐系统" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/07/28/基于协同过滤（CF）算法的推荐系统/">基于协同过滤（CF）算法的推荐系统</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/07/28/基于协同过滤（CF）算法的推荐系统/" class="article-date">
-  <time datetime="2019-07-27T16:00:00.000Z" itemprop="datePublished">2019-07-28</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/机器学习/">机器学习</a> / <a class="article-category-link" href="/categories/机器学习/协同过滤（CF）/">协同过滤（CF）</a> / <a class="article-category-link" href="/categories/机器学习/协同过滤（CF）/推荐系统/">推荐系统</a>
-  </div>
-
-      </div>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-      
-
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着计算机领域技术的高速发展，电子商务时代的普及，个性化的推荐系统深入生活应用的各个方面。个性化推荐算法是推荐系统中最核心的技术，在很大程度上决定了电子商务推荐系统性能的优劣。而协同过滤推荐是个性化推荐系统应用最为广泛的技术，协同过滤推荐主要分为基于用户的协同过滤推荐、基于项目的协同过滤推荐和基于模型的协同过滤推荐。</p>
-        
-          <a class="article-more-link" href="/2019/07/28/基于协同过滤（CF）算法的推荐系统/">阅读全文...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2019/07/28/基于协同过滤（CF）算法的推荐系统/" data-id="ck8ld8x4b000jykuh14du5km2" class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/协同过滤（CF）/">协同过滤（CF）</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推荐系统/">推荐系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        <article id="post-人工神经网络（ANN）" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/07/26/人工神经网络（ANN）/">人工神经网络（ANN）</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/07/26/人工神经网络（ANN）/" class="article-date">
-  <time datetime="2019-07-25T16:00:00.000Z" itemprop="datePublished">2019-07-26</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/机器学习/">机器学习</a> / <a class="article-category-link" href="/categories/机器学习/BP算法/">BP算法</a> / <a class="article-category-link" href="/categories/机器学习/BP算法/人工神经网络（ANN）/">人工神经网络（ANN）</a>
-  </div>
-
-      </div>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-      
-
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初学人工智能不久，今天碰上了人工神经网（ANN），开始学的时候很懵，一大堆理论、公式、推导…..作为一名小白，还是很痛苦的，不过经过摸索，大概了 解了什么是ANN，公式的推导以及一些其他问题，下面我就总结下自己的理解，一方面作为自己的笔记，日后方便巩固；另一方面，也可以分享给其他有意者。</p>
-        
-          <a class="article-more-link" href="/2019/07/26/人工神经网络（ANN）/">阅读全文...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2019/07/26/人工神经网络（ANN）/" data-id="ck8ld8x43000fykuhsmiv5c0z" class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BP算法/">BP算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/人工神经网络（ANN）/">人工神经网络（ANN）</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        <article id="post-多种相似度计算的python实现" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/07/24/多种相似度计算的python实现/">多种相似度计算的python实现</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/07/24/多种相似度计算的python实现/" class="article-date">
-  <time datetime="2019-07-23T16:00:00.000Z" itemprop="datePublished">2019-07-24</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/机器学习/">机器学习</a> / <a class="article-category-link" href="/categories/机器学习/相似度/">相似度</a> / <a class="article-category-link" href="/categories/机器学习/相似度/python/">python</a>
-  </div>
-
-      </div>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-      
-
-      
-        <meta name="referrer" content="no-referrer">
-
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中有很多地方要计算相似度，比如聚类分析和协同过滤。计算相似度的有许多方法，其中有欧几里德距离(欧式距离)、曼哈顿距离、Jaccard系数和皮尔逊相关度等等。</p>
-        
-          <a class="article-more-link" href="/2019/07/24/多种相似度计算的python实现/">阅读全文...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2019/07/24/多种相似度计算的python实现/" data-id="ck8ld8x4p000rykuhycyqkcnx" class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/相似度/">相似度</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-  </article>
-  
-
-  
-    <nav class="page-nav">
-      
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
-    </nav>
-  
-</section>
-</div>
-
-  <footer class="footer">
-  <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-</ul>
-    </div>
-    <ul class="list-inline">
-      <li>&copy; 2020 Flaneur</li>
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
     </ul>
-  </div>
-</footer>
+	<span class="target"></span>
+	<center>
+	<div class="hitokoto">
+		<span class="typed" id="hitokoto" data-st="true"></span>
+	</div>
+	</center>
+	
+	<p class="footerlinks">
+		<a href="#" class="iconfont icon-null"></a>
+		
+            <a href="https://github.com/HPU-Yz" title="github" class="iconfont icon-github" target="_blank" rel="noopener"> </a>
+        
+            <a href="/img/wechat.jpg" title="wechat" class="iconfont icon-wechat" target="_blank" rel="noopener"> </a>
+        
+            <a href="mailto:2426545812@qq.com" title="email" class="iconfont icon-email" target="_blank" rel="noopener"> </a>
+        
+		<a href="#" class="iconfont icon-null"></a>
+	</p>
+	
+    <p id="copyright">
+        &copy; 2020 Flaneur.
+        <span> | </span>Powered by <a href="https://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        <span> | </span>Theme <a href="https://github.com/Fechin/hexo-theme-diaspora" title="Diaspora" target="_blank" rel="noopener">Diaspora</a> by Fechin
+		
+    </p>
+</div>
 
-</main>
-<aside class="sidebar">
-  <button class="navbar-toggle"></button>
-
-<nav class="navbar">
-  
-    <div class="logo">
-      <a href="/"><img src="/images/favicon.ico" alt="Flaneur"></a>
+<div id="container">
+    
+<div id="screen">
+    <div id="mark">
+        <div class="layer" data-depth="0.4">
+            <img src="/img/welcome.png" id="cover" crossorigin="anonymous" width="1920" height="1080">
+        </div>
     </div>
-  
-  <ul class="nav nav-main">
+    <div id="vibrant">
+        <svg viewbox="0 0 2880 1620" height="100%" preserveaspectratio="xMaxYMax slice">
+            <polygon opacity="0.7" points="2000,1620 0,1620 0,0 600,0 "/>
+        </svg>
+        <div></div>
+    </div>
+    <div id="header">
+        <div>
+            <a class="image-logo" href="/"></a>
+			
+			<div class="iconfont icon-search switchsearch" href="/search/" title="搜索"></div>
+			
+            <div class="iconfont icon-menu switchmenu"></div>
+        </div>
+    </div>
     
-      <li class="nav-item">
-        <a class="nav-item-link" href="/">主页</a>
-      </li>
+    <div id="post0">
+        <p>三月 20, 2020</p>
+        <h2><a href="/2020/03/20/Python爬虫--爬取豆瓣 TOP250 电影排行榜/" title="Python爬虫--爬取豆瓣 TOP250 电影排行榜" class="posttitle">Python爬虫--爬取豆瓣 TOP250 电影排行榜</a></h2>
+        <p class="summary">本篇讲介绍一个简单的Python爬虫案例–爬取豆瓣 TOP250 电影排行榜。
+很多朋友在看一部电影前都喜欢先找一...</p>
+    </div>
     
-      <li class="nav-item">
-        <a class="nav-item-link" href="/archives">归档</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/gallery">相册</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/about">关于</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/tags">友链</a>
-      </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        搜索
-      </a>
-    </li>
-  </ul>
-</nav>
-
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
 </div>
-    </li>
-    <li class="nav-item">
-      
-        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-          <i class="fe fe-feed"></i>
-        </a>
-      
-    </li>
-  </ul>
-</nav>
 
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
+    <div id="primary">
+        
+<div class="post">
+    <a href="/2020/03/18/【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”/" title="【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”">
+        <img src="/img/wang.jpg" class="cover" width="680" height="440">
+    </a>
+    <div class="else">
+        <p>三月 18, 2020</p>
+        <h3><a href="/2020/03/18/【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”/" title="【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”" class="posttitle">【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”</a></h3>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这是法国名著《小王子》中一个有名的寓言故事，这个童话，实在...</p>
+    </div>
 </div>
+
+
+<div class="post">
+    <a href="/2020/03/05/python动态规划解决矩阵连乘/" title="python动态规划解决矩阵连乘">
+        <img src="/img/lianc.jpg" class="cover" width="680" height="440">
+    </a>
+    <div class="else">
+        <p>三月 05, 2020</p>
+        <h3><a href="/2020/03/05/python动态规划解决矩阵连乘/" title="python动态规划解决矩阵连乘" class="posttitle">python动态规划解决矩阵连乘</a></h3>
+        <p>动态规划，自顶向下分解，自底向上求解。
+动态规划&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划算...</p>
+    </div>
 </div>
-</aside>
-<script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/lazyload.min.js"></script>
-<script src="/js/snap.svg-min.js"></script>
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
 
 
-  <script src="/fancybox/jquery.fancybox.min.js"></script>
+<div class="post">
+    <a href="/2019/08/05/朴素贝叶斯算法/" title="朴素贝叶斯算法">
+        <img src="/img/pu.jpg" class="cover" width="680" height="440">
+    </a>
+    <div class="else">
+        <p>八月 05, 2019</p>
+        <h3><a href="/2019/08/05/朴素贝叶斯算法/" title="朴素贝叶斯算法" class="posttitle">朴素贝叶斯算法</a></h3>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是流行的十大算法之一，该算法是有监督的学习算...</p>
+    </div>
+</div>
 
 
+<div class="post">
+    <a href="/2019/08/01/浅谈机器学习-分类和聚类的区别/" title="浅谈机器学习-分类和聚类的区别">
+        <img src="/img/fenlei.jpg" class="cover" width="680" height="440">
+    </a>
+    <div class="else">
+        <p>八月 01, 2019</p>
+        <h3><a href="/2019/08/01/浅谈机器学习-分类和聚类的区别/" title="浅谈机器学习-分类和聚类的区别" class="posttitle">浅谈机器学习-分类和聚类的区别</a></h3>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习中有两类的大问题，一个是分类，一个是聚类。在我们的...</p>
+    </div>
+</div>
 
-  <script src="/js/search.js"></script>
+
+<div class="post">
+    <a href="/2019/08/01/浅谈机器学习-回归与分类的区别/" title="浅谈机器学习-回归与分类的区别">
+        <img src="/img/huigui.jpg" class="cover" width="680" height="440">
+    </a>
+    <div class="else">
+        <p>八月 01, 2019</p>
+        <h3><a href="/2019/08/01/浅谈机器学习-回归与分类的区别/" title="浅谈机器学习-回归与分类的区别" class="posttitle">浅谈机器学习-回归与分类的区别</a></h3>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习的主要任务便是聚焦于两个问题：分类和回归。本文将浅...</p>
+    </div>
+</div>
 
 
-<script src="/js/ocean.js"></script>
+<div class="post">
+    <a href="/2019/07/30/卷积神经网络（CNN）/" title="卷积神经网络（CNN）">
+        <img src="/img/juanji.jpg" class="cover" width="680" height="440">
+    </a>
+    <div class="else">
+        <p>七月 30, 2019</p>
+        <h3><a href="/2019/07/30/卷积神经网络（CNN）/" title="卷积神经网络（CNN）" class="posttitle">卷积神经网络（CNN）</a></h3>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CNN，即卷积神经网络，主要用于图像识别，分类。这篇卷积神...</p>
+    </div>
+</div>
+
+
+<div class="post">
+    <a href="/2019/07/28/基于协同过滤（CF）算法的推荐系统/" title="基于协同过滤（CF）算法的推荐系统">
+        <img src="/img/cf.jpg" class="cover" width="680" height="440">
+    </a>
+    <div class="else">
+        <p>七月 28, 2019</p>
+        <h3><a href="/2019/07/28/基于协同过滤（CF）算法的推荐系统/" title="基于协同过滤（CF）算法的推荐系统" class="posttitle">基于协同过滤（CF）算法的推荐系统</a></h3>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着计算机领域技术的高速发展，电子商务时代的普及，个性化...</p>
+    </div>
+</div>
+
+
+<div class="post">
+    <a href="/2019/07/26/人工神经网络（ANN）/" title="人工神经网络（ANN）">
+        <img src="/img/ann.jpg" class="cover" width="680" height="440">
+    </a>
+    <div class="else">
+        <p>七月 26, 2019</p>
+        <h3><a href="/2019/07/26/人工神经网络（ANN）/" title="人工神经网络（ANN）" class="posttitle">人工神经网络（ANN）</a></h3>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初学人工智能不久，今天碰上了人工神经网（ANN），开始学的...</p>
+    </div>
+</div>
+
+
+<div class="post">
+    <a href="/2019/07/24/多种相似度计算的python实现/" title="多种相似度计算的python实现">
+        <img src="/img/xsd.jpg" class="cover" width="680" height="440">
+    </a>
+    <div class="else">
+        <p>七月 24, 2019</p>
+        <h3><a href="/2019/07/24/多种相似度计算的python实现/" title="多种相似度计算的python实现" class="posttitle">多种相似度计算的python实现</a></h3>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中有很多地方要计算相似度，比如聚类分析和协同过滤...</p>
+    </div>
+</div>
+
+
+    </div>
+    
+    <div id="pager"><a href="/page/2/" class="more">加载更多</a></div>
+    
+</div>
+<div id="preview"></div>
+
+
 
 </body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 </html>

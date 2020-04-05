@@ -1,72 +1,67 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" class="loading">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
-  
-    <meta name="keywords" content="Hexo,博客，python，C语言,机器学习，人工智能">
-  
-  
-    <meta name="description" content="走最远的路，爬最高的山，看最美的风景。">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    基于协同过滤（CF）算法的推荐系统 |
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>基于协同过滤（CF）算法的推荐系统 - Flaneur</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Flaneur,"> 
+    <meta name="description" content="走最远的路，爬最高的山，看最美的风景。,&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 随着计算机领域技术的高速发展，电子商务时代的普及，个性化的推荐系统深入生活应用的各个方面。个性化推荐,"> 
+    <meta name="author" content="Flaneur"> 
+    <link rel="alternative" href="atom.xml" title="Flaneur" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
     
-    Flaneur</title>
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-  
-  <script src="/js/pace.min.js"></script>
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
 </head>
 </html>
-<body>
-<main class="content">
-  <section class="outer">
-  <article id="post-基于协同过滤（CF）算法的推荐系统" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<body class="loading">
+    <span id="config-title" style="display:none">Flaneur</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://hpu-yz.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">基于协同过滤（CF）算法的推荐系统</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
 
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      基于协同过滤（CF）算法的推荐系统
-    </h1>
-  
-  
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">基于协同过滤（CF）算法的推荐系统</h1>
+        <div class="stuff">
+            <span>七月 28, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/协同过滤（CF）/">协同过滤（CF）</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/推荐系统/">推荐系统</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
 
 
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/07/28/基于协同过滤（CF）算法的推荐系统/" class="article-date">
-  <time datetime="2019-07-27T16:00:00.000Z" itemprop="datePublished">2019-07-28</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/机器学习/">机器学习</a> / <a class="article-category-link" href="/categories/机器学习/协同过滤（CF）/">协同过滤（CF）</a> / <a class="article-category-link" href="/categories/机器学习/协同过滤（CF）/推荐系统/">推荐系统</a>
-  </div>
-
-      </div>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-      
-
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着计算机领域技术的高速发展，电子商务时代的普及，个性化的推荐系统深入生活应用的各个方面。个性化推荐算法是推荐系统中最核心的技术，在很大程度上决定了电子商务推荐系统性能的优劣。而协同过滤推荐是个性化推荐系统应用最为广泛的技术，协同过滤推荐主要分为基于用户的协同过滤推荐、基于项目的协同过滤推荐和基于模型的协同过滤推荐。</p>
-<a id="more"></a>
+        </div>
+        <div class="content markdown">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着计算机领域技术的高速发展，电子商务时代的普及，个性化的推荐系统深入生活应用的各个方面。个性化推荐算法是推荐系统中最核心的技术，在很大程度上决定了电子商务推荐系统性能的优劣。而协同过滤推荐是个性化推荐系统应用最为广泛的技术，协同过滤推荐主要分为基于用户的协同过滤推荐、基于项目的协同过滤推荐和基于模型的协同过滤推荐。</p>
 <h1 id="一、协同过滤算法描述"><a href="#一、协同过滤算法描述" class="headerlink" title="一、协同过滤算法描述"></a>一、协同过滤算法描述</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大数据时代产生了海量的数据，里面蕴含了丰富的价值。但是，大数据体量之大、种类之繁以及产生速率之快，海量的数据并不都是有价值的，用户从海量的数据中提取有用的、针对性的信息需要花费很大的时间成本。比如，当你面对如此多的电影列表，你想找到一部最符合自己兴趣的电影，因为电影数量之多，你不可能把所有的电影简介都看一遍。那么怎么解决这个问题呢？电影平台搜集你过去看过的全部电影，分析了解你对什么类型电影感兴趣，然后针对性的把你感兴趣的电影主动的罗列给你，你不用花费太多的精力便可快速找到满足自己需求的电影。推荐算法便是为解决这类实际需求而诞生了。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 推荐系统应用数据分析技术，找出用户最可能喜欢的东西推荐给用户，现在很多电子商务网站都有这个应用。目前用的比较多、比较成熟的推荐算法是协同过滤（Collaborative Filtering，简称CF）推荐算法，CF的基本思想是根据用户之前的喜好以及其他兴趣相近的用户的选择来给用户推荐物品。<br><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2hpLmNzZG4ubmV0L2F0dGFjaG1lbnQvMjAxMjAzLzE2LzBfMTMzMTkwOTY5MFhVcEkuZ2lm" alt><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如图所示，在CF中，用m×n的矩阵表示用户对物品的喜好情况，一般用打分表示用户对物品的喜好程度，分数越高表示越喜欢这个物品，0表示没有买过该物品。图中行表示一个用户，列表示一个物品，Uij表示用户i对物品j的打分情况。CF分为两个过程，一个为预测过程，另一个为推荐过程。预测过程是预测用户对没有购买过的物品的可能打分值，推荐是根据预测阶段的结果推荐用户最可能喜欢的一个或Top-N个物品。</p>
 <h1 id="二、协同过滤的实现"><a href="#二、协同过滤的实现" class="headerlink" title="二、协同过滤的实现"></a>二、协同过滤的实现</h1><p>要实现协同过滤的推荐算法，要进行以下三个步骤：</p>
@@ -115,146 +110,101 @@
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;再有，对于一些通用的东西，比如买书的时候的工具书，如现代汉语词典，新华字典神马的，通用性太强了，推荐也没什么必要了。</p>
 <p><strong>UserCF和ItemCF优缺点的对比</strong><br><img src="https://img-blog.csdnimg.cn/20190814083729968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2019/07/28/基于协同过滤（CF）算法的推荐系统/" data-id="ck8ld8x4b000jykuh14du5km2" class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/协同过滤（CF）/">协同过滤（CF）</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推荐系统/">推荐系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-    
-  <nav class="article-nav">
-    
-      <a href="/2019/07/30/卷积神经网络（CNN）/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            卷积神经网络（CNN）
-          
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
         </div>
-      </a>
-    
-    
-      <a href="/2019/07/26/人工神经网络（ANN）/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">人工神经网络（ANN）</div>
-      </a>
-    
-  </nav>
+        
+    <div id="gitalk-container" class="comment link" data-enable="true" data-ae="true" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
 
 
-  
-
-  
-    
-  
-
-</article>
-
-
-
-</section>
-  <footer class="footer">
-  <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-</ul>
     </div>
-    <ul class="list-inline">
-      <li>&copy; 2020 Flaneur</li>
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
-    </ul>
-  </div>
-</footer>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、协同过滤算法描述"><span class="toc-number">1.</span> <span class="toc-text">一、协同过滤算法描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、协同过滤的实现"><span class="toc-number">2.</span> <span class="toc-text">二、协同过滤的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、收集数据"><span class="toc-number">2.1.</span> <span class="toc-text">1、收集数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、找到相似用户或物品"><span class="toc-number">2.2.</span> <span class="toc-text">2、找到相似用户或物品</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、进行推荐"><span class="toc-number">2.3.</span> <span class="toc-text">3、进行推荐</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1、基于用户的协同过滤推荐-User-based-Collaborative-Filtering-Recommendation"><span class="toc-number">2.3.1.</span> <span class="toc-text">3.1、基于用户的协同过滤推荐(User-based Collaborative Filtering Recommendation)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2、基于项目的协同过滤推荐-Item-based-Collaborative-Filtering-Recommendation"><span class="toc-number">2.3.2.</span> <span class="toc-text">3.2、基于项目的协同过滤推荐(Item-based Collaborative Filtering Recommendation)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3、UserCF和ItemCF的区别"><span class="toc-number">2.3.3.</span> <span class="toc-text">3.3、UserCF和ItemCF的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、算法实例"><span class="toc-number">3.</span> <span class="toc-text">三、算法实例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#算法流程1"><span class="toc-number">3.1.</span> <span class="toc-text">算法流程1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法流程2"><span class="toc-number">3.2.</span> <span class="toc-text">算法流程2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法流程3"><span class="toc-number">3.3.</span> <span class="toc-text">算法流程3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法流程4"><span class="toc-number">3.4.</span> <span class="toc-text">算法流程4</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、python实现案例"><span class="toc-number">4.</span> <span class="toc-text">四、python实现案例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、算法的优缺点"><span class="toc-number">5.</span> <span class="toc-text">五、算法的优缺点</span></a></li></ol>	
+        </div>
+    
+</div>
 
-</main>
-<aside class="sidebar">
-  <button class="navbar-toggle"></button>
 
-<nav class="navbar">
-  
-    <div class="logo">
-      <a href="/"><img src="/images/favicon.ico" alt="Flaneur"></a>
     </div>
-  
-  <ul class="nav nav-main">
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/">主页</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/archives">归档</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/gallery">相册</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/about">关于</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/tags">友链</a>
-      </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        搜索
-      </a>
-    </li>
-  </ul>
-</nav>
-
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
 </div>
-    </li>
-    <li class="nav-item">
-      
-        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-          <i class="fe fe-feed"></i>
-        </a>
-      
-    </li>
-  </ul>
-</nav>
-
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-</aside>
-<script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/lazyload.min.js"></script>
-<script src="/js/snap.svg-min.js"></script>
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
-
-
-  <script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-  <script src="/js/search.js"></script>
-
-
-<script src="/js/ocean.js"></script>
-
 </body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 </html>

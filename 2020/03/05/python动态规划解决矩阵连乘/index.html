@@ -1,75 +1,68 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" class="loading">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
-  
-    <meta name="keywords" content="Hexo,博客，python，C语言,机器学习，人工智能">
-  
-  
-    <meta name="description" content="走最远的路，爬最高的山，看最美的风景。">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    python动态规划解决矩阵连乘 |
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>python动态规划解决矩阵连乘 - Flaneur</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Flaneur,"> 
+    <meta name="description" content="走最远的路，爬最高的山，看最美的风景。,动态规划，自顶向下分解，自底向上求解。
+动态规划&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;动态规划算法与分治法类似，其基本思想也就是将待求解的问,"> 
+    <meta name="author" content="Flaneur"> 
+    <link rel="alternative" href="atom.xml" title="Flaneur" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
     
-    Flaneur</title>
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-  
-  <script src="/js/pace.min.js"></script>
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
 </head>
 </html>
-<body>
-<main class="content">
-  <section class="outer">
-  <article id="post-python动态规划解决矩阵连乘" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<body class="loading">
+    <span id="config-title" style="display:none">Flaneur</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://hpu-yz.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">python动态规划解决矩阵连乘</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
 
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      python动态规划解决矩阵连乘
-    </h1>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/03/05/python动态规划解决矩阵连乘/" class="article-date">
-  <time datetime="2020-03-04T16:00:00.000Z" itemprop="datePublished">2020-03-05</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/动态规划/">动态规划</a> / <a class="article-category-link" href="/categories/动态规划/python/">python</a>
-  </div>
-
-      </div>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-      
-
-      
-        <meta name="referrer" content="no-referrer">
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">python动态规划解决矩阵连乘</h1>
+        <div class="stuff">
+            <span>三月 05, 2020</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/python/">python</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/动态规划/">动态规划</a></li></ul>
 
 
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>动态规划，自顶向下分解，自底向上求解。</p>
-<a id="more"></a>
+        </div>
+        <div class="content markdown">
+            <p>动态规划，自顶向下分解，自底向上求解。</p>
 <h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划算法与分治法类似，其基本思想也就是将待求解的问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解，简单概括为自顶向下分解，自底向上求解。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与分治法不同的是，适合于用动态规划法求解的问题，经分解得到的子问题往往不是相互独立的，换句话说，就是前面解决过的子问题，在后面的子问题中又碰到了前面解决过的子问题，子问题之间是有联系的。如果用分治法，有些同样的子问题会被重复计算几次，这样就很浪费时间了。所以动态规划是为了解决分治法的弊端而提出的，动态规划的基本思想就是，用一个表来记录所有已经解决过的子问题的答案，不管该子问题在以后是否会被用到，只要它被计算过，就将其结果填入表中，以后碰到同样的子问题，就可以从表中直接调用该子问题的答案，而不需要再计算一次。具体的动态规划的算法多种多样，但他们都具有相同的填表式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划的适用场合，一般适用于解最优化问题，例如矩阵连乘问题、最长公共子序列、背包问题等等。</p>
 <h2 id="矩阵连乘问题描述"><a href="#矩阵连乘问题描述" class="headerlink" title="矩阵连乘问题描述"></a>矩阵连乘问题描述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;给定n个矩阵：A1,A2,…,An，其中Ai与Ai+1是可乘的，i=1，2…，n-1。确定计算矩阵连乘积的计算次序，使得依此次序计算矩阵连乘积需要的数乘次数最少。输入数据为矩阵个数和每个矩阵规模，输出结果为计算矩阵连乘积的计算次序和最少数乘次数。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若A是一个p × q的矩阵，B是一个q × r的矩阵，则其乘积C=AB是一个p × r的矩阵。数乘次数是p × q × r.</p>
 <h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>A(3 × 5)A(5 × 7)A(7 × 2)的连乘次数和括号划分有关系吗？</p>
@@ -91,146 +84,101 @@
 <p>在计算出最优值m[i][j]后，可递归地由s[i][j]构造出相应的最优解。</p>
 <h2 id="python代码实现"><a href="#python代码实现" class="headerlink" title="python代码实现"></a>python代码实现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> *</span><br><span class="line"> </span><br><span class="line">input = int(input(<span class="string">"输入矩阵数："</span>))</span><br><span class="line">matrix = [[<span class="number">0</span>] * <span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(input)]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(input):                         <span class="comment">#生成矩阵</span></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        matrix[i][<span class="number">0</span>] = random.randrange(<span class="number">100</span>)</span><br><span class="line">        matrix[i][<span class="number">1</span>] = random.randrange(<span class="number">100</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        matrix[i][<span class="number">0</span>] = matrix[i<span class="number">-1</span>][<span class="number">1</span>]</span><br><span class="line">        matrix[i][<span class="number">1</span>] = random.randrange(<span class="number">100</span>)</span><br><span class="line">m = [[<span class="number">0</span>] * input <span class="keyword">for</span> i <span class="keyword">in</span> range(input)]         <span class="comment">#记录连乘次数</span></span><br><span class="line">s = [[<span class="number">0</span>] * input <span class="keyword">for</span> j <span class="keyword">in</span> range(input)]         <span class="comment">#记录括号位置</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">MatrixMultiplication</span><span class="params">(inp)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(inp):</span><br><span class="line">        m[i][i] = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> range(<span class="number">1</span>, inp):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(inp-r):</span><br><span class="line">            j = i + r</span><br><span class="line">            m[i][j] = m[i+<span class="number">1</span>][j] + matrix[i][<span class="number">0</span>] * matrix[i][<span class="number">1</span>] * matrix[j][<span class="number">1</span>]</span><br><span class="line">            s[i][j] = i+<span class="number">1</span></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(i+<span class="number">1</span>, j):</span><br><span class="line">                judge = m[i][k] + m[k+<span class="number">1</span>][j] + matrix[i][<span class="number">0</span>] * matrix[k][<span class="number">1</span>] * matrix[j][<span class="number">1</span>]</span><br><span class="line">                <span class="keyword">if</span> judge &lt; m[i][j]:</span><br><span class="line">                    m[i][j] = judge</span><br><span class="line">                    s[i][j] = k+<span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">printmatrix</span><span class="params">(left, right)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> left == right:</span><br><span class="line">        print(<span class="string">"A"</span>+str(left+<span class="number">1</span>), end=<span class="string">''</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"("</span>, end=<span class="string">''</span>)</span><br><span class="line">        printmatrix(left, s[left][right]<span class="number">-1</span>)</span><br><span class="line">        printmatrix(s[left][right], right)</span><br><span class="line">        print(<span class="string">")"</span>, end=<span class="string">''</span>)</span><br><span class="line">MatrixMultiplication(input)</span><br><span class="line">dm = DataFrame(m, index=list(range(<span class="number">1</span>, input+<span class="number">1</span>)), columns=list(range(<span class="number">1</span>, input+<span class="number">1</span>)))</span><br><span class="line">ds = DataFrame(s, index=list(range(<span class="number">1</span>, input+<span class="number">1</span>)), columns=list(range(<span class="number">1</span>, input+<span class="number">1</span>)))</span><br><span class="line">print(matrix)</span><br><span class="line">print(<span class="string">"数乘次数：\n"</span>, dm)</span><br><span class="line">print(<span class="string">"括号位置：\n"</span>, ds)</span><br><span class="line">print(<span class="string">"最终结果："</span>)</span><br><span class="line">printmatrix(<span class="number">0</span>, input<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2020/03/05/python动态规划解决矩阵连乘/" data-id="ck8ld8x1x0006ykuhudm160uc" class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动态规划/">动态规划</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-    
-  <nav class="article-nav">
-    
-      <a href="/2020/03/18/【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”
-          
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
         </div>
-      </a>
-    
-    
-      <a href="/2019/08/05/朴素贝叶斯算法/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">朴素贝叶斯算法</div>
-      </a>
-    
-  </nav>
+        
+    <div id="gitalk-container" class="comment link" data-enable="true" data-ae="true" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
 
 
-  
-
-  
-    
-  
-
-</article>
-
-
-
-</section>
-  <footer class="footer">
-  <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-</ul>
     </div>
-    <ul class="list-inline">
-      <li>&copy; 2020 Flaneur</li>
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
-    </ul>
-  </div>
-</footer>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#动态规划"><span class="toc-number">1.</span> <span class="toc-text">动态规划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#矩阵连乘问题描述"><span class="toc-number">2.</span> <span class="toc-text">矩阵连乘问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#疑问"><span class="toc-number">3.</span> <span class="toc-text">疑问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析"><span class="toc-number">4.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python代码实现"><span class="toc-number">5.</span> <span class="toc-text">python代码实现</span></a></li></ol>	
+        </div>
+    
+</div>
 
-</main>
-<aside class="sidebar">
-  <button class="navbar-toggle"></button>
 
-<nav class="navbar">
-  
-    <div class="logo">
-      <a href="/"><img src="/images/favicon.ico" alt="Flaneur"></a>
     </div>
-  
-  <ul class="nav nav-main">
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/">主页</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/archives">归档</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/gallery">相册</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/about">关于</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/tags">友链</a>
-      </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        搜索
-      </a>
-    </li>
-  </ul>
-</nav>
-
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
 </div>
-    </li>
-    <li class="nav-item">
-      
-        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-          <i class="fe fe-feed"></i>
-        </a>
-      
-    </li>
-  </ul>
-</nav>
-
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-</aside>
-<script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/lazyload.min.js"></script>
-<script src="/js/snap.svg-min.js"></script>
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
-
-
-  <script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-  <script src="/js/search.js"></script>
-
-
-<script src="/js/ocean.js"></script>
-
 </body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 </html>

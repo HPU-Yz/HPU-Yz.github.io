@@ -1,73 +1,67 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" class="loading">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
-  
-  
-    <meta name="keywords" content="Hexo,博客，python，C语言,机器学习，人工智能">
-  
-  
-    <meta name="description" content="走最远的路，爬最高的山，看最美的风景。">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    数据集的划分--训练集、验证集和测试集 |
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>数据集的划分--训练集、验证集和测试集 - Flaneur</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="Flaneur,"> 
+    <meta name="description" content="走最远的路，爬最高的山，看最美的风景。,&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、,"> 
+    <meta name="author" content="Flaneur"> 
+    <link rel="alternative" href="atom.xml" title="Flaneur" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
     
-    Flaneur</title>
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-  
-  <script src="/js/pace.min.js"></script>
+    
+    <link rel="stylesheet" href="/css/diaspora.css">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
 </head>
 </html>
-<body>
-<main class="content">
-  <section class="outer">
-  <article id="post-数据集的划分--训练集、验证集和测试集" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<body class="loading">
+    <span id="config-title" style="display:none">Flaneur</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="https://hpu-yz.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">数据集的划分--训练集、验证集和测试集</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
 
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      数据集的划分--训练集、验证集和测试集
-    </h1>
-  
-  
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">数据集的划分--训练集、验证集和测试集</h1>
+        <div class="stuff">
+            <span>七月 18, 2019</span>
+            
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/数据集/">数据集</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
 
 
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/07/18/数据集的划分--训练集、验证集和测试集/" class="article-date">
-  <time datetime="2019-07-17T16:00:00.000Z" itemprop="datePublished">2019-07-18</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/机器学习/">机器学习</a> / <a class="article-category-link" href="/categories/机器学习/数据集/">数据集</a>
-  </div>
-
-      </div>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-      
-
-      
-        <meta name="referrer" content="no-referrer">
-
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。<br><a id="more"></a></p>
+        </div>
+        <div class="content markdown">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。</p>
 <h2 id="为什么要划分数据集为训练集、验证集和测试集？"><a href="#为什么要划分数据集为训练集、验证集和测试集？" class="headerlink" title="为什么要划分数据集为训练集、验证集和测试集？"></a>为什么要划分数据集为训练集、验证集和测试集？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;做科研，就要提出问题，找到解决方法，并证明其有效性。这里的工作有3个部分，一个是提出问题，一个是找到解决方法，另一个是证明有效性。每一个部分都可以作为科研的对象，研究的越靠前，则越偏向科学，越靠后，则越偏向技术，因此叫做科学与技术。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在人工智能领域，证明一个模型的有效性，就是对于某一问题，有一些数据，而我们提出的模型可以（部分）解决这个问题，那如何来证明呢？这和我们平时的考试也是一样的，证明我们掌握了某类知识，就是去参加考试。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;好，那么如何设计考试，让这个考试可以较为客观的考察出每个人的能力呢（注意，不是让每个人都得最高分）？回想我们的高中阶段，有一些教材，让我们平时学习其基本知识（训练集），有一些模拟考试，让我们知道我们到底掌握的怎么样，然后再改进我们的学习（验证集），最后的高考决定我们的去向（测试集）。这样的类比，是不是就很清楚了。</p>
@@ -111,146 +105,101 @@
 </li>
 </ul>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hpu-yz.github.io/2019/07/18/数据集的划分--训练集、验证集和测试集/" data-id="ck8ld8x50000xykuhdrqnuzou" class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据集/">数据集</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-    
-  <nav class="article-nav">
-    
-      <a href="/2019/07/19/K-means聚类算法原理及python实现/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            K-means算法及python实现
-          
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src>
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
         </div>
-      </a>
-    
-    
-      <a href="/2019/07/18/梯度下降法的三种形式BGD、SGD、MBGD及python实现/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">梯度下降法的三种形式BGD、SGD、MBGD及python实现</div>
-      </a>
-    
-  </nav>
+        
+    <div id="gitalk-container" class="comment link" data-enable="true" data-ae="true" data-ci data-cs data-r data-o data-a data-d="false">查看评论</div>
 
 
-  
-
-  
-    
-  
-
-</article>
-
-
-
-</section>
-  <footer class="footer">
-  <div class="outer">
-    <div class="float-right">
-      <ul class="list-inline">
-  
-    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-</ul>
     </div>
-    <ul class="list-inline">
-      <li>&copy; 2020 Flaneur</li>
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
-    </ul>
-  </div>
-</footer>
+    
+        <div class="side">
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要划分数据集为训练集、验证集和测试集？"><span class="toc-number">1.</span> <span class="toc-text">为什么要划分数据集为训练集、验证集和测试集？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#训练集、验证集和测试集"><span class="toc-number">2.</span> <span class="toc-text">训练集、验证集和测试集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何划分训练集、验证集和测试集"><span class="toc-number">3.</span> <span class="toc-text">如何划分训练集、验证集和测试集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#验证集和测试集的区别"><span class="toc-number">4.</span> <span class="toc-text">验证集和测试集的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-number">5.</span> <span class="toc-text">综述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附言"><span class="toc-number">6.</span> <span class="toc-text">附言</span></a></li></ol>	
+        </div>
+    
+</div>
 
-</main>
-<aside class="sidebar">
-  <button class="navbar-toggle"></button>
 
-<nav class="navbar">
-  
-    <div class="logo">
-      <a href="/"><img src="/images/favicon.ico" alt="Flaneur"></a>
     </div>
-  
-  <ul class="nav nav-main">
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/">主页</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/archives">归档</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/gallery">相册</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/about">关于</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-item-link" href="/tags">友链</a>
-      </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        搜索
-      </a>
-    </li>
-  </ul>
-</nav>
-
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
 </div>
-    </li>
-    <li class="nav-item">
-      
-        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-          <i class="fe fe-feed"></i>
-        </a>
-      
-    </li>
-  </ul>
-</nav>
-
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-</aside>
-<script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/lazyload.min.js"></script>
-<script src="/js/snap.svg-min.js"></script>
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
-
-
-  <script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-  <script src="/js/search.js"></script>
-
-
-<script src="/js/ocean.js"></script>
-
 </body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 </html>
