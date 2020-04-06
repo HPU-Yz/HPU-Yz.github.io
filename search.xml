@@ -53,6 +53,54 @@
       </tags>
   </entry>
   <entry>
+    <title>K-means算法及python实现</title>
+    <url>/2019/07/19/K-means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8Apython%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K-means(Thek-meansalgorithm)是机器学习十大经典算法之一，同时也是最为经典的无监督聚类（Unsupervised Clustering）算法。接触聚类算法，首先需要了解k-means算法的实现原理和步骤。本文将对k-means算法的基本原理和实现实例进行分析。</p>
+<h1 id="一-聚类算法的简介"><a href="#一-聚类算法的简介" class="headerlink" title="一.聚类算法的简介"></a>一.聚类算法的简介</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于”<strong>监督学习</strong>“(supervised learning)，其训练样本<strong>是带有标记信息</strong>的，并且监督学习的<strong>目的是</strong>：对带有标记的数据集进行模型学习，从而便于对新的样本进行分类。而在“<strong>无监督学习</strong>”(unsupervised learning)中，训练样本的标记信息是未知的，<strong>目标是</strong>通过对无标记训练样本的学习来揭示数据的内在性质及规律，为进一步的数据分析提供基础。对于无监督学习，应用最广的便是”<strong>聚类</strong>“(clustering)。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;”<strong>聚类算法</strong>“试图将数据集中的样本划分为若干个通常是不相交的子集，每个子集称为一个“簇”(cluster)，通过这样的划分，每个簇可能对应于一些潜在的概念或类别。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们可以通过下面这个图来理解：<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img-blog.csdnimg.cn/20190724144117607.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图是未做标记的样本集，通过他们的分布，我们很容易对上图中的样本做出以下几种划分。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当需要将其划分为两个簇时，即 k=2时：<br><img src="https://img-blog.csdnimg.cn/20190726155350351.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当需要将其划分为四个簇时，即 k=4 时：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img-blog.csdnimg.cn/20190724144431802.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h1 id="二-K-means聚类算法"><a href="#二-K-means聚类算法" class="headerlink" title="二.K-means聚类算法"></a>二.K-means聚类算法</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kmeans算法又名k均值算法,K-means算法中的k表示的是聚类为k个簇，means代表取每一个聚类中数据值的均值作为该簇的中心，或者称为质心，即用每一个的类的质心对该簇进行描述。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其算法思想大致为：先从样本集中随机选取 k个样本作为簇中心，并计算所有样本与这 k个“簇中心”的距离，对于每一个样本，将其划分到与其距离最近的“簇中心”所在的簇中，对于新的簇计算各个簇的新的“簇中心”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据以上描述，我们大致可以猜测到实现kmeans算法的主要四点：<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）簇个数 k 的选择<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）各个样本点到“簇中心”的距离<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（3）根据新划分的簇，更新“簇中心”<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（4）重复上述2、3过程，直至”簇中心”没有移动<br>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优缺点：</p>
+<ul>
+<li>优点：容易实现</li>
+<li>缺点：可能收敛到局部最小值，在大规模数据上收敛较慢</li>
+</ul>
+<h1 id="三-K-means算法步骤详解"><a href="#三-K-means算法步骤详解" class="headerlink" title="三.K-means算法步骤详解"></a>三.K-means算法步骤详解</h1><h2 id="Step1-K值的选择"><a href="#Step1-K值的选择" class="headerlink" title="Step1.K值的选择"></a>Step1.K值的选择</h2><p> k 的选择一般是按照实际需求进行决定，或在实现算法时直接给定 k 值。</p>
+<blockquote>
+<p>说明：<br> <strong>A</strong>.质心数量由用户给出，记为k，k-means最终得到的簇数量也是k<br> <strong>B</strong>.后来每次更新的质心的个数都和初始k值相等<br> <strong>C</strong>.k-means最后聚类的簇个数和用户指定的质心个数相等，一个质心对应一个簇，每个样本只聚类到一个簇里面<br> <strong>D</strong>.初始簇为空</p>
+</blockquote>
+<h2 id="Step2-距离度量"><a href="#Step2-距离度量" class="headerlink" title="Step2.距离度量"></a>Step2.距离度量</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将对象点分到距离聚类中心最近的那个簇中需要最近邻的度量策略，在欧式空间中采用的是欧式距离，在处理文档中采用的是余弦相似度函数，有时候也采用曼哈顿距离作为度量，不同的情况实用的度量公式是不同的。 </p>
+<h3 id="2-1-欧式距离"><a href="#2-1-欧式距离" class="headerlink" title="2.1.欧式距离"></a>2.1.欧式距离</h3><p><img src="https://img-blog.csdnimg.cn/20190724141524460.png" alt></p>
+<h3 id="2-2-曼哈顿距离"><a href="#2-2-曼哈顿距离" class="headerlink" title="2.2.曼哈顿距离"></a>2.2.曼哈顿距离</h3><p><img src="https://img-blog.csdnimg.cn/20190724141601149.png" alt></p>
+<h3 id="2-3-余弦相似度"><a href="#2-3-余弦相似度" class="headerlink" title="2.3.余弦相似度"></a>2.3.余弦相似度</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A与B表示向量(x1,y1)，(x2,y2)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分子为A与B的点乘，分母为二者各自的L2相乘，即将所有维度值的平方相加后开方。<br><img src="https://img-blog.csdnimg.cn/2019072611455719.png" alt></p>
+<blockquote>
+<p>说明：<br><strong>A</strong>.经过step2，得到k个新的簇，每个样本都被分到k个簇中的某一个簇<br><strong>B</strong>.得到k个新的簇后，当前的质心就会失效，需要计算每个新簇的自己的新质心</p>
+</blockquote>
+<h2 id="Step3-新质心的计算"><a href="#Step3-新质心的计算" class="headerlink" title="Step3.新质心的计算"></a>Step3.新质心的计算</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于分类后的产生的k个簇，分别计算到簇内其他点距离均值最小的点作为质心（对于拥有坐标的簇可以计算每个簇坐标的均值作为质心）</p>
+<blockquote>
+<p>说明：<br><strong>A</strong>.比如一个新簇有3个样本：[[1,4], [2,5], [3,6]]，得到此簇的新质心=[(1+2+3)/3,   (4+5+6)/3]<br><strong>B</strong>.经过step3，会得到k个新的质心，作为step2中使用的质心</p>
+</blockquote>
+<h2 id="Step4-是否停止K-means"><a href="#Step4-是否停止K-means" class="headerlink" title="Step4.是否停止K-means"></a>Step4.是否停止K-means</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;质心不再改变，或给定loop最大次数loopLimit  </p>
+<blockquote>
+<p>说明：<br><strong>A</strong>当每个簇的质心，不再改变时就可以停止k-menas<br><strong>B</strong>.当loop次数超过looLimit时，停止k-means<br><strong>C</strong>.只需要满足两者的其中一个条件，就可以停止k-means<br><strong>C</strong>.如果Step4没有结束k-means，就再执行step2-step3-step4<br><strong>D</strong>.如果Step4结束了k-means，则就打印(或绘制)簇以及质心</p>
+</blockquote>
+<h1 id="四-python实现-代码详解"><a href="#四-python实现-代码详解" class="headerlink" title="四.python实现+代码详解"></a>四.python实现+代码详解</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以下是python得实例代码以及代码的详解，应该可以理解的。<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算欧拉距离</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcDis</span><span class="params">(dataSet, centroids, k)</span>:</span></span><br><span class="line">    clalist=[]</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> dataSet:</span><br><span class="line">        diff = np.tile(data, (k, <span class="number">1</span>)) - centroids  <span class="comment">#相减   (np.tile(a,(2,1))就是把a先沿x轴复制1倍，即没有复制，仍然是 [0,1,2]。 再把结果沿y方向复制2倍得到array([[0,1,2],[0,1,2]]))</span></span><br><span class="line">        squaredDiff = diff ** <span class="number">2</span>     <span class="comment">#平方</span></span><br><span class="line">        squaredDist = np.sum(squaredDiff, axis=<span class="number">1</span>)   <span class="comment">#和  (axis=1表示行)</span></span><br><span class="line">        distance = squaredDist ** <span class="number">0.5</span>  <span class="comment">#开根号</span></span><br><span class="line">        clalist.append(distance) </span><br><span class="line">    clalist = np.array(clalist)  <span class="comment">#返回一个每个点到质点的距离len(dateSet)*k的数组</span></span><br><span class="line">    <span class="keyword">return</span> clalist</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算质心</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify</span><span class="params">(dataSet, centroids, k)</span>:</span></span><br><span class="line">    <span class="comment"># 计算样本到质心的距离</span></span><br><span class="line">    clalist = calcDis(dataSet, centroids, k)</span><br><span class="line">    <span class="comment"># 分组并计算新的质心</span></span><br><span class="line">    minDistIndices = np.argmin(clalist, axis=<span class="number">1</span>)    <span class="comment">#axis=1 表示求出每行的最小值的下标</span></span><br><span class="line">    newCentroids = pd.DataFrame(dataSet).groupby(minDistIndices).mean() <span class="comment">#DataFramte(dataSet)对DataSet分组，groupby(min)按照min进行统计分类，mean()对分类结果求均值</span></span><br><span class="line">    newCentroids = newCentroids.values</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># 计算变化量</span></span><br><span class="line">    changed = newCentroids - centroids</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> changed, newCentroids</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用k-means分类</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">kmeans</span><span class="params">(dataSet, k)</span>:</span></span><br><span class="line">    <span class="comment"># 随机取质心</span></span><br><span class="line">    centroids = random.sample(dataSet, k)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 更新质心 直到变化量全为0</span></span><br><span class="line">    changed, newCentroids = classify(dataSet, centroids, k)</span><br><span class="line">    <span class="keyword">while</span> np.any(changed != <span class="number">0</span>):</span><br><span class="line">        changed, newCentroids = classify(dataSet, newCentroids, k)</span><br><span class="line"> </span><br><span class="line">    centroids = sorted(newCentroids.tolist())   <span class="comment">#tolist()将矩阵转换成列表 sorted()排序</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment"># 根据质心计算每个集群</span></span><br><span class="line">    cluster = []</span><br><span class="line">    clalist = calcDis(dataSet, centroids, k) <span class="comment">#调用欧拉距离</span></span><br><span class="line">    minDistIndices = np.argmin(clalist, axis=<span class="number">1</span>)  </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">        cluster.append([])</span><br><span class="line">    <span class="keyword">for</span> i, j <span class="keyword">in</span> enumerate(minDistIndices):   <span class="comment">#enymerate()可同时遍历索引和遍历元素</span></span><br><span class="line">        cluster[j].append(dataSet[i])</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> centroids, cluster</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 创建数据集</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createDataSet</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> [[<span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>], [<span class="number">2</span>, <span class="number">1</span>], [<span class="number">6</span>, <span class="number">4</span>], [<span class="number">6</span>, <span class="number">3</span>], [<span class="number">5</span>, <span class="number">4</span>]]</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>: </span><br><span class="line">    dataset = createDataSet()</span><br><span class="line">    centroids, cluster = kmeans(dataset, <span class="number">2</span>)</span><br><span class="line">    print(<span class="string">'质心为：%s'</span> % centroids)</span><br><span class="line">    print(<span class="string">'集群为：%s'</span> % cluster)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(dataset)):</span><br><span class="line">      plt.scatter(dataset[i][<span class="number">0</span>],dataset[i][<span class="number">1</span>], marker = <span class="string">'o'</span>,color = <span class="string">'green'</span>, s = <span class="number">40</span> ,label = <span class="string">'原始点'</span>)</span><br><span class="line">                                                    <span class="comment">#  记号形状       颜色      点的大小      设置标签</span></span><br><span class="line">      <span class="keyword">for</span> j <span class="keyword">in</span> range(len(centroids)):</span><br><span class="line">        plt.scatter(centroids[j][<span class="number">0</span>],centroids[j][<span class="number">1</span>],marker=<span class="string">'x'</span>,color=<span class="string">'red'</span>,s=<span class="number">50</span>,label=<span class="string">'质心'</span>)</span><br><span class="line">        plt.show</span><br></pre></td></tr></table></figure></p>
+<h1 id="五-K-means算法补充"><a href="#五-K-means算法补充" class="headerlink" title="五.K-means算法补充"></a>五.K-means算法补充</h1><p>1.对初始化敏感，初始质点k给定的不同，可能会产生不同的聚类结果。如下图所示，右边是k=2的结果，这个就正好，而左图是k=3的结果，可以看到右上角得这两个簇应该是可以合并成一个簇的。</p>
+<p>改进：<br>对k的选择可以先用一些算法分析数据的分布，如重心和密度等，然后选择合适的k<br><img src="https://img-blog.csdnimg.cn/20190726154810167.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>2.<strong>使用存在局限性</strong>，如下面这种非球状的数据分布就搞不定了：<br><img src="https://img-blog.csdnimg.cn/20190724161221112.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>3.数据集比较大的时候，<strong>收敛会比较慢</strong>。</p>
+<p>4.最终会收敛。不管初始点如何选择，最终都会收敛。可是是全局收敛，也可能是局部收敛。</p>
+<h1 id="六-小结"><a href="#六-小结" class="headerlink" title="六.小结"></a>六.小结</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. 聚类是一种无监督的学习方法。聚类区别于分类，即事先不知道要寻找的内容，没有预先设定好的目标变量。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. 聚类将数据点归到多个簇中，其中相似的数据点归为同一簇，而不相似的点归为不同的簇。相似度的计算方法有很多，具体的应用选择合适的相似度计算方法</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. K-means聚类算法，是一种广泛使用的聚类算法，其中k是需要指定的参数，即需要创建的簇的数目，K-means算法中的k个簇的质心可以通过随机的方式获得，但是这些点需要位于数据范围内。在算法中，计算每个点到质心得距离，选择距离最小的质心对应的簇作为该数据点的划分，然后再基于该分配过程后更新簇的质心。重复上述过程，直至各个簇的质心不再变化为止。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. K-means算法虽然有效，但是容易受到初始簇质心的情况而影响，有可能陷入局部最优解。为了解决这个问题，可以使用另外一种称为二分K-means的聚类算法。二分K-means算法首先将所有数据点分为一个簇；然后使用K-means（k=2）对其进行划分；下一次迭代时，选择使得SSE下降程度最大的簇进行划分；重复该过程，直至簇的个数达到指定的数目为止。实验表明，二分K-means算法的聚类效果要好于普通的K-means聚类算法。</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>K-means</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OJ刷题-while(scanf(&quot;%d&quot;,&amp;n)!=EOF)</title>
     <url>/2019/03/21/OJ/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“测试输入包含若干测试实例。当N为0时，输入结束，该实例不被处理。”这句话 是最早我对OJ的印象 以前也没见过这种输入要求， 做第一道题的时候就卡住了 上网看别人的代码 都有一句 while(scanf(“%d”,&amp;n)!=EOF)”scanf 函数还能放while里啊… EOF是什么玩意儿呢…”</p>
@@ -92,59 +140,6 @@
       </categories>
       <tags>
         <tag>OJ</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>KNN算法及python实现</title>
-    <url>/2019/07/20/K-%E6%9C%80%E8%BF%91%E9%82%BB%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95(KNN)%E5%8F%8Apython%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN算法即K-Nearest Neighbor，也是机器学习十大经典算法之一。前文讲解了K-means算法，今天我们就继续讲KNN算法，两者看起来挺相似的，但区别还是很大的，看完本片文章你就会明白了。</p>
-<h1 id="一、引入"><a href="#一、引入" class="headerlink" title="一、引入"></a>一、引入</h1><p>问题：确定绿色圆是属于红色三角形、还是蓝色正方形？<br><img src="https://img-blog.csdnimg.cn/20190729110829508.png" alt><br>KNN的思想：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从上图中我们可以看到，图中的数据集是良好的数据，即都打好了label，一类是蓝色的正方形，一类是红色的三角形，那个绿色的圆形是我们待分类的数据。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果K=3，那么离绿色点最近的有2个红色三角形和1个蓝色的正方形，这3个点投票，于是绿色的这个待分类点属于红色的三角形<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果K=5，那么离绿色点最近的有2个红色三角形和3个蓝色的正方形，这5个点投票，于是绿色的这个待分类点属于蓝色的正方形<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;即如果一个样本在特征空间中的k个最相邻的样本中，大多数属于某一个类别，则该样本也属于这个类别。我们可以看到，KNN本质是基于一种数据统计的方法！其实很多机器学习算法也是基于数据统计的。</p>
-<h1 id="二、KNN算法"><a href="#二、KNN算法" class="headerlink" title="二、KNN算法"></a>二、KNN算法</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN即K-最近邻分类算法（K-Nearest Neighbor），是一种memory-based learning，也叫instance-based learning，属于lazy learning。即它没有明显的前期训练过程，而是程序开始运行时，把数据集加载到内存后，不需要进行训练，就可以开始分类了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN也是一种监督学习算法，通过计算新数据与训练数据特征值之间的距离，然后选取K(K&gt;=1)个距离最近的邻居进行分类判(投票法)或者回归。若K=1，新数据被简单分配给其近邻的类。</p>
-<h2 id="2-步骤"><a href="#2-步骤" class="headerlink" title="2.步骤"></a>2.步骤</h2><p>1）计算测试数据与各个训练数据之间的距离；</p>
-<blockquote>
-<p>(计算距离的方式前文讲k-means时说过，不清楚的可以去查看以下➡<a href="https://hpu-yz.github.io/2019/07/19/K-means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8Apython%E5%AE%9E%E7%8E%B0/">传送门</a>)</p>
-</blockquote>
-<p>2）按照距离的递增关系进行排序；</p>
-<p>3）选取距离最小的K个点；</p>
-<blockquote>
-<p>K值是由自己来确定的</p>
-</blockquote>
-<p>4）确定前K个点所在类别的出现频率；</p>
-<p>5）返回前K个点中出现频率最高的类别作为测试数据的预测分类。</p>
-<blockquote>
-<p>说明：对于步骤5的预测分类有以下两种方法</p>
-<ol>
-<li>多数表决法：多数表决法类似于投票的过程，也就是在 K 个邻居中选择类别最多的种类作为测试样本的类别。</li>
-<li>加权表决法：根据距离的远近，对近邻的投票进行加权，距离越近则权重越大，通过权重计算结果最大值的类为测试样本的类别。</li>
-</ol>
-</blockquote>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>1)  非参数统计方法：不需要引入参数<br>2)  K的选择：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K = 1时，将待分类样本划入与其最接近的样本的类。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K = |X|时，仅根据训练样本进行频率统计，将待分类样本划入最多的类。<br>K需要合理选择，太小容易受干扰，太大增加计算复杂性。<br>3)  算法的复杂度：维度灾难，当维数增加时，所需的训练样本数急剧增加，一般采用降维处理。</p>
-<h1 id="三、算法优缺点"><a href="#三、算法优缺点" class="headerlink" title="三、算法优缺点"></a>三、算法优缺点</h1><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
-<li>简单、有效。 </li>
-<li>重新训练的代价较低(类别体系的变化和训练集的变化，在Web环境和电子商务应用中是很常见的)。 </li>
-<li>计算时间和空间线性于训练集的规模(在一些场合不算太大)。 </li>
-<li>由于KNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因此对于类域的交叉或重叠较多的待分样本集来说，KNN方法较其他方法更为适合。 </li>
-<li>该算法比较适用于样本容量比较大的类域的自动分类，而那些样本容量较小的类域采用这种算法比较容易产生误分。 </li>
-</ol>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
-<li>KNN算法是懒散学习方法(lazy learning)，而一些积极学习的算法要快很多。 </li>
-<li>需要存储全部的训练样本 </li>
-<li>输出的可解释性不强，例如决策树的可解释性较强。 </li>
-<li>该算法在分类时有个主要的不足是，当样本不平衡时，如一个类的样本容量很大，而其他类样本容量很小时，有可能导致当输入一个新样本时，该样本的K个邻居中大容量类的样本占多数。该算法只计算最近的邻居样本，某一类的样本数量很大，那么或者这类样本并不接近目标样本，或者这类样本很靠近目标样本。无论怎样，数量并不能影响运行结果。可以采用权值的方法(和该样本距离小的邻居权值大)来改进。 </li>
-<li>计算量较大。目前常用的解决方法是事先对已知样本点进行剪辑，事先去除对分类作用不大的样本。</li>
-</ol>
-<h1 id="四、KNN与K-means的区别"><a href="#四、KNN与K-means的区别" class="headerlink" title="四、KNN与K-means的区别"></a>四、KNN与K-means的区别</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;废话不多说，咱直接上图：<br><img src="https://img-blog.csdnimg.cn/2019072911370194.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>相似点：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虽然两者有很大且别，但两者也有共同之处。都包含了一个过程：给定一个点，在数据集找离它最近的点，即都用到了NN(Nearest Neighbor)算法。</p>
-<h1 id="五、python实例实现"><a href="#五、python实例实现" class="headerlink" title="五、python实例实现"></a>五、python实例实现</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下面引入一个实例，通过python代码具体看下KNN算法的流程。</p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">from numpy <span class="built_in">import</span> *</span><br><span class="line"><span class="built_in">import</span> operator</span><br><span class="line"></span><br><span class="line"><span class="attr">dataSet</span> = array([[<span class="number">1.0</span>,<span class="number">1.1</span>],[<span class="number">1.0</span>,<span class="number">1.0</span>],[<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0.1</span>]])</span><br><span class="line"><span class="attr">labels</span> = ['A','A','B','B']</span><br><span class="line"></span><br><span class="line">def classify0(inX,dataSet,labels,k):</span><br><span class="line"></span><br><span class="line">    <span class="comment">#求出样本集的行数，也就是labels标签的数目</span></span><br><span class="line">    <span class="attr">dataSetSize</span> = dataSet.shape[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment">#构造输入值和样本集的差值矩阵</span></span><br><span class="line">    <span class="attr">diffMat</span> = tile(inX,(dataSetSize,<span class="number">1</span>)) - dataSet</span><br><span class="line"></span><br><span class="line">    <span class="comment">#计算欧式距离</span></span><br><span class="line">    <span class="attr">sqDiffMat</span> = diffMat**<span class="number">2</span></span><br><span class="line">    <span class="attr">sqDistances</span> = sqDiffMat.sum(<span class="attr">axis=1)</span></span><br><span class="line">    <span class="attr">distances</span> = sqDistances**<span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#求距离从小到大排序的序号</span></span><br><span class="line">    <span class="attr">sortedDistIndicies</span> = distances.argsort()</span><br><span class="line"></span><br><span class="line">    <span class="comment">#对距离最小的k个点统计对应的样本标签</span></span><br><span class="line">    <span class="attr">classCount</span> = &#123;&#125;</span><br><span class="line">    for i <span class="keyword">in</span> range(k):</span><br><span class="line">        <span class="comment">#取第i+1邻近的样本对应的类别标签</span></span><br><span class="line">        <span class="attr">voteIlabel</span> = labels[sortedDistIndicies[i]]</span><br><span class="line">        <span class="comment">#以标签为key，标签出现的次数为value将统计到的标签及出现次数写进字典</span></span><br><span class="line">        classCount[voteIlabel] = classCount.get(voteIlabel,<span class="number">0</span>) + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#对字典按value从大到小排序</span></span><br><span class="line">    <span class="attr">sortedClassCount</span> = sorted(classCount.items(),<span class="attr">key=operator.itemgetter(1),reverse=True)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#返回排序后字典中最大value对应的key</span></span><br><span class="line">    return sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line"><span class="keyword">if</span> <span class="attr">__name__</span> == '__main__':</span><br><span class="line">    print(classify0([<span class="number">1.1</span>,<span class="number">0</span>],dataSet,labels,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>KNN</tag>
-        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -227,42 +222,47 @@
       </tags>
   </entry>
   <entry>
-    <title>K-means算法及python实现</title>
-    <url>/2019/07/19/K-means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8Apython%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K-means(Thek-meansalgorithm)是机器学习十大经典算法之一，同时也是最为经典的无监督聚类（Unsupervised Clustering）算法。接触聚类算法，首先需要了解k-means算法的实现原理和步骤。本文将对k-means算法的基本原理和实现实例进行分析。</p>
-<h1 id="一-聚类算法的简介"><a href="#一-聚类算法的简介" class="headerlink" title="一.聚类算法的简介"></a>一.聚类算法的简介</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于”<strong>监督学习</strong>“(supervised learning)，其训练样本<strong>是带有标记信息</strong>的，并且监督学习的<strong>目的是</strong>：对带有标记的数据集进行模型学习，从而便于对新的样本进行分类。而在“<strong>无监督学习</strong>”(unsupervised learning)中，训练样本的标记信息是未知的，<strong>目标是</strong>通过对无标记训练样本的学习来揭示数据的内在性质及规律，为进一步的数据分析提供基础。对于无监督学习，应用最广的便是”<strong>聚类</strong>“(clustering)。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;”<strong>聚类算法</strong>“试图将数据集中的样本划分为若干个通常是不相交的子集，每个子集称为一个“簇”(cluster)，通过这样的划分，每个簇可能对应于一些潜在的概念或类别。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们可以通过下面这个图来理解：<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img-blog.csdnimg.cn/20190724144117607.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图是未做标记的样本集，通过他们的分布，我们很容易对上图中的样本做出以下几种划分。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当需要将其划分为两个簇时，即 k=2时：<br><img src="https://img-blog.csdnimg.cn/20190726155350351.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当需要将其划分为四个簇时，即 k=4 时：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img-blog.csdnimg.cn/20190724144431802.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<h1 id="二-K-means聚类算法"><a href="#二-K-means聚类算法" class="headerlink" title="二.K-means聚类算法"></a>二.K-means聚类算法</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kmeans算法又名k均值算法,K-means算法中的k表示的是聚类为k个簇，means代表取每一个聚类中数据值的均值作为该簇的中心，或者称为质心，即用每一个的类的质心对该簇进行描述。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其算法思想大致为：先从样本集中随机选取 k个样本作为簇中心，并计算所有样本与这 k个“簇中心”的距离，对于每一个样本，将其划分到与其距离最近的“簇中心”所在的簇中，对于新的簇计算各个簇的新的“簇中心”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据以上描述，我们大致可以猜测到实现kmeans算法的主要四点：<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）簇个数 k 的选择<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）各个样本点到“簇中心”的距离<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（3）根据新划分的簇，更新“簇中心”<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（4）重复上述2、3过程，直至”簇中心”没有移动<br>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优缺点：</p>
-<ul>
-<li>优点：容易实现</li>
-<li>缺点：可能收敛到局部最小值，在大规模数据上收敛较慢</li>
-</ul>
-<h1 id="三-K-means算法步骤详解"><a href="#三-K-means算法步骤详解" class="headerlink" title="三.K-means算法步骤详解"></a>三.K-means算法步骤详解</h1><h2 id="Step1-K值的选择"><a href="#Step1-K值的选择" class="headerlink" title="Step1.K值的选择"></a>Step1.K值的选择</h2><p> k 的选择一般是按照实际需求进行决定，或在实现算法时直接给定 k 值。</p>
+    <title>KNN算法及python实现</title>
+    <url>/2019/07/20/K-%E6%9C%80%E8%BF%91%E9%82%BB%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95(KNN)%E5%8F%8Apython%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN算法即K-Nearest Neighbor，也是机器学习十大经典算法之一。前文讲解了K-means算法，今天我们就继续讲KNN算法，两者看起来挺相似的，但区别还是很大的，看完本片文章你就会明白了。</p>
+<h1 id="一、引入"><a href="#一、引入" class="headerlink" title="一、引入"></a>一、引入</h1><p>问题：确定绿色圆是属于红色三角形、还是蓝色正方形？<br><img src="https://img-blog.csdnimg.cn/20190729110829508.png" alt><br>KNN的思想：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从上图中我们可以看到，图中的数据集是良好的数据，即都打好了label，一类是蓝色的正方形，一类是红色的三角形，那个绿色的圆形是我们待分类的数据。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果K=3，那么离绿色点最近的有2个红色三角形和1个蓝色的正方形，这3个点投票，于是绿色的这个待分类点属于红色的三角形<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果K=5，那么离绿色点最近的有2个红色三角形和3个蓝色的正方形，这5个点投票，于是绿色的这个待分类点属于蓝色的正方形<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;即如果一个样本在特征空间中的k个最相邻的样本中，大多数属于某一个类别，则该样本也属于这个类别。我们可以看到，KNN本质是基于一种数据统计的方法！其实很多机器学习算法也是基于数据统计的。</p>
+<h1 id="二、KNN算法"><a href="#二、KNN算法" class="headerlink" title="二、KNN算法"></a>二、KNN算法</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN即K-最近邻分类算法（K-Nearest Neighbor），是一种memory-based learning，也叫instance-based learning，属于lazy learning。即它没有明显的前期训练过程，而是程序开始运行时，把数据集加载到内存后，不需要进行训练，就可以开始分类了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN也是一种监督学习算法，通过计算新数据与训练数据特征值之间的距离，然后选取K(K&gt;=1)个距离最近的邻居进行分类判(投票法)或者回归。若K=1，新数据被简单分配给其近邻的类。</p>
+<h2 id="2-步骤"><a href="#2-步骤" class="headerlink" title="2.步骤"></a>2.步骤</h2><p>1）计算测试数据与各个训练数据之间的距离；</p>
 <blockquote>
-<p>说明：<br> <strong>A</strong>.质心数量由用户给出，记为k，k-means最终得到的簇数量也是k<br> <strong>B</strong>.后来每次更新的质心的个数都和初始k值相等<br> <strong>C</strong>.k-means最后聚类的簇个数和用户指定的质心个数相等，一个质心对应一个簇，每个样本只聚类到一个簇里面<br> <strong>D</strong>.初始簇为空</p>
+<p>(计算距离的方式前文讲k-means时说过，不清楚的可以去查看以下➡<a href="https://hpu-yz.github.io/2019/07/19/K-means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8Apython%E5%AE%9E%E7%8E%B0/">传送门</a>)</p>
 </blockquote>
-<h2 id="Step2-距离度量"><a href="#Step2-距离度量" class="headerlink" title="Step2.距离度量"></a>Step2.距离度量</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将对象点分到距离聚类中心最近的那个簇中需要最近邻的度量策略，在欧式空间中采用的是欧式距离，在处理文档中采用的是余弦相似度函数，有时候也采用曼哈顿距离作为度量，不同的情况实用的度量公式是不同的。 </p>
-<h3 id="2-1-欧式距离"><a href="#2-1-欧式距离" class="headerlink" title="2.1.欧式距离"></a>2.1.欧式距离</h3><p><img src="https://img-blog.csdnimg.cn/20190724141524460.png" alt></p>
-<h3 id="2-2-曼哈顿距离"><a href="#2-2-曼哈顿距离" class="headerlink" title="2.2.曼哈顿距离"></a>2.2.曼哈顿距离</h3><p><img src="https://img-blog.csdnimg.cn/20190724141601149.png" alt></p>
-<h3 id="2-3-余弦相似度"><a href="#2-3-余弦相似度" class="headerlink" title="2.3.余弦相似度"></a>2.3.余弦相似度</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A与B表示向量(x1,y1)，(x2,y2)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分子为A与B的点乘，分母为二者各自的L2相乘，即将所有维度值的平方相加后开方。<br><img src="https://img-blog.csdnimg.cn/2019072611455719.png" alt></p>
+<p>2）按照距离的递增关系进行排序；</p>
+<p>3）选取距离最小的K个点；</p>
 <blockquote>
-<p>说明：<br><strong>A</strong>.经过step2，得到k个新的簇，每个样本都被分到k个簇中的某一个簇<br><strong>B</strong>.得到k个新的簇后，当前的质心就会失效，需要计算每个新簇的自己的新质心</p>
+<p>K值是由自己来确定的</p>
 </blockquote>
-<h2 id="Step3-新质心的计算"><a href="#Step3-新质心的计算" class="headerlink" title="Step3.新质心的计算"></a>Step3.新质心的计算</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于分类后的产生的k个簇，分别计算到簇内其他点距离均值最小的点作为质心（对于拥有坐标的簇可以计算每个簇坐标的均值作为质心）</p>
+<p>4）确定前K个点所在类别的出现频率；</p>
+<p>5）返回前K个点中出现频率最高的类别作为测试数据的预测分类。</p>
 <blockquote>
-<p>说明：<br><strong>A</strong>.比如一个新簇有3个样本：[[1,4], [2,5], [3,6]]，得到此簇的新质心=[(1+2+3)/3,   (4+5+6)/3]<br><strong>B</strong>.经过step3，会得到k个新的质心，作为step2中使用的质心</p>
+<p>说明：对于步骤5的预测分类有以下两种方法</p>
+<ol>
+<li>多数表决法：多数表决法类似于投票的过程，也就是在 K 个邻居中选择类别最多的种类作为测试样本的类别。</li>
+<li>加权表决法：根据距离的远近，对近邻的投票进行加权，距离越近则权重越大，通过权重计算结果最大值的类为测试样本的类别。</li>
+</ol>
 </blockquote>
-<h2 id="Step4-是否停止K-means"><a href="#Step4-是否停止K-means" class="headerlink" title="Step4.是否停止K-means"></a>Step4.是否停止K-means</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;质心不再改变，或给定loop最大次数loopLimit  </p>
-<blockquote>
-<p>说明：<br><strong>A</strong>当每个簇的质心，不再改变时就可以停止k-menas<br><strong>B</strong>.当loop次数超过looLimit时，停止k-means<br><strong>C</strong>.只需要满足两者的其中一个条件，就可以停止k-means<br><strong>C</strong>.如果Step4没有结束k-means，就再执行step2-step3-step4<br><strong>D</strong>.如果Step4结束了k-means，则就打印(或绘制)簇以及质心</p>
-</blockquote>
-<h1 id="四-python实现-代码详解"><a href="#四-python实现-代码详解" class="headerlink" title="四.python实现+代码详解"></a>四.python实现+代码详解</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以下是python得实例代码以及代码的详解，应该可以理解的。<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算欧拉距离</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcDis</span><span class="params">(dataSet, centroids, k)</span>:</span></span><br><span class="line">    clalist=[]</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> dataSet:</span><br><span class="line">        diff = np.tile(data, (k, <span class="number">1</span>)) - centroids  <span class="comment">#相减   (np.tile(a,(2,1))就是把a先沿x轴复制1倍，即没有复制，仍然是 [0,1,2]。 再把结果沿y方向复制2倍得到array([[0,1,2],[0,1,2]]))</span></span><br><span class="line">        squaredDiff = diff ** <span class="number">2</span>     <span class="comment">#平方</span></span><br><span class="line">        squaredDist = np.sum(squaredDiff, axis=<span class="number">1</span>)   <span class="comment">#和  (axis=1表示行)</span></span><br><span class="line">        distance = squaredDist ** <span class="number">0.5</span>  <span class="comment">#开根号</span></span><br><span class="line">        clalist.append(distance) </span><br><span class="line">    clalist = np.array(clalist)  <span class="comment">#返回一个每个点到质点的距离len(dateSet)*k的数组</span></span><br><span class="line">    <span class="keyword">return</span> clalist</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算质心</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify</span><span class="params">(dataSet, centroids, k)</span>:</span></span><br><span class="line">    <span class="comment"># 计算样本到质心的距离</span></span><br><span class="line">    clalist = calcDis(dataSet, centroids, k)</span><br><span class="line">    <span class="comment"># 分组并计算新的质心</span></span><br><span class="line">    minDistIndices = np.argmin(clalist, axis=<span class="number">1</span>)    <span class="comment">#axis=1 表示求出每行的最小值的下标</span></span><br><span class="line">    newCentroids = pd.DataFrame(dataSet).groupby(minDistIndices).mean() <span class="comment">#DataFramte(dataSet)对DataSet分组，groupby(min)按照min进行统计分类，mean()对分类结果求均值</span></span><br><span class="line">    newCentroids = newCentroids.values</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># 计算变化量</span></span><br><span class="line">    changed = newCentroids - centroids</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> changed, newCentroids</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用k-means分类</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">kmeans</span><span class="params">(dataSet, k)</span>:</span></span><br><span class="line">    <span class="comment"># 随机取质心</span></span><br><span class="line">    centroids = random.sample(dataSet, k)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 更新质心 直到变化量全为0</span></span><br><span class="line">    changed, newCentroids = classify(dataSet, centroids, k)</span><br><span class="line">    <span class="keyword">while</span> np.any(changed != <span class="number">0</span>):</span><br><span class="line">        changed, newCentroids = classify(dataSet, newCentroids, k)</span><br><span class="line"> </span><br><span class="line">    centroids = sorted(newCentroids.tolist())   <span class="comment">#tolist()将矩阵转换成列表 sorted()排序</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment"># 根据质心计算每个集群</span></span><br><span class="line">    cluster = []</span><br><span class="line">    clalist = calcDis(dataSet, centroids, k) <span class="comment">#调用欧拉距离</span></span><br><span class="line">    minDistIndices = np.argmin(clalist, axis=<span class="number">1</span>)  </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">        cluster.append([])</span><br><span class="line">    <span class="keyword">for</span> i, j <span class="keyword">in</span> enumerate(minDistIndices):   <span class="comment">#enymerate()可同时遍历索引和遍历元素</span></span><br><span class="line">        cluster[j].append(dataSet[i])</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> centroids, cluster</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 创建数据集</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createDataSet</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> [[<span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>], [<span class="number">2</span>, <span class="number">1</span>], [<span class="number">6</span>, <span class="number">4</span>], [<span class="number">6</span>, <span class="number">3</span>], [<span class="number">5</span>, <span class="number">4</span>]]</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>: </span><br><span class="line">    dataset = createDataSet()</span><br><span class="line">    centroids, cluster = kmeans(dataset, <span class="number">2</span>)</span><br><span class="line">    print(<span class="string">'质心为：%s'</span> % centroids)</span><br><span class="line">    print(<span class="string">'集群为：%s'</span> % cluster)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(dataset)):</span><br><span class="line">      plt.scatter(dataset[i][<span class="number">0</span>],dataset[i][<span class="number">1</span>], marker = <span class="string">'o'</span>,color = <span class="string">'green'</span>, s = <span class="number">40</span> ,label = <span class="string">'原始点'</span>)</span><br><span class="line">                                                    <span class="comment">#  记号形状       颜色      点的大小      设置标签</span></span><br><span class="line">      <span class="keyword">for</span> j <span class="keyword">in</span> range(len(centroids)):</span><br><span class="line">        plt.scatter(centroids[j][<span class="number">0</span>],centroids[j][<span class="number">1</span>],marker=<span class="string">'x'</span>,color=<span class="string">'red'</span>,s=<span class="number">50</span>,label=<span class="string">'质心'</span>)</span><br><span class="line">        plt.show</span><br></pre></td></tr></table></figure></p>
-<h1 id="五-K-means算法补充"><a href="#五-K-means算法补充" class="headerlink" title="五.K-means算法补充"></a>五.K-means算法补充</h1><p>1.对初始化敏感，初始质点k给定的不同，可能会产生不同的聚类结果。如下图所示，右边是k=2的结果，这个就正好，而左图是k=3的结果，可以看到右上角得这两个簇应该是可以合并成一个簇的。</p>
-<p>改进：<br>对k的选择可以先用一些算法分析数据的分布，如重心和密度等，然后选择合适的k<br><img src="https://img-blog.csdnimg.cn/20190726154810167.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>2.<strong>使用存在局限性</strong>，如下面这种非球状的数据分布就搞不定了：<br><img src="https://img-blog.csdnimg.cn/20190724161221112.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>3.数据集比较大的时候，<strong>收敛会比较慢</strong>。</p>
-<p>4.最终会收敛。不管初始点如何选择，最终都会收敛。可是是全局收敛，也可能是局部收敛。</p>
-<h1 id="六-小结"><a href="#六-小结" class="headerlink" title="六.小结"></a>六.小结</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. 聚类是一种无监督的学习方法。聚类区别于分类，即事先不知道要寻找的内容，没有预先设定好的目标变量。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. 聚类将数据点归到多个簇中，其中相似的数据点归为同一簇，而不相似的点归为不同的簇。相似度的计算方法有很多，具体的应用选择合适的相似度计算方法</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. K-means聚类算法，是一种广泛使用的聚类算法，其中k是需要指定的参数，即需要创建的簇的数目，K-means算法中的k个簇的质心可以通过随机的方式获得，但是这些点需要位于数据范围内。在算法中，计算每个点到质心得距离，选择距离最小的质心对应的簇作为该数据点的划分，然后再基于该分配过程后更新簇的质心。重复上述过程，直至各个簇的质心不再变化为止。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. K-means算法虽然有效，但是容易受到初始簇质心的情况而影响，有可能陷入局部最优解。为了解决这个问题，可以使用另外一种称为二分K-means的聚类算法。二分K-means算法首先将所有数据点分为一个簇；然后使用K-means（k=2）对其进行划分；下一次迭代时，选择使得SSE下降程度最大的簇进行划分；重复该过程，直至簇的个数达到指定的数目为止。实验表明，二分K-means算法的聚类效果要好于普通的K-means聚类算法。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>1)  非参数统计方法：不需要引入参数<br>2)  K的选择：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K = 1时，将待分类样本划入与其最接近的样本的类。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K = |X|时，仅根据训练样本进行频率统计，将待分类样本划入最多的类。<br>K需要合理选择，太小容易受干扰，太大增加计算复杂性。<br>3)  算法的复杂度：维度灾难，当维数增加时，所需的训练样本数急剧增加，一般采用降维处理。</p>
+<h1 id="三、算法优缺点"><a href="#三、算法优缺点" class="headerlink" title="三、算法优缺点"></a>三、算法优缺点</h1><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
+<li>简单、有效。 </li>
+<li>重新训练的代价较低(类别体系的变化和训练集的变化，在Web环境和电子商务应用中是很常见的)。 </li>
+<li>计算时间和空间线性于训练集的规模(在一些场合不算太大)。 </li>
+<li>由于KNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因此对于类域的交叉或重叠较多的待分样本集来说，KNN方法较其他方法更为适合。 </li>
+<li>该算法比较适用于样本容量比较大的类域的自动分类，而那些样本容量较小的类域采用这种算法比较容易产生误分。 </li>
+</ol>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
+<li>KNN算法是懒散学习方法(lazy learning)，而一些积极学习的算法要快很多。 </li>
+<li>需要存储全部的训练样本 </li>
+<li>输出的可解释性不强，例如决策树的可解释性较强。 </li>
+<li>该算法在分类时有个主要的不足是，当样本不平衡时，如一个类的样本容量很大，而其他类样本容量很小时，有可能导致当输入一个新样本时，该样本的K个邻居中大容量类的样本占多数。该算法只计算最近的邻居样本，某一类的样本数量很大，那么或者这类样本并不接近目标样本，或者这类样本很靠近目标样本。无论怎样，数量并不能影响运行结果。可以采用权值的方法(和该样本距离小的邻居权值大)来改进。 </li>
+<li>计算量较大。目前常用的解决方法是事先对已知样本点进行剪辑，事先去除对分类作用不大的样本。</li>
+</ol>
+<h1 id="四、KNN与K-means的区别"><a href="#四、KNN与K-means的区别" class="headerlink" title="四、KNN与K-means的区别"></a>四、KNN与K-means的区别</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;废话不多说，咱直接上图：<br><img src="https://img-blog.csdnimg.cn/2019072911370194.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>相似点：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虽然两者有很大且别，但两者也有共同之处。都包含了一个过程：给定一个点，在数据集找离它最近的点，即都用到了NN(Nearest Neighbor)算法。</p>
+<h1 id="五、python实例实现"><a href="#五、python实例实现" class="headerlink" title="五、python实例实现"></a>五、python实例实现</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下面引入一个实例，通过python代码具体看下KNN算法的流程。</p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line">from numpy <span class="built_in">import</span> *</span><br><span class="line"><span class="built_in">import</span> operator</span><br><span class="line"></span><br><span class="line"><span class="attr">dataSet</span> = array([[<span class="number">1.0</span>,<span class="number">1.1</span>],[<span class="number">1.0</span>,<span class="number">1.0</span>],[<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0.1</span>]])</span><br><span class="line"><span class="attr">labels</span> = ['A','A','B','B']</span><br><span class="line"></span><br><span class="line">def classify0(inX,dataSet,labels,k):</span><br><span class="line"></span><br><span class="line">    <span class="comment">#求出样本集的行数，也就是labels标签的数目</span></span><br><span class="line">    <span class="attr">dataSetSize</span> = dataSet.shape[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment">#构造输入值和样本集的差值矩阵</span></span><br><span class="line">    <span class="attr">diffMat</span> = tile(inX,(dataSetSize,<span class="number">1</span>)) - dataSet</span><br><span class="line"></span><br><span class="line">    <span class="comment">#计算欧式距离</span></span><br><span class="line">    <span class="attr">sqDiffMat</span> = diffMat**<span class="number">2</span></span><br><span class="line">    <span class="attr">sqDistances</span> = sqDiffMat.sum(<span class="attr">axis=1)</span></span><br><span class="line">    <span class="attr">distances</span> = sqDistances**<span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#求距离从小到大排序的序号</span></span><br><span class="line">    <span class="attr">sortedDistIndicies</span> = distances.argsort()</span><br><span class="line"></span><br><span class="line">    <span class="comment">#对距离最小的k个点统计对应的样本标签</span></span><br><span class="line">    <span class="attr">classCount</span> = &#123;&#125;</span><br><span class="line">    for i <span class="keyword">in</span> range(k):</span><br><span class="line">        <span class="comment">#取第i+1邻近的样本对应的类别标签</span></span><br><span class="line">        <span class="attr">voteIlabel</span> = labels[sortedDistIndicies[i]]</span><br><span class="line">        <span class="comment">#以标签为key，标签出现的次数为value将统计到的标签及出现次数写进字典</span></span><br><span class="line">        classCount[voteIlabel] = classCount.get(voteIlabel,<span class="number">0</span>) + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#对字典按value从大到小排序</span></span><br><span class="line">    <span class="attr">sortedClassCount</span> = sorted(classCount.items(),<span class="attr">key=operator.itemgetter(1),reverse=True)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#返回排序后字典中最大value对应的key</span></span><br><span class="line">    return sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line"><span class="keyword">if</span> <span class="attr">__name__</span> == '__main__':</span><br><span class="line">    print(classify0([<span class="number">1.1</span>,<span class="number">0</span>],dataSet,labels,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>机器学习</category>
@@ -271,7 +271,7 @@
       <tags>
         <tag>机器学习</tag>
         <tag>python</tag>
-        <tag>K-means</tag>
+        <tag>KNN</tag>
       </tags>
   </entry>
   <entry>
@@ -355,59 +355,6 @@
       <tags>
         <tag>python</tag>
         <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>人工神经网络（ANN）</title>
-    <url>/2019/07/26/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88ANN%EF%BC%89/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初学人工智能不久，今天碰上了人工神经网（ANN），开始学的时候很懵，一大堆理论、公式、推导…..作为一名小白，还是很痛苦的，不过经过摸索，大概了 解了什么是ANN，公式的推导以及一些其他问题，下面我就总结下自己的理解，一方面作为自己的笔记，日后方便巩固；另一方面，也可以分享给其他有意者。</p>
-<h1 id="一、什么是神经网络"><a href="#一、什么是神经网络" class="headerlink" title="一、什么是神经网络"></a>一、什么是神经网络</h1><h2 id="1-单层神经网络"><a href="#1-单层神经网络" class="headerlink" title="1.单层神经网络"></a>1.单层神经网络</h2><p>首先以单层神经元为例解释人工神经元是如何工作的<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjMwMjYzZC5wbmc" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x1,x2,…, xN：神经元的输入。这些可以从输入层实际观测或者是一个隐藏层的中间值（隐藏层即介于输入与输出之间的所有节点组成的一层。后面讲到多层神经网络是会再跟大家解释的）。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X0：偏置单元。这是常值添加到激活函数的输入（类似数学里y＝ax+b中使直线不过原点的常数b）。即截距项，通常有＋1值。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w0,w1,w2,…,wN：对应每个输入的权重。甚至偏置单元也是有权重的。</p>
-<p>a:神经元的输出。计算如下：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjQ2NzM2Zi5wbmc" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;式子里的f是已知的激活函数，f使神经网络（单层乃至多层）非常灵活并且具有能估计复杂的非线性关系的能力。在简单情况下可以是一个高斯函数、逻辑函数、双曲线函数或者甚至上是一个线性函数。利用神经网络可让其实现三个基本功能：与、或、非（AND, OR, NOT）。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里引入一个例子：and功能实现如下<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjc3YjA2Yy5wbmc" alt><br>神经元输出：a = f( -1.5 + x1 + x2 )</p>
-<p>这样大家就很容易理解其工作原理，其实就是对输入值赋予不同权重，经过激活函数输出的过程。</p>
-<h2 id="2-多层神经网络"><a href="#2-多层神经网络" class="headerlink" title="2.多层神经网络"></a>2.多层神经网络</h2><h3 id="2-1-网络结构"><a href="#2-1-网络结构" class="headerlink" title="2.1 网络结构"></a>2.1 网络结构</h3><p>清楚了单层神经网络，多层神经网络也好理解了，就相当于多个单层的叠加成多层的过程。<br><img src="https://img-blog.csdnimg.cn/20190811204232448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br><strong>神经网络分为三种类型的层</strong>：</p>
-<p>输入层：神经网络最左边的一层，通过这些神经元输入需要训练观察的样本，即初始输入数据的一层。</p>
-<p>隐藏层：介于输入与输出之间的所有节点组成的一层。帮助神经网络学习数据间的复杂关系，即对数据进行处理的层。</p>
-<p>输出层：由前两层得到神经网络最后一层，即最后结果输出的一层。</p>
-<h3 id="2-2-传递函数-激活函数"><a href="#2-2-传递函数-激活函数" class="headerlink" title="2.2 传递函数/激活函数"></a>2.2 传递函数/激活函数</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前面每一层输入经过线性变换wx+b后还用到了sigmoid函数，在神经网络的结构中被称为传递函数或者激活函数。除了sigmoid，还有tanh、relu等别的激活函数。激活函数使线性的结果非线性化。</p>
-<h3 id="2-3-为什么需要传递函数"><a href="#2-3-为什么需要传递函数" class="headerlink" title="2.3 为什么需要传递函数"></a>2.3 为什么需要传递函数</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单理解上，如果不加激活函数，无论多少层隐层，最终的结果还是原始输入的线性变化，这样一层隐层就可以达到结果，就没有多层感知器的意义了。所以每个隐层都会配一个激活函数，提供非线性变化。</p>
-<h1 id="二、BP算法"><a href="#二、BP算法" class="headerlink" title="二、BP算法"></a>二、BP算法</h1><h2 id="1-BP算法基本思想"><a href="#1-BP算法基本思想" class="headerlink" title="1.BP算法基本思想"></a>1.BP算法基本思想</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP算法全称叫作误差反向传播(error Back Propagation，或者也叫作误差逆传播)算法。其算法基本思想为：在上述的前馈网络中，输入信号经输入层输入，通过隐层计算由输出层输出，输出值与标记值比较，若有误差，将误差反向由输出层向输入层传播，在这个过程中，利用梯度下降算法对神经元权值进行调整。</p>
-<h2 id="2-BP算法的推导"><a href="#2-BP算法的推导" class="headerlink" title="2.BP算法的推导"></a>2.BP算法的推导</h2><h3 id="2-1-数学基础理论"><a href="#2-1-数学基础理论" class="headerlink" title="2.1 数学基础理论"></a>2.1 数学基础理论</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP算法中核心的数学工具就是微积分的<strong>链式求导法则</strong>。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMjQxMzk3LWMwN2Q1ODFjOTJkYWViZWMucG5n" alt></p>
-<h3 id="2-2推导过程"><a href="#2-2推导过程" class="headerlink" title="2.2推导过程"></a>2.2推导过程</h3><p><img src="https://img-blog.csdnimg.cn/20190811205148228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<ol>
-<li><strong>正向传播求损失，反向传播回传误差</strong></li>
-<li>根据误差信号修正每层的权重 </li>
-<li>f是激活函数；f(netj)是隐层的输出； f(netk）是输出层的输出O; d是target</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结合BP网络结构，误差由输出展开至输入的过程如下：<br><img src="https://img-blog.csdnimg.cn/20190811205328707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>有了误差E，通过求偏导就可以求得最优的权重。（不要忘记学习率） </p>
-<p><img src="https://img-blog.csdnimg.cn/2019081120540142.png" alt></p>
-<h2 id="3-举例说明"><a href="#3-举例说明" class="headerlink" title="3. 举例说明"></a>3. 举例说明</h2><p><img src="https://img-blog.csdnimg.cn/20190811205641720.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>图中元素：<br>两个输入；<br>隐层: b1, w1, w2, w3, w4 (都有初始值）<br>输出层：b2, w5, w6, w7, w8（赋了初始值）</p>
-<h3 id="3-1-前向传播"><a href="#3-1-前向传播" class="headerlink" title="3.1 前向传播"></a>3.1 前向传播</h3><p><img src="https://img-blog.csdnimg.cn/20190811205743162.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>则误差：<br><img src="https://img-blog.csdnimg.cn/20190811205806851.png" alt></p>
-<h3 id="3-2-反向传播"><a href="#3-2-反向传播" class="headerlink" title="3.2 反向传播"></a>3.2 反向传播</h3><p><img src="https://img-blog.csdnimg.cn/20190811205859442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>参数更新：<br><img src="https://img-blog.csdnimg.cn/20190811205921617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>求误差对w1的偏导 ：<br><img src="https://img-blog.csdnimg.cn/20190811205940706.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>注意，w1对两个输出的误差都有影响<br>通过以上过程可以更新所有权重，就可以再次迭代更新了，直到满足条件。</p>
-<h1 id="三、python代码实现"><a href="#三、python代码实现" class="headerlink" title="三、python代码实现"></a>三、python代码实现</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上述例子，用python可写出如下代码，并附有详解：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import math</span><br><span class="line">a=np.array([0.05,0.1])           #a1,a2的输入值</span><br><span class="line">weight1=np.array([[0.15,0.25],[0.2,0.3]])   #a1对b1,b2的权重，a2对b1，b2的权重</span><br><span class="line">weight2=np.array([[0.4,0.5],[0.45,0.55]])     #b1对c1,c2的权重，b2对c1，c2的权重</span><br><span class="line">target=np.array([0.01,0.99])</span><br><span class="line">d1=0.35   #输入层的偏置（1）的权重</span><br><span class="line">d2=0.6    #隐藏层的偏置（1）的权重</span><br><span class="line">β=0.5    #学习效率</span><br><span class="line"></span><br><span class="line"><span class="section">#一：前向传播</span></span><br><span class="line"></span><br><span class="line"><span class="section">#计算输入层到隐藏层的输入值，得矩阵netb1,netb2</span></span><br><span class="line">netb=np.dot(a,weight1)+d1</span><br><span class="line"></span><br><span class="line"><span class="section">#计算隐藏层的输出值,得到矩阵outb1,outb2</span></span><br><span class="line">m=[]</span><br><span class="line">for i in range(len(netb)):</span><br><span class="line"><span class="code">    outb=1.0 / (1.0 + math.exp(-netb[i]))</span></span><br><span class="line"><span class="code">    m.append(outb)</span></span><br><span class="line">m=np.array(m)</span><br><span class="line"></span><br><span class="line"><span class="section">#计算隐藏层到输出层的输入值，得矩阵netc1,netc2</span></span><br><span class="line">netc=np.dot(m,weight2)+d2</span><br><span class="line"></span><br><span class="line"><span class="section">#计算隐藏层的输出值,得到矩阵outc1,outc2</span></span><br><span class="line">n=[]</span><br><span class="line">for i in range(len(netc)):</span><br><span class="line"><span class="code">    outc=1.0 / (1.0 + math.exp(-netc[i]))</span></span><br><span class="line"><span class="code">    n.append(outc)</span></span><br><span class="line">n=np.array(n)</span><br><span class="line"></span><br><span class="line"><span class="section">#二：反向传播</span></span><br><span class="line">count=0 #计数</span><br><span class="line">e=0     #误差  </span><br><span class="line">E=[]    #统计误差</span><br><span class="line"><span class="section">#梯度下降</span></span><br><span class="line">while True:</span><br><span class="line">  count+=1</span><br><span class="line">  </span><br><span class="line">  #总误差对w1-w4的偏导</span><br><span class="line">  pd1=(-(target[<span class="string">0</span>]-n[<span class="string">0</span>])<span class="emphasis">*n[0]*</span>(1-n[<span class="string">0</span>])<span class="emphasis">*weight2[0][0]-(target[1]-n[1])*</span>n[<span class="string">1</span>]<span class="emphasis">*(1-n[1])*</span>weight2[<span class="string">0</span>][<span class="symbol">1</span>])<span class="emphasis">*m[0]*</span>(1-m[0])*a[0]</span><br><span class="line">  pd2=(-(target[<span class="string">0</span>]-n[<span class="string">0</span>])<span class="emphasis">*n[0]*</span>(1-n[<span class="string">0</span>])<span class="emphasis">*weight2[0][0]-(target[1]-n[1])*</span>n[<span class="string">1</span>]<span class="emphasis">*(1-n[1])*</span>weight2[<span class="string">0</span>][<span class="symbol">1</span>])<span class="emphasis">*m[0]*</span>(1-m[0])*a[1]</span><br><span class="line">  pd3=(-(target[<span class="string">0</span>]-n[<span class="string">0</span>])<span class="emphasis">*n[0]*</span>(1-n[<span class="string">0</span>])<span class="emphasis">*weight2[1][0]-(target[1]-n[1])*</span>n[<span class="string">1</span>]<span class="emphasis">*(1-n[1])*</span>weight2[<span class="string">0</span>][<span class="symbol">1</span>])<span class="emphasis">*m[0]*</span>(1-m[0])*a[0]                          </span><br><span class="line">  pd4=(-(target[<span class="string">0</span>]-n[<span class="string">0</span>])<span class="emphasis">*n[0]*</span>(1-n[<span class="string">0</span>])<span class="emphasis">*weight2[1][1]-(target[1]-n[1])*</span>n[<span class="string">1</span>]<span class="emphasis">*(1-n[1])*</span>weight2[<span class="string">0</span>][<span class="symbol">1</span>])<span class="emphasis">*m[0]*</span>(1-m[0])*a[1]</span><br><span class="line">  weight1[<span class="string">0</span>][<span class="symbol">0</span>]=weight1[<span class="string">0</span>][<span class="symbol">0</span>]-β*pd1</span><br><span class="line">  weight1[<span class="string">1</span>][<span class="symbol">0</span>]=weight1[<span class="string">1</span>][<span class="symbol">0</span>]-β*pd2</span><br><span class="line">  weight1[<span class="string">0</span>][<span class="symbol">1</span>]=weight1[<span class="string">0</span>][<span class="symbol">1</span>]-β*pd3</span><br><span class="line">  weight1[<span class="string">1</span>][<span class="symbol">1</span>]=weight1[<span class="string">1</span>][<span class="symbol">1</span>]-β*pd4</span><br><span class="line"></span><br><span class="line">  #总误差对w5-w8的偏导</span><br><span class="line">  pd5=-(target[0]-n[0])<span class="emphasis">*n[0]*</span>(1-n[0])*m[0]</span><br><span class="line">  pd6=-(target[0]-n[0])<span class="emphasis">*n[0]*</span>(1-n[0])*m[1]</span><br><span class="line">  pd7=-(target[1]-n[1])<span class="emphasis">*n[1]*</span>(1-n[1])*m[0]</span><br><span class="line">  pd8=-(target[1]-n[1])<span class="emphasis">*n[1]*</span>(1-n[1])*m[1]</span><br><span class="line">  weight2[<span class="string">0</span>][<span class="symbol">0</span>]=weight2[<span class="string">0</span>][<span class="symbol">0</span>]-β*pd5</span><br><span class="line">  weight2[<span class="string">1</span>][<span class="symbol">0</span>]=weight2[<span class="string">1</span>][<span class="symbol">0</span>]-β*pd6</span><br><span class="line">  weight2[<span class="string">0</span>][<span class="symbol">1</span>]=weight2[<span class="string">0</span>][<span class="symbol">1</span>]-β*pd7</span><br><span class="line">  weight2[<span class="string">1</span>][<span class="symbol">1</span>]=weight2[<span class="string">1</span>][<span class="symbol">1</span>]-β*pd8</span><br><span class="line">  </span><br><span class="line">  netb=np.dot(a,weight1)+d1</span><br><span class="line">  m=[]</span><br><span class="line">  for i in range(len(netb)):</span><br><span class="line"><span class="code">    outb=1.0 / (1.0 + math.exp(-netb[i]))</span></span><br><span class="line"><span class="code">    m.append(outb)</span></span><br><span class="line">  m=np.array(m)</span><br><span class="line">  netc=np.dot(m,weight2)+d2</span><br><span class="line">  n=[]</span><br><span class="line">  for i in range(len(netc)):</span><br><span class="line"><span class="code">    outc=1.0 / (1.0 + math.exp(-netc[i]))</span></span><br><span class="line"><span class="code">    n.append(outc)</span></span><br><span class="line">  n=np.array(n)</span><br><span class="line">  </span><br><span class="line">  #计算总误差</span><br><span class="line">  for j in range(len(n)):</span><br><span class="line"><span class="code">    e += (target[j]-n[j])**2/2</span></span><br><span class="line">  E.append(e)</span><br><span class="line">  #判断</span><br><span class="line">  if e<span class="xml"><span class="tag">&lt;<span class="name">0.0000001:</span></span></span></span><br><span class="line"><span class="xml">    break</span></span><br><span class="line"><span class="xml">  else:</span></span><br><span class="line"><span class="xml">      e=0</span></span><br><span class="line"><span class="xml">print(count)</span></span><br><span class="line"><span class="xml">print(e)</span></span><br><span class="line"><span class="xml">print(n)</span></span><br><span class="line"><span class="xml">plt.plot(range(len(E)),E,label='error')</span></span><br><span class="line"><span class="xml">plt.legend() </span></span><br><span class="line"><span class="xml">plt.xlabel('time')</span></span><br><span class="line"><span class="xml">plt.ylabel('error')</span></span><br><span class="line"><span class="xml">plt.show()</span></span><br></pre></td></tr></table></figure>
-<h1 id="四、BP神经网络的优缺点"><a href="#四、BP神经网络的优缺点" class="headerlink" title="四、BP神经网络的优缺点"></a>四、BP神经网络的优缺点</h1><p><strong>BP神经网络的优点：</strong></p>
-<ol>
-<li>非线性映射能力</li>
-<li>泛化能力  </li>
-<li>容错能力，允许输入样本中带有较大误差甚至个别错误。反应正确规律的知识来自全体样本，个别样本中的误差不能左右对权矩阵的调整</li>
-</ol>
-<p><strong>BP神经网络的缺陷：</strong></p>
-<ol>
-<li>需要的参数过多，而且参数的选择没有有效的方法。确定一个BP神经网络需要知道：网络的层数、每一层神经元的个数和权值。权值可以通过学习得到，如果，隐层神经元数量太多会引起过学习，如果隐层神经元个数太少会引起欠学习。此外学习率的选择也是需要考虑。目前来说，对于参数的确定缺少一个简单有效的方法，所以导致算法很不稳定；</li>
-<li>属于监督学习，对于样本有较大依赖性，网络学习的逼近和推广能力与样本有很大关系，如果样本集合代表性差，样本矛盾多，存在冗余样本，网络就很难达到预期的性能；</li>
-<li>由于权值是随机给定的，所以BP神经网络具有不可重现性；</li>
-</ol>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>BP算法</tag>
-        <tag>人工神经网络（ANN）</tag>
       </tags>
   </entry>
   <entry>
@@ -675,6 +622,59 @@
       </tags>
   </entry>
   <entry>
+    <title>人工神经网络（ANN）</title>
+    <url>/2019/07/26/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88ANN%EF%BC%89/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初学人工智能不久，今天碰上了人工神经网（ANN），开始学的时候很懵，一大堆理论、公式、推导…..作为一名小白，还是很痛苦的，不过经过摸索，大概了 解了什么是ANN，公式的推导以及一些其他问题，下面我就总结下自己的理解，一方面作为自己的笔记，日后方便巩固；另一方面，也可以分享给其他有意者。</p>
+<h1 id="一、什么是神经网络"><a href="#一、什么是神经网络" class="headerlink" title="一、什么是神经网络"></a>一、什么是神经网络</h1><h2 id="1-单层神经网络"><a href="#1-单层神经网络" class="headerlink" title="1.单层神经网络"></a>1.单层神经网络</h2><p>首先以单层神经元为例解释人工神经元是如何工作的<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjMwMjYzZC5wbmc" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x1,x2,…, xN：神经元的输入。这些可以从输入层实际观测或者是一个隐藏层的中间值（隐藏层即介于输入与输出之间的所有节点组成的一层。后面讲到多层神经网络是会再跟大家解释的）。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X0：偏置单元。这是常值添加到激活函数的输入（类似数学里y＝ax+b中使直线不过原点的常数b）。即截距项，通常有＋1值。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w0,w1,w2,…,wN：对应每个输入的权重。甚至偏置单元也是有权重的。</p>
+<p>a:神经元的输出。计算如下：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjQ2NzM2Zi5wbmc" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;式子里的f是已知的激活函数，f使神经网络（单层乃至多层）非常灵活并且具有能估计复杂的非线性关系的能力。在简单情况下可以是一个高斯函数、逻辑函数、双曲线函数或者甚至上是一个线性函数。利用神经网络可让其实现三个基本功能：与、或、非（AND, OR, NOT）。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里引入一个例子：and功能实现如下<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjc3YjA2Yy5wbmc" alt><br>神经元输出：a = f( -1.5 + x1 + x2 )</p>
+<p>这样大家就很容易理解其工作原理，其实就是对输入值赋予不同权重，经过激活函数输出的过程。</p>
+<h2 id="2-多层神经网络"><a href="#2-多层神经网络" class="headerlink" title="2.多层神经网络"></a>2.多层神经网络</h2><h3 id="2-1-网络结构"><a href="#2-1-网络结构" class="headerlink" title="2.1 网络结构"></a>2.1 网络结构</h3><p>清楚了单层神经网络，多层神经网络也好理解了，就相当于多个单层的叠加成多层的过程。<br><img src="https://img-blog.csdnimg.cn/20190811204232448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br><strong>神经网络分为三种类型的层</strong>：</p>
+<p>输入层：神经网络最左边的一层，通过这些神经元输入需要训练观察的样本，即初始输入数据的一层。</p>
+<p>隐藏层：介于输入与输出之间的所有节点组成的一层。帮助神经网络学习数据间的复杂关系，即对数据进行处理的层。</p>
+<p>输出层：由前两层得到神经网络最后一层，即最后结果输出的一层。</p>
+<h3 id="2-2-传递函数-激活函数"><a href="#2-2-传递函数-激活函数" class="headerlink" title="2.2 传递函数/激活函数"></a>2.2 传递函数/激活函数</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前面每一层输入经过线性变换wx+b后还用到了sigmoid函数，在神经网络的结构中被称为传递函数或者激活函数。除了sigmoid，还有tanh、relu等别的激活函数。激活函数使线性的结果非线性化。</p>
+<h3 id="2-3-为什么需要传递函数"><a href="#2-3-为什么需要传递函数" class="headerlink" title="2.3 为什么需要传递函数"></a>2.3 为什么需要传递函数</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单理解上，如果不加激活函数，无论多少层隐层，最终的结果还是原始输入的线性变化，这样一层隐层就可以达到结果，就没有多层感知器的意义了。所以每个隐层都会配一个激活函数，提供非线性变化。</p>
+<h1 id="二、BP算法"><a href="#二、BP算法" class="headerlink" title="二、BP算法"></a>二、BP算法</h1><h2 id="1-BP算法基本思想"><a href="#1-BP算法基本思想" class="headerlink" title="1.BP算法基本思想"></a>1.BP算法基本思想</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP算法全称叫作误差反向传播(error Back Propagation，或者也叫作误差逆传播)算法。其算法基本思想为：在上述的前馈网络中，输入信号经输入层输入，通过隐层计算由输出层输出，输出值与标记值比较，若有误差，将误差反向由输出层向输入层传播，在这个过程中，利用梯度下降算法对神经元权值进行调整。</p>
+<h2 id="2-BP算法的推导"><a href="#2-BP算法的推导" class="headerlink" title="2.BP算法的推导"></a>2.BP算法的推导</h2><h3 id="2-1-数学基础理论"><a href="#2-1-数学基础理论" class="headerlink" title="2.1 数学基础理论"></a>2.1 数学基础理论</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP算法中核心的数学工具就是微积分的<strong>链式求导法则</strong>。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMjQxMzk3LWMwN2Q1ODFjOTJkYWViZWMucG5n" alt></p>
+<h3 id="2-2推导过程"><a href="#2-2推导过程" class="headerlink" title="2.2推导过程"></a>2.2推导过程</h3><p><img src="https://img-blog.csdnimg.cn/20190811205148228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<ol>
+<li><strong>正向传播求损失，反向传播回传误差</strong></li>
+<li>根据误差信号修正每层的权重 </li>
+<li>f是激活函数；f(netj)是隐层的输出； f(netk）是输出层的输出O; d是target</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结合BP网络结构，误差由输出展开至输入的过程如下：<br><img src="https://img-blog.csdnimg.cn/20190811205328707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>有了误差E，通过求偏导就可以求得最优的权重。（不要忘记学习率） </p>
+<p><img src="https://img-blog.csdnimg.cn/2019081120540142.png" alt></p>
+<h2 id="3-举例说明"><a href="#3-举例说明" class="headerlink" title="3. 举例说明"></a>3. 举例说明</h2><p><img src="https://img-blog.csdnimg.cn/20190811205641720.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>图中元素：<br>两个输入；<br>隐层: b1, w1, w2, w3, w4 (都有初始值）<br>输出层：b2, w5, w6, w7, w8（赋了初始值）</p>
+<h3 id="3-1-前向传播"><a href="#3-1-前向传播" class="headerlink" title="3.1 前向传播"></a>3.1 前向传播</h3><p><img src="https://img-blog.csdnimg.cn/20190811205743162.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>则误差：<br><img src="https://img-blog.csdnimg.cn/20190811205806851.png" alt></p>
+<h3 id="3-2-反向传播"><a href="#3-2-反向传播" class="headerlink" title="3.2 反向传播"></a>3.2 反向传播</h3><p><img src="https://img-blog.csdnimg.cn/20190811205859442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>参数更新：<br><img src="https://img-blog.csdnimg.cn/20190811205921617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>求误差对w1的偏导 ：<br><img src="https://img-blog.csdnimg.cn/20190811205940706.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>注意，w1对两个输出的误差都有影响<br>通过以上过程可以更新所有权重，就可以再次迭代更新了，直到满足条件。</p>
+<h1 id="三、python代码实现"><a href="#三、python代码实现" class="headerlink" title="三、python代码实现"></a>三、python代码实现</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上述例子，用python可写出如下代码，并附有详解：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import math</span><br><span class="line">a=np.array([0.05,0.1])           #a1,a2的输入值</span><br><span class="line">weight1=np.array([[0.15,0.25],[0.2,0.3]])   #a1对b1,b2的权重，a2对b1，b2的权重</span><br><span class="line">weight2=np.array([[0.4,0.5],[0.45,0.55]])     #b1对c1,c2的权重，b2对c1，c2的权重</span><br><span class="line">target=np.array([0.01,0.99])</span><br><span class="line">d1=0.35   #输入层的偏置（1）的权重</span><br><span class="line">d2=0.6    #隐藏层的偏置（1）的权重</span><br><span class="line">β=0.5    #学习效率</span><br><span class="line"></span><br><span class="line"><span class="section">#一：前向传播</span></span><br><span class="line"></span><br><span class="line"><span class="section">#计算输入层到隐藏层的输入值，得矩阵netb1,netb2</span></span><br><span class="line">netb=np.dot(a,weight1)+d1</span><br><span class="line"></span><br><span class="line"><span class="section">#计算隐藏层的输出值,得到矩阵outb1,outb2</span></span><br><span class="line">m=[]</span><br><span class="line">for i in range(len(netb)):</span><br><span class="line"><span class="code">    outb=1.0 / (1.0 + math.exp(-netb[i]))</span></span><br><span class="line"><span class="code">    m.append(outb)</span></span><br><span class="line">m=np.array(m)</span><br><span class="line"></span><br><span class="line"><span class="section">#计算隐藏层到输出层的输入值，得矩阵netc1,netc2</span></span><br><span class="line">netc=np.dot(m,weight2)+d2</span><br><span class="line"></span><br><span class="line"><span class="section">#计算隐藏层的输出值,得到矩阵outc1,outc2</span></span><br><span class="line">n=[]</span><br><span class="line">for i in range(len(netc)):</span><br><span class="line"><span class="code">    outc=1.0 / (1.0 + math.exp(-netc[i]))</span></span><br><span class="line"><span class="code">    n.append(outc)</span></span><br><span class="line">n=np.array(n)</span><br><span class="line"></span><br><span class="line"><span class="section">#二：反向传播</span></span><br><span class="line">count=0 #计数</span><br><span class="line">e=0     #误差  </span><br><span class="line">E=[]    #统计误差</span><br><span class="line"><span class="section">#梯度下降</span></span><br><span class="line">while True:</span><br><span class="line">  count+=1</span><br><span class="line">  </span><br><span class="line">  #总误差对w1-w4的偏导</span><br><span class="line">  pd1=(-(target[<span class="string">0</span>]-n[<span class="string">0</span>])<span class="emphasis">*n[0]*</span>(1-n[<span class="string">0</span>])<span class="emphasis">*weight2[0][0]-(target[1]-n[1])*</span>n[<span class="string">1</span>]<span class="emphasis">*(1-n[1])*</span>weight2[<span class="string">0</span>][<span class="symbol">1</span>])<span class="emphasis">*m[0]*</span>(1-m[0])*a[0]</span><br><span class="line">  pd2=(-(target[<span class="string">0</span>]-n[<span class="string">0</span>])<span class="emphasis">*n[0]*</span>(1-n[<span class="string">0</span>])<span class="emphasis">*weight2[0][0]-(target[1]-n[1])*</span>n[<span class="string">1</span>]<span class="emphasis">*(1-n[1])*</span>weight2[<span class="string">0</span>][<span class="symbol">1</span>])<span class="emphasis">*m[0]*</span>(1-m[0])*a[1]</span><br><span class="line">  pd3=(-(target[<span class="string">0</span>]-n[<span class="string">0</span>])<span class="emphasis">*n[0]*</span>(1-n[<span class="string">0</span>])<span class="emphasis">*weight2[1][0]-(target[1]-n[1])*</span>n[<span class="string">1</span>]<span class="emphasis">*(1-n[1])*</span>weight2[<span class="string">0</span>][<span class="symbol">1</span>])<span class="emphasis">*m[0]*</span>(1-m[0])*a[0]                          </span><br><span class="line">  pd4=(-(target[<span class="string">0</span>]-n[<span class="string">0</span>])<span class="emphasis">*n[0]*</span>(1-n[<span class="string">0</span>])<span class="emphasis">*weight2[1][1]-(target[1]-n[1])*</span>n[<span class="string">1</span>]<span class="emphasis">*(1-n[1])*</span>weight2[<span class="string">0</span>][<span class="symbol">1</span>])<span class="emphasis">*m[0]*</span>(1-m[0])*a[1]</span><br><span class="line">  weight1[<span class="string">0</span>][<span class="symbol">0</span>]=weight1[<span class="string">0</span>][<span class="symbol">0</span>]-β*pd1</span><br><span class="line">  weight1[<span class="string">1</span>][<span class="symbol">0</span>]=weight1[<span class="string">1</span>][<span class="symbol">0</span>]-β*pd2</span><br><span class="line">  weight1[<span class="string">0</span>][<span class="symbol">1</span>]=weight1[<span class="string">0</span>][<span class="symbol">1</span>]-β*pd3</span><br><span class="line">  weight1[<span class="string">1</span>][<span class="symbol">1</span>]=weight1[<span class="string">1</span>][<span class="symbol">1</span>]-β*pd4</span><br><span class="line"></span><br><span class="line">  #总误差对w5-w8的偏导</span><br><span class="line">  pd5=-(target[0]-n[0])<span class="emphasis">*n[0]*</span>(1-n[0])*m[0]</span><br><span class="line">  pd6=-(target[0]-n[0])<span class="emphasis">*n[0]*</span>(1-n[0])*m[1]</span><br><span class="line">  pd7=-(target[1]-n[1])<span class="emphasis">*n[1]*</span>(1-n[1])*m[0]</span><br><span class="line">  pd8=-(target[1]-n[1])<span class="emphasis">*n[1]*</span>(1-n[1])*m[1]</span><br><span class="line">  weight2[<span class="string">0</span>][<span class="symbol">0</span>]=weight2[<span class="string">0</span>][<span class="symbol">0</span>]-β*pd5</span><br><span class="line">  weight2[<span class="string">1</span>][<span class="symbol">0</span>]=weight2[<span class="string">1</span>][<span class="symbol">0</span>]-β*pd6</span><br><span class="line">  weight2[<span class="string">0</span>][<span class="symbol">1</span>]=weight2[<span class="string">0</span>][<span class="symbol">1</span>]-β*pd7</span><br><span class="line">  weight2[<span class="string">1</span>][<span class="symbol">1</span>]=weight2[<span class="string">1</span>][<span class="symbol">1</span>]-β*pd8</span><br><span class="line">  </span><br><span class="line">  netb=np.dot(a,weight1)+d1</span><br><span class="line">  m=[]</span><br><span class="line">  for i in range(len(netb)):</span><br><span class="line"><span class="code">    outb=1.0 / (1.0 + math.exp(-netb[i]))</span></span><br><span class="line"><span class="code">    m.append(outb)</span></span><br><span class="line">  m=np.array(m)</span><br><span class="line">  netc=np.dot(m,weight2)+d2</span><br><span class="line">  n=[]</span><br><span class="line">  for i in range(len(netc)):</span><br><span class="line"><span class="code">    outc=1.0 / (1.0 + math.exp(-netc[i]))</span></span><br><span class="line"><span class="code">    n.append(outc)</span></span><br><span class="line">  n=np.array(n)</span><br><span class="line">  </span><br><span class="line">  #计算总误差</span><br><span class="line">  for j in range(len(n)):</span><br><span class="line"><span class="code">    e += (target[j]-n[j])**2/2</span></span><br><span class="line">  E.append(e)</span><br><span class="line">  #判断</span><br><span class="line">  if e<span class="xml"><span class="tag">&lt;<span class="name">0.0000001:</span></span></span></span><br><span class="line"><span class="xml">    break</span></span><br><span class="line"><span class="xml">  else:</span></span><br><span class="line"><span class="xml">      e=0</span></span><br><span class="line"><span class="xml">print(count)</span></span><br><span class="line"><span class="xml">print(e)</span></span><br><span class="line"><span class="xml">print(n)</span></span><br><span class="line"><span class="xml">plt.plot(range(len(E)),E,label='error')</span></span><br><span class="line"><span class="xml">plt.legend() </span></span><br><span class="line"><span class="xml">plt.xlabel('time')</span></span><br><span class="line"><span class="xml">plt.ylabel('error')</span></span><br><span class="line"><span class="xml">plt.show()</span></span><br></pre></td></tr></table></figure>
+<h1 id="四、BP神经网络的优缺点"><a href="#四、BP神经网络的优缺点" class="headerlink" title="四、BP神经网络的优缺点"></a>四、BP神经网络的优缺点</h1><p><strong>BP神经网络的优点：</strong></p>
+<ol>
+<li>非线性映射能力</li>
+<li>泛化能力  </li>
+<li>容错能力，允许输入样本中带有较大误差甚至个别错误。反应正确规律的知识来自全体样本，个别样本中的误差不能左右对权矩阵的调整</li>
+</ol>
+<p><strong>BP神经网络的缺陷：</strong></p>
+<ol>
+<li>需要的参数过多，而且参数的选择没有有效的方法。确定一个BP神经网络需要知道：网络的层数、每一层神经元的个数和权值。权值可以通过学习得到，如果，隐层神经元数量太多会引起过学习，如果隐层神经元个数太少会引起欠学习。此外学习率的选择也是需要考虑。目前来说，对于参数的确定缺少一个简单有效的方法，所以导致算法很不稳定；</li>
+<li>属于监督学习，对于样本有较大依赖性，网络学习的逼近和推广能力与样本有很大关系，如果样本集合代表性差，样本矛盾多，存在冗余样本，网络就很难达到预期的性能；</li>
+<li>由于权值是随机给定的，所以BP神经网络具有不可重现性；</li>
+</ol>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>BP算法</tag>
+        <tag>人工神经网络（ANN）</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基于协同过滤（CF）算法的推荐系统</title>
     <url>/2019/07/28/%E5%9F%BA%E4%BA%8E%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%EF%BC%88CF%EF%BC%89%E7%AE%97%E6%B3%95%E7%9A%84%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着计算机领域技术的高速发展，电子商务时代的普及，个性化的推荐系统深入生活应用的各个方面。个性化推荐算法是推荐系统中最核心的技术，在很大程度上决定了电子商务推荐系统性能的优劣。而协同过滤推荐是个性化推荐系统应用最为广泛的技术，协同过滤推荐主要分为基于用户的协同过滤推荐、基于项目的协同过滤推荐和基于模型的协同过滤推荐。</p>
@@ -736,43 +736,6 @@
       </tags>
   </entry>
   <entry>
-    <title>暑期培训第一次测试题总结</title>
-    <url>/2019/07/22/%E6%9A%91%E6%9C%9F%E5%9F%B9%E8%AE%AD%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>这里是一些暑期培训第一次测试题的部分解释，经过这次测试的摧残，总结备录一下，方便日后回顾复习。</p>
-<h2 id="Feeling"><a href="#Feeling" class="headerlink" title="Feeling"></a>Feeling</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经过几天的学习，7月22日下午，进行了第一次检测。开始以为会让我们推导一些公式什么的，结果当拿到测试题的时候，一首凉凉送给自己……开始的选择题和填空题还能接受，看到简答题，这都是什么，有种似曾相识的感觉，但就是写不出来。为时四十分钟的考试结束后，不到半个小时成绩就出来了，虽然成绩不那么好，但排名还行，然后学长给我们进行了讲解答疑，发现自己学的有点粗糙，没有注意那些细节性问题和概念，学以致用这方面也是有点差的。</p>
-<h2 id="Test-1"><a href="#Test-1" class="headerlink" title="Test 1"></a>Test 1</h2><h3 id="为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set"><a href="#为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set" class="headerlink" title="为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?"></a>为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校验集是用于调整超参数的，从而更好的优化训练模型。测试集是用于在完成神经网络训练过程后,为了客观评价模型在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,而且测试集<strong>不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标</strong>。</p>
-<p>（备注：不清楚这三个数据集概念及其作用的，可看下我以前写的关于这些的一篇文章。传送门：）</p>
-<h2 id="Test-2"><a href="#Test-2" class="headerlink" title="Test 2"></a>Test 2</h2><h3 id="批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？"><a href="#批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？" class="headerlink" title="批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？"></a>批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们要先知道什么是BGD和SGD，从两者的运算方法上，我们就可以得知不同之处。</p>
-<p>（1）批量梯度下降法（Batch Gradient Descent） ：在更新参数时都使用所有的样本来进行更新。</p>
-<ul>
-<li>优点：<strong>全局最优解</strong>，能保证每一次更新权值，都能降低损失函数；易于并行实现。</li>
-<li>缺点：当样本数目很多时，训练过程会很慢。</li>
-</ul>
-<p>（2）随机梯度下降法（Stochastic Gradient Descent）：在更新参数时都使用一个样本来进行更新。每一次跟新参数都用一个样本，更新很多次。如果样本量很大的情况（例如几十万），那么可能只用其中几万条或者几千条的样本，就已经将参数迭代到最优解了，对比上面的批量梯度下降，迭代一次需要用到十几万训练样本，一次迭代不可能最优，如果迭代10次的话就需要遍历训练样本10次，这种方式计算复杂度太高。</p>
-<ul>
-<li>优点：训练速度快；</li>
-<li>缺点：准确度下降，<strong>并不是全局最优</strong>；不易于并行实现。从迭代的次数上来看，随机梯度下降法迭代的次数较多，在解空间的搜索过程看起来很盲目。噪音很多，使得它并不是每次迭代都向着整体最优化方向。</li>
-</ul>
-<h2 id="Test-3"><a href="#Test-3" class="headerlink" title="Test 3"></a>Test 3</h2><h3 id="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"><a href="#当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？" class="headerlink" title="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"></a>当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;废话不多说，直接上图：<br><img src="https://img-blog.csdnimg.cn/20190722174826448.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="Test-4"><a href="#Test-4" class="headerlink" title="Test 4"></a>Test 4</h2><h3 id="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"><a href="#假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？" class="headerlink" title="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"></a>假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于逻辑回归，把权重初始化为0当然也是可以的，但是对于一个神经网络，如果你把权重或者参数都初始化为0，那么梯度下降将不会起作用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果权值全初始化为0，则<strong>无法更新权值</strong>。这是由于前向传播中，所有节点输出值均相同，由于此处使用了sigmod激活函数，所以此处所有神经节点输出都为1/2，而在反向传播每个节点输出值对损失函数的偏导时，涉及到对权值相乘后的求和，该项永远为0，故所乘的结果也必然为0，这样在计算权值对算是函数的偏导时，其偏导必然为0，所有权值偏导都为0，那么就不要指望使用梯度下降法能更新权值了，自然神经网络的训练也就无法进行下去了。</p>
-<h2 id="Test-5"><a href="#Test-5" class="headerlink" title="Test 5"></a>Test 5</h2><h3 id="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"><a href="#在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？" class="headerlink" title="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"></a>在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;神经网络中的梯度不稳定指的是<strong>梯度消失</strong>和<strong>梯度爆炸</strong>问题。<br>（备注：对于这两种问题的具体解释和为什么会出现这种问题，以及解决方法，这里不具体讨论了，我会在以后的文章中具体解释到的。）</p>
-<h2 id="Test-6"><a href="#Test-6" class="headerlink" title="Test 6"></a>Test 6</h2><h3 id="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"><a href="#为什么在神经网络中使用交叉熵而不是均方差作为误差函数？" class="headerlink" title="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"></a>为什么在神经网络中使用交叉熵而不是均方差作为误差函数？</h3><pre><code>1. 神经网络中如果预测值与实际值的误差越大，那么在反向传播训练的过程中，各种参数调整的幅度就要更大，从而使训练更快收敛，如果预测值与实际值的误差小，各种参数调整的幅度就要小，从而减少震荡。
-
-2. 使用平方误差损失函数，误差增大参数的梯度会增大，但是当误差很大时，参数的梯度就会又减小了。
-
-3. 使用交叉熵损失是函数，误差越大参数的梯度也越大，能够快速收敛。
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（备注：对于结论的推导过程会总结在另一篇文章里。）</p>
-]]></content>
-      <categories>
-        <category>测试题</category>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>测试题</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>推荐系统之矩阵分解(MF)及其python实现</title>
     <url>/2019/07/23/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E4%B9%8B%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3(MF)%E5%8F%8A%E5%85%B6python%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目前推荐系统中用的最多的就是矩阵分解方法，在Netflix Prize推荐系统大赛中取得突出效果。以用户-项目评分矩阵为例，矩阵分解就是预测出评分矩阵中的缺失值，然后根据预测值以某种方式向用户推荐。今天以“用户-项目评分矩阵R（M×N）”说明矩阵分解方式的原理以及python实现。</p>
@@ -816,63 +779,40 @@
       </tags>
   </entry>
   <entry>
-    <title>朴素贝叶斯算法</title>
-    <url>/2019/08/05/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是流行的十大算法之一，该算法是有监督的学习算法，解决的是分类问题，如客户是否流失、是否值得投资、信用等级评定等多分类问题。<strong>该算法的优点在于简单易懂、学习效率高、在某些领域的分类问题中能够与决策树、神经网络相媲美。</strong>但由于该算法以自变量之间的独立（条件特征独立）性和连续变量的正态性假设为前提，就会导致算法精度在某种程度上受影响。</p>
-<h1 id="一、问题的提出"><a href="#一、问题的提出" class="headerlink" title="一、问题的提出"></a>一、问题的提出</h1><p>先举一个具体的例子：</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“一所学校里面有 60% 的男生，40% 的女生。男生总是穿长裤，女生则一半穿长裤一半穿裙子。有了这些信息之后我们可以容易地计算“随机选取一个学生，他（她）穿长裤的概率和穿裙子的概率是多大”，这个就是前面说的“正向概率”的计算。然而，假设你走在校园中，迎面走来一个穿长裤的学生（很不幸的是你高度近似，你只看得见他（她）穿的是否长裤，而无法确定他（她）的性别），你能够推断出他（她）是男生的概率是多大吗？”</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们来算一算：假设学校里面人的总数是 U 个。60% 的男生都穿长裤，于是我们得到了 U <em> P(Boy) </em> P(Pants|Boy) 个穿长裤的（男生）（其中 P(Boy) 是男生的概率 = 60%，这里可以简单的理解为男生的比例；P(Pants|Boy) 是条件概率，即在 Boy 这个条件下穿长裤的概率是多大，这里是 100% ，因为所有男生都穿长裤）。40% 的女生里面又有一半（50%）是穿长裤的，于是我们又得到了 U <em> P(Girl) </em> P(Pants|Girl) 个穿长裤的（女生）。加起来一共是 U <em> P(Boy) </em> P(Pants|Boy) + U <em> P(Girl) </em> P(Pants|Girl) 个穿长裤的，其中有 U <em> P(Girl) </em> P(Pants|Girl) 个女生。两者一比就是你要求的答案。<br>下面我们把这个答案形式化一下：我们要求的是 P(Girl|Pants) （穿长裤的人里面有多少女生），我们计算的结果是 U <em> P(Girl) </em> P(Pants|Girl) / [U <em> P(Boy) </em> P(Pants|Boy) + U <em> P(Girl) </em> P(Pants|Girl)] 。容易发现这里校园内人的总数是无关的，可以消去。于是得到</p>
-<p><strong>P(Girl|Pants) = P(Girl) <em> P(Pants|Girl) / [P(Boy) </em> P(Pants|Boy) + P(Girl) * P(Pants|Girl)]</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意，如果把上式收缩起来，分母其实就是 P(Pants) ，分子其实就是 P(Pants, Girl) 。而这个比例很自然地就读作：在穿长裤的人（ P(Pants) ）里面有多少（穿长裤）的女孩（ P(Pants, Girl) ）。<br>进一步得到公式的一般形式：</p>
-<p><strong>P(B|A) = P(A|B) <em> P(B) / [P(A|B) </em> P(B) + P(A|~B) * P(~B) ]</strong></p>
-<p>收缩起来就是：<strong>P(B|A) = P(AB) / P(A)</strong><br>其实这个就等于：<strong>P(B|A) * P(A) = P(AB)</strong></p>
-<h1 id="二、正式的定义"><a href="#二、正式的定义" class="headerlink" title="二、正式的定义"></a>二、正式的定义</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是基于贝叶斯定理与特征条件独立假设的分类方法，然后依据被分类项属于各个类的概率，概率最大者即为所划分的类别。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设输入空间X=（x1,x2,x3…xn），输出类标记为Y=（y1,y2,y3…yn）。x的集合记为X，称为属性集。一般X和Y的关系不确定的，你只能在某种程度上说x有多大可能性属于类y1，比如说x有80%的可能性属于类y1，这时可以把X和Y看做是随机变量，P(Y|X)称为Y的<strong>后验概率</strong>（posterior probability），与之相对的P(Y)称为Y的<strong>先验概率</strong>（prior probability），P(X=x|Y=y1)称之为<strong>条件概率</strong>。</p>
-<p><strong>先验概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过经验来判断事情发生的概率，比如说“贝叶死”的发病率是万分之一，就是先验概率。再比如南方的梅雨季是 6-7 月，就是通过往年的气候总结出来的经验，这个时候下雨的概率就比其他时间高出很多。</p>
-<p><strong>后验概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;后验概率就是发生结果之后，推测原因的概率。比如说某人查出来了患有“贝叶死”，那么患病的原因可能是 A、B 或 C。患有“贝叶死”是因为原因 A 的概率就是后验概率。它是属于条件概率的一种。</p>
-<p><strong>条件概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;事件 A 在另外一个事件 B 已经发生条件下的发生概率，表示为 P(A|B)，读作“在 B 发生的条件下 A 发生的概率”。比如原因 A 的条件下，患有“贝叶死”的概率，就是条件概率。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单说来就是：贝叶斯分类算法的理论基于贝叶斯公式：<br><img src="https://img-blog.csdnimg.cn/20190816085605498.png" alt></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中P(A|B)称为<strong>条件概率</strong>，P(B)<strong>先验概率</strong>，对应P(B|A)为<strong>后验概率</strong>。朴素贝叶斯分类器基于一个简单的假定，即给定的目标值属性之间是相互独立。贝叶斯公式之所以有用是因为在日常生活中，我们可以很容易得到P(A|B)，而很难得出P(B|A)，但我们更关心P(B|A)，所以就可以根据贝叶斯公式来计算。</p>
-<h1 id="三、应用举例"><a href="#三、应用举例" class="headerlink" title="三、应用举例"></a>三、应用举例</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如下表所示，训练数据学习一个朴素贝叶斯分类器并确定x=(2,S)T的类标记y。表中x1、x2为特征，取值的集合分别为X1={1,2,3}，X2={S,M,L}，类标记Y={1,-1}</p>
-<p><img src="https://img-blog.csdnimg.cn/20190816084258206.png" alt><br>根据贝叶斯算法得到如下概率：</p>
-<p>P(Y=1)=9/15，P(Y=-1)=6/15</p>
-<p>P(X1=1|Y=1)=2/9，P(X1=2|Y=1)=3/9，P(X1=3|Y=1)=4/9</p>
-<p>P(X2=S|Y=1)=1/9，P(X2=M|Y=1)=4/9，P(X2=L|Y=1)=4/9</p>
-<p>P(X1=1|Y=-1)=3/6，P(X1=2|Y=-1)=2/6，P(X1=3|Y=-1)=1/6</p>
-<p>P(X2=S|Y=-1)=3/6，P(X2=M|Y=-1)=2/6，P((X2=L|Y=-1)=1/6</p>
-<p>所以对于给定的x=(2,S)T计算：</p>
-<p>P(Y=1)P(X1=2|Y=1)P(X2=S|Y=1)=(9/15)(3/9)(1/9)=1/45</p>
-<p>P(Y=-1)P(X1=2|Y=-1)P(X2=S|Y=-1)=(6/15)(2/6)(1/6)=1/15</p>
-<p>所以分类结果为y=-1</p>
-<h1 id="四、朴素贝叶斯算法的优缺点"><a href="#四、朴素贝叶斯算法的优缺点" class="headerlink" title="四、朴素贝叶斯算法的优缺点"></a>四、朴素贝叶斯算法的优缺点</h1><p><strong>优点：</strong></p>
-<ol>
-<li>朴素贝叶斯模型发源于古典数学理论，有着坚实的数学基础，以及稳定的分类效率；</li>
-<li>对大数量训练和查询时具有较高的速度。即使使用超大规模的训练集，针对每个项目通常也只会有相对较少的特征数，并且对项目的训练和分类也仅仅是特征概率的数学运算而已；</li>
-<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练（即可以实时的对新增的样本进行训练）；</li>
-<li>对缺失数据不太敏感，算法也比较简单，常用于文本分类；</li>
-<li>朴素贝叶斯对结果解释容易理解。</li>
-</ol>
-<p> <strong>缺点</strong></p>
-<ol>
-<li>需要计算先验概率；</li>
-<li>分类决策存在错误率；</li>
-<li>对输入数据的表达形式很敏感；</li>
-<li>由于使用了样本属性独立性的假设，所以如果样本属性有关联时其效果不好。</li>
-</ol>
-<h1 id="五、应用领域"><a href="#五、应用领域" class="headerlink" title="五、应用领域"></a>五、应用领域</h1><ol>
-<li>欺诈检测中使用较多；</li>
-<li>一封电子邮件是否是垃圾邮件；</li>
-<li>一篇文章应该分到科技、政治，还是体育类；</li>
-<li>一段文字表达的是积极的情绪还是消极的情绪；</li>
-<li>人脸识别</li>
-</ol>
+    <title>暑期培训第一次测试题总结</title>
+    <url>/2019/07/22/%E6%9A%91%E6%9C%9F%E5%9F%B9%E8%AE%AD%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%B5%8B%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>这里是一些暑期培训第一次测试题的部分解释，经过这次测试的摧残，总结备录一下，方便日后回顾复习。</p>
+<h2 id="Feeling"><a href="#Feeling" class="headerlink" title="Feeling"></a>Feeling</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经过几天的学习，7月22日下午，进行了第一次检测。开始以为会让我们推导一些公式什么的，结果当拿到测试题的时候，一首凉凉送给自己……开始的选择题和填空题还能接受，看到简答题，这都是什么，有种似曾相识的感觉，但就是写不出来。为时四十分钟的考试结束后，不到半个小时成绩就出来了，虽然成绩不那么好，但排名还行，然后学长给我们进行了讲解答疑，发现自己学的有点粗糙，没有注意那些细节性问题和概念，学以致用这方面也是有点差的。</p>
+<h2 id="Test-1"><a href="#Test-1" class="headerlink" title="Test 1"></a>Test 1</h2><h3 id="为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set"><a href="#为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set" class="headerlink" title="为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?"></a>为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校验集是用于调整超参数的，从而更好的优化训练模型。测试集是用于在完成神经网络训练过程后,为了客观评价模型在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,而且测试集<strong>不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标</strong>。</p>
+<p>（备注：不清楚这三个数据集概念及其作用的，可看下我以前写的关于这些的一篇文章。传送门：）</p>
+<h2 id="Test-2"><a href="#Test-2" class="headerlink" title="Test 2"></a>Test 2</h2><h3 id="批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？"><a href="#批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？" class="headerlink" title="批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？"></a>批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们要先知道什么是BGD和SGD，从两者的运算方法上，我们就可以得知不同之处。</p>
+<p>（1）批量梯度下降法（Batch Gradient Descent） ：在更新参数时都使用所有的样本来进行更新。</p>
+<ul>
+<li>优点：<strong>全局最优解</strong>，能保证每一次更新权值，都能降低损失函数；易于并行实现。</li>
+<li>缺点：当样本数目很多时，训练过程会很慢。</li>
+</ul>
+<p>（2）随机梯度下降法（Stochastic Gradient Descent）：在更新参数时都使用一个样本来进行更新。每一次跟新参数都用一个样本，更新很多次。如果样本量很大的情况（例如几十万），那么可能只用其中几万条或者几千条的样本，就已经将参数迭代到最优解了，对比上面的批量梯度下降，迭代一次需要用到十几万训练样本，一次迭代不可能最优，如果迭代10次的话就需要遍历训练样本10次，这种方式计算复杂度太高。</p>
+<ul>
+<li>优点：训练速度快；</li>
+<li>缺点：准确度下降，<strong>并不是全局最优</strong>；不易于并行实现。从迭代的次数上来看，随机梯度下降法迭代的次数较多，在解空间的搜索过程看起来很盲目。噪音很多，使得它并不是每次迭代都向着整体最优化方向。</li>
+</ul>
+<h2 id="Test-3"><a href="#Test-3" class="headerlink" title="Test 3"></a>Test 3</h2><h3 id="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"><a href="#当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？" class="headerlink" title="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"></a>当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;废话不多说，直接上图：<br><img src="https://img-blog.csdnimg.cn/20190722174826448.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="Test-4"><a href="#Test-4" class="headerlink" title="Test 4"></a>Test 4</h2><h3 id="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"><a href="#假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？" class="headerlink" title="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"></a>假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于逻辑回归，把权重初始化为0当然也是可以的，但是对于一个神经网络，如果你把权重或者参数都初始化为0，那么梯度下降将不会起作用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果权值全初始化为0，则<strong>无法更新权值</strong>。这是由于前向传播中，所有节点输出值均相同，由于此处使用了sigmod激活函数，所以此处所有神经节点输出都为1/2，而在反向传播每个节点输出值对损失函数的偏导时，涉及到对权值相乘后的求和，该项永远为0，故所乘的结果也必然为0，这样在计算权值对算是函数的偏导时，其偏导必然为0，所有权值偏导都为0，那么就不要指望使用梯度下降法能更新权值了，自然神经网络的训练也就无法进行下去了。</p>
+<h2 id="Test-5"><a href="#Test-5" class="headerlink" title="Test 5"></a>Test 5</h2><h3 id="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"><a href="#在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？" class="headerlink" title="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"></a>在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;神经网络中的梯度不稳定指的是<strong>梯度消失</strong>和<strong>梯度爆炸</strong>问题。<br>（备注：对于这两种问题的具体解释和为什么会出现这种问题，以及解决方法，这里不具体讨论了，我会在以后的文章中具体解释到的。）</p>
+<h2 id="Test-6"><a href="#Test-6" class="headerlink" title="Test 6"></a>Test 6</h2><h3 id="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"><a href="#为什么在神经网络中使用交叉熵而不是均方差作为误差函数？" class="headerlink" title="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"></a>为什么在神经网络中使用交叉熵而不是均方差作为误差函数？</h3><pre><code>1. 神经网络中如果预测值与实际值的误差越大，那么在反向传播训练的过程中，各种参数调整的幅度就要更大，从而使训练更快收敛，如果预测值与实际值的误差小，各种参数调整的幅度就要小，从而减少震荡。
+
+2. 使用平方误差损失函数，误差增大参数的梯度会增大，但是当误差很大时，参数的梯度就会又减小了。
+
+3. 使用交叉熵损失是函数，误差越大参数的梯度也越大，能够快速收敛。
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（备注：对于结论的推导过程会总结在另一篇文章里。）</p>
 ]]></content>
       <categories>
+        <category>测试题</category>
         <category>机器学习</category>
       </categories>
       <tags>
         <tag>机器学习</tag>
-        <tag>朴素贝叶斯算法</tag>
+        <tag>测试题</tag>
       </tags>
   </entry>
   <entry>
@@ -967,6 +907,90 @@
       </tags>
   </entry>
   <entry>
+    <title>朴素贝叶斯算法</title>
+    <url>/2019/08/05/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是流行的十大算法之一，该算法是有监督的学习算法，解决的是分类问题，如客户是否流失、是否值得投资、信用等级评定等多分类问题。<strong>该算法的优点在于简单易懂、学习效率高、在某些领域的分类问题中能够与决策树、神经网络相媲美。</strong>但由于该算法以自变量之间的独立（条件特征独立）性和连续变量的正态性假设为前提，就会导致算法精度在某种程度上受影响。</p>
+<h1 id="一、问题的提出"><a href="#一、问题的提出" class="headerlink" title="一、问题的提出"></a>一、问题的提出</h1><p>先举一个具体的例子：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“一所学校里面有 60% 的男生，40% 的女生。男生总是穿长裤，女生则一半穿长裤一半穿裙子。有了这些信息之后我们可以容易地计算“随机选取一个学生，他（她）穿长裤的概率和穿裙子的概率是多大”，这个就是前面说的“正向概率”的计算。然而，假设你走在校园中，迎面走来一个穿长裤的学生（很不幸的是你高度近似，你只看得见他（她）穿的是否长裤，而无法确定他（她）的性别），你能够推断出他（她）是男生的概率是多大吗？”</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们来算一算：假设学校里面人的总数是 U 个。60% 的男生都穿长裤，于是我们得到了 U <em> P(Boy) </em> P(Pants|Boy) 个穿长裤的（男生）（其中 P(Boy) 是男生的概率 = 60%，这里可以简单的理解为男生的比例；P(Pants|Boy) 是条件概率，即在 Boy 这个条件下穿长裤的概率是多大，这里是 100% ，因为所有男生都穿长裤）。40% 的女生里面又有一半（50%）是穿长裤的，于是我们又得到了 U <em> P(Girl) </em> P(Pants|Girl) 个穿长裤的（女生）。加起来一共是 U <em> P(Boy) </em> P(Pants|Boy) + U <em> P(Girl) </em> P(Pants|Girl) 个穿长裤的，其中有 U <em> P(Girl) </em> P(Pants|Girl) 个女生。两者一比就是你要求的答案。<br>下面我们把这个答案形式化一下：我们要求的是 P(Girl|Pants) （穿长裤的人里面有多少女生），我们计算的结果是 U <em> P(Girl) </em> P(Pants|Girl) / [U <em> P(Boy) </em> P(Pants|Boy) + U <em> P(Girl) </em> P(Pants|Girl)] 。容易发现这里校园内人的总数是无关的，可以消去。于是得到</p>
+<p><strong>P(Girl|Pants) = P(Girl) <em> P(Pants|Girl) / [P(Boy) </em> P(Pants|Boy) + P(Girl) * P(Pants|Girl)]</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意，如果把上式收缩起来，分母其实就是 P(Pants) ，分子其实就是 P(Pants, Girl) 。而这个比例很自然地就读作：在穿长裤的人（ P(Pants) ）里面有多少（穿长裤）的女孩（ P(Pants, Girl) ）。<br>进一步得到公式的一般形式：</p>
+<p><strong>P(B|A) = P(A|B) <em> P(B) / [P(A|B) </em> P(B) + P(A|~B) * P(~B) ]</strong></p>
+<p>收缩起来就是：<strong>P(B|A) = P(AB) / P(A)</strong><br>其实这个就等于：<strong>P(B|A) * P(A) = P(AB)</strong></p>
+<h1 id="二、正式的定义"><a href="#二、正式的定义" class="headerlink" title="二、正式的定义"></a>二、正式的定义</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是基于贝叶斯定理与特征条件独立假设的分类方法，然后依据被分类项属于各个类的概率，概率最大者即为所划分的类别。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设输入空间X=（x1,x2,x3…xn），输出类标记为Y=（y1,y2,y3…yn）。x的集合记为X，称为属性集。一般X和Y的关系不确定的，你只能在某种程度上说x有多大可能性属于类y1，比如说x有80%的可能性属于类y1，这时可以把X和Y看做是随机变量，P(Y|X)称为Y的<strong>后验概率</strong>（posterior probability），与之相对的P(Y)称为Y的<strong>先验概率</strong>（prior probability），P(X=x|Y=y1)称之为<strong>条件概率</strong>。</p>
+<p><strong>先验概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过经验来判断事情发生的概率，比如说“贝叶死”的发病率是万分之一，就是先验概率。再比如南方的梅雨季是 6-7 月，就是通过往年的气候总结出来的经验，这个时候下雨的概率就比其他时间高出很多。</p>
+<p><strong>后验概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;后验概率就是发生结果之后，推测原因的概率。比如说某人查出来了患有“贝叶死”，那么患病的原因可能是 A、B 或 C。患有“贝叶死”是因为原因 A 的概率就是后验概率。它是属于条件概率的一种。</p>
+<p><strong>条件概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;事件 A 在另外一个事件 B 已经发生条件下的发生概率，表示为 P(A|B)，读作“在 B 发生的条件下 A 发生的概率”。比如原因 A 的条件下，患有“贝叶死”的概率，就是条件概率。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单说来就是：贝叶斯分类算法的理论基于贝叶斯公式：<br><img src="https://img-blog.csdnimg.cn/20190816085605498.png" alt></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中P(A|B)称为<strong>条件概率</strong>，P(B)<strong>先验概率</strong>，对应P(B|A)为<strong>后验概率</strong>。朴素贝叶斯分类器基于一个简单的假定，即给定的目标值属性之间是相互独立。贝叶斯公式之所以有用是因为在日常生活中，我们可以很容易得到P(A|B)，而很难得出P(B|A)，但我们更关心P(B|A)，所以就可以根据贝叶斯公式来计算。</p>
+<h1 id="三、应用举例"><a href="#三、应用举例" class="headerlink" title="三、应用举例"></a>三、应用举例</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如下表所示，训练数据学习一个朴素贝叶斯分类器并确定x=(2,S)T的类标记y。表中x1、x2为特征，取值的集合分别为X1={1,2,3}，X2={S,M,L}，类标记Y={1,-1}</p>
+<p><img src="https://img-blog.csdnimg.cn/20190816084258206.png" alt><br>根据贝叶斯算法得到如下概率：</p>
+<p>P(Y=1)=9/15，P(Y=-1)=6/15</p>
+<p>P(X1=1|Y=1)=2/9，P(X1=2|Y=1)=3/9，P(X1=3|Y=1)=4/9</p>
+<p>P(X2=S|Y=1)=1/9，P(X2=M|Y=1)=4/9，P(X2=L|Y=1)=4/9</p>
+<p>P(X1=1|Y=-1)=3/6，P(X1=2|Y=-1)=2/6，P(X1=3|Y=-1)=1/6</p>
+<p>P(X2=S|Y=-1)=3/6，P(X2=M|Y=-1)=2/6，P((X2=L|Y=-1)=1/6</p>
+<p>所以对于给定的x=(2,S)T计算：</p>
+<p>P(Y=1)P(X1=2|Y=1)P(X2=S|Y=1)=(9/15)(3/9)(1/9)=1/45</p>
+<p>P(Y=-1)P(X1=2|Y=-1)P(X2=S|Y=-1)=(6/15)(2/6)(1/6)=1/15</p>
+<p>所以分类结果为y=-1</p>
+<h1 id="四、朴素贝叶斯算法的优缺点"><a href="#四、朴素贝叶斯算法的优缺点" class="headerlink" title="四、朴素贝叶斯算法的优缺点"></a>四、朴素贝叶斯算法的优缺点</h1><p><strong>优点：</strong></p>
+<ol>
+<li>朴素贝叶斯模型发源于古典数学理论，有着坚实的数学基础，以及稳定的分类效率；</li>
+<li>对大数量训练和查询时具有较高的速度。即使使用超大规模的训练集，针对每个项目通常也只会有相对较少的特征数，并且对项目的训练和分类也仅仅是特征概率的数学运算而已；</li>
+<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练（即可以实时的对新增的样本进行训练）；</li>
+<li>对缺失数据不太敏感，算法也比较简单，常用于文本分类；</li>
+<li>朴素贝叶斯对结果解释容易理解。</li>
+</ol>
+<p> <strong>缺点</strong></p>
+<ol>
+<li>需要计算先验概率；</li>
+<li>分类决策存在错误率；</li>
+<li>对输入数据的表达形式很敏感；</li>
+<li>由于使用了样本属性独立性的假设，所以如果样本属性有关联时其效果不好。</li>
+</ol>
+<h1 id="五、应用领域"><a href="#五、应用领域" class="headerlink" title="五、应用领域"></a>五、应用领域</h1><ol>
+<li>欺诈检测中使用较多；</li>
+<li>一封电子邮件是否是垃圾邮件；</li>
+<li>一篇文章应该分到科技、政治，还是体育类；</li>
+<li>一段文字表达的是积极的情绪还是消极的情绪；</li>
+<li>人脸识别</li>
+</ol>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>朴素贝叶斯算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浅谈机器学习-回归与分类的区别</title>
+    <url>/2019/08/01/%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%9B%9E%E5%BD%92%E4%B8%8E%E5%88%86%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习的主要任务便是聚焦于两个问题：分类和回归。本文将浅谈下两者的区别。</p>
+<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归会给出一个具体的结果，例如房价的数据，根据位置、周边、配套等等这些维度，给出一个房价的预测。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类相信大家都不会陌生，生活中会见到很多的应用，比如垃圾邮件识别、信用卡发放等等，就是基于数据集，作出二分类或者多分类的选择。</p>
+<p>浅层： 两者的的预测目标变量类型不同，回归问题是连续变量，分类问题离散变量。<br>中层： 回归问题是定量问题，分类问题是定性问题。<br>高层： 回归与分类的根本区别在于输出空间是否为一个度量空间。<br><img src="https://img-blog.csdnimg.cn/20190318195051810.png" alt></p>
+<h1 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h1><p>分类和回归的区别在于输出变量的类型。</p>
+<p>定量输出称为回归，或者说是连续变量预测；<br>定性输出称为分类，或者说是离散变量预测。</p>
+<p>举个例子：<br>预测明天的气温是多少度，这是一个回归任务；<br>预测明天是阴、晴还是雨，就是一个分类任务。</p>
+<h1 id="应用场景不同"><a href="#应用场景不同" class="headerlink" title="应用场景不同"></a>应用场景不同</h1><p>1.回归问题的应用场景</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归问题通常是用来预测一个值，如预测房价、未来的天气情况等等，例如一个产品的实际价格为500元，通过回归分析预测值为499元，我们认为这是一个比较好的回归分析。一个比较常见的回归算法是线性回归算法（LR）。另外，回归分析用在神经网络上，其最上层是不需要加上softmax函数的，而是直接对前一层累加即可。回归是对真实值的一种逼近预测。</p>
+<p>2.分类问题的应用场景</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类问题是用于将事物打上一个标签，通常结果为离散值。例如判断一幅图片上的动物是一只猫还是一只狗，分类通常是建立在回归之上，分类的最后一层通常要使用softmax函数进行判断其所属类别。分类并没有逼近的概念，最终正确结果只有一个，错误的就是错误的，不会有相近的概念。最常见的分类方法是逻辑回归，或者叫逻辑分类。</p>
+<h1 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类模型和回归模型本质一样，都是要建立映射关系。在实际操作中，我们确实常常将回归问题和分类问题互相转化，即分类模型可将回归模型的输出离散化，回归模型也可将分类模型的输出连续化。（分类问题回归化：逻辑回归；回归问题分类化：年龄预测问题——&gt;年龄段分类问题）</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>分类</tag>
+        <tag>回归</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>梯度下降法的三种形式BGD、SGD、MBGD及python实现</title>
     <url>/2019/07/18/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95%E7%9A%84%E4%B8%89%E7%A7%8D%E5%BD%A2%E5%BC%8FBGD%E3%80%81SGD%E3%80%81MBGD%E5%8F%8Apython%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;梯度下降法作为机器学习中较常使用的优化算法，其有着三种不同的形式：批量梯度下降（Batch Gradient Descent）、随机梯度下降（Stochastic Gradient Descent）以及小批量梯度下降（Mini-Batch Gradient Descent）。其中小批量梯度下降法也常用在深度学习中进行模型的训练。接下来，我们将对这三种不同的梯度下降法进行理解。</p>
@@ -993,30 +1017,6 @@
         <tag>机器学习</tag>
         <tag>python</tag>
         <tag>梯度下降</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>浅谈机器学习-回归与分类的区别</title>
-    <url>/2019/08/01/%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%9B%9E%E5%BD%92%E4%B8%8E%E5%88%86%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习的主要任务便是聚焦于两个问题：分类和回归。本文将浅谈下两者的区别。</p>
-<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归会给出一个具体的结果，例如房价的数据，根据位置、周边、配套等等这些维度，给出一个房价的预测。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类相信大家都不会陌生，生活中会见到很多的应用，比如垃圾邮件识别、信用卡发放等等，就是基于数据集，作出二分类或者多分类的选择。</p>
-<p>浅层： 两者的的预测目标变量类型不同，回归问题是连续变量，分类问题离散变量。<br>中层： 回归问题是定量问题，分类问题是定性问题。<br>高层： 回归与分类的根本区别在于输出空间是否为一个度量空间。<br><img src="https://img-blog.csdnimg.cn/20190318195051810.png" alt></p>
-<h1 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h1><p>分类和回归的区别在于输出变量的类型。</p>
-<p>定量输出称为回归，或者说是连续变量预测；<br>定性输出称为分类，或者说是离散变量预测。</p>
-<p>举个例子：<br>预测明天的气温是多少度，这是一个回归任务；<br>预测明天是阴、晴还是雨，就是一个分类任务。</p>
-<h1 id="应用场景不同"><a href="#应用场景不同" class="headerlink" title="应用场景不同"></a>应用场景不同</h1><p>1.回归问题的应用场景</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归问题通常是用来预测一个值，如预测房价、未来的天气情况等等，例如一个产品的实际价格为500元，通过回归分析预测值为499元，我们认为这是一个比较好的回归分析。一个比较常见的回归算法是线性回归算法（LR）。另外，回归分析用在神经网络上，其最上层是不需要加上softmax函数的，而是直接对前一层累加即可。回归是对真实值的一种逼近预测。</p>
-<p>2.分类问题的应用场景</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类问题是用于将事物打上一个标签，通常结果为离散值。例如判断一幅图片上的动物是一只猫还是一只狗，分类通常是建立在回归之上，分类的最后一层通常要使用softmax函数进行判断其所属类别。分类并没有逼近的概念，最终正确结果只有一个，错误的就是错误的，不会有相近的概念。最常见的分类方法是逻辑回归，或者叫逻辑分类。</p>
-<h1 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类模型和回归模型本质一样，都是要建立映射关系。在实际操作中，我们确实常常将回归问题和分类问题互相转化，即分类模型可将回归模型的输出离散化，回归模型也可将分类模型的输出连续化。（分类问题回归化：逻辑回归；回归问题分类化：年龄预测问题——&gt;年龄段分类问题）</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>分类</tag>
-        <tag>回归</tag>
       </tags>
   </entry>
 </search>
