@@ -30,7 +30,8 @@
     <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/jquery/jquery.min.js"></script>
     
 <link rel="alternate" href="/atom.xml" title="Flaneur" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -411,7 +412,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/sj.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -601,7 +602,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>这里是一些暑期培训第一次测试题的部分解释，经过这次测试的摧残，总结备录一下，方便日后回顾复习。</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里是一些暑期培训第一次测试题的部分解释，经过这次测试的摧残，总结备录一下，方便日后回顾复习。</p>
 <h2 id="Feeling"><a href="#Feeling" class="headerlink" title="Feeling"></a>Feeling</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经过几天的学习，7月22日下午，进行了第一次检测。开始以为会让我们推导一些公式什么的，结果当拿到测试题的时候，一首凉凉送给自己……开始的选择题和填空题还能接受，看到简答题，这都是什么，有种似曾相识的感觉，但就是写不出来。为时四十分钟的考试结束后，不到半个小时成绩就出来了，虽然成绩不那么好，但排名还行，然后学长给我们进行了讲解答疑，发现自己学的有点粗糙，没有注意那些细节性问题和概念，学以致用这方面也是有点差的。</p>
 <h2 id="Test-1"><a href="#Test-1" class="headerlink" title="Test 1"></a>Test 1</h2><h3 id="为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set"><a href="#为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set" class="headerlink" title="为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?"></a>为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校验集是用于调整超参数的，从而更好的优化训练模型。测试集是用于在完成神经网络训练过程后,为了客观评价模型在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,而且测试集<strong>不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标</strong>。</p>
 <p>（备注：不清楚这三个数据集概念及其作用的，可看下我以前写的关于这些的一篇文章。传送门：）</p>
@@ -1131,8 +1132,7 @@
                 <a href="/2019/07/23/tui-jian-xi-tong-zhi-ju-zhen-fen-jie-mf-ji-qi-python-shi-xian/">
                     <div class="card-image">
                         
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/2.jpg" class="responsive-img" alt="推荐系统之矩阵分解(MF)及其python实现">
+                        <img src="/medias/mf.jpg" class="responsive-img" alt="推荐系统之矩阵分解(MF)及其python实现">
                         
                         <span class="card-title">推荐系统之矩阵分解(MF)及其python实现</span>
                     </div>
@@ -1196,8 +1196,7 @@
                 <a href="/2019/07/20/k-zui-jin-lin-fen-lei-suan-fa-knn-ji-python-shi-xian/">
                     <div class="card-image">
                         
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="KNN算法及python实现">
+                        <img src="/medias/knn.jpg" class="responsive-img" alt="KNN算法及python实现">
                         
                         <span class="card-title">KNN算法及python实现</span>
                     </div>
@@ -1235,12 +1234,12 @@
                         <span class="chip bg-color">机器学习</span>
                     </a>
                     
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
-                    </a>
-                    
                     <a href="/tags/KNN/">
                         <span class="chip bg-color">KNN</span>
+                    </a>
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
                     </a>
                     
                 </div>
@@ -1382,7 +1381,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
     <footer class="page-footer bg-color">
     
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             <span id="year">2019</span>
@@ -1408,6 +1407,50 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             </span>
             
             <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "3";
+                    var startDate = "15";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
             
             <br>
             

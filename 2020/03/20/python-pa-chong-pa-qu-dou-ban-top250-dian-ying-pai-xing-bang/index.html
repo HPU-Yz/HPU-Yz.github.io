@@ -30,7 +30,8 @@
     <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/jquery/jquery.min.js"></script>
     
 <link rel="alternate" href="/atom.xml" title="Flaneur" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -411,7 +412,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/pc.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -601,7 +602,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>本篇讲介绍一个简单的Python爬虫案例–爬取豆瓣 TOP250 电影排行榜。</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇讲介绍一个简单的Python爬虫案例–爬取豆瓣 TOP250 电影排行榜。</p>
 <p>很多朋友在看一部电影前都喜欢先找一下网友们对该片的评价。</p>
 <p>说到电影评分的网站，除了国外的 IMDB 和烂番茄，国内要数豆瓣最为出名。</p>
 <p>主要原因是豆瓣有一套完整的评分和防水军机制 。</p>
@@ -610,7 +611,7 @@
 <p>豆瓣还专门提供了一个 TOP250 的电影链接 -&gt; <a href="https://movie.douban.com/top250" target="_blank" rel="noopener">https://movie.douban.com/top250</a></p>
 <h1 id="爬取思路"><a href="#爬取思路" class="headerlink" title="爬取思路"></a>爬取思路</h1><p>爬取的过程很好理解，这里只需要两个过程：<br>① 从服务器上下载所需页面<br>② 解析这个页面，得到自己需要有用的内容</p>
 <h3 id="①抓取页面"><a href="#①抓取页面" class="headerlink" title="①抓取页面"></a>①抓取页面</h3><p>有的人可能会利用 urllib 模块实现网络抓取功能。但在 Python 中，有一个更好地替代者——Requests。Requests 简化了 urllib 的诸多冗杂且无意义的操作，并提供了更强大的功能。<br>所以在这里我们使用 Requests 模块的 get() 方法从服务器上来下载这个页面。</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> requests
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> requests
 
 url <span class="token operator">=</span> <span class="token string">"https://movie.douban.com/top250"</span>
 headers <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -618,19 +619,19 @@ headers <span class="token operator">=</span> <span class="token punctuation">{<
     <span class="token punctuation">}</span>
 
 res <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">)</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>res就是我们需要的这个页面的资源，我们不妨打开来看看是不是</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">"豆瓣电影.txt"</span><span class="token punctuation">,</span><span class="token string">'w'</span><span class="token punctuation">,</span>encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">"豆瓣电影.txt"</span><span class="token punctuation">,</span><span class="token string">'w'</span><span class="token punctuation">,</span>encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
     f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>res<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>打开文本如下图<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zbG9tb28ub3NzLWNuLWJlaWppbmcuYWxpeXVuY3MuY29tLzJkZTI1MDMzZTQ0NGY3NTc2ZTRlNDZlYmU2Mjg1YzllLm1kLnBuZw?x-oss-process=image/format,png" alt><br>我们可以看出这确实是当前网页的资源，所以我们就抓取成功了。</p>
 <h2 id="②解析页面"><a href="#②解析页面" class="headerlink" title="②解析页面"></a>②解析页面</h2><p>解析网页内容推荐使用 BeautifulSoup 模块，它可以化腐朽为神奇，将一个复杂的网页结构转化为书籍目录的形式供你浏览。<br>例如，我们现在需要解析提取出当前页面的电影名字</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> bs4
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> bs4
 soup <span class="token operator">=</span> bs4<span class="token punctuation">.</span>BeautifulSoup<span class="token punctuation">(</span>res<span class="token punctuation">.</span>text<span class="token punctuation">,</span><span class="token string">"html.parser"</span><span class="token punctuation">)</span>
 targets <span class="token operator">=</span> soup<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">"div"</span><span class="token punctuation">,</span>class_<span class="token operator">=</span><span class="token string">"hd"</span><span class="token punctuation">)</span>
 <span class="token keyword">for</span> each <span class="token keyword">in</span> targets<span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span>each<span class="token punctuation">.</span>a<span class="token punctuation">.</span>span<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>可以得到如下结果</p>
 <blockquote>
 <p>肖申克的救赎<br>霸王别姬<br>阿甘正传<br>这个杀手不太冷<br>美丽人生<br>泰坦尼克号<br>千与千寻<br>辛德勒的名单<br> 盗梦空间<br> 忠犬八公的故事<br> 海上钢琴师<br>机器人总动员<br>三傻大闹宝莱坞<br>楚门的世界<br>放牛班的春天<br> 星际穿越<br> 大话西游之大圣娶亲<br> 熔炉<br> 疯狂动物城<br> 无间道<br> 龙猫<br> 教父<br> 当幸福来敲门<br>怦然心动<br>触不可及</p>
@@ -647,12 +648,12 @@ targets <span class="token operator">=</span> soup<span class="token punctuation
 <p>我们可以发现这样的规律：<br>每一次的更新的 <code>url = https://movie.douban.com/top250 + &#39;/?start=&#39; + str(25*i)</code>其中<code>i</code>可以表示为页数-1</p>
 <p>咦，这个时候，你可能会有疑问，我们怎么知道一共有多少页呢，不能一直for循环无穷吧。</p>
 <p>那当然不可能的了，我们可以按第二步解析网页方式来获取页数</p>
-<pre class=" language-python"><code class="language-python">depth <span class="token operator">=</span> soup<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'span'</span><span class="token punctuation">,</span>class_<span class="token operator">=</span><span class="token string">'next'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>previous_sibling<span class="token punctuation">.</span>previous_sibling<span class="token punctuation">.</span>text
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">depth <span class="token operator">=</span> soup<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'span'</span><span class="token punctuation">,</span>class_<span class="token operator">=</span><span class="token string">'next'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>previous_sibling<span class="token punctuation">.</span>previous_sibling<span class="token punctuation">.</span>text
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>注意，这个返回的<code>depth</code>是给字符串形式，需要<code>int()</code></p>
 <p>这样结合刚才的过程，就可以迭代每一页了</p>
 <h1 id="代码清单"><a href="#代码清单" class="headerlink" title="代码清单"></a>代码清单</h1><p>感兴趣的话，可以试一试哦</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> requests
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> requests
 <span class="token keyword">import</span> bs4
 
 <span class="token comment" spellcheck="true">#抓取网页</span>
@@ -716,7 +717,7 @@ targets <span class="token operator">=</span> soup<span class="token punctuation
 <span class="token keyword">if</span> __name__<span class="token operator">==</span><span class="token string">"__main__"</span><span class="token punctuation">:</span>
     main<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="嘟嘟"><a href="#嘟嘟" class="headerlink" title="嘟嘟"></a>嘟嘟</h2><p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：<a href="https://cloud.tencent.com/developer/support-plan?invite_code=3c2lknoq16w4k" target="_blank" rel="noopener">https://cloud.tencent.com/developer/support-plan?invite_code=3c2lknoq16w4k</a></p>
 
             </div>
@@ -1225,8 +1226,7 @@ targets <span class="token operator">=</span> soup<span class="token punctuation
                 <a href="/2020/03/20/python-pa-chong-pa-qu-dou-ban-top250-dian-ying-pai-xing-bang/">
                     <div class="card-image">
                         
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="Python爬虫--爬取豆瓣 TOP250 电影排行榜">
+                        <img src="/medias/pc.jpg" class="responsive-img" alt="Python爬虫--爬取豆瓣 TOP250 电影排行榜">
                         
                         <span class="card-title">Python爬虫--爬取豆瓣 TOP250 电影排行榜</span>
                     </div>
@@ -1234,10 +1234,9 @@ targets <span class="token operator">=</span> soup<span class="token punctuation
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本篇讲介绍一个简单的Python爬虫案例–爬取豆瓣 TOP250 电影排行榜。
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇讲介绍一个简单的Python爬虫案例–爬取豆瓣 TOP250 电影排行榜。
 很多朋友在看一部电影前都喜欢先找一下网友们对该片的评价。
-说到电影评分的网站，除了国外的 IMDB 和烂番茄，国内要数豆瓣最为出名。
-主要原因是豆瓣有一套完整的
+说到电
                         
                     </div>
                     <div class="publish-info">
@@ -1286,8 +1285,7 @@ targets <span class="token operator">=</span> soup<span class="token punctuation
                 <a href="/2020/03/18/xiao-wang-zi-zheng-yin-wei-ni-wei-ni-de-mei-gui-hua-fei-liao-shi-jian-zhe-cai-shi-ni-de-mei-gui-bian-de-ru-ci-chong-yao/">
                     <div class="card-image">
                         
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/3.jpg" class="responsive-img" alt="【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”">
+                        <img src="/medias/wang.jpg" class="responsive-img" alt="【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”">
                         
                         <span class="card-title">【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”</span>
                     </div>
@@ -1461,7 +1459,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
     <footer class="page-footer bg-color">
     
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             <span id="year">2019</span>
@@ -1487,6 +1485,50 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             </span>
             
             <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "3";
+                    var startDate = "15";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
             
             <br>
             

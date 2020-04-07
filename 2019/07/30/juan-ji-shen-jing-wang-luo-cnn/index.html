@@ -30,7 +30,8 @@
     <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/jquery/jquery.min.js"></script>
     
 <link rel="alternate" href="/atom.xml" title="Flaneur" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -411,7 +412,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/juanji.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -1244,20 +1245,18 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/">
+                <a href="/2019/08/01/qian-tan-ji-qi-xue-xi-fen-lei-he-ju-lei-de-qu-bie/">
                     <div class="card-image">
                         
+                        <img src="/medias/fenlei.jpg" class="responsive-img" alt="浅谈机器学习-分类和聚类的区别">
                         
-                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/8.jpg" class="responsive-img" alt="浅谈机器学习-回归与分类的区别">
-                        
-                        <span class="card-title">浅谈机器学习-回归与分类的区别</span>
+                        <span class="card-title">浅谈机器学习-分类和聚类的区别</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习的主要任务便是聚焦于两个问题：分类和回归。本文将浅谈下两者的区别。
-区别&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习中有两类的大问题，一个是分类，一个是聚类。在我们的生活中，我们常常没有过多的去区分这两个概念，觉得聚类就是分类，分类也差不多就是聚类，下
                         
                     </div>
                     <div class="publish-info">
@@ -1287,8 +1286,8 @@
                         <span class="chip bg-color">分类</span>
                     </a>
                     
-                    <a href="/tags/回归/">
-                        <span class="chip bg-color">回归</span>
+                    <a href="/tags/聚类/">
+                        <span class="chip bg-color">聚类</span>
                     </a>
                     
                 </div>
@@ -1305,8 +1304,7 @@
                 <a href="/2019/07/28/ji-yu-xie-tong-guo-lu-cf-suan-fa-de-tui-jian-xi-tong/">
                     <div class="card-image">
                         
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/6.jpg" class="responsive-img" alt="基于协同过滤（CF）算法的推荐系统">
+                        <img src="/medias/cf.jpg" class="responsive-img" alt="基于协同过滤（CF）算法的推荐系统">
                         
                         <span class="card-title">基于协同过滤（CF）算法的推荐系统</span>
                     </div>
@@ -1340,12 +1338,12 @@
                         <span class="chip bg-color">机器学习</span>
                     </a>
                     
-                    <a href="/tags/推荐系统/">
-                        <span class="chip bg-color">推荐系统</span>
-                    </a>
-                    
                     <a href="/tags/协同过滤（CF）/">
                         <span class="chip bg-color">协同过滤（CF）</span>
+                    </a>
+                    
+                    <a href="/tags/推荐系统/">
+                        <span class="chip bg-color">推荐系统</span>
                     </a>
                     
                 </div>
@@ -1487,7 +1485,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
     <footer class="page-footer bg-color">
     
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             <span id="year">2019</span>
@@ -1513,6 +1511,50 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             </span>
             
             <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "3";
+                    var startDate = "15";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
             
             <br>
             

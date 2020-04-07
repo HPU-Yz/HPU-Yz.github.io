@@ -30,7 +30,8 @@
     <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/jquery/jquery.min.js"></script>
     
 <link rel="alternate" href="/atom.xml" title="Flaneur" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -411,7 +412,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/wang.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -1162,8 +1163,7 @@
                 <a href="/2020/03/20/python-pa-chong-pa-qu-dou-ban-top250-dian-ying-pai-xing-bang/">
                     <div class="card-image">
                         
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="Python爬虫--爬取豆瓣 TOP250 电影排行榜">
+                        <img src="/medias/pc.jpg" class="responsive-img" alt="Python爬虫--爬取豆瓣 TOP250 电影排行榜">
                         
                         <span class="card-title">Python爬虫--爬取豆瓣 TOP250 电影排行榜</span>
                     </div>
@@ -1171,10 +1171,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本篇讲介绍一个简单的Python爬虫案例–爬取豆瓣 TOP250 电影排行榜。
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇讲介绍一个简单的Python爬虫案例–爬取豆瓣 TOP250 电影排行榜。
 很多朋友在看一部电影前都喜欢先找一下网友们对该片的评价。
-说到电影评分的网站，除了国外的 IMDB 和烂番茄，国内要数豆瓣最为出名。
-主要原因是豆瓣有一套完整的
+说到电
                         
                     </div>
                     <div class="publish-info">
@@ -1222,8 +1221,7 @@
                 <a href="/2020/03/05/python-dong-tai-gui-hua-jie-jue-ju-zhen-lian-cheng/">
                     <div class="card-image">
                         
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/9.jpg" class="responsive-img" alt="python动态规划解决矩阵连乘">
+                        <img src="/medias/lianc.jpg" class="responsive-img" alt="python动态规划解决矩阵连乘">
                         
                         <span class="card-title">python动态规划解决矩阵连乘</span>
                     </div>
@@ -1231,8 +1229,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            动态规划，自顶向下分解，自底向上求解。
-动态规划&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划算法与分治法类似，其基本思想也就是将待求解的问题分解成若干个子问题，先求解子问题，然后从
+                            动态规划&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划算法与分治法类似，其基本思想也就是将待求解的问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解，简单概括为
                         
                     </div>
                     <div class="publish-info">
@@ -1401,7 +1398,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
     <footer class="page-footer bg-color">
     
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             <span id="year">2019</span>
@@ -1427,6 +1424,50 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             </span>
             
             <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "3";
+                    var startDate = "15";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
             
             <br>
             

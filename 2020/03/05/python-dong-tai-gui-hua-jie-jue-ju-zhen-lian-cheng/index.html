@@ -30,7 +30,8 @@
     <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/jquery/jquery.min.js"></script>
     
 <link rel="alternate" href="/atom.xml" title="Flaneur" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -411,7 +412,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/lianc.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -597,8 +598,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>动态规划，自顶向下分解，自底向上求解。</p>
-<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划算法与分治法类似，其基本思想也就是将待求解的问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解，简单概括为自顶向下分解，自底向上求解。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与分治法不同的是，适合于用动态规划法求解的问题，经分解得到的子问题往往不是相互独立的，换句话说，就是前面解决过的子问题，在后面的子问题中又碰到了前面解决过的子问题，子问题之间是有联系的。如果用分治法，有些同样的子问题会被重复计算几次，这样就很浪费时间了。所以动态规划是为了解决分治法的弊端而提出的，动态规划的基本思想就是，用一个表来记录所有已经解决过的子问题的答案，不管该子问题在以后是否会被用到，只要它被计算过，就将其结果填入表中，以后碰到同样的子问题，就可以从表中直接调用该子问题的答案，而不需要再计算一次。具体的动态规划的算法多种多样，但他们都具有相同的填表式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划的适用场合，一般适用于解最优化问题，例如矩阵连乘问题、最长公共子序列、背包问题等等。</p>
+                <h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划算法与分治法类似，其基本思想也就是将待求解的问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解，简单概括为自顶向下分解，自底向上求解。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与分治法不同的是，适合于用动态规划法求解的问题，经分解得到的子问题往往不是相互独立的，换句话说，就是前面解决过的子问题，在后面的子问题中又碰到了前面解决过的子问题，子问题之间是有联系的。如果用分治法，有些同样的子问题会被重复计算几次，这样就很浪费时间了。所以动态规划是为了解决分治法的弊端而提出的，动态规划的基本思想就是，用一个表来记录所有已经解决过的子问题的答案，不管该子问题在以后是否会被用到，只要它被计算过，就将其结果填入表中，以后碰到同样的子问题，就可以从表中直接调用该子问题的答案，而不需要再计算一次。具体的动态规划的算法多种多样，但他们都具有相同的填表式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划的适用场合，一般适用于解最优化问题，例如矩阵连乘问题、最长公共子序列、背包问题等等。</p>
 <h2 id="矩阵连乘问题描述"><a href="#矩阵连乘问题描述" class="headerlink" title="矩阵连乘问题描述"></a>矩阵连乘问题描述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;给定n个矩阵：A1,A2,…,An，其中Ai与Ai+1是可乘的，i=1，2…，n-1。确定计算矩阵连乘积的计算次序，使得依此次序计算矩阵连乘积需要的数乘次数最少。输入数据为矩阵个数和每个矩阵规模，输出结果为计算矩阵连乘积的计算次序和最少数乘次数。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若A是一个p × q的矩阵，B是一个q × r的矩阵，则其乘积C=AB是一个p × r的矩阵。数乘次数是p × q × r.</p>
 <h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>A(3 × 5)A(5 × 7)A(7 × 2)的连乘次数和括号划分有关系吗？</p>
 <blockquote>
@@ -617,7 +617,7 @@
 <p>问题的最优解包含了其子问题的最优解。<br>最优子结构性质是问题可用动态规划法求解的显著特征。<br>Ai…Ak，Ak+1…Aj的最优划分也包含在Ai…Aj的最优划分中</p>
 </blockquote>
 <p>在计算出最优值m[i][j]后，可递归地由s[i][j]构造出相应的最优解。</p>
-<h2 id="python代码实现"><a href="#python代码实现" class="headerlink" title="python代码实现"></a>python代码实现</h2><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> random
+<h2 id="python代码实现"><a href="#python代码实现" class="headerlink" title="python代码实现"></a>python代码实现</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> random
 <span class="token keyword">from</span> pandas <span class="token keyword">import</span> <span class="token operator">*</span>
 
 input <span class="token operator">=</span> int<span class="token punctuation">(</span>input<span class="token punctuation">(</span><span class="token string">"输入矩阵数："</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -661,7 +661,7 @@ ds <span class="token operator">=</span> DataFrame<span class="token punctuation
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"最终结果："</span><span class="token punctuation">)</span>
 printmatrix<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> input<span class="token number">-1</span><span class="token punctuation">)</span>
 
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr>
@@ -1168,8 +1168,7 @@ printmatrix<span class="token punctuation">(</span><span class="token number">0<
                 <a href="/2020/03/18/xiao-wang-zi-zheng-yin-wei-ni-wei-ni-de-mei-gui-hua-fei-liao-shi-jian-zhe-cai-shi-ni-de-mei-gui-bian-de-ru-ci-chong-yao/">
                     <div class="card-image">
                         
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/3.jpg" class="responsive-img" alt="【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”">
+                        <img src="/medias/wang.jpg" class="responsive-img" alt="【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”">
                         
                         <span class="card-title">【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”</span>
                     </div>
@@ -1218,8 +1217,7 @@ printmatrix<span class="token punctuation">(</span><span class="token number">0<
                 <a href="/2019/08/05/po-su-bei-xie-si-suan-fa/">
                     <div class="card-image">
                         
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="朴素贝叶斯算法">
+                        <img src="/medias/ys.jpg" class="responsive-img" alt="朴素贝叶斯算法">
                         
                         <span class="card-title">朴素贝叶斯算法</span>
                     </div>
@@ -1396,7 +1394,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
     <footer class="page-footer bg-color">
     
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             <span id="year">2019</span>
@@ -1422,6 +1420,50 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             </span>
             
             <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "3";
+                    var startDate = "15";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
             
             <br>
             
