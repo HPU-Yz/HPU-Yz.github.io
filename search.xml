@@ -312,104 +312,6 @@ if __name__ == &#39;__main__&#39;:
       </tags>
   </entry>
   <entry>
-    <title>python+离散数学→逻辑演算</title>
-    <url>/2019/04/02/python-chi-san-shu-xue-luo-ji-yan-suan/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇探讨的是一道逻辑演算推理题。有两种方法，一种是常规的离散数学逻辑演算，另一种则是用python程序来解决。本篇将探究两种方法： python+离散数学→逻辑演算。</p>
-<blockquote>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在某次研讨会的中间休息时间，3名与会者根据王教授的口音对他是哪个省市的人判断如下：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲:王教授不是苏州人，是上海人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙:王教授不是上海人，是苏州人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙:王教授既不是上海人，也不是杭州人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;听完这3人的判断后，王教授笑着说，你们3人中有一人说得全对，有一人说对了一半，另一人全不对。试用逻辑演算分析王教授到底是哪里人.</p>
-</blockquote>
-<blockquote>
-<h2 id="常规推理"><a href="#常规推理" class="headerlink" title="常规推理"></a>常规推理</h2></blockquote>
-<p>设命题&nbsp;&nbsp;&nbsp;&nbsp;p:王教授是苏州人；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q:王教授是上海人；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r:王教授是杭州人；</p>
-<p>用p,q,r表示甲乙丙的观点如下：</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲：￢p∧q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙：p∧￢q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙：￢q∧￢r              </p>
-<p>其中一人全对，一人对一半，另一人全错。</p>
-<p>即其中一个真命题，两个假命题。先找真命题</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲全对：B1=￢p∧q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲对一半：B2=(￢p∧￢q) ∨(p∧q)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲全错：B3=p∧￢q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙全对：C1= p∧￢q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙对一半：C2=(￢p∧￢q) ∨(p∧q)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙全错：C3=￢p∧q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙全对：D1=￢q∧￢r</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙对一半：D2=(q∧￢r) ∨( ￢q∧r)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙全错：D3=q∧r</p>
-<p>有王教授那句话可以写：</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E=（B1∧C2∧D3）∨(B1∧C3∧D2) ∨(B2∧C1∧D3) ∨(B2∧C3∧D1) ∨(B3∧C1∧D2) ∨(B3∧C2∧D1)</p>
-<p>是真命题</p>
-<p>而B1∧C2∧D3⇔(￢p∧q) ∧((￢p∧￢q) ∨(p∧q)) ∧(q∧r)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q) ∧((￢p∧￢q) ∧(q∧r) ∨ (p∧q) ∧(q∧r))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q) ∧(0∨(p∧q∧r))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q)∧(p∧q∧r)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔0</p>
-<p>其他同理类似可得：</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B1C3D2⇔￢p∧q∧￢r</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B2C1D3⇔0</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B2C3D1⇔0</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B3C1D2⇔p∧￢q∧r</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B3C2D1⇔0</p>
-<p>所以E⇔(￢p∧q∧￢r) ∨(p∧￢q∧r)</p>
-<p>而pqr中只能有一个是真的，所以p∧q⇔0，p∧r⇔0，q∧r⇔0</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E⇔(￢p∧q∧￢r) ∨0</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔￢p∧q∧￢r</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔1</p>
-<p>所以p为假，q为真，r为假，王教授是上海人。</p>
-<blockquote>
-<h2 id="python程序实现"><a href="#python程序实现" class="headerlink" title="python程序实现"></a>python程序实现</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以下是上述过程的代码实现，并附有代码详解，有兴趣的小伙伴可以看一看。</p>
-</blockquote>
-<pre><code>for p in range(2):                                  #p:王教授是苏州人
-    for q in range(2):                              #q:王教授是上海人
-        for r in range(2):                          #r:王教授是杭州人
-         #以下三行表示p,q,r不可能同时为真的情况
-         if (p == 1 and q == 1): continue
-         if (p == 1 and r == 1): continue
-         if (q == 1 and r == 1): continue
-
-         Jia = (not p) and q                        #甲的判断
-         Yi = p and (not q)                         #乙的判断
-         Bing = (not q) and (not r)                 #丙的判断
-
-         B1 = (not p) and q                         #甲的判断全对
-         B2 = ((not p) and (not q))or (p and q)     #甲的判断一半对
-         B3 = p and (not q)                         #甲的判断全错
-
-         C1 = p and (not q)                         #乙的判断全对
-         C2 = (p and q) or ((not p) and (not q))    #乙的判断一半对
-         C3 = (not p) and q                         #乙的判断全错
-
-         D1 = (not q) and (not r)                   #丙的判断全对
-         D2 = ((not q) and r) or (q and(not r))     #丙的判断一半对
-         D3 = q and r                               #丙的判断全错
-
-         #王教授所说的话
-         E = (B1 and C2 and D3) \
-           or(B1 and C3 and D2) \
-           or(B2 and C1 and D3) \
-           or(B2 and C3 and D1) \
-           or(B3 and C1 and D2) \
-           or(B3 and C2 and D1)
-
-         #符合王教授所的E值
-         if E==1 :
-           print(&quot;%d,%d,%d E=%d,Jia=%d,Yi=%d,Bing=%d&quot;%(p,q,r,E,Jia,Yi,Bing))
-
-
-</code></pre><blockquote>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其实用python解决离散数学的逻辑推理题比直接推理效率更高而且准确性也高，并且在遇到复杂的逻辑推理时，很容易把自己绕晕，半天也解不出来，倒不如我们可以让计算机帮我们解决，只需写几十行代码，就可以罗列出复杂的关系，何乐而不为呢，所以我们可以多学学这种解题方法！😁</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>python</category>
-        <category>离散</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>离散</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Python判断离散数学的合式公式</title>
     <url>/2019/03/17/python-pan-duan-chi-san-shu-xue-de-he-shi-gong-shi/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你没有听错，用python程序来解决离散数学的逻辑推理问题，我当我第一次听老师说的时候也很吃惊（再说上学期的Python学的也不咋地…..😩)，但经老师讲解后才知道，使用python解题不仅效率高，而且准确性也很强的，所以还是有必要学习以下的。</p>
@@ -592,6 +494,312 @@ printmatrix<span class="token punctuation">(</span><span class="token number">0<
       </tags>
   </entry>
   <entry>
+    <title>Python爬虫--爬取豆瓣 TOP250 电影排行榜</title>
+    <url>/2020/03/20/python-pa-chong-pa-qu-dou-ban-top250-dian-ying-pai-xing-bang/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇讲介绍一个简单的Python爬虫案例–爬取豆瓣 TOP250 电影排行榜。</p>
+<p>很多朋友在看一部电影前都喜欢先找一下网友们对该片的评价。</p>
+<p>说到电影评分的网站，除了国外的 IMDB 和烂番茄，国内要数豆瓣最为出名。</p>
+<p>主要原因是豆瓣有一套完整的评分和防水军机制 。</p>
+<p>在这套机制下，豆瓣评分高的电影不一定是所有人都喜欢的，但是豆瓣评分低的电影，一定是实打实的烂片！</p>
+<p>虽然每个人的喜好偏爱不同，但通常豆瓣评分 8 分以上的电影，都是值得一看的。</p>
+<p>豆瓣还专门提供了一个 TOP250 的电影链接 -&gt; <a href="https://movie.douban.com/top250" target="_blank" rel="noopener">https://movie.douban.com/top250</a></p>
+<h1 id="爬取思路"><a href="#爬取思路" class="headerlink" title="爬取思路"></a>爬取思路</h1><p>爬取的过程很好理解，这里只需要两个过程：<br>① 从服务器上下载所需页面<br>② 解析这个页面，得到自己需要有用的内容</p>
+<h3 id="①抓取页面"><a href="#①抓取页面" class="headerlink" title="①抓取页面"></a>①抓取页面</h3><p>有的人可能会利用 urllib 模块实现网络抓取功能。但在 Python 中，有一个更好地替代者——Requests。Requests 简化了 urllib 的诸多冗杂且无意义的操作，并提供了更强大的功能。<br>所以在这里我们使用 Requests 模块的 get() 方法从服务器上来下载这个页面。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> requests
+
+url <span class="token operator">=</span> <span class="token string">"https://movie.douban.com/top250"</span>
+headers <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">"User-Agent"</span><span class="token punctuation">:</span><span class="token string">"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3314.0 Safari/537.36 SE 2.X MetaSr 1.0"</span>
+    <span class="token punctuation">}</span>
+
+res <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>res就是我们需要的这个页面的资源，我们不妨打开来看看是不是</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">"豆瓣电影.txt"</span><span class="token punctuation">,</span><span class="token string">'w'</span><span class="token punctuation">,</span>encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>res<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>打开文本如下图<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zbG9tb28ub3NzLWNuLWJlaWppbmcuYWxpeXVuY3MuY29tLzJkZTI1MDMzZTQ0NGY3NTc2ZTRlNDZlYmU2Mjg1YzllLm1kLnBuZw?x-oss-process=image/format,png" alt><br>我们可以看出这确实是当前网页的资源，所以我们就抓取成功了。</p>
+<h2 id="②解析页面"><a href="#②解析页面" class="headerlink" title="②解析页面"></a>②解析页面</h2><p>解析网页内容推荐使用 BeautifulSoup 模块，它可以化腐朽为神奇，将一个复杂的网页结构转化为书籍目录的形式供你浏览。<br>例如，我们现在需要解析提取出当前页面的电影名字</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> bs4
+soup <span class="token operator">=</span> bs4<span class="token punctuation">.</span>BeautifulSoup<span class="token punctuation">(</span>res<span class="token punctuation">.</span>text<span class="token punctuation">,</span><span class="token string">"html.parser"</span><span class="token punctuation">)</span>
+targets <span class="token operator">=</span> soup<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">"div"</span><span class="token punctuation">,</span>class_<span class="token operator">=</span><span class="token string">"hd"</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> each <span class="token keyword">in</span> targets<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>each<span class="token punctuation">.</span>a<span class="token punctuation">.</span>span<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以得到如下结果</p>
+<blockquote>
+<p>肖申克的救赎<br>霸王别姬<br>阿甘正传<br>这个杀手不太冷<br>美丽人生<br>泰坦尼克号<br>千与千寻<br>辛德勒的名单<br> 盗梦空间<br> 忠犬八公的故事<br> 海上钢琴师<br>机器人总动员<br>三傻大闹宝莱坞<br>楚门的世界<br>放牛班的春天<br> 星际穿越<br> 大话西游之大圣娶亲<br> 熔炉<br> 疯狂动物城<br> 无间道<br> 龙猫<br> 教父<br> 当幸福来敲门<br>怦然心动<br>触不可及</p>
+</blockquote>
+<p>这里你可能就会有疑问，这些数据是怎么得来的呢？<br>我们先来看下 HTML 源代码：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zbG9tb28ub3NzLWNuLWJlaWppbmcuYWxpeXVuY3MuY29tL2E0MDcxYzNhNmYyZDUzMjVjMWJhYzJhMDQ4OTQ2Zjk4Lm1kLnBuZw?x-oss-process=image/format,png" alt><br>发现每个电影的标题都是位于 <code>&lt;div class=&quot;hd&quot;&gt;...&lt;/div&gt;</code> 标签中的，它的从属关系是：<code>div -&gt; a -&gt; span</code>。</p>
+<p>所以我们先调用 find_all() 方法，找到所有 class=”hd” 的 div 标签，然后按照从属关系即可直接取出电影名。<br>同理，我们借用此发方法来解析提取出电影的评分、介绍等需要的信息。</p>
+<h2 id="附加问题"><a href="#附加问题" class="headerlink" title="附加问题"></a>附加问题</h2><p>我们刚才解析提取的仅仅是第一页的页面，那么还有第二、第三、第四页……呢？</p>
+<p>其实，解决起来也很简单，我们可以使用for循环来对每一页进行上述的两个过程。</p>
+<p>但，我们此时又有新的问题，我们不可能每抓取一次，就重新输入下一网页的链接地址，这样很麻烦，效率也不高。</p>
+<p> 我们可以分析每一页的链接：</p>
+<blockquote>
+<p> 第一页：<a href="https://movie.douban.com/top250" target="_blank" rel="noopener">https://movie.douban.com/top250</a><br>第二页：<a href="https://movie.douban.com/top250?start=25" target="_blank" rel="noopener">https://movie.douban.com/top250?start=25</a><br>第三页：<a href="https://movie.douban.com/top250?start=50" target="_blank" rel="noopener">https://movie.douban.com/top250?start=50</a><br>第四页：<a href="https://movie.douban.com/top250?start=75" target="_blank" rel="noopener">https://movie.douban.com/top250?start=75</a><br>第五页：<a href="https://movie.douban.com/top250?start=100" target="_blank" rel="noopener">https://movie.douban.com/top250?start=100</a><br> … …<br> …. …</p>
+</blockquote>
+<p>我们可以发现这样的规律：<br>每一次的更新的 <code>url = https://movie.douban.com/top250 + &#39;/?start=&#39; + str(25*i)</code>其中<code>i</code>可以表示为页数-1</p>
+<p>咦，这个时候，你可能会有疑问，我们怎么知道一共有多少页呢，不能一直for循环无穷吧。</p>
+<p>那当然不可能的了，我们可以按第二步解析网页方式来获取页数</p>
+<pre class="line-numbers language-python"><code class="language-python">depth <span class="token operator">=</span> soup<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'span'</span><span class="token punctuation">,</span>class_<span class="token operator">=</span><span class="token string">'next'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>previous_sibling<span class="token punctuation">.</span>previous_sibling<span class="token punctuation">.</span>text
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>注意，这个返回的<code>depth</code>是给字符串形式，需要<code>int()</code></p>
+<p>这样结合刚才的过程，就可以迭代每一页了</p>
+<h1 id="代码清单"><a href="#代码清单" class="headerlink" title="代码清单"></a>代码清单</h1><p>感兴趣的话，可以试一试哦</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> requests
+<span class="token keyword">import</span> bs4
+
+<span class="token comment" spellcheck="true">#抓取网页</span>
+<span class="token keyword">def</span> <span class="token function">open_url</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    headers <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"User-Agent"</span><span class="token punctuation">:</span><span class="token string">"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3314.0 Safari/537.36 SE 2.X MetaSr 1.0"</span><span class="token punctuation">}</span>
+    res <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> res
+
+<span class="token comment" spellcheck="true">#得到总页数</span>
+<span class="token keyword">def</span> <span class="token function">find_depth</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    soup <span class="token operator">=</span> bs4<span class="token punctuation">.</span>BeautifulSoup<span class="token punctuation">(</span>res<span class="token punctuation">.</span>text<span class="token punctuation">,</span><span class="token string">'html.parser'</span><span class="token punctuation">)</span>
+    depth <span class="token operator">=</span> soup<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'span'</span><span class="token punctuation">,</span>class_<span class="token operator">=</span><span class="token string">'next'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>previous_sibling<span class="token punctuation">.</span>previous_sibling<span class="token punctuation">.</span>text
+
+    <span class="token keyword">return</span> int<span class="token punctuation">(</span>depth<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">#解析网页，提取内容</span>
+<span class="token keyword">def</span> <span class="token function">find_movies</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    soup <span class="token operator">=</span> bs4<span class="token punctuation">.</span>BeautifulSoup<span class="token punctuation">(</span>res<span class="token punctuation">.</span>text<span class="token punctuation">,</span><span class="token string">'html.parser'</span><span class="token punctuation">)</span>
+
+    names <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    target <span class="token operator">=</span> soup<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">,</span>class_<span class="token operator">=</span><span class="token string">'hd'</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> target<span class="token punctuation">:</span>
+        names<span class="token punctuation">.</span>append<span class="token punctuation">(</span>i<span class="token punctuation">.</span>a<span class="token punctuation">.</span>span<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
+
+    ranks <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    target <span class="token operator">=</span> soup<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">'span'</span><span class="token punctuation">,</span>class_<span class="token operator">=</span><span class="token string">'rating_num'</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> target<span class="token punctuation">:</span>
+        ranks<span class="token punctuation">.</span>append<span class="token punctuation">(</span>i<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
+
+    messages <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    target <span class="token operator">=</span> soup<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">,</span>class_<span class="token operator">=</span><span class="token string">'bd'</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> target<span class="token punctuation">:</span>
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            messages<span class="token punctuation">.</span>append<span class="token punctuation">(</span>i<span class="token punctuation">.</span>p<span class="token punctuation">.</span>text<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> i<span class="token punctuation">.</span>p<span class="token punctuation">.</span>text<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">except</span><span class="token punctuation">:</span>
+            <span class="token keyword">continue</span>
+
+    result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    length <span class="token operator">=</span> len<span class="token punctuation">(</span>names<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>length<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        result<span class="token punctuation">.</span>append<span class="token punctuation">(</span>names<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">','</span> <span class="token operator">+</span>ranks<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">','</span> <span class="token operator">+</span> messages<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">'\n'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> result
+
+<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    host <span class="token operator">=</span> <span class="token string">"https://movie.douban.com/top250"</span>
+    res <span class="token operator">=</span> open_url<span class="token punctuation">(</span>host<span class="token punctuation">)</span>
+    depth <span class="token operator">=</span> find_depth<span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+
+    result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>depth<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        url <span class="token operator">=</span> host <span class="token operator">+</span> <span class="token string">'/?start='</span> <span class="token operator">+</span> str<span class="token punctuation">(</span><span class="token number">25</span><span class="token operator">*</span>i<span class="token punctuation">)</span>
+        res <span class="token operator">=</span> open_url<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+        result<span class="token punctuation">.</span>extend<span class="token punctuation">(</span>find_movies<span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">"豆瓣TOP250电影.txt"</span><span class="token punctuation">,</span><span class="token string">'w'</span><span class="token punctuation">,</span>encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+        <span class="token keyword">for</span> each <span class="token keyword">in</span> result<span class="token punctuation">:</span>
+            f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>each<span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__<span class="token operator">==</span><span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="嘟嘟"><a href="#嘟嘟" class="headerlink" title="嘟嘟"></a>嘟嘟</h2><p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：<a href="https://cloud.tencent.com/developer/support-plan?invite_code=3c2lknoq16w4k" target="_blank" rel="noopener">https://cloud.tencent.com/developer/support-plan?invite_code=3c2lknoq16w4k</a></p>
+]]></content>
+      <categories>
+        <category>python</category>
+        <category>爬虫</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>爬虫</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”</title>
+    <url>/2020/03/18/xiao-wang-zi-zheng-yin-wei-ni-wei-ni-de-mei-gui-hua-fei-liao-shi-jian-zhe-cai-shi-ni-de-mei-gui-bian-de-ru-ci-chong-yao/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这是法国名著《小王子》中一个有名的寓言故事，这个童话，实在太有智慧灵性了。人与人之间，不也是一样道理吗？我不得不承认，我被触动了。</p>
+<h2 id="【小王子】"><a href="#【小王子】" class="headerlink" title="【小王子】"></a>【小王子】</h2><p> 有一天，小王子的星球上，不知从哪里来了一颗种子，后来忽然发了芽。小王子小心翼翼地监护着这株与众不同的嫩芽。小王子看到嫩芽长出一个巨大的花蕾，感到从中一定会产生奇迹。但是，这朵花儿却躲在她那绿茵茵的房间里，梳妆打扮没个完。一天清晨，正好当太阳升起的时候，她露面了。</p>
+<p>   她，精心做了那么许多的准备，却伸着懒腰打着呵欠说：“哎呀！我刚刚睡醒。。。请原谅。。。瞧我的头发还是乱蓬蓬的。。。”</p>
+<p>   小王子此时抑制不住自己那爱慕之情。</p>
+<p>“你真美！”</p>
+<p>“是么？你可知道，太阳是和我同时诞生的。。。”</p>
+<p>   小王子看得出，这花儿很不谦虚，不过，她确实楚楚动人。</p>
+<p>“我想，是该吃早点的时候了吧？”她随后又说，“请您记得我需要。。。”</p>
+<p>   小王子感到十分惭愧，于是去提了一壶清水来给她浇灌。</p>
+<p>   不久，她就以她的多疑的虚荣心来折磨小王子。例如，有一天，她谈起她身上长着的四根刺时，她对小王子说：“老虎么，让它们带着它们的利抓来吧！”</p>
+<p>“我的星球上根本没有老虎，”小王子反驳说，“而且老虎是不吃草的。”</p>
+<p>   花儿娇嗔地说：“我可不是草。”</p>
+<p>“请原谅！”</p>
+<p>“我不怕什么老虎，可是我受不了穿堂风，您没有屏风吗？”</p>
+<p>   小王子思忖着：“受不了穿堂风。。。这对一株植物来说，太不幸了。这朵花儿有点难弄…”</p>
+<p>   这时，她故意咳得更响，好使他良心受责备。</p>
+<p>   尽管小王子真心诚意爱这朵花儿，这样一来，他开始对她产生怀疑了。小王子对一些无关紧要的话，看得过分认真，结果使自己很苦恼。</p>
+<p>   小王子选择了离开，去旅行。</p>
+<p>   临行那天早上，当小王子最后一次浇花，准备为她盖上玻璃罩子时，他觉得自己想哭出来。</p>
+<p>“再见了！”他对花儿说。</p>
+<p>   花儿咳嗽起来，但并不是由于感冒。她终于开口说：“我真傻，我请求你的原谅。祝你幸福。”她居然没有一句责备他的话，这实在使他感到意外。他站在那里手足无措，玻璃罩举在半空。他不懂得这份脉脉的柔情。</p>
+<p>   “的确，我爱你。”花儿对他说，“但是你一点儿都没体会到，这实在是我的错。再说也没有用了。不过，你过去也和我一样的傻。希望你今后幸福。。。把罩子放到一边去吧，我用不着它了。”</p>
+<p>“要是风。。。”</p>
+<p>“我的感冒并没有那么厉害。。。晚间的凉风对我有好处。我是花儿呀。”</p>
+<p>“要是虫子野兽。。。”</p>
+<p>“我要是想结识蝴蝶，我就应当忍受得了两三只小毛虫在身上爬。据说，这很美妙。如果没有蝴蝶和毛虫，还有谁来看我呢？你么，你又远在天边。至于大动物，我并不怕，我有爪子。”</p>
+<p>   她天真地伸出她那四根刺，随后又说：“别这样磨磨蹭蹭啦，这挺叫人烦心！你既然决定走，那就快走吧！” </p>
+<p> 她是怕小王子看见她哭。这是一朵有傲气的花。。。 </p>
+<p>   有一天，小王子对我倾诉：“我当时什么也不懂！我应该根据她的行动，而不是根据她的话判断她。她对我散发芳香，她使我的生活充满阳光。我真不该离开她。我本应看得出她耍的那些小花招后面隐藏着的一片柔情。花儿是多么里外不一致！我当时年纪太小，不懂得爱她。”</p>
+<p>   小王子走着走着，这时候，一只狐狸出现了。</p>
+<p>“你好！”狐狸说。</p>
+<p>“你好！”小王子彬彬有礼地回答。但回头一看，什么也没有看见。</p>
+<p>“我就在这儿。”那声音说，“在苹果树下。”</p>
+<p>“你是谁？”小王子说，“你真漂亮。”</p>
+<p>“我是狐狸。”狐狸说。</p>
+<p>“来跟我玩玩吧。”小王子建议说，“我很不开心。。。”</p>
+<p>“我不能跟你玩，”狐狸说，“我还没经过驯养。”</p>
+<p>“啊，对不起！”小王子说。但是，想了一想后，他又说：“什么叫做驯养？”</p>
+<p>   狐狸说：“意思就是：建立一种关系。”</p>
+<p>“建立关系？”</p>
+<p>   “一点不错，”狐狸说，“在我看来，你只不过是一个小男孩，跟成千上万的男孩毫无两样。我不需要你，你也不需要我。对你来说我只不过是一只狐狸，跟成千上万的狐狸毫无两样。但是，你如果驯养了我，那么我们俩就彼此相互需要。对我来说，你是世界上独一无二的；我在你看来，也是世界上独一无二的。。。”</p>
+<p>   狐狸叹口气说：“世上没有十全十美的事，我的生活很单调枯燥，但是，如果你驯养了我，我的生活就会充满阳光。我会听得出一种与众不同的脚步声。别的脚步声会使我往洞里钻，你的脚步声却像音乐一般，把我从洞里召唤出来。还有，你看！那边的麦田，你看见了吗？我不吃面包，麦子对我来说，一点也没用。麦田不能引起我什么联想，这真使人扫兴！但是，你有金色的头发。一旦你驯养了我，那就会十分美妙！麦子，黄澄澄，会使我联想到你，而且我甚至会喜欢风吹麦浪的沙沙声。。。”</p>
+<p>   狐狸没说下去，盯着小王子看了好久。</p>
+<p>“请你。。。驯养我吧！”他说。</p>
+<p>   “我是很愿意的，”小王子回答道，“可是我的时间不多。我还要认识一些新朋友，了解许许多多的事。”</p>
+<p>   “人们只能了解自己所驯养的东西，”狐狸说，“人们不会有时间去了解任何东西。他们想要什么东西，都往商店去买现成的。可是，世界上没有可以购买朋友的商店，所以人也就得不到朋友。你要朋友，就请驯养我吧！”</p>
+<p>“要驯养，该怎样做呢？”小王子说。</p>
+<p>   “必须非常耐心。”狐狸回答道，“首先，你离我远一点，像这样，坐在草地上。我用眼梢瞅着你，你一句话也别说。话语往往是误会的根源。不过，每天你坐得更靠近我一些。。。”</p>
+<p>   第二天，小王子又来了。</p>
+<p>   “最好还是在同一时间来，”狐狸说，“比如说，你在下午四点钟来，一到三点钟我就开始感到幸福了。时间越接近，我就越感到幸福。到了四点钟，我就会坐立不安，焦虑重重；我就会发现幸福的代价。可是，你如果想什么时间来就什么时间来，我就不知道什么时候准备好我的心。。。应当有一定的常规。”</p>
+<p>“常规是什么？”小王子问道。</p>
+<p>   “这也是被人差不多忘得一干二净的事，”狐狸说，“这就是使某一天与其他日子不同，使某一时刻与其他时刻不同。比如说，猎人也有一种常规。他们每星期四都和乡村里的姑娘跳舞。星期四就成为我开心的日子！我甚至可以一直逛到葡萄园。要是猎人什么时候都去跳舞，这一天和其他日子没什么不同，那我就终年没放假的日子了。”</p>
+<p>   于是小王子驯养了狐狸。当小王子快要离开时，狐狸说：“哎！。。。我想哭。”</p>
+<p>   “这是你自己的错，我从未想过要使你难受，但是，你却要我驯养你。。。”小王子说。</p>
+<p>“是这样！”狐狸说。</p>
+<p>“可是你现在又要哭！”小王子说。</p>
+<p>“当然啦。”狐狸说。</p>
+<p>“这样对你有什么好处。”</p>
+<p>“对我有好处。”狐狸说，“有了麦子的颜色。”</p>
+<p>   小王子走了。路上他碰见满园的玫瑰花儿。</p>
+<p>   满园的玫瑰花儿向小王子用力点着头微笑，小王子说：“你们很美，但你们是空虚的。没有人会为你们去死。当然，我的那朵玫瑰，一个普通的过路人会认为她们和你们是一样的。可是，她单独一朵比你们全体更可贵，因为我给她浇过水，因为我为她盖过罩子，因为我给她用屏风挡风，因为我倾听过她的怨艾，她的夸口，有时甚至倾听她的沉默。因为她是我的玫瑰花。”</p>
+<p>   小王子又回到狐狸身旁：“再见了。。。狐狸”</p>
+<p>“再见了。”狐狸说，“本质的东西，眼睛是看不到的，只有用心灵看。”</p>
+<p>“本质的东西，眼睛是看不到的，只有用心灵看。”小王子重复这句话，以免忘记。</p>
+<p>“正是因为我对我的玫瑰，花费了时间，才使花儿变得那么重要。”小王子重复这句话，以免忘记。</p>
+<p>“这个真理，已经被人忘记了，”狐狸说，“但是你千万不要忘记。对你驯养的东西，你要永远负责。你必须对你的花儿负责。。。”</p>
+<p>“我要对我的花儿负责。”小王子又重复跟着说，为了牢牢记住。</p>
+<h4 id="摘自《小王子》"><a href="#摘自《小王子》" class="headerlink" title="摘自《小王子》"></a>摘自《小王子》</h4>]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python+离散数学→逻辑演算</title>
+    <url>/2019/04/02/python-chi-san-shu-xue-luo-ji-yan-suan/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇探讨的是一道逻辑演算推理题。有两种方法，一种是常规的离散数学逻辑演算，另一种则是用python程序来解决。本篇将探究两种方法： python+离散数学→逻辑演算。</p>
+<blockquote>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在某次研讨会的中间休息时间，3名与会者根据王教授的口音对他是哪个省市的人判断如下：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲:王教授不是苏州人，是上海人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙:王教授不是上海人，是苏州人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙:王教授既不是上海人，也不是杭州人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;听完这3人的判断后，王教授笑着说，你们3人中有一人说得全对，有一人说对了一半，另一人全不对。试用逻辑演算分析王教授到底是哪里人.</p>
+</blockquote>
+<blockquote>
+<h2 id="常规推理"><a href="#常规推理" class="headerlink" title="常规推理"></a>常规推理</h2></blockquote>
+<p>设命题&nbsp;&nbsp;&nbsp;&nbsp;p:王教授是苏州人；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q:王教授是上海人；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r:王教授是杭州人；</p>
+<p>用p,q,r表示甲乙丙的观点如下：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲：￢p∧q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙：p∧￢q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙：￢q∧￢r              </p>
+<p>其中一人全对，一人对一半，另一人全错。</p>
+<p>即其中一个真命题，两个假命题。先找真命题</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲全对：B1=￢p∧q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲对一半：B2=(￢p∧￢q) ∨(p∧q)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲全错：B3=p∧￢q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙全对：C1= p∧￢q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙对一半：C2=(￢p∧￢q) ∨(p∧q)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙全错：C3=￢p∧q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙全对：D1=￢q∧￢r</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙对一半：D2=(q∧￢r) ∨( ￢q∧r)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙全错：D3=q∧r</p>
+<p>有王教授那句话可以写：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E=（B1∧C2∧D3）∨(B1∧C3∧D2) ∨(B2∧C1∧D3) ∨(B2∧C3∧D1) ∨(B3∧C1∧D2) ∨(B3∧C2∧D1)</p>
+<p>是真命题</p>
+<p>而B1∧C2∧D3⇔(￢p∧q) ∧((￢p∧￢q) ∨(p∧q)) ∧(q∧r)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q) ∧((￢p∧￢q) ∧(q∧r) ∨ (p∧q) ∧(q∧r))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q) ∧(0∨(p∧q∧r))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q)∧(p∧q∧r)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔0</p>
+<p>其他同理类似可得：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B1C3D2⇔￢p∧q∧￢r</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B2C1D3⇔0</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B2C3D1⇔0</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B3C1D2⇔p∧￢q∧r</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B3C2D1⇔0</p>
+<p>所以E⇔(￢p∧q∧￢r) ∨(p∧￢q∧r)</p>
+<p>而pqr中只能有一个是真的，所以p∧q⇔0，p∧r⇔0，q∧r⇔0</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E⇔(￢p∧q∧￢r) ∨0</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔￢p∧q∧￢r</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔1</p>
+<p>所以p为假，q为真，r为假，王教授是上海人。</p>
+<blockquote>
+<h2 id="python程序实现"><a href="#python程序实现" class="headerlink" title="python程序实现"></a>python程序实现</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以下是上述过程的代码实现，并附有代码详解，有兴趣的小伙伴可以看一看。</p>
+</blockquote>
+<pre><code>for p in range(2):                                  #p:王教授是苏州人
+    for q in range(2):                              #q:王教授是上海人
+        for r in range(2):                          #r:王教授是杭州人
+         #以下三行表示p,q,r不可能同时为真的情况
+         if (p == 1 and q == 1): continue
+         if (p == 1 and r == 1): continue
+         if (q == 1 and r == 1): continue
+
+         Jia = (not p) and q                        #甲的判断
+         Yi = p and (not q)                         #乙的判断
+         Bing = (not q) and (not r)                 #丙的判断
+
+         B1 = (not p) and q                         #甲的判断全对
+         B2 = ((not p) and (not q))or (p and q)     #甲的判断一半对
+         B3 = p and (not q)                         #甲的判断全错
+
+         C1 = p and (not q)                         #乙的判断全对
+         C2 = (p and q) or ((not p) and (not q))    #乙的判断一半对
+         C3 = (not p) and q                         #乙的判断全错
+
+         D1 = (not q) and (not r)                   #丙的判断全对
+         D2 = ((not q) and r) or (q and(not r))     #丙的判断一半对
+         D3 = q and r                               #丙的判断全错
+
+         #王教授所说的话
+         E = (B1 and C2 and D3) \
+           or(B1 and C3 and D2) \
+           or(B2 and C1 and D3) \
+           or(B2 and C3 and D1) \
+           or(B3 and C1 and D2) \
+           or(B3 and C2 and D1)
+
+         #符合王教授所的E值
+         if E==1 :
+           print(&quot;%d,%d,%d E=%d,Jia=%d,Yi=%d,Bing=%d&quot;%(p,q,r,E,Jia,Yi,Bing))
+
+
+</code></pre><blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其实用python解决离散数学的逻辑推理题比直接推理效率更高而且准确性也高，并且在遇到复杂的逻辑推理时，很容易把自己绕晕，半天也解不出来，倒不如我们可以让计算机帮我们解决，只需写几十行代码，就可以罗列出复杂的关系，何乐而不为呢，所以我们可以多学学这种解题方法！😁</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>python</category>
+        <category>离散</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>离散</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>人工神经网络（ANN）</title>
     <url>/2019/07/26/ren-gong-shen-jing-wang-luo-ann/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初学人工智能不久，今天碰上了人工神经网（ANN），开始学的时候很懵，一大堆理论、公式、推导…..作为一名小白，还是很痛苦的，不过经过摸索，大概了 解了什么是ANN，公式的推导以及一些其他问题，下面我就总结下自己的理解，一方面作为自己的笔记，日后方便巩固；另一方面，也可以分享给其他有意者。</p>
@@ -735,91 +943,58 @@ plt.show()
       </tags>
   </entry>
   <entry>
-    <title>多种相似度计算的python实现</title>
-    <url>/2019/07/24/duo-chong-xiang-si-du-ji-suan-de-python-shi-xian/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中有很多地方要计算相似度，比如聚类分析和协同过滤。计算相似度的有许多方法，其中有欧几里德距离(欧式距离)、曼哈顿距离、Jaccard系数和皮尔逊相关度等等。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们这里把一些常用的相似度计算方法，用python进行实现以下。大家都是初学者，我认为把公式先写下来，然后再写代码去实现比较好。 </p>
-<h2 id="欧几里德距离-欧式距离"><a href="#欧几里德距离-欧式距离" class="headerlink" title="欧几里德距离(欧式距离)"></a>欧几里德距离(欧式距离)</h2><p>几个数据集之间的相似度一般是基于每对对象间的距离计算。最常用的当然是欧几里德距离，其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204320390.png" alt></p>
-<pre><code>#-*-coding:utf-8 -*-
+    <title>数据集的划分--训练集、验证集和测试集</title>
+    <url>/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。</p>
+<h2 id="为什么要划分数据集为训练集、验证集和测试集？"><a href="#为什么要划分数据集为训练集、验证集和测试集？" class="headerlink" title="为什么要划分数据集为训练集、验证集和测试集？"></a>为什么要划分数据集为训练集、验证集和测试集？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;做科研，就要提出问题，找到解决方法，并证明其有效性。这里的工作有3个部分，一个是提出问题，一个是找到解决方法，另一个是证明有效性。每一个部分都可以作为科研的对象，研究的越靠前，则越偏向科学，越靠后，则越偏向技术，因此叫做科学与技术。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在人工智能领域，证明一个模型的有效性，就是对于某一问题，有一些数据，而我们提出的模型可以（部分）解决这个问题，那如何来证明呢？这和我们平时的考试也是一样的，证明我们掌握了某类知识，就是去参加考试。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;好，那么如何设计考试，让这个考试可以较为客观的考察出每个人的能力呢（注意，不是让每个人都得最高分）？回想我们的高中阶段，有一些教材，让我们平时学习其基本知识（训练集），有一些模拟考试，让我们知道我们到底掌握的怎么样，然后再改进我们的学习（验证集），最后的高考决定我们的去向（测试集）。这样的类比，是不是就很清楚了。</p>
+<h2 id="训练集、验证集和测试集"><a href="#训练集、验证集和测试集" class="headerlink" title="训练集、验证集和测试集"></a>训练集、验证集和测试集</h2><pre><code>1. **训练集**：顾名思义指的是用于训练的样本集合,主要用来训练神经网络中的参数。
 
-#计算欧几里德距离：
-def euclidean(p,q):
-#如果两数据集数目不同，计算两者之间都对应有的数
-same = 0
-for i in p:
-    if i in q:
-        same +=1
+2. **验证集**：从字面意思理解即为用于验证模型性能的样本集合.不同神经网络在训练集上训练结束后,通过验证集来比较判断各个模型的性能.这里的不同模型主要是指对应不同超参数的神经网络,也可以指完全不同结构的神经网络。
 
-#计算欧几里德距离,并将其标准化
-e = sum([(p[i] - q[i])**2 for i in range(same)])
-return 1/(1+e**.5)
-</code></pre><p>我们用数据集可以去算一下： </p>
-<pre><code>p = [1,3,2,3,4,3]
-q = [1,3,4,3,2,3,4,3]
-print euclidean(p,q)
-</code></pre><p>得出结果是：0.261203874964</p>
-<h2 id="皮尔逊相关度"><a href="#皮尔逊相关度" class="headerlink" title="皮尔逊相关度"></a>皮尔逊相关度</h2><p>几个数据集中出现异常值的时候，欧几里德距离就不如皮尔逊相关度‘稳定’，它会在出现偏差时倾向于给出更好的结果。其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204538985.png" alt></p>
-<pre><code>-*-coding:utf-8 -*-
+3. **测试集**：对于训练完成的神经网络,测试集用于客观的评价神经网络的性能。
+</code></pre><h2 id="如何划分训练集、验证集和测试集"><a href="#如何划分训练集、验证集和测试集" class="headerlink" title="如何划分训练集、验证集和测试集"></a>如何划分训练集、验证集和测试集</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个问题其实非常基础，也非常明确，在Scikit-learn里提供了各种各样的划分方法。无论是单一的训练集、验证集和测试集，还是进行交叉验证，你都会找到调用的方法，因此我们这里主要介绍两种常见的方法。</p>
+<pre><code>1. 前人给出训练集、验证集和测试集
+  对于这种情况，那么只能跟随前人的数据划分进行，一般的比赛也是如此。一定不要使用测试集来调整性能（测试集已知的情况下），尽管存在使用这种方法来提升模型的性能的行为，但是我们并不推荐这么做。最正常的做法应当是使用训练集来学习，并使用验证集来调整超参数。当在验证集上取得最优的模型时，此时就可以使用此模型的超参数来重新训练（训练集+验证集），并用测试集评估最终的性能。
+    我们首先说明加入验证集重新训练和不加有啥区别，从理论上讲，一方面学习的样本增多，应当是会提升模型性能的，第二，其在验证集上取得最优的模型与验证集的分布的契合度是最高的，因此最终的模型会更接近验证集的分布。
+    其次再说明验证集和测试集上的性能差异。事实上，在验证集上取得最优的模型，未必在测试集上取得最优。其原因就是训练的模型是否对于该问题有着较好的泛化能力，即没有对验证集产生过拟合现象。正因为有这种情况的发生，才会有人使用测试集的最优值作为最终的结果（而不管验证集的好坏）。
 
-#计算皮尔逊相关度：
-def pearson(p,q):
-#只计算两者共同有的
-    same = 0
-    for i in p:
-        if i in q:
-            same +=1
-
-    n = same
-    #分别求p，q的和
-    sumx = sum([p[i] for i in range(n)])
-    sumy = sum([q[i] for i in range(n)])
-    #分别求出p，q的平方和
-    sumxsq = sum([p[i]**2 for i in range(n)])
-    sumysq = sum([q[i]**2 for i in range(n)])
-    #求出p，q的乘积和
-    sumxy = sum([p[i]*q[i] for i in range(n)])
-    # print sumxy
-    #求出pearson相关系数
-    up = sumxy - sumx*sumy/n
-    down = ((sumxsq - pow(sumxsq,2)/n)*(sumysq - pow(sumysq,2)/n))**.5
-    #若down为零则不能计算，return 0
-    if down == 0 :return 0
-    r = up/down
-    return r
-</code></pre><p>用同样的数据集去计算：</p>
-<pre><code>p = [1,3,2,3,4,3]
-q = [1,3,4,3,2,3,4,3]
-print pearson(p,q)
-</code></pre><p>得出结果是：0.00595238095238</p>
-<h2 id="曼哈顿距离"><a href="#曼哈顿距离" class="headerlink" title="曼哈顿距离"></a>曼哈顿距离</h2><p>曼哈顿距离是另一种相似度计算方法，不是经常需要，但是我们仍然学会如何用python去实现，其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204709370.png" alt></p>
-<pre><code>#-*-coding:utf-8 -*-
-
-#计算曼哈顿距离：
-def manhattan(p,q):
-#只计算两者共同有的
-    same = 0
-    for i in p:
-        if i in q:
-        same += 1
-#计算曼哈顿距离
-    n = same
-    vals = range(n)
-    distance = sum(abs(p[i] - q[i]) for i in vals)
-    return distance
-</code></pre><p>用以上的数据集去计算：</p>
-<pre><code>p = [1,3,2,3,4,3]
-q = [1,3,4,3,2,3,4,3]
-print manhattan(p,q)
-</code></pre><p>得出结果为4</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里只讲述了三种相似度的计算方法，事实上还有很多种，由于我也是刚学，其他的方法还不是很了解，以后碰到了再补上。一般情况下，这三种方法是最常用的，足够我们使用了。</p>
+2. 前人没有明确给出数据集的划分
+  这时候可以采取第一种划分方法，对于样本数较小的数据集，同样可以采取交叉验证的方法。
+    交叉验证的方法的使用场景有很多，我们这里是针对不同的模型的性能好坏进行评估。
+    使用交叉验证，可以获得更为客观的性能差异。当使用第一种方法时，我们更建议使用P值来做显著性检验，从而保证性能差异的客观性。而使用第二种方法，即交叉验证时，我们选取其性能表现的均值作为最终的结果，更能体现该模型的泛化能力。
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.存在验证集<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里五倍交叉验证是用于进行调参，此时不接触测试集。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据集首先划分出训练集与测试集（可以是4:1或者9:1）。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其次，在训练集中，再划分出验证集（通常也是4:1或者9：1）<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后对于训练集和验证集进行5折交叉验证，选取出最优的超参数，然后把训练集和验证集一起训练出最终的模型。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.不存在验证集<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该情况通常是对比不同的模型，如自己的模型和别人的模型的性能好坏。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只需要把数据集划分为训练集和测试集即可，然后选取5次试验的平均值作为最终的性能评价。</p>
+<h2 id="验证集和测试集的区别"><a href="#验证集和测试集的区别" class="headerlink" title="验证集和测试集的区别"></a>验证集和测试集的区别</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;那么,训练集、校验集和测试集之间又有什么区别呢?一般而言,训练集与后两者之间较易分辨,校验集和测试集之间的概念较易混淆.个人是从下面的角度来理解的:</p>
+<ul>
+<li><p>神经网络在网络结构确定的情况下,有两部分影响模型最终的性能,一是普通参数(比如权重w和偏置b),另一个是超参数(例如学习率,网络层数).普通参数我们在训练集上进行训练,超参数我们一般人工指定(比较不同超参数的模型在校验集上的性能).那为什么我们不像普通参数一样在训练集上训练超参数呢?(花书给出了解答)一是：超参数一般难以优化(无法像普通参数一样通过梯度下降的方式进行优化).二是：超参数很多时候不适合在训练集上进行训练,例如,如果在训练集上训练能控制模型容量的超参数,这些超参数总会被训练成使得模型容量最大的参数(因为模型容量越大,训练误差越小),所以训练集上训练超参数的结果就是模型绝对过拟合.</p>
+</li>
+<li><p>正因为超参数无法在训练集上进行训练,因此我们单独设立了一个验证集,用于选择(人工训练)最优的超参数.因为验证集是用于选择超参数的,因此校验集和训练集是独立不重叠的.</p>
+</li>
+<li><p>测试集是用于在完成神经网络训练过程后,为了<strong>客观评价模型</strong>在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,因此测试与验证集和训练集之间也是独立不重叠的,而且测试集不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标.</p>
+</li>
+</ul>
+<p>为了方便清楚直观的了解，上一个表格：<br><img src="https://img-blog.csdnimg.cn/20190724110042475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至此,我们可以将神经网络完整的训练过程归结为一下两个步骤:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.训练普通参数.在训练集(给定超参数)上利用学习算法,训练普通参数,使得模型在训练集上的误差降低到可接受的程度(一般接近人类的水平).</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.’训练’超参数.在验证集上验证网络的generalization error(泛化能力),并根据模型性能对超参数进行调整.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重复1和2两个步骤,直至网络在验证集上取得较低的generalization error.此时完整的训练过程结束.在完成参数和超参数的训练后,在测试集上测试网络的性能.</p>
+<h2 id="附言"><a href="#附言" class="headerlink" title="附言"></a>附言</h2><p>说到底：</p>
+<ul>
+<li><p>验证集是一定需要的；</p>
+</li>
+<li><p>如果验证集具有足够泛化代表性，是不需要再整出什么测试集的；</p>
+</li>
+<li><p>整个测试集往往就是为了在验证集只是非训练集一个小子集的情况下，好奇一下那个靠训练集（训练）和验证集（调参）多次接力训练出来的模型是不是具有了泛化性能，因而加试一下图个确定。</p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>机器学习</category>
-        <category>python</category>
       </categories>
       <tags>
         <tag>机器学习</tag>
-        <tag>python</tag>
-        <tag>相似度</tag>
+        <tag>数据集</tag>
       </tags>
   </entry>
   <entry>
@@ -979,133 +1154,91 @@ print manhattan(p,q)
       </tags>
   </entry>
   <entry>
-    <title>Python爬虫--爬取豆瓣 TOP250 电影排行榜</title>
-    <url>/2020/03/20/python-pa-chong-pa-qu-dou-ban-top250-dian-ying-pai-xing-bang/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇讲介绍一个简单的Python爬虫案例–爬取豆瓣 TOP250 电影排行榜。</p>
-<p>很多朋友在看一部电影前都喜欢先找一下网友们对该片的评价。</p>
-<p>说到电影评分的网站，除了国外的 IMDB 和烂番茄，国内要数豆瓣最为出名。</p>
-<p>主要原因是豆瓣有一套完整的评分和防水军机制 。</p>
-<p>在这套机制下，豆瓣评分高的电影不一定是所有人都喜欢的，但是豆瓣评分低的电影，一定是实打实的烂片！</p>
-<p>虽然每个人的喜好偏爱不同，但通常豆瓣评分 8 分以上的电影，都是值得一看的。</p>
-<p>豆瓣还专门提供了一个 TOP250 的电影链接 -&gt; <a href="https://movie.douban.com/top250" target="_blank" rel="noopener">https://movie.douban.com/top250</a></p>
-<h1 id="爬取思路"><a href="#爬取思路" class="headerlink" title="爬取思路"></a>爬取思路</h1><p>爬取的过程很好理解，这里只需要两个过程：<br>① 从服务器上下载所需页面<br>② 解析这个页面，得到自己需要有用的内容</p>
-<h3 id="①抓取页面"><a href="#①抓取页面" class="headerlink" title="①抓取页面"></a>①抓取页面</h3><p>有的人可能会利用 urllib 模块实现网络抓取功能。但在 Python 中，有一个更好地替代者——Requests。Requests 简化了 urllib 的诸多冗杂且无意义的操作，并提供了更强大的功能。<br>所以在这里我们使用 Requests 模块的 get() 方法从服务器上来下载这个页面。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> requests
+    <title>多种相似度计算的python实现</title>
+    <url>/2019/07/24/duo-chong-xiang-si-du-ji-suan-de-python-shi-xian/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中有很多地方要计算相似度，比如聚类分析和协同过滤。计算相似度的有许多方法，其中有欧几里德距离(欧式距离)、曼哈顿距离、Jaccard系数和皮尔逊相关度等等。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们这里把一些常用的相似度计算方法，用python进行实现以下。大家都是初学者，我认为把公式先写下来，然后再写代码去实现比较好。 </p>
+<h2 id="欧几里德距离-欧式距离"><a href="#欧几里德距离-欧式距离" class="headerlink" title="欧几里德距离(欧式距离)"></a>欧几里德距离(欧式距离)</h2><p>几个数据集之间的相似度一般是基于每对对象间的距离计算。最常用的当然是欧几里德距离，其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204320390.png" alt></p>
+<pre><code>#-*-coding:utf-8 -*-
 
-url <span class="token operator">=</span> <span class="token string">"https://movie.douban.com/top250"</span>
-headers <span class="token operator">=</span> <span class="token punctuation">{</span>
-    <span class="token string">"User-Agent"</span><span class="token punctuation">:</span><span class="token string">"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3314.0 Safari/537.36 SE 2.X MetaSr 1.0"</span>
-    <span class="token punctuation">}</span>
+#计算欧几里德距离：
+def euclidean(p,q):
+#如果两数据集数目不同，计算两者之间都对应有的数
+same = 0
+for i in p:
+    if i in q:
+        same +=1
 
-res <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>res就是我们需要的这个页面的资源，我们不妨打开来看看是不是</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">"豆瓣电影.txt"</span><span class="token punctuation">,</span><span class="token string">'w'</span><span class="token punctuation">,</span>encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
-    f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>res<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>打开文本如下图<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zbG9tb28ub3NzLWNuLWJlaWppbmcuYWxpeXVuY3MuY29tLzJkZTI1MDMzZTQ0NGY3NTc2ZTRlNDZlYmU2Mjg1YzllLm1kLnBuZw?x-oss-process=image/format,png" alt><br>我们可以看出这确实是当前网页的资源，所以我们就抓取成功了。</p>
-<h2 id="②解析页面"><a href="#②解析页面" class="headerlink" title="②解析页面"></a>②解析页面</h2><p>解析网页内容推荐使用 BeautifulSoup 模块，它可以化腐朽为神奇，将一个复杂的网页结构转化为书籍目录的形式供你浏览。<br>例如，我们现在需要解析提取出当前页面的电影名字</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> bs4
-soup <span class="token operator">=</span> bs4<span class="token punctuation">.</span>BeautifulSoup<span class="token punctuation">(</span>res<span class="token punctuation">.</span>text<span class="token punctuation">,</span><span class="token string">"html.parser"</span><span class="token punctuation">)</span>
-targets <span class="token operator">=</span> soup<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">"div"</span><span class="token punctuation">,</span>class_<span class="token operator">=</span><span class="token string">"hd"</span><span class="token punctuation">)</span>
-<span class="token keyword">for</span> each <span class="token keyword">in</span> targets<span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>each<span class="token punctuation">.</span>a<span class="token punctuation">.</span>span<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>可以得到如下结果</p>
-<blockquote>
-<p>肖申克的救赎<br>霸王别姬<br>阿甘正传<br>这个杀手不太冷<br>美丽人生<br>泰坦尼克号<br>千与千寻<br>辛德勒的名单<br> 盗梦空间<br> 忠犬八公的故事<br> 海上钢琴师<br>机器人总动员<br>三傻大闹宝莱坞<br>楚门的世界<br>放牛班的春天<br> 星际穿越<br> 大话西游之大圣娶亲<br> 熔炉<br> 疯狂动物城<br> 无间道<br> 龙猫<br> 教父<br> 当幸福来敲门<br>怦然心动<br>触不可及</p>
-</blockquote>
-<p>这里你可能就会有疑问，这些数据是怎么得来的呢？<br>我们先来看下 HTML 源代码：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zbG9tb28ub3NzLWNuLWJlaWppbmcuYWxpeXVuY3MuY29tL2E0MDcxYzNhNmYyZDUzMjVjMWJhYzJhMDQ4OTQ2Zjk4Lm1kLnBuZw?x-oss-process=image/format,png" alt><br>发现每个电影的标题都是位于 <code>&lt;div class=&quot;hd&quot;&gt;...&lt;/div&gt;</code> 标签中的，它的从属关系是：<code>div -&gt; a -&gt; span</code>。</p>
-<p>所以我们先调用 find_all() 方法，找到所有 class=”hd” 的 div 标签，然后按照从属关系即可直接取出电影名。<br>同理，我们借用此发方法来解析提取出电影的评分、介绍等需要的信息。</p>
-<h2 id="附加问题"><a href="#附加问题" class="headerlink" title="附加问题"></a>附加问题</h2><p>我们刚才解析提取的仅仅是第一页的页面，那么还有第二、第三、第四页……呢？</p>
-<p>其实，解决起来也很简单，我们可以使用for循环来对每一页进行上述的两个过程。</p>
-<p>但，我们此时又有新的问题，我们不可能每抓取一次，就重新输入下一网页的链接地址，这样很麻烦，效率也不高。</p>
-<p> 我们可以分析每一页的链接：</p>
-<blockquote>
-<p> 第一页：<a href="https://movie.douban.com/top250" target="_blank" rel="noopener">https://movie.douban.com/top250</a><br>第二页：<a href="https://movie.douban.com/top250?start=25" target="_blank" rel="noopener">https://movie.douban.com/top250?start=25</a><br>第三页：<a href="https://movie.douban.com/top250?start=50" target="_blank" rel="noopener">https://movie.douban.com/top250?start=50</a><br>第四页：<a href="https://movie.douban.com/top250?start=75" target="_blank" rel="noopener">https://movie.douban.com/top250?start=75</a><br>第五页：<a href="https://movie.douban.com/top250?start=100" target="_blank" rel="noopener">https://movie.douban.com/top250?start=100</a><br> … …<br> …. …</p>
-</blockquote>
-<p>我们可以发现这样的规律：<br>每一次的更新的 <code>url = https://movie.douban.com/top250 + &#39;/?start=&#39; + str(25*i)</code>其中<code>i</code>可以表示为页数-1</p>
-<p>咦，这个时候，你可能会有疑问，我们怎么知道一共有多少页呢，不能一直for循环无穷吧。</p>
-<p>那当然不可能的了，我们可以按第二步解析网页方式来获取页数</p>
-<pre class="line-numbers language-python"><code class="language-python">depth <span class="token operator">=</span> soup<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'span'</span><span class="token punctuation">,</span>class_<span class="token operator">=</span><span class="token string">'next'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>previous_sibling<span class="token punctuation">.</span>previous_sibling<span class="token punctuation">.</span>text
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>注意，这个返回的<code>depth</code>是给字符串形式，需要<code>int()</code></p>
-<p>这样结合刚才的过程，就可以迭代每一页了</p>
-<h1 id="代码清单"><a href="#代码清单" class="headerlink" title="代码清单"></a>代码清单</h1><p>感兴趣的话，可以试一试哦</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> requests
-<span class="token keyword">import</span> bs4
+#计算欧几里德距离,并将其标准化
+e = sum([(p[i] - q[i])**2 for i in range(same)])
+return 1/(1+e**.5)
+</code></pre><p>我们用数据集可以去算一下： </p>
+<pre><code>p = [1,3,2,3,4,3]
+q = [1,3,4,3,2,3,4,3]
+print euclidean(p,q)
+</code></pre><p>得出结果是：0.261203874964</p>
+<h2 id="皮尔逊相关度"><a href="#皮尔逊相关度" class="headerlink" title="皮尔逊相关度"></a>皮尔逊相关度</h2><p>几个数据集中出现异常值的时候，欧几里德距离就不如皮尔逊相关度‘稳定’，它会在出现偏差时倾向于给出更好的结果。其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204538985.png" alt></p>
+<pre><code>-*-coding:utf-8 -*-
 
-<span class="token comment" spellcheck="true">#抓取网页</span>
-<span class="token keyword">def</span> <span class="token function">open_url</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    headers <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"User-Agent"</span><span class="token punctuation">:</span><span class="token string">"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3314.0 Safari/537.36 SE 2.X MetaSr 1.0"</span><span class="token punctuation">}</span>
-    res <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>headers<span class="token operator">=</span>headers<span class="token punctuation">)</span>
+#计算皮尔逊相关度：
+def pearson(p,q):
+#只计算两者共同有的
+    same = 0
+    for i in p:
+        if i in q:
+            same +=1
 
-    <span class="token keyword">return</span> res
+    n = same
+    #分别求p，q的和
+    sumx = sum([p[i] for i in range(n)])
+    sumy = sum([q[i] for i in range(n)])
+    #分别求出p，q的平方和
+    sumxsq = sum([p[i]**2 for i in range(n)])
+    sumysq = sum([q[i]**2 for i in range(n)])
+    #求出p，q的乘积和
+    sumxy = sum([p[i]*q[i] for i in range(n)])
+    # print sumxy
+    #求出pearson相关系数
+    up = sumxy - sumx*sumy/n
+    down = ((sumxsq - pow(sumxsq,2)/n)*(sumysq - pow(sumysq,2)/n))**.5
+    #若down为零则不能计算，return 0
+    if down == 0 :return 0
+    r = up/down
+    return r
+</code></pre><p>用同样的数据集去计算：</p>
+<pre><code>p = [1,3,2,3,4,3]
+q = [1,3,4,3,2,3,4,3]
+print pearson(p,q)
+</code></pre><p>得出结果是：0.00595238095238</p>
+<h2 id="曼哈顿距离"><a href="#曼哈顿距离" class="headerlink" title="曼哈顿距离"></a>曼哈顿距离</h2><p>曼哈顿距离是另一种相似度计算方法，不是经常需要，但是我们仍然学会如何用python去实现，其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204709370.png" alt></p>
+<pre><code>#-*-coding:utf-8 -*-
 
-<span class="token comment" spellcheck="true">#得到总页数</span>
-<span class="token keyword">def</span> <span class="token function">find_depth</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    soup <span class="token operator">=</span> bs4<span class="token punctuation">.</span>BeautifulSoup<span class="token punctuation">(</span>res<span class="token punctuation">.</span>text<span class="token punctuation">,</span><span class="token string">'html.parser'</span><span class="token punctuation">)</span>
-    depth <span class="token operator">=</span> soup<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'span'</span><span class="token punctuation">,</span>class_<span class="token operator">=</span><span class="token string">'next'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>previous_sibling<span class="token punctuation">.</span>previous_sibling<span class="token punctuation">.</span>text
-
-    <span class="token keyword">return</span> int<span class="token punctuation">(</span>depth<span class="token punctuation">)</span>
-
-<span class="token comment" spellcheck="true">#解析网页，提取内容</span>
-<span class="token keyword">def</span> <span class="token function">find_movies</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    soup <span class="token operator">=</span> bs4<span class="token punctuation">.</span>BeautifulSoup<span class="token punctuation">(</span>res<span class="token punctuation">.</span>text<span class="token punctuation">,</span><span class="token string">'html.parser'</span><span class="token punctuation">)</span>
-
-    names <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-    target <span class="token operator">=</span> soup<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">,</span>class_<span class="token operator">=</span><span class="token string">'hd'</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> target<span class="token punctuation">:</span>
-        names<span class="token punctuation">.</span>append<span class="token punctuation">(</span>i<span class="token punctuation">.</span>a<span class="token punctuation">.</span>span<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
-
-    ranks <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-    target <span class="token operator">=</span> soup<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">'span'</span><span class="token punctuation">,</span>class_<span class="token operator">=</span><span class="token string">'rating_num'</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> target<span class="token punctuation">:</span>
-        ranks<span class="token punctuation">.</span>append<span class="token punctuation">(</span>i<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
-
-    messages <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-    target <span class="token operator">=</span> soup<span class="token punctuation">.</span>find_all<span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">,</span>class_<span class="token operator">=</span><span class="token string">'bd'</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> target<span class="token punctuation">:</span>
-        <span class="token keyword">try</span><span class="token punctuation">:</span>
-            messages<span class="token punctuation">.</span>append<span class="token punctuation">(</span>i<span class="token punctuation">.</span>p<span class="token punctuation">.</span>text<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> i<span class="token punctuation">.</span>p<span class="token punctuation">.</span>text<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token keyword">except</span><span class="token punctuation">:</span>
-            <span class="token keyword">continue</span>
-
-    result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-    length <span class="token operator">=</span> len<span class="token punctuation">(</span>names<span class="token punctuation">)</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>length<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        result<span class="token punctuation">.</span>append<span class="token punctuation">(</span>names<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">','</span> <span class="token operator">+</span>ranks<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">','</span> <span class="token operator">+</span> messages<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">'\n'</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">return</span> result
-
-<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    host <span class="token operator">=</span> <span class="token string">"https://movie.douban.com/top250"</span>
-    res <span class="token operator">=</span> open_url<span class="token punctuation">(</span>host<span class="token punctuation">)</span>
-    depth <span class="token operator">=</span> find_depth<span class="token punctuation">(</span>res<span class="token punctuation">)</span>
-
-    result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>depth<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        url <span class="token operator">=</span> host <span class="token operator">+</span> <span class="token string">'/?start='</span> <span class="token operator">+</span> str<span class="token punctuation">(</span><span class="token number">25</span><span class="token operator">*</span>i<span class="token punctuation">)</span>
-        res <span class="token operator">=</span> open_url<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
-        result<span class="token punctuation">.</span>extend<span class="token punctuation">(</span>find_movies<span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">"豆瓣TOP250电影.txt"</span><span class="token punctuation">,</span><span class="token string">'w'</span><span class="token punctuation">,</span>encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
-        <span class="token keyword">for</span> each <span class="token keyword">in</span> result<span class="token punctuation">:</span>
-            f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>each<span class="token punctuation">)</span>
-
-<span class="token keyword">if</span> __name__<span class="token operator">==</span><span class="token string">"__main__"</span><span class="token punctuation">:</span>
-    main<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="嘟嘟"><a href="#嘟嘟" class="headerlink" title="嘟嘟"></a>嘟嘟</h2><p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：<a href="https://cloud.tencent.com/developer/support-plan?invite_code=3c2lknoq16w4k" target="_blank" rel="noopener">https://cloud.tencent.com/developer/support-plan?invite_code=3c2lknoq16w4k</a></p>
+#计算曼哈顿距离：
+def manhattan(p,q):
+#只计算两者共同有的
+    same = 0
+    for i in p:
+        if i in q:
+        same += 1
+#计算曼哈顿距离
+    n = same
+    vals = range(n)
+    distance = sum(abs(p[i] - q[i]) for i in vals)
+    return distance
+</code></pre><p>用以上的数据集去计算：</p>
+<pre><code>p = [1,3,2,3,4,3]
+q = [1,3,4,3,2,3,4,3]
+print manhattan(p,q)
+</code></pre><p>得出结果为4</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里只讲述了三种相似度的计算方法，事实上还有很多种，由于我也是刚学，其他的方法还不是很了解，以后碰到了再补上。一般情况下，这三种方法是最常用的，足够我们使用了。</p>
 ]]></content>
       <categories>
+        <category>机器学习</category>
         <category>python</category>
-        <category>爬虫</category>
       </categories>
       <tags>
+        <tag>机器学习</tag>
         <tag>python</tag>
-        <tag>爬虫</tag>
+        <tag>相似度</tag>
       </tags>
   </entry>
   <entry>
@@ -1242,6 +1375,43 @@ if __name__==&#39;__main__&#39;:
       </tags>
   </entry>
   <entry>
+    <title>暑期培训第一次测试题总结</title>
+    <url>/2019/07/22/shu-qi-pei-xun-di-yi-ci-ce-shi-ti-zong-jie/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里是一些暑期培训第一次测试题的部分解释，经过这次测试的摧残，总结备录一下，方便日后回顾复习。</p>
+<h2 id="Feeling"><a href="#Feeling" class="headerlink" title="Feeling"></a>Feeling</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经过几天的学习，7月22日下午，进行了第一次检测。开始以为会让我们推导一些公式什么的，结果当拿到测试题的时候，一首凉凉送给自己……开始的选择题和填空题还能接受，看到简答题，这都是什么，有种似曾相识的感觉，但就是写不出来。为时四十分钟的考试结束后，不到半个小时成绩就出来了，虽然成绩不那么好，但排名还行，然后学长给我们进行了讲解答疑，发现自己学的有点粗糙，没有注意那些细节性问题和概念，学以致用这方面也是有点差的。</p>
+<h2 id="Test-1"><a href="#Test-1" class="headerlink" title="Test 1"></a>Test 1</h2><h3 id="为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set"><a href="#为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set" class="headerlink" title="为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?"></a>为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校验集是用于调整超参数的，从而更好的优化训练模型。测试集是用于在完成神经网络训练过程后,为了客观评价模型在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,而且测试集<strong>不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标</strong>。</p>
+<p>（备注：不清楚这三个数据集概念及其作用的，可看下我以前写的关于这些的一篇文章。传送门：）</p>
+<h2 id="Test-2"><a href="#Test-2" class="headerlink" title="Test 2"></a>Test 2</h2><h3 id="批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？"><a href="#批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？" class="headerlink" title="批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？"></a>批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们要先知道什么是BGD和SGD，从两者的运算方法上，我们就可以得知不同之处。</p>
+<p>（1）批量梯度下降法（Batch Gradient Descent） ：在更新参数时都使用所有的样本来进行更新。</p>
+<ul>
+<li>优点：<strong>全局最优解</strong>，能保证每一次更新权值，都能降低损失函数；易于并行实现。</li>
+<li>缺点：当样本数目很多时，训练过程会很慢。</li>
+</ul>
+<p>（2）随机梯度下降法（Stochastic Gradient Descent）：在更新参数时都使用一个样本来进行更新。每一次跟新参数都用一个样本，更新很多次。如果样本量很大的情况（例如几十万），那么可能只用其中几万条或者几千条的样本，就已经将参数迭代到最优解了，对比上面的批量梯度下降，迭代一次需要用到十几万训练样本，一次迭代不可能最优，如果迭代10次的话就需要遍历训练样本10次，这种方式计算复杂度太高。</p>
+<ul>
+<li>优点：训练速度快；</li>
+<li>缺点：准确度下降，<strong>并不是全局最优</strong>；不易于并行实现。从迭代的次数上来看，随机梯度下降法迭代的次数较多，在解空间的搜索过程看起来很盲目。噪音很多，使得它并不是每次迭代都向着整体最优化方向。</li>
+</ul>
+<h2 id="Test-3"><a href="#Test-3" class="headerlink" title="Test 3"></a>Test 3</h2><h3 id="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"><a href="#当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？" class="headerlink" title="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"></a>当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;废话不多说，直接上图：<br><img src="https://img-blog.csdnimg.cn/20190722174826448.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="Test-4"><a href="#Test-4" class="headerlink" title="Test 4"></a>Test 4</h2><h3 id="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"><a href="#假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？" class="headerlink" title="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"></a>假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于逻辑回归，把权重初始化为0当然也是可以的，但是对于一个神经网络，如果你把权重或者参数都初始化为0，那么梯度下降将不会起作用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果权值全初始化为0，则<strong>无法更新权值</strong>。这是由于前向传播中，所有节点输出值均相同，由于此处使用了sigmod激活函数，所以此处所有神经节点输出都为1/2，而在反向传播每个节点输出值对损失函数的偏导时，涉及到对权值相乘后的求和，该项永远为0，故所乘的结果也必然为0，这样在计算权值对算是函数的偏导时，其偏导必然为0，所有权值偏导都为0，那么就不要指望使用梯度下降法能更新权值了，自然神经网络的训练也就无法进行下去了。</p>
+<h2 id="Test-5"><a href="#Test-5" class="headerlink" title="Test 5"></a>Test 5</h2><h3 id="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"><a href="#在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？" class="headerlink" title="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"></a>在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;神经网络中的梯度不稳定指的是<strong>梯度消失</strong>和<strong>梯度爆炸</strong>问题。<br>（备注：对于这两种问题的具体解释和为什么会出现这种问题，以及解决方法，这里不具体讨论了，我会在以后的文章中具体解释到的。）</p>
+<h2 id="Test-6"><a href="#Test-6" class="headerlink" title="Test 6"></a>Test 6</h2><h3 id="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"><a href="#为什么在神经网络中使用交叉熵而不是均方差作为误差函数？" class="headerlink" title="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"></a>为什么在神经网络中使用交叉熵而不是均方差作为误差函数？</h3><pre><code>1. 神经网络中如果预测值与实际值的误差越大，那么在反向传播训练的过程中，各种参数调整的幅度就要更大，从而使训练更快收敛，如果预测值与实际值的误差小，各种参数调整的幅度就要小，从而减少震荡。
+
+2. 使用平方误差损失函数，误差增大参数的梯度会增大，但是当误差很大时，参数的梯度就会又减小了。
+
+3. 使用交叉熵损失是函数，误差越大参数的梯度也越大，能够快速收敛。
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（备注：对于结论的推导过程会总结在另一篇文章里。）</p>
+]]></content>
+      <categories>
+        <category>测试题</category>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>测试题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>推荐系统之矩阵分解(MF)及其python实现</title>
     <url>/2019/07/23/tui-jian-xi-tong-zhi-ju-zhen-fen-jie-mf-ji-qi-python-shi-xian/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目前推荐系统中用的最多的就是矩阵分解方法，在Netflix Prize推荐系统大赛中取得突出效果。以用户-项目评分矩阵为例，矩阵分解就是预测出评分矩阵中的缺失值，然后根据预测值以某种方式向用户推荐。今天以“用户-项目评分矩阵R（M×N）”说明矩阵分解方式的原理以及python实现。</p>
@@ -1336,50 +1506,30 @@ if __name__ == &#39;__main__&#39;:   #主函数
       </tags>
   </entry>
   <entry>
-    <title>数据集的划分--训练集、验证集和测试集</title>
-    <url>/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。</p>
-<h2 id="为什么要划分数据集为训练集、验证集和测试集？"><a href="#为什么要划分数据集为训练集、验证集和测试集？" class="headerlink" title="为什么要划分数据集为训练集、验证集和测试集？"></a>为什么要划分数据集为训练集、验证集和测试集？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;做科研，就要提出问题，找到解决方法，并证明其有效性。这里的工作有3个部分，一个是提出问题，一个是找到解决方法，另一个是证明有效性。每一个部分都可以作为科研的对象，研究的越靠前，则越偏向科学，越靠后，则越偏向技术，因此叫做科学与技术。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在人工智能领域，证明一个模型的有效性，就是对于某一问题，有一些数据，而我们提出的模型可以（部分）解决这个问题，那如何来证明呢？这和我们平时的考试也是一样的，证明我们掌握了某类知识，就是去参加考试。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;好，那么如何设计考试，让这个考试可以较为客观的考察出每个人的能力呢（注意，不是让每个人都得最高分）？回想我们的高中阶段，有一些教材，让我们平时学习其基本知识（训练集），有一些模拟考试，让我们知道我们到底掌握的怎么样，然后再改进我们的学习（验证集），最后的高考决定我们的去向（测试集）。这样的类比，是不是就很清楚了。</p>
-<h2 id="训练集、验证集和测试集"><a href="#训练集、验证集和测试集" class="headerlink" title="训练集、验证集和测试集"></a>训练集、验证集和测试集</h2><pre><code>1. **训练集**：顾名思义指的是用于训练的样本集合,主要用来训练神经网络中的参数。
-
-2. **验证集**：从字面意思理解即为用于验证模型性能的样本集合.不同神经网络在训练集上训练结束后,通过验证集来比较判断各个模型的性能.这里的不同模型主要是指对应不同超参数的神经网络,也可以指完全不同结构的神经网络。
-
-3. **测试集**：对于训练完成的神经网络,测试集用于客观的评价神经网络的性能。
-</code></pre><h2 id="如何划分训练集、验证集和测试集"><a href="#如何划分训练集、验证集和测试集" class="headerlink" title="如何划分训练集、验证集和测试集"></a>如何划分训练集、验证集和测试集</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个问题其实非常基础，也非常明确，在Scikit-learn里提供了各种各样的划分方法。无论是单一的训练集、验证集和测试集，还是进行交叉验证，你都会找到调用的方法，因此我们这里主要介绍两种常见的方法。</p>
-<pre><code>1. 前人给出训练集、验证集和测试集
-  对于这种情况，那么只能跟随前人的数据划分进行，一般的比赛也是如此。一定不要使用测试集来调整性能（测试集已知的情况下），尽管存在使用这种方法来提升模型的性能的行为，但是我们并不推荐这么做。最正常的做法应当是使用训练集来学习，并使用验证集来调整超参数。当在验证集上取得最优的模型时，此时就可以使用此模型的超参数来重新训练（训练集+验证集），并用测试集评估最终的性能。
-    我们首先说明加入验证集重新训练和不加有啥区别，从理论上讲，一方面学习的样本增多，应当是会提升模型性能的，第二，其在验证集上取得最优的模型与验证集的分布的契合度是最高的，因此最终的模型会更接近验证集的分布。
-    其次再说明验证集和测试集上的性能差异。事实上，在验证集上取得最优的模型，未必在测试集上取得最优。其原因就是训练的模型是否对于该问题有着较好的泛化能力，即没有对验证集产生过拟合现象。正因为有这种情况的发生，才会有人使用测试集的最优值作为最终的结果（而不管验证集的好坏）。
-
-2. 前人没有明确给出数据集的划分
-  这时候可以采取第一种划分方法，对于样本数较小的数据集，同样可以采取交叉验证的方法。
-    交叉验证的方法的使用场景有很多，我们这里是针对不同的模型的性能好坏进行评估。
-    使用交叉验证，可以获得更为客观的性能差异。当使用第一种方法时，我们更建议使用P值来做显著性检验，从而保证性能差异的客观性。而使用第二种方法，即交叉验证时，我们选取其性能表现的均值作为最终的结果，更能体现该模型的泛化能力。
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.存在验证集<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里五倍交叉验证是用于进行调参，此时不接触测试集。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据集首先划分出训练集与测试集（可以是4:1或者9:1）。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其次，在训练集中，再划分出验证集（通常也是4:1或者9：1）<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后对于训练集和验证集进行5折交叉验证，选取出最优的超参数，然后把训练集和验证集一起训练出最终的模型。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.不存在验证集<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该情况通常是对比不同的模型，如自己的模型和别人的模型的性能好坏。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只需要把数据集划分为训练集和测试集即可，然后选取5次试验的平均值作为最终的性能评价。</p>
-<h2 id="验证集和测试集的区别"><a href="#验证集和测试集的区别" class="headerlink" title="验证集和测试集的区别"></a>验证集和测试集的区别</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;那么,训练集、校验集和测试集之间又有什么区别呢?一般而言,训练集与后两者之间较易分辨,校验集和测试集之间的概念较易混淆.个人是从下面的角度来理解的:</p>
+    <title>浅谈机器学习-分类和聚类的区别</title>
+    <url>/2019/08/01/qian-tan-ji-qi-xue-xi-fen-lei-he-ju-lei-de-qu-bie/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习中有两类的大问题，一个是分类，一个是聚类。在我们的生活中，我们常常没有过多的去区分这两个概念，觉得聚类就是分类，分类也差不多就是聚类，下面，我们就具体来研究下分类与聚类之间在数据挖掘中本质的区别。</p>
+<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>分类有如下几种说法，但表达的意思是相同的。</p>
 <ul>
-<li><p>神经网络在网络结构确定的情况下,有两部分影响模型最终的性能,一是普通参数(比如权重w和偏置b),另一个是超参数(例如学习率,网络层数).普通参数我们在训练集上进行训练,超参数我们一般人工指定(比较不同超参数的模型在校验集上的性能).那为什么我们不像普通参数一样在训练集上训练超参数呢?(花书给出了解答)一是：超参数一般难以优化(无法像普通参数一样通过梯度下降的方式进行优化).二是：超参数很多时候不适合在训练集上进行训练,例如,如果在训练集上训练能控制模型容量的超参数,这些超参数总会被训练成使得模型容量最大的参数(因为模型容量越大,训练误差越小),所以训练集上训练超参数的结果就是模型绝对过拟合.</p>
-</li>
-<li><p>正因为超参数无法在训练集上进行训练,因此我们单独设立了一个验证集,用于选择(人工训练)最优的超参数.因为验证集是用于选择超参数的,因此校验集和训练集是独立不重叠的.</p>
-</li>
-<li><p>测试集是用于在完成神经网络训练过程后,为了<strong>客观评价模型</strong>在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,因此测试与验证集和训练集之间也是独立不重叠的,而且测试集不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标.</p>
-</li>
+<li>分类（classification）:分类任务就是通过学习得到一个目标函数f，把每个属性集x映射到一个预先定义的类标号y中。</li>
+<li>分类是根据一些给定的已知类别标号的样本，训练某种学习机器（即得到某种目标函数），使它能够对未知类别的样本进行分类。这属于supervised learning（监督学习）。</li>
+<li>分类：通过学习来得到样本属性与类标号之间的关系。<br>用自己的话来说，就是我们根据已知的一些样本（包括属性与类标号）来得到分类模型（即得到样本属性与类标号之间的函数），然后通过此目标函数来对只包含属性的样本数据进行分类。</li>
 </ul>
-<p>为了方便清楚直观的了解，上一个表格：<br><img src="https://img-blog.csdnimg.cn/20190724110042475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至此,我们可以将神经网络完整的训练过程归结为一下两个步骤:</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.训练普通参数.在训练集(给定超参数)上利用学习算法,训练普通参数,使得模型在训练集上的误差降低到可接受的程度(一般接近人类的水平).</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.’训练’超参数.在验证集上验证网络的generalization error(泛化能力),并根据模型性能对超参数进行调整.</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重复1和2两个步骤,直至网络在验证集上取得较低的generalization error.此时完整的训练过程结束.在完成参数和超参数的训练后,在测试集上测试网络的性能.</p>
-<h2 id="附言"><a href="#附言" class="headerlink" title="附言"></a>附言</h2><p>说到底：</p>
+<p><strong>分类算法的局限</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类作为一种监督学习方法，要求必须事先明确知道各个类别的信息，并且断言所有待分类项都有一个类别与之对应。但是很多时候上述条件得不到满足，尤其是在处理海量数据的时候，如果通过预处理使得数据满足分类算法的要求，则代价非常大，这时候可以考虑使用聚类算法。</p>
+<h1 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h1><p>聚类的相关的一些概念如下</p>
 <ul>
-<li><p>验证集是一定需要的；</p>
-</li>
-<li><p>如果验证集具有足够泛化代表性，是不需要再整出什么测试集的；</p>
-</li>
-<li><p>整个测试集往往就是为了在验证集只是非训练集一个小子集的情况下，好奇一下那个靠训练集（训练）和验证集（调参）多次接力训练出来的模型是不是具有了泛化性能，因而加试一下图个确定。</p>
-</li>
+<li>聚类指事先并不知道任何样本的类别标号，希望通过某种算法来把一组未知类别的样本划分成若干类别，聚类的时候，我们并不关心某一类是什么，我们需要实现的目标只是把相似的东西聚到一起，这在机器学习中被称作 unsupervised learning （无监督学习）</li>
+<li>通常，人们根据样本间的某种距离或者相似性来定义聚类，即把相似的（或距离近的）样本聚为同一类，而把不相似的（或距离远的）样本归在其他类。</li>
+<li>聚类的目标：组内的对象相互之间时相似的（相关的），而不同组中的对象是不同的（不相关的）。组内的相似性越大，组间差别越大，聚类就越好。</li>
+</ul>
+<h1 id="分类与聚类的比较"><a href="#分类与聚类的比较" class="headerlink" title="分类与聚类的比较"></a>分类与聚类的比较</h1><ul>
+<li>分类：有训练数据，且训练数据包含输入和输出（有监督学习），已知分类的类别（即训练数据的输出）。学习出一个模型，用该模型对未分好类（预测数据）的数据进行预测分类（已知的类别中）。</li>
+<li>聚类：训练数据只有输入（无监督学习）。训练过程即预测过程（聚类过程），且不知道类别，甚至不知道有多少个类别，类别的数量需要指定（K-means）,也可以直接通过算法学习出来（DBSCAN）。只能通过特征的相似性对样本分类。该过程即聚类。</li>
+<li>聚类分析是研究如何在没有训练的条件下把样本划分为若干类。</li>
+<li>在分类中，对于目标数据库中存在哪些类是知道的，要做的就是将每一条记录分别属于哪一类标记出来。</li>
+<li>聚类需要解决的问题是将已给定的若干无标记的模式聚集起来使之成为有意义的聚类，聚类是在预先不知道目标数据库到底有多少类的情况下，希望将所有的记录组成不同的类或者说聚类，并且使得在这种分类情况下，以某种度量（例如：距离）为标准的相似性，在同一聚类之间最小化，而在不同聚类之间最大化。</li>
+<li>与分类不同，无监督学习不依赖预先定义的类或带类标记的训练实例，需要由聚类学习算法自动确定标记，而分类学习的实例或数据样本有类别标记。</li>
 </ul>
 ]]></content>
       <categories>
@@ -1387,145 +1537,8 @@ if __name__ == &#39;__main__&#39;:   #主函数
       </categories>
       <tags>
         <tag>机器学习</tag>
-        <tag>数据集</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>朴素贝叶斯算法</title>
-    <url>/2019/08/05/po-su-bei-xie-si-suan-fa/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是流行的十大算法之一，该算法是有监督的学习算法，解决的是分类问题，如客户是否流失、是否值得投资、信用等级评定等多分类问题。<strong>该算法的优点在于简单易懂、学习效率高、在某些领域的分类问题中能够与决策树、神经网络相媲美。</strong>但由于该算法以自变量之间的独立（条件特征独立）性和连续变量的正态性假设为前提，就会导致算法精度在某种程度上受影响。</p>
-<h1 id="一、问题的提出"><a href="#一、问题的提出" class="headerlink" title="一、问题的提出"></a>一、问题的提出</h1><p>先举一个具体的例子：</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“一所学校里面有 60% 的男生，40% 的女生。男生总是穿长裤，女生则一半穿长裤一半穿裙子。有了这些信息之后我们可以容易地计算“随机选取一个学生，他（她）穿长裤的概率和穿裙子的概率是多大”，这个就是前面说的“正向概率”的计算。然而，假设你走在校园中，迎面走来一个穿长裤的学生（很不幸的是你高度近似，你只看得见他（她）穿的是否长裤，而无法确定他（她）的性别），你能够推断出他（她）是男生的概率是多大吗？”</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们来算一算：假设学校里面人的总数是 U 个。60% 的男生都穿长裤，于是我们得到了 U <em> P(Boy) </em> P(Pants|Boy) 个穿长裤的（男生）（其中 P(Boy) 是男生的概率 = 60%，这里可以简单的理解为男生的比例；P(Pants|Boy) 是条件概率，即在 Boy 这个条件下穿长裤的概率是多大，这里是 100% ，因为所有男生都穿长裤）。40% 的女生里面又有一半（50%）是穿长裤的，于是我们又得到了 U <em> P(Girl) </em> P(Pants|Girl) 个穿长裤的（女生）。加起来一共是 U <em> P(Boy) </em> P(Pants|Boy) + U <em> P(Girl) </em> P(Pants|Girl) 个穿长裤的，其中有 U <em> P(Girl) </em> P(Pants|Girl) 个女生。两者一比就是你要求的答案。<br>下面我们把这个答案形式化一下：我们要求的是 P(Girl|Pants) （穿长裤的人里面有多少女生），我们计算的结果是 U <em> P(Girl) </em> P(Pants|Girl) / [U <em> P(Boy) </em> P(Pants|Boy) + U <em> P(Girl) </em> P(Pants|Girl)] 。容易发现这里校园内人的总数是无关的，可以消去。于是得到</p>
-<p><strong>P(Girl|Pants) = P(Girl) <em> P(Pants|Girl) / [P(Boy) </em> P(Pants|Boy) + P(Girl) * P(Pants|Girl)]</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意，如果把上式收缩起来，分母其实就是 P(Pants) ，分子其实就是 P(Pants, Girl) 。而这个比例很自然地就读作：在穿长裤的人（ P(Pants) ）里面有多少（穿长裤）的女孩（ P(Pants, Girl) ）。<br>进一步得到公式的一般形式：</p>
-<p><strong>P(B|A) = P(A|B) <em> P(B) / [P(A|B) </em> P(B) + P(A|~B) * P(~B) ]</strong></p>
-<p>收缩起来就是：<strong>P(B|A) = P(AB) / P(A)</strong><br>其实这个就等于：<strong>P(B|A) * P(A) = P(AB)</strong></p>
-<h1 id="二、正式的定义"><a href="#二、正式的定义" class="headerlink" title="二、正式的定义"></a>二、正式的定义</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是基于贝叶斯定理与特征条件独立假设的分类方法，然后依据被分类项属于各个类的概率，概率最大者即为所划分的类别。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设输入空间X=（x1,x2,x3…xn），输出类标记为Y=（y1,y2,y3…yn）。x的集合记为X，称为属性集。一般X和Y的关系不确定的，你只能在某种程度上说x有多大可能性属于类y1，比如说x有80%的可能性属于类y1，这时可以把X和Y看做是随机变量，P(Y|X)称为Y的<strong>后验概率</strong>（posterior probability），与之相对的P(Y)称为Y的<strong>先验概率</strong>（prior probability），P(X=x|Y=y1)称之为<strong>条件概率</strong>。</p>
-<p><strong>先验概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过经验来判断事情发生的概率，比如说“贝叶死”的发病率是万分之一，就是先验概率。再比如南方的梅雨季是 6-7 月，就是通过往年的气候总结出来的经验，这个时候下雨的概率就比其他时间高出很多。</p>
-<p><strong>后验概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;后验概率就是发生结果之后，推测原因的概率。比如说某人查出来了患有“贝叶死”，那么患病的原因可能是 A、B 或 C。患有“贝叶死”是因为原因 A 的概率就是后验概率。它是属于条件概率的一种。</p>
-<p><strong>条件概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;事件 A 在另外一个事件 B 已经发生条件下的发生概率，表示为 P(A|B)，读作“在 B 发生的条件下 A 发生的概率”。比如原因 A 的条件下，患有“贝叶死”的概率，就是条件概率。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单说来就是：贝叶斯分类算法的理论基于贝叶斯公式：<br><img src="https://img-blog.csdnimg.cn/20190816085605498.png" alt></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中P(A|B)称为<strong>条件概率</strong>，P(B)<strong>先验概率</strong>，对应P(B|A)为<strong>后验概率</strong>。朴素贝叶斯分类器基于一个简单的假定，即给定的目标值属性之间是相互独立。贝叶斯公式之所以有用是因为在日常生活中，我们可以很容易得到P(A|B)，而很难得出P(B|A)，但我们更关心P(B|A)，所以就可以根据贝叶斯公式来计算。</p>
-<h1 id="三、应用举例"><a href="#三、应用举例" class="headerlink" title="三、应用举例"></a>三、应用举例</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如下表所示，训练数据学习一个朴素贝叶斯分类器并确定x=(2,S)T的类标记y。表中x1、x2为特征，取值的集合分别为X1={1,2,3}，X2={S,M,L}，类标记Y={1,-1}</p>
-<p><img src="https://img-blog.csdnimg.cn/20190816084258206.png" alt><br>根据贝叶斯算法得到如下概率：</p>
-<p>P(Y=1)=9/15，P(Y=-1)=6/15</p>
-<p>P(X1=1|Y=1)=2/9，P(X1=2|Y=1)=3/9，P(X1=3|Y=1)=4/9</p>
-<p>P(X2=S|Y=1)=1/9，P(X2=M|Y=1)=4/9，P(X2=L|Y=1)=4/9</p>
-<p>P(X1=1|Y=-1)=3/6，P(X1=2|Y=-1)=2/6，P(X1=3|Y=-1)=1/6</p>
-<p>P(X2=S|Y=-1)=3/6，P(X2=M|Y=-1)=2/6，P((X2=L|Y=-1)=1/6</p>
-<p>所以对于给定的x=(2,S)T计算：</p>
-<p>P(Y=1)P(X1=2|Y=1)P(X2=S|Y=1)=(9/15)(3/9)(1/9)=1/45</p>
-<p>P(Y=-1)P(X1=2|Y=-1)P(X2=S|Y=-1)=(6/15)(2/6)(1/6)=1/15</p>
-<p>所以分类结果为y=-1</p>
-<h1 id="四、朴素贝叶斯算法的优缺点"><a href="#四、朴素贝叶斯算法的优缺点" class="headerlink" title="四、朴素贝叶斯算法的优缺点"></a>四、朴素贝叶斯算法的优缺点</h1><p><strong>优点：</strong></p>
-<ol>
-<li>朴素贝叶斯模型发源于古典数学理论，有着坚实的数学基础，以及稳定的分类效率；</li>
-<li>对大数量训练和查询时具有较高的速度。即使使用超大规模的训练集，针对每个项目通常也只会有相对较少的特征数，并且对项目的训练和分类也仅仅是特征概率的数学运算而已；</li>
-<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练（即可以实时的对新增的样本进行训练）；</li>
-<li>对缺失数据不太敏感，算法也比较简单，常用于文本分类；</li>
-<li>朴素贝叶斯对结果解释容易理解。</li>
-</ol>
-<p> <strong>缺点</strong></p>
-<ol>
-<li>需要计算先验概率；</li>
-<li>分类决策存在错误率；</li>
-<li>对输入数据的表达形式很敏感；</li>
-<li>由于使用了样本属性独立性的假设，所以如果样本属性有关联时其效果不好。</li>
-</ol>
-<h1 id="五、应用领域"><a href="#五、应用领域" class="headerlink" title="五、应用领域"></a>五、应用领域</h1><ol>
-<li>欺诈检测中使用较多；</li>
-<li>一封电子邮件是否是垃圾邮件；</li>
-<li>一篇文章应该分到科技、政治，还是体育类；</li>
-<li>一段文字表达的是积极的情绪还是消极的情绪；</li>
-<li>人脸识别</li>
-</ol>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>朴素贝叶斯算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”</title>
-    <url>/2020/03/18/xiao-wang-zi-zheng-yin-wei-ni-wei-ni-de-mei-gui-hua-fei-liao-shi-jian-zhe-cai-shi-ni-de-mei-gui-bian-de-ru-ci-chong-yao/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这是法国名著《小王子》中一个有名的寓言故事，这个童话，实在太有智慧灵性了。人与人之间，不也是一样道理吗？我不得不承认，我被触动了。</p>
-<h2 id="【小王子】"><a href="#【小王子】" class="headerlink" title="【小王子】"></a>【小王子】</h2><p> 有一天，小王子的星球上，不知从哪里来了一颗种子，后来忽然发了芽。小王子小心翼翼地监护着这株与众不同的嫩芽。小王子看到嫩芽长出一个巨大的花蕾，感到从中一定会产生奇迹。但是，这朵花儿却躲在她那绿茵茵的房间里，梳妆打扮没个完。一天清晨，正好当太阳升起的时候，她露面了。</p>
-<p>   她，精心做了那么许多的准备，却伸着懒腰打着呵欠说：“哎呀！我刚刚睡醒。。。请原谅。。。瞧我的头发还是乱蓬蓬的。。。”</p>
-<p>   小王子此时抑制不住自己那爱慕之情。</p>
-<p>“你真美！”</p>
-<p>“是么？你可知道，太阳是和我同时诞生的。。。”</p>
-<p>   小王子看得出，这花儿很不谦虚，不过，她确实楚楚动人。</p>
-<p>“我想，是该吃早点的时候了吧？”她随后又说，“请您记得我需要。。。”</p>
-<p>   小王子感到十分惭愧，于是去提了一壶清水来给她浇灌。</p>
-<p>   不久，她就以她的多疑的虚荣心来折磨小王子。例如，有一天，她谈起她身上长着的四根刺时，她对小王子说：“老虎么，让它们带着它们的利抓来吧！”</p>
-<p>“我的星球上根本没有老虎，”小王子反驳说，“而且老虎是不吃草的。”</p>
-<p>   花儿娇嗔地说：“我可不是草。”</p>
-<p>“请原谅！”</p>
-<p>“我不怕什么老虎，可是我受不了穿堂风，您没有屏风吗？”</p>
-<p>   小王子思忖着：“受不了穿堂风。。。这对一株植物来说，太不幸了。这朵花儿有点难弄…”</p>
-<p>   这时，她故意咳得更响，好使他良心受责备。</p>
-<p>   尽管小王子真心诚意爱这朵花儿，这样一来，他开始对她产生怀疑了。小王子对一些无关紧要的话，看得过分认真，结果使自己很苦恼。</p>
-<p>   小王子选择了离开，去旅行。</p>
-<p>   临行那天早上，当小王子最后一次浇花，准备为她盖上玻璃罩子时，他觉得自己想哭出来。</p>
-<p>“再见了！”他对花儿说。</p>
-<p>   花儿咳嗽起来，但并不是由于感冒。她终于开口说：“我真傻，我请求你的原谅。祝你幸福。”她居然没有一句责备他的话，这实在使他感到意外。他站在那里手足无措，玻璃罩举在半空。他不懂得这份脉脉的柔情。</p>
-<p>   “的确，我爱你。”花儿对他说，“但是你一点儿都没体会到，这实在是我的错。再说也没有用了。不过，你过去也和我一样的傻。希望你今后幸福。。。把罩子放到一边去吧，我用不着它了。”</p>
-<p>“要是风。。。”</p>
-<p>“我的感冒并没有那么厉害。。。晚间的凉风对我有好处。我是花儿呀。”</p>
-<p>“要是虫子野兽。。。”</p>
-<p>“我要是想结识蝴蝶，我就应当忍受得了两三只小毛虫在身上爬。据说，这很美妙。如果没有蝴蝶和毛虫，还有谁来看我呢？你么，你又远在天边。至于大动物，我并不怕，我有爪子。”</p>
-<p>   她天真地伸出她那四根刺，随后又说：“别这样磨磨蹭蹭啦，这挺叫人烦心！你既然决定走，那就快走吧！” </p>
-<p> 她是怕小王子看见她哭。这是一朵有傲气的花。。。 </p>
-<p>   有一天，小王子对我倾诉：“我当时什么也不懂！我应该根据她的行动，而不是根据她的话判断她。她对我散发芳香，她使我的生活充满阳光。我真不该离开她。我本应看得出她耍的那些小花招后面隐藏着的一片柔情。花儿是多么里外不一致！我当时年纪太小，不懂得爱她。”</p>
-<p>   小王子走着走着，这时候，一只狐狸出现了。</p>
-<p>“你好！”狐狸说。</p>
-<p>“你好！”小王子彬彬有礼地回答。但回头一看，什么也没有看见。</p>
-<p>“我就在这儿。”那声音说，“在苹果树下。”</p>
-<p>“你是谁？”小王子说，“你真漂亮。”</p>
-<p>“我是狐狸。”狐狸说。</p>
-<p>“来跟我玩玩吧。”小王子建议说，“我很不开心。。。”</p>
-<p>“我不能跟你玩，”狐狸说，“我还没经过驯养。”</p>
-<p>“啊，对不起！”小王子说。但是，想了一想后，他又说：“什么叫做驯养？”</p>
-<p>   狐狸说：“意思就是：建立一种关系。”</p>
-<p>“建立关系？”</p>
-<p>   “一点不错，”狐狸说，“在我看来，你只不过是一个小男孩，跟成千上万的男孩毫无两样。我不需要你，你也不需要我。对你来说我只不过是一只狐狸，跟成千上万的狐狸毫无两样。但是，你如果驯养了我，那么我们俩就彼此相互需要。对我来说，你是世界上独一无二的；我在你看来，也是世界上独一无二的。。。”</p>
-<p>   狐狸叹口气说：“世上没有十全十美的事，我的生活很单调枯燥，但是，如果你驯养了我，我的生活就会充满阳光。我会听得出一种与众不同的脚步声。别的脚步声会使我往洞里钻，你的脚步声却像音乐一般，把我从洞里召唤出来。还有，你看！那边的麦田，你看见了吗？我不吃面包，麦子对我来说，一点也没用。麦田不能引起我什么联想，这真使人扫兴！但是，你有金色的头发。一旦你驯养了我，那就会十分美妙！麦子，黄澄澄，会使我联想到你，而且我甚至会喜欢风吹麦浪的沙沙声。。。”</p>
-<p>   狐狸没说下去，盯着小王子看了好久。</p>
-<p>“请你。。。驯养我吧！”他说。</p>
-<p>   “我是很愿意的，”小王子回答道，“可是我的时间不多。我还要认识一些新朋友，了解许许多多的事。”</p>
-<p>   “人们只能了解自己所驯养的东西，”狐狸说，“人们不会有时间去了解任何东西。他们想要什么东西，都往商店去买现成的。可是，世界上没有可以购买朋友的商店，所以人也就得不到朋友。你要朋友，就请驯养我吧！”</p>
-<p>“要驯养，该怎样做呢？”小王子说。</p>
-<p>   “必须非常耐心。”狐狸回答道，“首先，你离我远一点，像这样，坐在草地上。我用眼梢瞅着你，你一句话也别说。话语往往是误会的根源。不过，每天你坐得更靠近我一些。。。”</p>
-<p>   第二天，小王子又来了。</p>
-<p>   “最好还是在同一时间来，”狐狸说，“比如说，你在下午四点钟来，一到三点钟我就开始感到幸福了。时间越接近，我就越感到幸福。到了四点钟，我就会坐立不安，焦虑重重；我就会发现幸福的代价。可是，你如果想什么时间来就什么时间来，我就不知道什么时候准备好我的心。。。应当有一定的常规。”</p>
-<p>“常规是什么？”小王子问道。</p>
-<p>   “这也是被人差不多忘得一干二净的事，”狐狸说，“这就是使某一天与其他日子不同，使某一时刻与其他时刻不同。比如说，猎人也有一种常规。他们每星期四都和乡村里的姑娘跳舞。星期四就成为我开心的日子！我甚至可以一直逛到葡萄园。要是猎人什么时候都去跳舞，这一天和其他日子没什么不同，那我就终年没放假的日子了。”</p>
-<p>   于是小王子驯养了狐狸。当小王子快要离开时，狐狸说：“哎！。。。我想哭。”</p>
-<p>   “这是你自己的错，我从未想过要使你难受，但是，你却要我驯养你。。。”小王子说。</p>
-<p>“是这样！”狐狸说。</p>
-<p>“可是你现在又要哭！”小王子说。</p>
-<p>“当然啦。”狐狸说。</p>
-<p>“这样对你有什么好处。”</p>
-<p>“对我有好处。”狐狸说，“有了麦子的颜色。”</p>
-<p>   小王子走了。路上他碰见满园的玫瑰花儿。</p>
-<p>   满园的玫瑰花儿向小王子用力点着头微笑，小王子说：“你们很美，但你们是空虚的。没有人会为你们去死。当然，我的那朵玫瑰，一个普通的过路人会认为她们和你们是一样的。可是，她单独一朵比你们全体更可贵，因为我给她浇过水，因为我为她盖过罩子，因为我给她用屏风挡风，因为我倾听过她的怨艾，她的夸口，有时甚至倾听她的沉默。因为她是我的玫瑰花。”</p>
-<p>   小王子又回到狐狸身旁：“再见了。。。狐狸”</p>
-<p>“再见了。”狐狸说，“本质的东西，眼睛是看不到的，只有用心灵看。”</p>
-<p>“本质的东西，眼睛是看不到的，只有用心灵看。”小王子重复这句话，以免忘记。</p>
-<p>“正是因为我对我的玫瑰，花费了时间，才使花儿变得那么重要。”小王子重复这句话，以免忘记。</p>
-<p>“这个真理，已经被人忘记了，”狐狸说，“但是你千万不要忘记。对你驯养的东西，你要永远负责。你必须对你的花儿负责。。。”</p>
-<p>“我要对我的花儿负责。”小王子又重复跟着说，为了牢牢记住。</p>
-<h4 id="摘自《小王子》"><a href="#摘自《小王子》" class="headerlink" title="摘自《小王子》"></a>摘自《小王子》</h4>]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
+        <tag>分类</tag>
+        <tag>聚类</tag>
       </tags>
   </entry>
   <entry>
@@ -1690,76 +1703,63 @@ plt.show()
       </tags>
   </entry>
   <entry>
-    <title>暑期培训第一次测试题总结</title>
-    <url>/2019/07/22/shu-qi-pei-xun-di-yi-ci-ce-shi-ti-zong-jie/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里是一些暑期培训第一次测试题的部分解释，经过这次测试的摧残，总结备录一下，方便日后回顾复习。</p>
-<h2 id="Feeling"><a href="#Feeling" class="headerlink" title="Feeling"></a>Feeling</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经过几天的学习，7月22日下午，进行了第一次检测。开始以为会让我们推导一些公式什么的，结果当拿到测试题的时候，一首凉凉送给自己……开始的选择题和填空题还能接受，看到简答题，这都是什么，有种似曾相识的感觉，但就是写不出来。为时四十分钟的考试结束后，不到半个小时成绩就出来了，虽然成绩不那么好，但排名还行，然后学长给我们进行了讲解答疑，发现自己学的有点粗糙，没有注意那些细节性问题和概念，学以致用这方面也是有点差的。</p>
-<h2 id="Test-1"><a href="#Test-1" class="headerlink" title="Test 1"></a>Test 1</h2><h3 id="为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set"><a href="#为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set" class="headerlink" title="为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?"></a>为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校验集是用于调整超参数的，从而更好的优化训练模型。测试集是用于在完成神经网络训练过程后,为了客观评价模型在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,而且测试集<strong>不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标</strong>。</p>
-<p>（备注：不清楚这三个数据集概念及其作用的，可看下我以前写的关于这些的一篇文章。传送门：）</p>
-<h2 id="Test-2"><a href="#Test-2" class="headerlink" title="Test 2"></a>Test 2</h2><h3 id="批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？"><a href="#批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？" class="headerlink" title="批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？"></a>批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们要先知道什么是BGD和SGD，从两者的运算方法上，我们就可以得知不同之处。</p>
-<p>（1）批量梯度下降法（Batch Gradient Descent） ：在更新参数时都使用所有的样本来进行更新。</p>
-<ul>
-<li>优点：<strong>全局最优解</strong>，能保证每一次更新权值，都能降低损失函数；易于并行实现。</li>
-<li>缺点：当样本数目很多时，训练过程会很慢。</li>
-</ul>
-<p>（2）随机梯度下降法（Stochastic Gradient Descent）：在更新参数时都使用一个样本来进行更新。每一次跟新参数都用一个样本，更新很多次。如果样本量很大的情况（例如几十万），那么可能只用其中几万条或者几千条的样本，就已经将参数迭代到最优解了，对比上面的批量梯度下降，迭代一次需要用到十几万训练样本，一次迭代不可能最优，如果迭代10次的话就需要遍历训练样本10次，这种方式计算复杂度太高。</p>
-<ul>
-<li>优点：训练速度快；</li>
-<li>缺点：准确度下降，<strong>并不是全局最优</strong>；不易于并行实现。从迭代的次数上来看，随机梯度下降法迭代的次数较多，在解空间的搜索过程看起来很盲目。噪音很多，使得它并不是每次迭代都向着整体最优化方向。</li>
-</ul>
-<h2 id="Test-3"><a href="#Test-3" class="headerlink" title="Test 3"></a>Test 3</h2><h3 id="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"><a href="#当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？" class="headerlink" title="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"></a>当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;废话不多说，直接上图：<br><img src="https://img-blog.csdnimg.cn/20190722174826448.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="Test-4"><a href="#Test-4" class="headerlink" title="Test 4"></a>Test 4</h2><h3 id="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"><a href="#假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？" class="headerlink" title="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"></a>假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于逻辑回归，把权重初始化为0当然也是可以的，但是对于一个神经网络，如果你把权重或者参数都初始化为0，那么梯度下降将不会起作用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果权值全初始化为0，则<strong>无法更新权值</strong>。这是由于前向传播中，所有节点输出值均相同，由于此处使用了sigmod激活函数，所以此处所有神经节点输出都为1/2，而在反向传播每个节点输出值对损失函数的偏导时，涉及到对权值相乘后的求和，该项永远为0，故所乘的结果也必然为0，这样在计算权值对算是函数的偏导时，其偏导必然为0，所有权值偏导都为0，那么就不要指望使用梯度下降法能更新权值了，自然神经网络的训练也就无法进行下去了。</p>
-<h2 id="Test-5"><a href="#Test-5" class="headerlink" title="Test 5"></a>Test 5</h2><h3 id="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"><a href="#在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？" class="headerlink" title="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"></a>在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;神经网络中的梯度不稳定指的是<strong>梯度消失</strong>和<strong>梯度爆炸</strong>问题。<br>（备注：对于这两种问题的具体解释和为什么会出现这种问题，以及解决方法，这里不具体讨论了，我会在以后的文章中具体解释到的。）</p>
-<h2 id="Test-6"><a href="#Test-6" class="headerlink" title="Test 6"></a>Test 6</h2><h3 id="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"><a href="#为什么在神经网络中使用交叉熵而不是均方差作为误差函数？" class="headerlink" title="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"></a>为什么在神经网络中使用交叉熵而不是均方差作为误差函数？</h3><pre><code>1. 神经网络中如果预测值与实际值的误差越大，那么在反向传播训练的过程中，各种参数调整的幅度就要更大，从而使训练更快收敛，如果预测值与实际值的误差小，各种参数调整的幅度就要小，从而减少震荡。
-
-2. 使用平方误差损失函数，误差增大参数的梯度会增大，但是当误差很大时，参数的梯度就会又减小了。
-
-3. 使用交叉熵损失是函数，误差越大参数的梯度也越大，能够快速收敛。
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（备注：对于结论的推导过程会总结在另一篇文章里。）</p>
-]]></content>
-      <categories>
-        <category>测试题</category>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>测试题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>浅谈机器学习-分类和聚类的区别</title>
-    <url>/2019/08/01/qian-tan-ji-qi-xue-xi-fen-lei-he-ju-lei-de-qu-bie/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习中有两类的大问题，一个是分类，一个是聚类。在我们的生活中，我们常常没有过多的去区分这两个概念，觉得聚类就是分类，分类也差不多就是聚类，下面，我们就具体来研究下分类与聚类之间在数据挖掘中本质的区别。</p>
-<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>分类有如下几种说法，但表达的意思是相同的。</p>
-<ul>
-<li>分类（classification）:分类任务就是通过学习得到一个目标函数f，把每个属性集x映射到一个预先定义的类标号y中。</li>
-<li>分类是根据一些给定的已知类别标号的样本，训练某种学习机器（即得到某种目标函数），使它能够对未知类别的样本进行分类。这属于supervised learning（监督学习）。</li>
-<li>分类：通过学习来得到样本属性与类标号之间的关系。<br>用自己的话来说，就是我们根据已知的一些样本（包括属性与类标号）来得到分类模型（即得到样本属性与类标号之间的函数），然后通过此目标函数来对只包含属性的样本数据进行分类。</li>
-</ul>
-<p><strong>分类算法的局限</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类作为一种监督学习方法，要求必须事先明确知道各个类别的信息，并且断言所有待分类项都有一个类别与之对应。但是很多时候上述条件得不到满足，尤其是在处理海量数据的时候，如果通过预处理使得数据满足分类算法的要求，则代价非常大，这时候可以考虑使用聚类算法。</p>
-<h1 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h1><p>聚类的相关的一些概念如下</p>
-<ul>
-<li>聚类指事先并不知道任何样本的类别标号，希望通过某种算法来把一组未知类别的样本划分成若干类别，聚类的时候，我们并不关心某一类是什么，我们需要实现的目标只是把相似的东西聚到一起，这在机器学习中被称作 unsupervised learning （无监督学习）</li>
-<li>通常，人们根据样本间的某种距离或者相似性来定义聚类，即把相似的（或距离近的）样本聚为同一类，而把不相似的（或距离远的）样本归在其他类。</li>
-<li>聚类的目标：组内的对象相互之间时相似的（相关的），而不同组中的对象是不同的（不相关的）。组内的相似性越大，组间差别越大，聚类就越好。</li>
-</ul>
-<h1 id="分类与聚类的比较"><a href="#分类与聚类的比较" class="headerlink" title="分类与聚类的比较"></a>分类与聚类的比较</h1><ul>
-<li>分类：有训练数据，且训练数据包含输入和输出（有监督学习），已知分类的类别（即训练数据的输出）。学习出一个模型，用该模型对未分好类（预测数据）的数据进行预测分类（已知的类别中）。</li>
-<li>聚类：训练数据只有输入（无监督学习）。训练过程即预测过程（聚类过程），且不知道类别，甚至不知道有多少个类别，类别的数量需要指定（K-means）,也可以直接通过算法学习出来（DBSCAN）。只能通过特征的相似性对样本分类。该过程即聚类。</li>
-<li>聚类分析是研究如何在没有训练的条件下把样本划分为若干类。</li>
-<li>在分类中，对于目标数据库中存在哪些类是知道的，要做的就是将每一条记录分别属于哪一类标记出来。</li>
-<li>聚类需要解决的问题是将已给定的若干无标记的模式聚集起来使之成为有意义的聚类，聚类是在预先不知道目标数据库到底有多少类的情况下，希望将所有的记录组成不同的类或者说聚类，并且使得在这种分类情况下，以某种度量（例如：距离）为标准的相似性，在同一聚类之间最小化，而在不同聚类之间最大化。</li>
-<li>与分类不同，无监督学习不依赖预先定义的类或带类标记的训练实例，需要由聚类学习算法自动确定标记，而分类学习的实例或数据样本有类别标记。</li>
-</ul>
+    <title>朴素贝叶斯算法</title>
+    <url>/2019/08/05/po-su-bei-xie-si-suan-fa/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是流行的十大算法之一，该算法是有监督的学习算法，解决的是分类问题，如客户是否流失、是否值得投资、信用等级评定等多分类问题。<strong>该算法的优点在于简单易懂、学习效率高、在某些领域的分类问题中能够与决策树、神经网络相媲美。</strong>但由于该算法以自变量之间的独立（条件特征独立）性和连续变量的正态性假设为前提，就会导致算法精度在某种程度上受影响。</p>
+<h1 id="一、问题的提出"><a href="#一、问题的提出" class="headerlink" title="一、问题的提出"></a>一、问题的提出</h1><p>先举一个具体的例子：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“一所学校里面有 60% 的男生，40% 的女生。男生总是穿长裤，女生则一半穿长裤一半穿裙子。有了这些信息之后我们可以容易地计算“随机选取一个学生，他（她）穿长裤的概率和穿裙子的概率是多大”，这个就是前面说的“正向概率”的计算。然而，假设你走在校园中，迎面走来一个穿长裤的学生（很不幸的是你高度近似，你只看得见他（她）穿的是否长裤，而无法确定他（她）的性别），你能够推断出他（她）是男生的概率是多大吗？”</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们来算一算：假设学校里面人的总数是 U 个。60% 的男生都穿长裤，于是我们得到了 U <em> P(Boy) </em> P(Pants|Boy) 个穿长裤的（男生）（其中 P(Boy) 是男生的概率 = 60%，这里可以简单的理解为男生的比例；P(Pants|Boy) 是条件概率，即在 Boy 这个条件下穿长裤的概率是多大，这里是 100% ，因为所有男生都穿长裤）。40% 的女生里面又有一半（50%）是穿长裤的，于是我们又得到了 U <em> P(Girl) </em> P(Pants|Girl) 个穿长裤的（女生）。加起来一共是 U <em> P(Boy) </em> P(Pants|Boy) + U <em> P(Girl) </em> P(Pants|Girl) 个穿长裤的，其中有 U <em> P(Girl) </em> P(Pants|Girl) 个女生。两者一比就是你要求的答案。<br>下面我们把这个答案形式化一下：我们要求的是 P(Girl|Pants) （穿长裤的人里面有多少女生），我们计算的结果是 U <em> P(Girl) </em> P(Pants|Girl) / [U <em> P(Boy) </em> P(Pants|Boy) + U <em> P(Girl) </em> P(Pants|Girl)] 。容易发现这里校园内人的总数是无关的，可以消去。于是得到</p>
+<p><strong>P(Girl|Pants) = P(Girl) <em> P(Pants|Girl) / [P(Boy) </em> P(Pants|Boy) + P(Girl) * P(Pants|Girl)]</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意，如果把上式收缩起来，分母其实就是 P(Pants) ，分子其实就是 P(Pants, Girl) 。而这个比例很自然地就读作：在穿长裤的人（ P(Pants) ）里面有多少（穿长裤）的女孩（ P(Pants, Girl) ）。<br>进一步得到公式的一般形式：</p>
+<p><strong>P(B|A) = P(A|B) <em> P(B) / [P(A|B) </em> P(B) + P(A|~B) * P(~B) ]</strong></p>
+<p>收缩起来就是：<strong>P(B|A) = P(AB) / P(A)</strong><br>其实这个就等于：<strong>P(B|A) * P(A) = P(AB)</strong></p>
+<h1 id="二、正式的定义"><a href="#二、正式的定义" class="headerlink" title="二、正式的定义"></a>二、正式的定义</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是基于贝叶斯定理与特征条件独立假设的分类方法，然后依据被分类项属于各个类的概率，概率最大者即为所划分的类别。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设输入空间X=（x1,x2,x3…xn），输出类标记为Y=（y1,y2,y3…yn）。x的集合记为X，称为属性集。一般X和Y的关系不确定的，你只能在某种程度上说x有多大可能性属于类y1，比如说x有80%的可能性属于类y1，这时可以把X和Y看做是随机变量，P(Y|X)称为Y的<strong>后验概率</strong>（posterior probability），与之相对的P(Y)称为Y的<strong>先验概率</strong>（prior probability），P(X=x|Y=y1)称之为<strong>条件概率</strong>。</p>
+<p><strong>先验概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过经验来判断事情发生的概率，比如说“贝叶死”的发病率是万分之一，就是先验概率。再比如南方的梅雨季是 6-7 月，就是通过往年的气候总结出来的经验，这个时候下雨的概率就比其他时间高出很多。</p>
+<p><strong>后验概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;后验概率就是发生结果之后，推测原因的概率。比如说某人查出来了患有“贝叶死”，那么患病的原因可能是 A、B 或 C。患有“贝叶死”是因为原因 A 的概率就是后验概率。它是属于条件概率的一种。</p>
+<p><strong>条件概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;事件 A 在另外一个事件 B 已经发生条件下的发生概率，表示为 P(A|B)，读作“在 B 发生的条件下 A 发生的概率”。比如原因 A 的条件下，患有“贝叶死”的概率，就是条件概率。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单说来就是：贝叶斯分类算法的理论基于贝叶斯公式：<br><img src="https://img-blog.csdnimg.cn/20190816085605498.png" alt></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中P(A|B)称为<strong>条件概率</strong>，P(B)<strong>先验概率</strong>，对应P(B|A)为<strong>后验概率</strong>。朴素贝叶斯分类器基于一个简单的假定，即给定的目标值属性之间是相互独立。贝叶斯公式之所以有用是因为在日常生活中，我们可以很容易得到P(A|B)，而很难得出P(B|A)，但我们更关心P(B|A)，所以就可以根据贝叶斯公式来计算。</p>
+<h1 id="三、应用举例"><a href="#三、应用举例" class="headerlink" title="三、应用举例"></a>三、应用举例</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如下表所示，训练数据学习一个朴素贝叶斯分类器并确定x=(2,S)T的类标记y。表中x1、x2为特征，取值的集合分别为X1={1,2,3}，X2={S,M,L}，类标记Y={1,-1}</p>
+<p><img src="https://img-blog.csdnimg.cn/20190816084258206.png" alt><br>根据贝叶斯算法得到如下概率：</p>
+<p>P(Y=1)=9/15，P(Y=-1)=6/15</p>
+<p>P(X1=1|Y=1)=2/9，P(X1=2|Y=1)=3/9，P(X1=3|Y=1)=4/9</p>
+<p>P(X2=S|Y=1)=1/9，P(X2=M|Y=1)=4/9，P(X2=L|Y=1)=4/9</p>
+<p>P(X1=1|Y=-1)=3/6，P(X1=2|Y=-1)=2/6，P(X1=3|Y=-1)=1/6</p>
+<p>P(X2=S|Y=-1)=3/6，P(X2=M|Y=-1)=2/6，P((X2=L|Y=-1)=1/6</p>
+<p>所以对于给定的x=(2,S)T计算：</p>
+<p>P(Y=1)P(X1=2|Y=1)P(X2=S|Y=1)=(9/15)(3/9)(1/9)=1/45</p>
+<p>P(Y=-1)P(X1=2|Y=-1)P(X2=S|Y=-1)=(6/15)(2/6)(1/6)=1/15</p>
+<p>所以分类结果为y=-1</p>
+<h1 id="四、朴素贝叶斯算法的优缺点"><a href="#四、朴素贝叶斯算法的优缺点" class="headerlink" title="四、朴素贝叶斯算法的优缺点"></a>四、朴素贝叶斯算法的优缺点</h1><p><strong>优点：</strong></p>
+<ol>
+<li>朴素贝叶斯模型发源于古典数学理论，有着坚实的数学基础，以及稳定的分类效率；</li>
+<li>对大数量训练和查询时具有较高的速度。即使使用超大规模的训练集，针对每个项目通常也只会有相对较少的特征数，并且对项目的训练和分类也仅仅是特征概率的数学运算而已；</li>
+<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练（即可以实时的对新增的样本进行训练）；</li>
+<li>对缺失数据不太敏感，算法也比较简单，常用于文本分类；</li>
+<li>朴素贝叶斯对结果解释容易理解。</li>
+</ol>
+<p> <strong>缺点</strong></p>
+<ol>
+<li>需要计算先验概率；</li>
+<li>分类决策存在错误率；</li>
+<li>对输入数据的表达形式很敏感；</li>
+<li>由于使用了样本属性独立性的假设，所以如果样本属性有关联时其效果不好。</li>
+</ol>
+<h1 id="五、应用领域"><a href="#五、应用领域" class="headerlink" title="五、应用领域"></a>五、应用领域</h1><ol>
+<li>欺诈检测中使用较多；</li>
+<li>一封电子邮件是否是垃圾邮件；</li>
+<li>一篇文章应该分到科技、政治，还是体育类；</li>
+<li>一段文字表达的是积极的情绪还是消极的情绪；</li>
+<li>人脸识别</li>
+</ol>
 ]]></content>
       <categories>
         <category>机器学习</category>
       </categories>
       <tags>
         <tag>机器学习</tag>
-        <tag>分类</tag>
-        <tag>聚类</tag>
+        <tag>朴素贝叶斯算法</tag>
       </tags>
   </entry>
   <entry>
