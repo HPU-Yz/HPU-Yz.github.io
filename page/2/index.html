@@ -1,0 +1,1074 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Hexo,博客，python，C语言,机器学习，人工智能">
+    <meta name="description" content="走最远的路，爬最高的山，看最美的风景。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Flaneur</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/jquery/jquery.min.js"></script>
+    
+<link rel="alternate" href="/atom.xml" title="Flaneur" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Flaneur</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href class="waves-effect waves-light">
+
+      
+      <i class="fas fa-list" style="zoom: 0.6;"></i>
+      
+      <span>Medias</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/musics">
+          
+          <i class="fas fa-music" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Musics</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/movies">
+          
+          <i class="fas fa-film" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Movies</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/books">
+          
+          <i class="fas fa-book" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Books</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/galleries">
+          
+          <i class="fas fa-image" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Galleries</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Flaneur</div>
+        <div class="logo-desc">
+            
+            走最远的路，爬最高的山，看最美的风景。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-list"></i>
+			
+			Medias
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul style="background:  ;">
+              
+                <li>   
+				
+                  <a href="/musics " style="margin-left:75px" ;>
+				  
+				   <i class="fa fas fa-music" style="position: absolute;left:50px"></i>
+			      
+		          <span>Musics</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/movies " style="margin-left:75px" ;>
+				  
+				   <i class="fa fas fa-film" style="position: absolute;left:50px"></i>
+			      
+		          <span>Movies</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/books " style="margin-left:75px" ;>
+				  
+				   <i class="fa fas fa-book" style="position: absolute;left:50px"></i>
+			      
+		          <span>Books</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/galleries " style="margin-left:75px" ;>
+				  
+				   <i class="fa fas fa-image" style="position: absolute;left:50px"></i>
+			      
+		          <span>Galleries</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/HPU-Yz/HPU-Yz.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/HPU-Yz/HPU-Yz.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank" data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewbox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+    <div class="bg-cover pd-header about-cover">
+    <div class="container">
+    <div class="row">
+    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+        <div class="brand">
+            <div class="title center-align">
+                
+                Welocme to Flaneur&#39;s Blog
+                
+            </div>
+
+            <div class="description center-align">
+                
+                <span id="subtitle"></span>
+                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+                <script>
+                    var typed = new Typed("#subtitle", {
+                        strings: ['从来没有真正的绝境, 只有心灵的迷途','Never really desperate, only the lost of the soul'],
+                        startDelay: 300,
+                        typeSpeed: 100,
+                        loop: true,
+                        backSpeed: 50,
+                        showCursor: true
+                    });
+                </script>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // 每天切换 banner 图.  Switch banner image every day.
+    $('.bg-cover').css('background-image', 'url(https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/banner/' + new Date().getDay() + '.jpg)');
+</script>
+
+
+    </div>
+</div>
+
+
+<main class="content">
+
+    
+
+    
+
+    <!-- 所有文章卡片 -->
+    <article id="articles" class="container articles">
+        <div class="row article-row">
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/07/20/k-zui-jin-lin-fen-lei-suan-fa-knn-ji-python-shi-xian/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="KNN算法及python实现">
+                            
+                            <span class="card-title">KNN算法及python实现</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN算法即K-Nearest Neighbor，也是机器学习十大经典算法之一。前文讲解了K-means算法，今天我们就继续讲KNN算法，两者看
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-07-20
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/机器学习/" class="post-category">
+                                    机器学习
+                                </a>
+                                
+                                <a href="/categories/机器学习/python/" class="post-category">
+                                    python
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/机器学习/">
+                            <span class="chip bg-color">机器学习</span>
+                        </a>
+                        
+                        <a href="/tags/python/">
+                            <span class="chip bg-color">python</span>
+                        </a>
+                        
+                        <a href="/tags/KNN/">
+                            <span class="chip bg-color">KNN</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/07/19/k-means-ju-lei-suan-fa-yuan-li-ji-python-shi-xian/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/14.jpg" class="responsive-img" alt="K-means算法及python实现">
+                            
+                            <span class="card-title">K-means算法及python实现</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K-means(Thek-meansalgorithm)是机器学习十大经典算法之一，同时也是最为经典的无监督聚类（Unsupervised Cl
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-07-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/机器学习/" class="post-category">
+                                    机器学习
+                                </a>
+                                
+                                <a href="/categories/机器学习/python/" class="post-category">
+                                    python
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/机器学习/">
+                            <span class="chip bg-color">机器学习</span>
+                        </a>
+                        
+                        <a href="/tags/K-means/">
+                            <span class="chip bg-color">K-means</span>
+                        </a>
+                        
+                        <a href="/tags/python/">
+                            <span class="chip bg-color">python</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/07/18/ti-du-xia-jiang-fa-de-san-chong-xing-shi-bgd-sgd-mbgd-ji-python-shi-xian/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/22.jpg" class="responsive-img" alt="梯度下降法的三种形式BGD、SGD、MBGD及python实现">
+                            
+                            <span class="card-title">梯度下降法的三种形式BGD、SGD、MBGD及python实现</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;梯度下降法作为机器学习中较常使用的优化算法，其有着三种不同的形式：批量梯度下降（Batch Gradient Descent）、随机梯度下降（S
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-07-18
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/机器学习/" class="post-category">
+                                    机器学习
+                                </a>
+                                
+                                <a href="/categories/机器学习/python/" class="post-category">
+                                    python
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/机器学习/">
+                            <span class="chip bg-color">机器学习</span>
+                        </a>
+                        
+                        <a href="/tags/python/">
+                            <span class="chip bg-color">python</span>
+                        </a>
+                        
+                        <a href="/tags/梯度下降/">
+                            <span class="chip bg-color">梯度下降</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/16.jpg" class="responsive-img" alt="数据集的划分--训练集、验证集和测试集">
+                            
+                            <span class="card-title">数据集的划分--训练集、验证集和测试集</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。
+为什么要划分数据集为训练
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-07-18
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/机器学习/" class="post-category">
+                                    机器学习
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/机器学习/">
+                            <span class="chip bg-color">机器学习</span>
+                        </a>
+                        
+                        <a href="/tags/数据集/">
+                            <span class="chip bg-color">数据集</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/04/02/python-chi-san-shu-xue-luo-ji-yan-suan/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/22.jpg" class="responsive-img" alt="python+离散数学→逻辑演算">
+                            
+                            <span class="card-title">python+离散数学→逻辑演算</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇探讨的是一道逻辑演算推理题。有两种方法，一种是常规的离散数学逻辑演算，另一种则是用python程序来解决。本篇将探究两种方法： python
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-04-02
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/python/" class="post-category">
+                                    python
+                                </a>
+                                
+                                <a href="/categories/python/离散/" class="post-category">
+                                    离散
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/python/">
+                            <span class="chip bg-color">python</span>
+                        </a>
+                        
+                        <a href="/tags/离散/">
+                            <span class="chip bg-color">离散</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/03/21/oj/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/10.jpg" class="responsive-img" alt="OJ刷题-while(scanf(" %d",&n)!="EOF)"">
+                            
+                            <span class="card-title">OJ刷题-while(scanf("%d",&n)!=EOF)</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“测试输入包含若干测试实例。当N为0时，输入结束，该实例不被处理。”这句话 是最早我对OJ的印象 以前也没见过这种输入要求， 做第一道题的时候就
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-03-21
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/OJ/" class="post-category">
+                                    OJ
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/OJ/">
+                            <span class="chip bg-color">OJ</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/03/17/python-pan-duan-chi-san-shu-xue-de-he-shi-gong-shi/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/13.jpg" class="responsive-img" alt="Python判断离散数学的合式公式">
+                            
+                            <span class="card-title">Python判断离散数学的合式公式</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你没有听错，用python程序来解决离散数学的逻辑推理问题，我当我第一次听老师说的时候也很吃惊（再说上学期的Python学的也不咋地…..😩)
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-03-17
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/python/" class="post-category">
+                                    python
+                                </a>
+                                
+                                <a href="/categories/python/离散/" class="post-category">
+                                    离散
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/python/">
+                            <span class="chip bg-color">python</span>
+                        </a>
+                        
+                        <a href="/tags/离散/">
+                            <span class="chip bg-color">离散</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/03/15/hexo-bo-ke-da-jian/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/17.jpg" class="responsive-img" alt="Hexo博客搭建">
+                            
+                            <span class="card-title">Hexo博客搭建</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇文章用于介绍Hexo个人博客的搭建过程，这也是我搭建本博客后的第一篇文章，分享一下搭建方法，有兴趣的小伙伴也可以自主搭建一个属于自己的博客！
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-03-15
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Hexo/" class="post-category">
+                                    Hexo
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Hexo/">
+                            <span class="chip bg-color">Hexo</span>
+                        </a>
+                        
+                        <a href="/tags/博客搭建/">
+                            <span class="chip bg-color">博客搭建</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </article>
+
+</main>
+
+
+<div class="container paging">
+    <div class="row">
+        <div class="col s6 m4 l4">
+            
+            <a href="/" class="left btn-floating btn-large waves-effect waves-light bg-color">
+                <i class="fas fa-angle-left"></i>
+            </a>
+            
+        </div>
+        <div class="page-info col m4 l4 hide-on-small-only">
+            <div class="center-align b-text-gray">2 / 2</div>
+        </div>
+        <div class="col s6 m4 l4">
+            
+            <a class="right btn-floating btn-large disabled">
+                <i class="fas fa-angle-right"></i>
+            </a>
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="https://hpu-yz.github.io" target="_blank">Flaneur</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">37.5k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv" class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv" class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/HPU-Yz" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2426545812@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2426545812" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2426545812" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

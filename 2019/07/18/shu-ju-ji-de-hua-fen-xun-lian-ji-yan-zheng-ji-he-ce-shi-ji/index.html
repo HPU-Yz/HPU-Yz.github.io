@@ -1,9 +1,613 @@
-<!-- build time:Tue Apr 07 2020 09:33:30 GMT+0800 (GMT+08:00) --><!DOCTYPE HTML><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="keywords" content="数据集的划分--训练集、验证集和测试集, Hexo,博客，python，C语言,机器学习，人工智能"><meta name="description" content="走最远的路，爬最高的山，看最美的风景。"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><meta name="renderer" content="webkit|ie-stand|ie-comp"><meta name="mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>数据集的划分--训练集、验证集和测试集 | Flaneur</title><link rel="icon" type="image/png" href="/favicon.png"><link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css"><link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css"><link rel="stylesheet" type="text/css" href="/libs/aos/aos.css"><link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css"><link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css"><link rel="stylesheet" type="text/css" href="/css/matery.css"><link rel="stylesheet" type="text/css" href="/css/my.css"><script src="/libs/jquery/jquery.min.js"></script><link rel="alternate" href="/atom.xml" title="Flaneur" type="application/atom+xml"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><header class="navbar-fixed"><nav id="headNav" class="bg-color nav-transparent"><div id="navContainer" class="nav-wrapper container"><div class="brand-logo"><a href="/" class="waves-effect waves-light"><img src="/medias/logo.png" class="logo-img" alt="LOGO"> <span class="logo-span">Flaneur</span></a></div><a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a><ul class="right nav-menu"><li class="hide-on-med-and-down nav-item"><a href="/" class="waves-effect waves-light"><i class="fas fa-home" style="zoom:.6"></i> <span>首页</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/tags" class="waves-effect waves-light"><i class="fas fa-tags" style="zoom:.6"></i> <span>标签</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/categories" class="waves-effect waves-light"><i class="fas fa-bookmark" style="zoom:.6"></i> <span>分类</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/archives" class="waves-effect waves-light"><i class="fas fa-archive" style="zoom:.6"></i> <span>归档</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/about" class="waves-effect waves-light"><i class="fas fa-user-circle" style="zoom:.6"></i> <span>关于</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/contact" class="waves-effect waves-light"><i class="fas fa-comments" style="zoom:.6"></i> <span>留言板</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/friends" class="waves-effect waves-light"><i class="fas fa-address-book" style="zoom:.6"></i> <span>友情链接</span></a></li><li class="hide-on-med-and-down nav-item"><a href class="waves-effect waves-light"><i class="fas fa-list" style="zoom:.6"></i> <span>Medias</span> <i class="fas fa-chevron-down" aria-hidden="true" style="zoom:.6"></i></a><ul class="sub-nav menus_item_child"><li><a href="/musics"><i class="fas fa-music" style="margin-top:-20px;zoom:.6"></i> <span>Musics</span></a></li><li><a href="/movies"><i class="fas fa-film" style="margin-top:-20px;zoom:.6"></i> <span>Movies</span></a></li><li><a href="/books"><i class="fas fa-book" style="margin-top:-20px;zoom:.6"></i> <span>Books</span></a></li><li><a href="/galleries"><i class="fas fa-image" style="margin-top:-20px;zoom:.6"></i> <span>Galleries</span></a></li></ul></li><li><a href="#searchModal" class="modal-trigger waves-effect waves-light"><i id="searchIcon" class="fas fa-search" title="搜索" style="zoom:.85"></i></a></li></ul><div id="mobile-nav" class="side-nav sidenav"><div class="mobile-head bg-color"><img src="/medias/logo.png" class="logo-img circle responsive-img"><div class="logo-name">Flaneur</div><div class="logo-desc">走最远的路，爬最高的山，看最美的风景。</div></div><ul class="menu-list mobile-menu-list"><li class="m-nav-item"><a href="/" class="waves-effect waves-light"><i class="fa-fw fas fa-home"></i> 首页</a></li><li class="m-nav-item"><a href="/tags" class="waves-effect waves-light"><i class="fa-fw fas fa-tags"></i> 标签</a></li><li class="m-nav-item"><a href="/categories" class="waves-effect waves-light"><i class="fa-fw fas fa-bookmark"></i> 分类</a></li><li class="m-nav-item"><a href="/archives" class="waves-effect waves-light"><i class="fa-fw fas fa-archive"></i> 归档</a></li><li class="m-nav-item"><a href="/about" class="waves-effect waves-light"><i class="fa-fw fas fa-user-circle"></i> 关于</a></li><li class="m-nav-item"><a href="/contact" class="waves-effect waves-light"><i class="fa-fw fas fa-comments"></i> 留言板</a></li><li class="m-nav-item"><a href="/friends" class="waves-effect waves-light"><i class="fa-fw fas fa-address-book"></i> 友情链接</a></li><li class="m-nav-item"><a href="javascript:;"><i class="fa-fw fas fa-list"></i> Medias <span class="m-icon"><i class="fas fa-chevron-right"></i></span></a><ul><li><a href="/musics" style="margin-left:75px" ;><i class="fa fas fa-music" style="position:absolute;left:50px"></i> <span>Musics</span></a></li><li><a href="/movies" style="margin-left:75px" ;><i class="fa fas fa-film" style="position:absolute;left:50px"></i> <span>Movies</span></a></li><li><a href="/books" style="margin-left:75px" ;><i class="fa fas fa-book" style="position:absolute;left:50px"></i> <span>Books</span></a></li><li><a href="/galleries" style="margin-left:75px" ;><i class="fa fas fa-image" style="position:absolute;left:50px"></i> <span>Galleries</span></a></li></ul></li><li><div class="divider"></div></li><li><a href="https://github.com/HPU-Yz/HPU-Yz.github.io" class="waves-effect waves-light" target="_blank"><i class="fab fa-github-square fa-fw"></i>Fork Me</a></li></ul></div></div><style>.nav-transparent .github-corner{display:none!important}.github-corner{position:absolute;z-index:10;top:0;right:0;border:0;transform:scale(1.1)}.github-corner svg{color:#0f9d58;fill:#fff;height:64px;width:64px}.github-corner:hover .octo-arm{animation:a .56s ease-in-out}.github-corner .octo-arm{animation:none}@keyframes a{0%,to{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}</style><a href="https://github.com/HPU-Yz/HPU-Yz.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank" data-tooltip="Fork Me" data-position="left" data-delay="50"><svg viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a></nav></header><div class="bg-cover pd-header post-cover" style="background-image:url(/medias/featureimages/16.jpg)"><div class="container" style="right:0;left:0"><div class="row"><div class="col s12 m12 l12"><div class="brand"><h1 class="description center-align post-title">数据集的划分--训练集、验证集和测试集</h1></div></div></div></div></div><main class="post-container content"><link rel="stylesheet" href="/libs/tocbot/tocbot.css"><style>#articleContent h1::before,#articleContent h2::before,#articleContent h3::before,#articleContent h4::before,#articleContent h5::before,#articleContent h6::before{display:block;content:" ";height:100px;margin-top:-100px;visibility:hidden}#articleContent :focus{outline:0}.toc-fixed{position:fixed;top:64px}.toc-widget{width:345px;padding-left:20px}.toc-widget .toc-title{margin:35px 0 15px 0;padding-left:17px;font-size:1.5rem;font-weight:700;line-height:1.5rem}.toc-widget ol{padding:0;list-style:none}#toc-content{height:calc(100vh - 250px);overflow:auto}#toc-content ol{padding-left:10px}#toc-content ol li{padding-left:10px}#toc-content .toc-link:hover{color:#42b983;font-weight:700;text-decoration:underline}#toc-content .toc-link::before{background-color:transparent;max-height:25px;position:absolute;right:23.5vw;display:block}.toc-fixed .toc-link::before{position:fixed!important}#toc-content .is-active-link{color:#42b983}#toc-content .is-active-link::before{background-color:#42b983}#floating-toc-btn{position:fixed;right:15px;bottom:76px;padding-top:15px;margin-bottom:0;z-index:998}#floating-toc-btn .btn-floating{width:48px;height:48px}#floating-toc-btn .btn-floating i{line-height:48px;font-size:1.4rem}</style><div class="row"><div id="main-content" class="col s12 m12 l9"><div id="artDetail"><div class="card"><div class="card-content article-info"><div class="row tag-cate"><div class="col s7"><div class="article-tag"><a href="/tags/机器学习/"><span class="chip bg-color">机器学习</span> </a><a href="/tags/数据集/"><span class="chip bg-color">数据集</span></a></div></div><div class="col s5 right-align"><div class="post-cate"><i class="fas fa-bookmark fa-fw icon-category"></i> <a href="/categories/机器学习/" class="post-category">机器学习</a></div></div></div><div class="post-info"><div class="post-date info-break-policy"><i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2019-07-18</div><div class="info-break-policy"><i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 2.6k</div><div class="info-break-policy"><i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp; 9 分</div></div></div><hr class="clearfix"><div class="card-content article-card-content"><div id="articleContent"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。</p><h2 id="为什么要划分数据集为训练集、验证集和测试集？"><a href="#为什么要划分数据集为训练集、验证集和测试集？" class="headerlink" title="为什么要划分数据集为训练集、验证集和测试集？"></a>为什么要划分数据集为训练集、验证集和测试集？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;做科研，就要提出问题，找到解决方法，并证明其有效性。这里的工作有3个部分，一个是提出问题，一个是找到解决方法，另一个是证明有效性。每一个部分都可以作为科研的对象，研究的越靠前，则越偏向科学，越靠后，则越偏向技术，因此叫做科学与技术。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在人工智能领域，证明一个模型的有效性，就是对于某一问题，有一些数据，而我们提出的模型可以（部分）解决这个问题，那如何来证明呢？这和我们平时的考试也是一样的，证明我们掌握了某类知识，就是去参加考试。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;好，那么如何设计考试，让这个考试可以较为客观的考察出每个人的能力呢（注意，不是让每个人都得最高分）？回想我们的高中阶段，有一些教材，让我们平时学习其基本知识（训练集），有一些模拟考试，让我们知道我们到底掌握的怎么样，然后再改进我们的学习（验证集），最后的高考决定我们的去向（测试集）。这样的类比，是不是就很清楚了。</p><h2 id="训练集、验证集和测试集"><a href="#训练集、验证集和测试集" class="headerlink" title="训练集、验证集和测试集"></a>训练集、验证集和测试集</h2><pre><code>1. **训练集**：顾名思义指的是用于训练的样本集合,主要用来训练神经网络中的参数。
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="数据集的划分--训练集、验证集和测试集, Hexo,博客，python，C语言,机器学习，人工智能">
+    <meta name="description" content="走最远的路，爬最高的山，看最美的风景。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>数据集的划分--训练集、验证集和测试集 | Flaneur</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/jquery/jquery.min.js"></script>
+    
+<link rel="alternate" href="/atom.xml" title="Flaneur" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Flaneur</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href class="waves-effect waves-light">
+
+      
+      <i class="fas fa-list" style="zoom: 0.6;"></i>
+      
+      <span>Medias</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/musics">
+          
+          <i class="fas fa-music" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Musics</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/movies">
+          
+          <i class="fas fa-film" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Movies</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/books">
+          
+          <i class="fas fa-book" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Books</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/galleries">
+          
+          <i class="fas fa-image" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Galleries</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Flaneur</div>
+        <div class="logo-desc">
+            
+            走最远的路，爬最高的山，看最美的风景。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-list"></i>
+			
+			Medias
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul style="background:  ;">
+              
+                <li>   
+				
+                  <a href="/musics " style="margin-left:75px" ;>
+				  
+				   <i class="fa fas fa-music" style="position: absolute;left:50px"></i>
+			      
+		          <span>Musics</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/movies " style="margin-left:75px" ;>
+				  
+				   <i class="fa fas fa-film" style="position: absolute;left:50px"></i>
+			      
+		          <span>Movies</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/books " style="margin-left:75px" ;>
+				  
+				   <i class="fa fas fa-book" style="position: absolute;left:50px"></i>
+			      
+		          <span>Books</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/galleries " style="margin-left:75px" ;>
+				  
+				   <i class="fa fas fa-image" style="position: absolute;left:50px"></i>
+			      
+		          <span>Galleries</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/HPU-Yz/HPU-Yz.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/HPU-Yz/HPU-Yz.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank" data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewbox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/16.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">数据集的划分--训练集、验证集和测试集</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+        
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    .toc-fixed .toc-link::before{
+        position: fixed!important;/*当toc的位置改为fixed时，.toc-link::before也要改为fixed*/
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/机器学习/">
+                                <span class="chip bg-color">机器学习</span>
+                            </a>
+                        
+                            <a href="/tags/数据集/">
+                                <span class="chip bg-color">数据集</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/机器学习/" class="post-category">
+                                机器学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-07-18
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    9 分
+                </div>
+                
+
+                
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。</p>
+<h2 id="为什么要划分数据集为训练集、验证集和测试集？"><a href="#为什么要划分数据集为训练集、验证集和测试集？" class="headerlink" title="为什么要划分数据集为训练集、验证集和测试集？"></a>为什么要划分数据集为训练集、验证集和测试集？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;做科研，就要提出问题，找到解决方法，并证明其有效性。这里的工作有3个部分，一个是提出问题，一个是找到解决方法，另一个是证明有效性。每一个部分都可以作为科研的对象，研究的越靠前，则越偏向科学，越靠后，则越偏向技术，因此叫做科学与技术。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在人工智能领域，证明一个模型的有效性，就是对于某一问题，有一些数据，而我们提出的模型可以（部分）解决这个问题，那如何来证明呢？这和我们平时的考试也是一样的，证明我们掌握了某类知识，就是去参加考试。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;好，那么如何设计考试，让这个考试可以较为客观的考察出每个人的能力呢（注意，不是让每个人都得最高分）？回想我们的高中阶段，有一些教材，让我们平时学习其基本知识（训练集），有一些模拟考试，让我们知道我们到底掌握的怎么样，然后再改进我们的学习（验证集），最后的高考决定我们的去向（测试集）。这样的类比，是不是就很清楚了。</p>
+<h2 id="训练集、验证集和测试集"><a href="#训练集、验证集和测试集" class="headerlink" title="训练集、验证集和测试集"></a>训练集、验证集和测试集</h2><pre><code>1. **训练集**：顾名思义指的是用于训练的样本集合,主要用来训练神经网络中的参数。
 
 2. **验证集**：从字面意思理解即为用于验证模型性能的样本集合.不同神经网络在训练集上训练结束后,通过验证集来比较判断各个模型的性能.这里的不同模型主要是指对应不同超参数的神经网络,也可以指完全不同结构的神经网络。
 
 3. **测试集**：对于训练完成的神经网络,测试集用于客观的评价神经网络的性能。
-</code></pre><h2 id="如何划分训练集、验证集和测试集"><a href="#如何划分训练集、验证集和测试集" class="headerlink" title="如何划分训练集、验证集和测试集"></a>如何划分训练集、验证集和测试集</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个问题其实非常基础，也非常明确，在Scikit-learn里提供了各种各样的划分方法。无论是单一的训练集、验证集和测试集，还是进行交叉验证，你都会找到调用的方法，因此我们这里主要介绍两种常见的方法。</p><pre><code>1. 前人给出训练集、验证集和测试集
+</code></pre><h2 id="如何划分训练集、验证集和测试集"><a href="#如何划分训练集、验证集和测试集" class="headerlink" title="如何划分训练集、验证集和测试集"></a>如何划分训练集、验证集和测试集</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个问题其实非常基础，也非常明确，在Scikit-learn里提供了各种各样的划分方法。无论是单一的训练集、验证集和测试集，还是进行交叉验证，你都会找到调用的方法，因此我们这里主要介绍两种常见的方法。</p>
+<pre><code>1. 前人给出训练集、验证集和测试集
   对于这种情况，那么只能跟随前人的数据划分进行，一般的比赛也是如此。一定不要使用测试集来调整性能（测试集已知的情况下），尽管存在使用这种方法来提升模型的性能的行为，但是我们并不推荐这么做。最正常的做法应当是使用训练集来学习，并使用验证集来调整超参数。当在验证集上取得最优的模型时，此时就可以使用此模型的超参数来重新训练（训练集+验证集），并用测试集评估最终的性能。
     我们首先说明加入验证集重新训练和不加有啥区别，从理论上讲，一方面学习的样本增多，应当是会提升模型性能的，第二，其在验证集上取得最优的模型与验证集的分布的契合度是最高的，因此最终的模型会更接近验证集的分布。
     其次再说明验证集和测试集上的性能差异。事实上，在验证集上取得最优的模型，未必在测试集上取得最优。其原因就是训练的模型是否对于该问题有着较好的泛化能力，即没有对验证集产生过拟合现象。正因为有这种情况的发生，才会有人使用测试集的最优值作为最终的结果（而不管验证集的好坏）。
@@ -12,14 +616,698 @@
   这时候可以采取第一种划分方法，对于样本数较小的数据集，同样可以采取交叉验证的方法。
     交叉验证的方法的使用场景有很多，我们这里是针对不同的模型的性能好坏进行评估。
     使用交叉验证，可以获得更为客观的性能差异。当使用第一种方法时，我们更建议使用P值来做显著性检验，从而保证性能差异的客观性。而使用第二种方法，即交叉验证时，我们选取其性能表现的均值作为最终的结果，更能体现该模型的泛化能力。
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.存在验证集<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里五倍交叉验证是用于进行调参，此时不接触测试集。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据集首先划分出训练集与测试集（可以是4:1或者9:1）。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其次，在训练集中，再划分出验证集（通常也是4:1或者9：1）<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后对于训练集和验证集进行5折交叉验证，选取出最优的超参数，然后把训练集和验证集一起训练出最终的模型。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.不存在验证集<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该情况通常是对比不同的模型，如自己的模型和别人的模型的性能好坏。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只需要把数据集划分为训练集和测试集即可，然后选取5次试验的平均值作为最终的性能评价。</p><h2 id="验证集和测试集的区别"><a href="#验证集和测试集的区别" class="headerlink" title="验证集和测试集的区别"></a>验证集和测试集的区别</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;那么,训练集、校验集和测试集之间又有什么区别呢?一般而言,训练集与后两者之间较易分辨,校验集和测试集之间的概念较易混淆.个人是从下面的角度来理解的:</p><ul><li><p>神经网络在网络结构确定的情况下,有两部分影响模型最终的性能,一是普通参数(比如权重w和偏置b),另一个是超参数(例如学习率,网络层数).普通参数我们在训练集上进行训练,超参数我们一般人工指定(比较不同超参数的模型在校验集上的性能).那为什么我们不像普通参数一样在训练集上训练超参数呢?(花书给出了解答)一是：超参数一般难以优化(无法像普通参数一样通过梯度下降的方式进行优化).二是：超参数很多时候不适合在训练集上进行训练,例如,如果在训练集上训练能控制模型容量的超参数,这些超参数总会被训练成使得模型容量最大的参数(因为模型容量越大,训练误差越小),所以训练集上训练超参数的结果就是模型绝对过拟合.</p></li><li><p>正因为超参数无法在训练集上进行训练,因此我们单独设立了一个验证集,用于选择(人工训练)最优的超参数.因为验证集是用于选择超参数的,因此校验集和训练集是独立不重叠的.</p></li><li><p>测试集是用于在完成神经网络训练过程后,为了<strong>客观评价模型</strong>在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,因此测试与验证集和训练集之间也是独立不重叠的,而且测试集不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标.</p></li></ul><p>为了方便清楚直观的了解，上一个表格：<br><img src="https://img-blog.csdnimg.cn/20190724110042475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p><h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至此,我们可以将神经网络完整的训练过程归结为一下两个步骤:</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.训练普通参数.在训练集(给定超参数)上利用学习算法,训练普通参数,使得模型在训练集上的误差降低到可接受的程度(一般接近人类的水平).</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.’训练’超参数.在验证集上验证网络的generalization error(泛化能力),并根据模型性能对超参数进行调整.</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重复1和2两个步骤,直至网络在验证集上取得较低的generalization error.此时完整的训练过程结束.在完成参数和超参数的训练后,在测试集上测试网络的性能.</p><h2 id="附言"><a href="#附言" class="headerlink" title="附言"></a>附言</h2><p>说到底：</p><ul><li><p>验证集是一定需要的；</p></li><li><p>如果验证集具有足够泛化代表性，是不需要再整出什么测试集的；</p></li><li><p>整个测试集往往就是为了在验证集只是非训练集一个小子集的情况下，好奇一下那个靠训练集（训练）和验证集（调参）多次接力训练出来的模型是不是具有了泛化性能，因而加试一下图个确定。</p></li></ul></div><hr><div class="reprint" id="reprint-statement"><div class="reprint__author"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-user">文章作者: </i></span><span class="reprint-info"><a href="https://hpu-yz.github.io" rel="external nofollow noreferrer">Flaneur</a></span></div><div class="reprint__type"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-link">文章链接: </i></span><span class="reprint-info"><a href="https://hpu-yz.github.io/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/">https://hpu-yz.github.io/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/</a></span></div><div class="reprint__notice"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-copyright">版权声明: </i></span><span class="reprint-info">本博客所有文章除特別声明外，均采用 <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a> 许可协议。转载请注明来源 <a href="https://hpu-yz.github.io" target="_blank">Flaneur</a> !</span></div></div><script async defer>document.addEventListener("copy", function (e) {
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.存在验证集<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里五倍交叉验证是用于进行调参，此时不接触测试集。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据集首先划分出训练集与测试集（可以是4:1或者9:1）。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其次，在训练集中，再划分出验证集（通常也是4:1或者9：1）<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后对于训练集和验证集进行5折交叉验证，选取出最优的超参数，然后把训练集和验证集一起训练出最终的模型。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.不存在验证集<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该情况通常是对比不同的模型，如自己的模型和别人的模型的性能好坏。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只需要把数据集划分为训练集和测试集即可，然后选取5次试验的平均值作为最终的性能评价。</p>
+<h2 id="验证集和测试集的区别"><a href="#验证集和测试集的区别" class="headerlink" title="验证集和测试集的区别"></a>验证集和测试集的区别</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;那么,训练集、校验集和测试集之间又有什么区别呢?一般而言,训练集与后两者之间较易分辨,校验集和测试集之间的概念较易混淆.个人是从下面的角度来理解的:</p>
+<ul>
+<li><p>神经网络在网络结构确定的情况下,有两部分影响模型最终的性能,一是普通参数(比如权重w和偏置b),另一个是超参数(例如学习率,网络层数).普通参数我们在训练集上进行训练,超参数我们一般人工指定(比较不同超参数的模型在校验集上的性能).那为什么我们不像普通参数一样在训练集上训练超参数呢?(花书给出了解答)一是：超参数一般难以优化(无法像普通参数一样通过梯度下降的方式进行优化).二是：超参数很多时候不适合在训练集上进行训练,例如,如果在训练集上训练能控制模型容量的超参数,这些超参数总会被训练成使得模型容量最大的参数(因为模型容量越大,训练误差越小),所以训练集上训练超参数的结果就是模型绝对过拟合.</p>
+</li>
+<li><p>正因为超参数无法在训练集上进行训练,因此我们单独设立了一个验证集,用于选择(人工训练)最优的超参数.因为验证集是用于选择超参数的,因此校验集和训练集是独立不重叠的.</p>
+</li>
+<li><p>测试集是用于在完成神经网络训练过程后,为了<strong>客观评价模型</strong>在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,因此测试与验证集和训练集之间也是独立不重叠的,而且测试集不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标.</p>
+</li>
+</ul>
+<p>为了方便清楚直观的了解，上一个表格：<br><img src="https://img-blog.csdnimg.cn/20190724110042475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至此,我们可以将神经网络完整的训练过程归结为一下两个步骤:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.训练普通参数.在训练集(给定超参数)上利用学习算法,训练普通参数,使得模型在训练集上的误差降低到可接受的程度(一般接近人类的水平).</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.’训练’超参数.在验证集上验证网络的generalization error(泛化能力),并根据模型性能对超参数进行调整.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重复1和2两个步骤,直至网络在验证集上取得较低的generalization error.此时完整的训练过程结束.在完成参数和超参数的训练后,在测试集上测试网络的性能.</p>
+<h2 id="附言"><a href="#附言" class="headerlink" title="附言"></a>附言</h2><p>说到底：</p>
+<ul>
+<li><p>验证集是一定需要的；</p>
+</li>
+<li><p>如果验证集具有足够泛化代表性，是不需要再整出什么测试集的；</p>
+</li>
+<li><p>整个测试集往往就是为了在验证集只是非训练集一个小子集的情况下，好奇一下那个靠训练集（训练）和验证集（调参）多次接力训练出来的模型是不是具有了泛化性能，因而加试一下图个确定。</p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://hpu-yz.github.io" rel="external nofollow noreferrer">Flaneur</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://hpu-yz.github.io/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/">https://hpu-yz.github.io/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://hpu-yz.github.io" target="_blank">Flaneur</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
         let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
 
       function navToReprintStatement() {
         $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
-      }</script><div class="tag_share" style="display:block"><div class="post-meta__tag-list" style="display:inline-block"><div class="article-tag"><a href="/tags/机器学习/"><span class="chip bg-color">机器学习</span> </a><a href="/tags/数据集/"><span class="chip bg-color">数据集</span></a></div></div><div class="post_share" style="zoom:80%;width:fit-content;display:inline-block;float:right;margin:-.15rem 0"><link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css"><div id="article-share"><div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div><script src="/libs/share/js/social-share.min.js"></script></div></div></div><style>#reward{margin:40px 0;text-align:center}#reward .reward-link{font-size:1.4rem;line-height:38px}#reward .btn-floating:hover{box-shadow:0 6px 12px rgba(0,0,0,.2),0 5px 15px rgba(0,0,0,.2)}#rewardModal{width:320px;height:350px}#rewardModal .reward-title{margin:15px auto;padding-bottom:5px}#rewardModal .modal-content{padding:10px}#rewardModal .close{position:absolute;right:15px;top:15px;color:rgba(0,0,0,.5);font-size:1.3rem;line-height:20px;cursor:pointer}#rewardModal .close:hover{color:#ef5350;transform:scale(1.3);-moz-transform:scale(1.3);-webkit-transform:scale(1.3);-o-transform:scale(1.3)}#rewardModal .reward-tabs{margin:0 auto;width:210px}.reward-tabs .tabs{height:38px;margin:10px auto;padding-left:0}.reward-content ul{padding-left:0!important}.reward-tabs .tabs .tab{height:38px;line-height:38px}.reward-tabs .tab a{color:#fff;background-color:#ccc}.reward-tabs .tab a:hover{background-color:#ccc;color:#fff}.reward-tabs .wechat-tab .active{color:#fff!important;background-color:#22AB38!important}.reward-tabs .alipay-tab .active{color:#fff!important;background-color:#019FE8!important}.reward-tabs .reward-img{width:210px;height:210px}</style><div id="reward"><a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a><div id="rewardModal" class="modal"><div class="modal-content"><a class="close modal-close"><i class="fas fa-times"></i></a><h4 class="reward-title">你的赏识是我前进的动力</h4><div class="reward-content"><div class="reward-tabs"><ul class="tabs row"><li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li><li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li></ul><div id="alipay"><img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码"></div><div id="wechat"><img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码"></div></div></div></div></div></div><script>$(function(){$(".tabs").tabs()})</script></div></div><style>.valine-card{margin:1.5rem auto}.valine-card .card-content{padding:20px 20px 5px 20px}#vcomments textarea{box-sizing:border-box;background:url(/medias/comment_bg.png) 100% 100% no-repeat}#vcomments p{margin:2px 2px 10px;font-size:1.05rem;line-height:1.78rem}#vcomments blockquote p{text-indent:.2rem}#vcomments a{padding:0 2px;color:#4cbf30;font-weight:500;text-decoration:none}#vcomments img{max-width:100%;height:auto;cursor:pointer}#vcomments ol li{list-style-type:decimal}#vcomments ol,ul{display:block;padding-left:2em;word-spacing:.05rem}#vcomments ul li,ol li{display:list-item;line-height:1.8rem;font-size:1rem}#vcomments ul li{list-style-type:disc}#vcomments ul ul li{list-style-type:circle}#vcomments table,td,th{padding:12px 13px;border:1px solid #dfe2e5}#vcomments table,td,th{border:0}table tr:nth-child(2n),thead{background-color:#fafafa}#vcomments table th{background-color:#f2f2f2;min-width:80px}#vcomments table td{min-width:80px}#vcomments h1{font-size:1.85rem;font-weight:700;line-height:2.2rem}#vcomments h2{font-size:1.65rem;font-weight:700;line-height:1.9rem}#vcomments h3{font-size:1.45rem;font-weight:700;line-height:1.7rem}#vcomments h4{font-size:1.25rem;font-weight:700;line-height:1.5rem}#vcomments h5{font-size:1.1rem;font-weight:700;line-height:1.4rem}#vcomments h6{font-size:1rem;line-height:1.3rem}#vcomments p{font-size:1rem;line-height:1.5rem}#vcomments hr{margin:12px 0;border:0;border-top:1px solid #ccc}#vcomments blockquote{margin:15px 0;border-left:5px solid #42b983;padding:1rem .8rem .3rem .8rem;color:#666;background-color:rgba(66,185,131,.1)}#vcomments pre{font-family:monospace,monospace;padding:1.2em;margin:.5em 0;background:#272822;overflow:auto;border-radius:.3em;tab-size:4}#vcomments code{font-family:monospace,monospace;padding:1px 3px;font-size:.92rem;color:#e96900;background-color:#f8f8f8;border-radius:2px}#vcomments pre code{font-family:monospace,monospace;padding:0;color:#e8eaf6;background-color:#272822}#vcomments pre[class*=language-]{padding:1.2em;margin:.5em 0}#vcomments code[class*=language-],pre[class*=language-]{color:#e8eaf6}#vcomments [type=checkbox]:not(:checked),[type=checkbox]:checked{position:inherit;margin-left:-1.3rem;margin-right:.4rem;margin-top:-1px;vertical-align:middle;left:unset;visibility:visible}#vcomments b,strong{font-weight:700}#vcomments dfn{font-style:italic}#vcomments small{font-size:85%}#vcomments cite{font-style:normal}#vcomments mark{background-color:#fcf8e3;padding:.2em}#vcomments table,td,th{padding:12px 13px;border:1px solid #dfe2e5}table tr:nth-child(2n),thead{background-color:#fafafa}#vcomments table th{background-color:#f2f2f2;min-width:80px}#vcomments table td{min-width:80px}#vcomments [type=checkbox]:not(:checked),[type=checkbox]:checked{position:inherit;margin-left:-1.3rem;margin-right:.4rem;margin-top:-1px;vertical-align:middle;left:unset;visibility:visible}</style><div class="card valine-card" data-aos="fade-up"><div class="comment_headling" style="font-size:20px;font-weight:700;position:relative;padding-left:20px;top:15px;padding-bottom:5px"><i class="fas fa-comments fa-fw" aria-hidden="true"></i> <span>评论</span></div><div id="vcomments" class="card-content" style="display:grid"></div></div><script src="/libs/valine/av-min.js"></script><script src="/libs/valine/Valine.min.js"></script><script>new Valine({el:"#vcomments",appId:"gNvfNq61qvxgPJ2We41KkGhK-9Nh9j0Va",appKey:"hrC47QFpm6rC1BFn28YQXRdC",notify:!1,verify:!1,visitor:!0,avatar:"mm",pageSize:"10",lang:"zh-cn",placeholder:"just go go"})</script><article id="prenext-posts" class="prev-next articles"><div class="row article-row"><div class="article col s12 m6" data-aos="fade-up"><div class="article-badge left-badge text-color"><i class="fas fa-chevron-left"></i>&nbsp;上一篇</div><div class="card"><a href="/2019/07/19/k-means-ju-lei-suan-fa-yuan-li-ji-python-shi-xian/"><div class="card-image"><img src="/medias/featureimages/14.jpg" class="responsive-img" alt="K-means算法及python实现"> <span class="card-title">K-means算法及python实现</span></div></a><div class="card-content article-content"><div class="summary block-with-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K-means(Thek-meansalgorithm)是机器学习十大经典算法之一，同时也是最为经典的无监督聚类（Unsupervised Cl</div><div class="publish-info"><span class="publish-date"><i class="far fa-clock fa-fw icon-date"></i>2019-07-19 </span><span class="publish-author"><i class="fas fa-bookmark fa-fw icon-category"></i> <a href="/categories/机器学习/" class="post-category">机器学习 </a><a href="/categories/机器学习/python/" class="post-category">python</a></span></div></div><div class="card-action article-tags"><a href="/tags/机器学习/"><span class="chip bg-color">机器学习</span> </a><a href="/tags/python/"><span class="chip bg-color">python</span> </a><a href="/tags/K-means/"><span class="chip bg-color">K-means</span></a></div></div></div><div class="article col s12 m6" data-aos="fade-up"><div class="article-badge right-badge text-color">下一篇&nbsp;<i class="fas fa-chevron-right"></i></div><div class="card"><a href="/2019/07/18/ti-du-xia-jiang-fa-de-san-chong-xing-shi-bgd-sgd-mbgd-ji-python-shi-xian/"><div class="card-image"><img src="/medias/featureimages/22.jpg" class="responsive-img" alt="梯度下降法的三种形式BGD、SGD、MBGD及python实现"> <span class="card-title">梯度下降法的三种形式BGD、SGD、MBGD及python实现</span></div></a><div class="card-content article-content"><div class="summary block-with-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;梯度下降法作为机器学习中较常使用的优化算法，其有着三种不同的形式：批量梯度下降（Batch Gradient Descent）、随机梯度下降（S</div><div class="publish-info"><span class="publish-date"><i class="far fa-clock fa-fw icon-date"></i>2019-07-18 </span><span class="publish-author"><i class="fas fa-bookmark fa-fw icon-category"></i> <a href="/categories/机器学习/" class="post-category">机器学习 </a><a href="/categories/机器学习/python/" class="post-category">python</a></span></div></div><div class="card-action article-tags"><a href="/tags/机器学习/"><span class="chip bg-color">机器学习</span> </a><a href="/tags/python/"><span class="chip bg-color">python</span> </a><a href="/tags/梯度下降/"><span class="chip bg-color">梯度下降</span></a></div></div></div></div></article></div><script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script><script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script><script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script><script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script><style type="text/css">code[class*=language-],pre[class*=language-]{white-space:pre!important}</style></div><div id="toc-aside" class="expanded col l3 hide-on-med-and-down"><div class="toc-widget"><div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div><div id="toc-content"></div></div></div></div><div id="floating-toc-btn" class="hide-on-med-and-down"><a class="btn-floating btn-large bg-color"><i class="fas fa-list-ul"></i></a></div><script src="/libs/tocbot/tocbot.min.js"></script><script>$(function () {
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/机器学习/">
+                                    <span class="chip bg-color">机器学习</span>
+                                </a>
+                            
+                                <a href="/tags/数据集/">
+                                    <span class="chip bg-color">数据集</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/valine/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'gNvfNq61qvxgPJ2We41KkGhK-9Nh9j0Va',
+        appKey: 'hrC47QFpm6rC1BFn28YQXRdC',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+    
+	
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/07/18/ti-du-xia-jiang-fa-de-san-chong-xing-shi-bgd-sgd-mbgd-ji-python-shi-xian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/22.jpg" class="responsive-img" alt="梯度下降法的三种形式BGD、SGD、MBGD及python实现">
+                        
+                        <span class="card-title">梯度下降法的三种形式BGD、SGD、MBGD及python实现</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;梯度下降法作为机器学习中较常使用的优化算法，其有着三种不同的形式：批量梯度下降（Batch Gradient Descent）、随机梯度下降（S
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-07-18
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/机器学习/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            <a href="/categories/机器学习/python/" class="post-category">
+                                    python
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/机器学习/">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/梯度下降/">
+                        <span class="chip bg-color">梯度下降</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/04/02/python-chi-san-shu-xue-luo-ji-yan-suan/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/22.jpg" class="responsive-img" alt="python+离散数学→逻辑演算">
+                        
+                        <span class="card-title">python+离散数学→逻辑演算</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇探讨的是一道逻辑演算推理题。有两种方法，一种是常规的离散数学逻辑演算，另一种则是用python程序来解决。本篇将探究两种方法： python
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-04-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/python/" class="post-category">
+                                    python
+                                </a>
+                            
+                            <a href="/categories/python/离散/" class="post-category">
+                                    离散
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/离散/">
+                        <span class="chip bg-color">离散</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
@@ -90,4 +1378,156 @@
             fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
-    });</script></main><footer class="page-footer bg-color"><div class="container row center-align" style="margin-bottom:0!important"><div class="col s12 m8 l8 copy-right">Copyright&nbsp;&copy; <span id="year">2019</span> <a href="https://hpu-yz.github.io" target="_blank">Flaneur</a> |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a><br>&nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">37.5k</span>&nbsp;字 <span id="busuanzi_container_site_pv">|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv" class="white-color"></span>&nbsp;次 </span><span id="busuanzi_container_site_uv">|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv" class="white-color"></span>&nbsp;人</span><br><br></div><div class="col s12 m4 l4 social-link social-statis"><a href="https://github.com/HPU-Yz" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50"><i class="fab fa-github"></i> </a><a href="mailto:2426545812@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50"><i class="fas fa-envelope-open"></i> </a><a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2426545812" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2426545812" data-position="top" data-delay="50"><i class="fab fa-qq"></i> </a><a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50"><i class="fas fa-rss"></i></a></div></div></footer><div class="progress-bar"></div><div id="searchModal" class="modal"><div class="modal-content"><div class="search-header"><span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span> <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input"></div><div id="searchResult"></div></div></div><script src="/js/search.js"></script><script type="text/javascript">$(function(){searchFunc("/search.xml","searchInput","searchResult")})</script><div id="backTop" class="top-scroll"><a class="btn-floating btn-large waves-effect waves-light" href="#!"><i class="fas fa-arrow-up"></i></a></div><script src="/libs/materialize/materialize.min.js"></script><script src="/libs/masonry/masonry.pkgd.min.js"></script><script src="/libs/aos/aos.js"></script><script src="/libs/scrollprogress/scrollProgress.min.js"></script><script src="/libs/lightGallery/js/lightgallery-all.min.js"></script><script src="/js/matery.js"></script><script>!function(){var t=document.createElement("script"),s=window.location.protocol.split(":")[0];"https"===s?t.src="https://zz.bdstatic.com/linksubmit/push.js":t.src="http://push.zhanzhang.baidu.com/push.js";var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}()</script><script src="/libs/others/clicklove.js" async></script><script async src="/libs/others/busuanzi.pure.mini.js"></script><script src="/libs/instantpage/instantpage.js" type="module"></script></body></html><!-- rebuild by neat -->
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="https://hpu-yz.github.io" target="_blank">Flaneur</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">37.5k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv" class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv" class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/HPU-Yz" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2426545812@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2426545812" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2426545812" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

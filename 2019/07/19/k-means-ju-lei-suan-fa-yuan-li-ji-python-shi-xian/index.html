@@ -1,4 +1,638 @@
-<!-- build time:Tue Apr 07 2020 09:33:30 GMT+0800 (GMT+08:00) --><!DOCTYPE HTML><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="keywords" content="K-means算法及python实现, Hexo,博客，python，C语言,机器学习，人工智能"><meta name="description" content="走最远的路，爬最高的山，看最美的风景。"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><meta name="renderer" content="webkit|ie-stand|ie-comp"><meta name="mobile-web-app-capable" content="yes"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>K-means算法及python实现 | Flaneur</title><link rel="icon" type="image/png" href="/favicon.png"><link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css"><link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css"><link rel="stylesheet" type="text/css" href="/libs/aos/aos.css"><link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css"><link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css"><link rel="stylesheet" type="text/css" href="/css/matery.css"><link rel="stylesheet" type="text/css" href="/css/my.css"><script src="/libs/jquery/jquery.min.js"></script><link rel="alternate" href="/atom.xml" title="Flaneur" type="application/atom+xml"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><body><header class="navbar-fixed"><nav id="headNav" class="bg-color nav-transparent"><div id="navContainer" class="nav-wrapper container"><div class="brand-logo"><a href="/" class="waves-effect waves-light"><img src="/medias/logo.png" class="logo-img" alt="LOGO"> <span class="logo-span">Flaneur</span></a></div><a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a><ul class="right nav-menu"><li class="hide-on-med-and-down nav-item"><a href="/" class="waves-effect waves-light"><i class="fas fa-home" style="zoom:.6"></i> <span>首页</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/tags" class="waves-effect waves-light"><i class="fas fa-tags" style="zoom:.6"></i> <span>标签</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/categories" class="waves-effect waves-light"><i class="fas fa-bookmark" style="zoom:.6"></i> <span>分类</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/archives" class="waves-effect waves-light"><i class="fas fa-archive" style="zoom:.6"></i> <span>归档</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/about" class="waves-effect waves-light"><i class="fas fa-user-circle" style="zoom:.6"></i> <span>关于</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/contact" class="waves-effect waves-light"><i class="fas fa-comments" style="zoom:.6"></i> <span>留言板</span></a></li><li class="hide-on-med-and-down nav-item"><a href="/friends" class="waves-effect waves-light"><i class="fas fa-address-book" style="zoom:.6"></i> <span>友情链接</span></a></li><li class="hide-on-med-and-down nav-item"><a href class="waves-effect waves-light"><i class="fas fa-list" style="zoom:.6"></i> <span>Medias</span> <i class="fas fa-chevron-down" aria-hidden="true" style="zoom:.6"></i></a><ul class="sub-nav menus_item_child"><li><a href="/musics"><i class="fas fa-music" style="margin-top:-20px;zoom:.6"></i> <span>Musics</span></a></li><li><a href="/movies"><i class="fas fa-film" style="margin-top:-20px;zoom:.6"></i> <span>Movies</span></a></li><li><a href="/books"><i class="fas fa-book" style="margin-top:-20px;zoom:.6"></i> <span>Books</span></a></li><li><a href="/galleries"><i class="fas fa-image" style="margin-top:-20px;zoom:.6"></i> <span>Galleries</span></a></li></ul></li><li><a href="#searchModal" class="modal-trigger waves-effect waves-light"><i id="searchIcon" class="fas fa-search" title="搜索" style="zoom:.85"></i></a></li></ul><div id="mobile-nav" class="side-nav sidenav"><div class="mobile-head bg-color"><img src="/medias/logo.png" class="logo-img circle responsive-img"><div class="logo-name">Flaneur</div><div class="logo-desc">走最远的路，爬最高的山，看最美的风景。</div></div><ul class="menu-list mobile-menu-list"><li class="m-nav-item"><a href="/" class="waves-effect waves-light"><i class="fa-fw fas fa-home"></i> 首页</a></li><li class="m-nav-item"><a href="/tags" class="waves-effect waves-light"><i class="fa-fw fas fa-tags"></i> 标签</a></li><li class="m-nav-item"><a href="/categories" class="waves-effect waves-light"><i class="fa-fw fas fa-bookmark"></i> 分类</a></li><li class="m-nav-item"><a href="/archives" class="waves-effect waves-light"><i class="fa-fw fas fa-archive"></i> 归档</a></li><li class="m-nav-item"><a href="/about" class="waves-effect waves-light"><i class="fa-fw fas fa-user-circle"></i> 关于</a></li><li class="m-nav-item"><a href="/contact" class="waves-effect waves-light"><i class="fa-fw fas fa-comments"></i> 留言板</a></li><li class="m-nav-item"><a href="/friends" class="waves-effect waves-light"><i class="fa-fw fas fa-address-book"></i> 友情链接</a></li><li class="m-nav-item"><a href="javascript:;"><i class="fa-fw fas fa-list"></i> Medias <span class="m-icon"><i class="fas fa-chevron-right"></i></span></a><ul><li><a href="/musics" style="margin-left:75px" ;><i class="fa fas fa-music" style="position:absolute;left:50px"></i> <span>Musics</span></a></li><li><a href="/movies" style="margin-left:75px" ;><i class="fa fas fa-film" style="position:absolute;left:50px"></i> <span>Movies</span></a></li><li><a href="/books" style="margin-left:75px" ;><i class="fa fas fa-book" style="position:absolute;left:50px"></i> <span>Books</span></a></li><li><a href="/galleries" style="margin-left:75px" ;><i class="fa fas fa-image" style="position:absolute;left:50px"></i> <span>Galleries</span></a></li></ul></li><li><div class="divider"></div></li><li><a href="https://github.com/HPU-Yz/HPU-Yz.github.io" class="waves-effect waves-light" target="_blank"><i class="fab fa-github-square fa-fw"></i>Fork Me</a></li></ul></div></div><style>.nav-transparent .github-corner{display:none!important}.github-corner{position:absolute;z-index:10;top:0;right:0;border:0;transform:scale(1.1)}.github-corner svg{color:#0f9d58;fill:#fff;height:64px;width:64px}.github-corner:hover .octo-arm{animation:a .56s ease-in-out}.github-corner .octo-arm{animation:none}@keyframes a{0%,to{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}</style><a href="https://github.com/HPU-Yz/HPU-Yz.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank" data-tooltip="Fork Me" data-position="left" data-delay="50"><svg viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a></nav></header><div class="bg-cover pd-header post-cover" style="background-image:url(/medias/featureimages/14.jpg)"><div class="container" style="right:0;left:0"><div class="row"><div class="col s12 m12 l12"><div class="brand"><h1 class="description center-align post-title">K-means算法及python实现</h1></div></div></div></div></div><main class="post-container content"><link rel="stylesheet" href="/libs/tocbot/tocbot.css"><style>#articleContent h1::before,#articleContent h2::before,#articleContent h3::before,#articleContent h4::before,#articleContent h5::before,#articleContent h6::before{display:block;content:" ";height:100px;margin-top:-100px;visibility:hidden}#articleContent :focus{outline:0}.toc-fixed{position:fixed;top:64px}.toc-widget{width:345px;padding-left:20px}.toc-widget .toc-title{margin:35px 0 15px 0;padding-left:17px;font-size:1.5rem;font-weight:700;line-height:1.5rem}.toc-widget ol{padding:0;list-style:none}#toc-content{height:calc(100vh - 250px);overflow:auto}#toc-content ol{padding-left:10px}#toc-content ol li{padding-left:10px}#toc-content .toc-link:hover{color:#42b983;font-weight:700;text-decoration:underline}#toc-content .toc-link::before{background-color:transparent;max-height:25px;position:absolute;right:23.5vw;display:block}.toc-fixed .toc-link::before{position:fixed!important}#toc-content .is-active-link{color:#42b983}#toc-content .is-active-link::before{background-color:#42b983}#floating-toc-btn{position:fixed;right:15px;bottom:76px;padding-top:15px;margin-bottom:0;z-index:998}#floating-toc-btn .btn-floating{width:48px;height:48px}#floating-toc-btn .btn-floating i{line-height:48px;font-size:1.4rem}</style><div class="row"><div id="main-content" class="col s12 m12 l9"><div id="artDetail"><div class="card"><div class="card-content article-info"><div class="row tag-cate"><div class="col s7"><div class="article-tag"><a href="/tags/机器学习/"><span class="chip bg-color">机器学习</span> </a><a href="/tags/python/"><span class="chip bg-color">python</span> </a><a href="/tags/K-means/"><span class="chip bg-color">K-means</span></a></div></div><div class="col s5 right-align"><div class="post-cate"><i class="fas fa-bookmark fa-fw icon-category"></i> <a href="/categories/机器学习/" class="post-category">机器学习 </a><a href="/categories/机器学习/python/" class="post-category">python</a></div></div></div><div class="post-info"><div class="post-date info-break-policy"><i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp; 2019-07-19</div><div class="info-break-policy"><i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp; 2.8k</div><div class="info-break-policy"><i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp; 11 分</div></div></div><hr class="clearfix"><div class="card-content article-card-content"><div id="articleContent"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K-means(Thek-meansalgorithm)是机器学习十大经典算法之一，同时也是最为经典的无监督聚类（Unsupervised Clustering）算法。接触聚类算法，首先需要了解k-means算法的实现原理和步骤。本文将对k-means算法的基本原理和实现实例进行分析。</p><h1 id="一-聚类算法的简介"><a href="#一-聚类算法的简介" class="headerlink" title="一.聚类算法的简介"></a>一.聚类算法的简介</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于”<strong>监督学习</strong>“(supervised learning)，其训练样本<strong>是带有标记信息</strong>的，并且监督学习的<strong>目的是</strong>：对带有标记的数据集进行模型学习，从而便于对新的样本进行分类。而在“<strong>无监督学习</strong>”(unsupervised learning)中，训练样本的标记信息是未知的，<strong>目标是</strong>通过对无标记训练样本的学习来揭示数据的内在性质及规律，为进一步的数据分析提供基础。对于无监督学习，应用最广的便是”<strong>聚类</strong>“(clustering)。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;”<strong>聚类算法</strong>“试图将数据集中的样本划分为若干个通常是不相交的子集，每个子集称为一个“簇”(cluster)，通过这样的划分，每个簇可能对应于一些潜在的概念或类别。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们可以通过下面这个图来理解：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img-blog.csdnimg.cn/20190724144117607.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图是未做标记的样本集，通过他们的分布，我们很容易对上图中的样本做出以下几种划分。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当需要将其划分为两个簇时，即 k=2时：<br><img src="https://img-blog.csdnimg.cn/20190726155350351.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当需要将其划分为四个簇时，即 k=4 时：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img-blog.csdnimg.cn/20190724144431802.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p><h1 id="二-K-means聚类算法"><a href="#二-K-means聚类算法" class="headerlink" title="二.K-means聚类算法"></a>二.K-means聚类算法</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kmeans算法又名k均值算法,K-means算法中的k表示的是聚类为k个簇，means代表取每一个聚类中数据值的均值作为该簇的中心，或者称为质心，即用每一个的类的质心对该簇进行描述。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其算法思想大致为：先从样本集中随机选取 k个样本作为簇中心，并计算所有样本与这 k个“簇中心”的距离，对于每一个样本，将其划分到与其距离最近的“簇中心”所在的簇中，对于新的簇计算各个簇的新的“簇中心”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据以上描述，我们大致可以猜测到实现kmeans算法的主要四点：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）簇个数 k 的选择<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）各个样本点到“簇中心”的距离<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（3）根据新划分的簇，更新“簇中心”<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（4）重复上述2、3过程，直至”簇中心”没有移动<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优缺点：</p><ul><li>优点：容易实现</li><li>缺点：可能收敛到局部最小值，在大规模数据上收敛较慢</li></ul><h1 id="三-K-means算法步骤详解"><a href="#三-K-means算法步骤详解" class="headerlink" title="三.K-means算法步骤详解"></a>三.K-means算法步骤详解</h1><h2 id="Step1-K值的选择"><a href="#Step1-K值的选择" class="headerlink" title="Step1.K值的选择"></a>Step1.K值的选择</h2><p>k 的选择一般是按照实际需求进行决定，或在实现算法时直接给定 k 值。</p><blockquote><p>说明：<br><strong>A</strong>.质心数量由用户给出，记为k，k-means最终得到的簇数量也是k<br><strong>B</strong>.后来每次更新的质心的个数都和初始k值相等<br><strong>C</strong>.k-means最后聚类的簇个数和用户指定的质心个数相等，一个质心对应一个簇，每个样本只聚类到一个簇里面<br><strong>D</strong>.初始簇为空</p></blockquote><h2 id="Step2-距离度量"><a href="#Step2-距离度量" class="headerlink" title="Step2.距离度量"></a>Step2.距离度量</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将对象点分到距离聚类中心最近的那个簇中需要最近邻的度量策略，在欧式空间中采用的是欧式距离，在处理文档中采用的是余弦相似度函数，有时候也采用曼哈顿距离作为度量，不同的情况实用的度量公式是不同的。</p><h3 id="2-1-欧式距离"><a href="#2-1-欧式距离" class="headerlink" title="2.1.欧式距离"></a>2.1.欧式距离</h3><p><img src="https://img-blog.csdnimg.cn/20190724141524460.png" alt></p><h3 id="2-2-曼哈顿距离"><a href="#2-2-曼哈顿距离" class="headerlink" title="2.2.曼哈顿距离"></a>2.2.曼哈顿距离</h3><p><img src="https://img-blog.csdnimg.cn/20190724141601149.png" alt></p><h3 id="2-3-余弦相似度"><a href="#2-3-余弦相似度" class="headerlink" title="2.3.余弦相似度"></a>2.3.余弦相似度</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A与B表示向量(x1,y1)，(x2,y2)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分子为A与B的点乘，分母为二者各自的L2相乘，即将所有维度值的平方相加后开方。<br><img src="https://img-blog.csdnimg.cn/2019072611455719.png" alt></p><blockquote><p>说明：<br><strong>A</strong>.经过step2，得到k个新的簇，每个样本都被分到k个簇中的某一个簇<br><strong>B</strong>.得到k个新的簇后，当前的质心就会失效，需要计算每个新簇的自己的新质心</p></blockquote><h2 id="Step3-新质心的计算"><a href="#Step3-新质心的计算" class="headerlink" title="Step3.新质心的计算"></a>Step3.新质心的计算</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于分类后的产生的k个簇，分别计算到簇内其他点距离均值最小的点作为质心（对于拥有坐标的簇可以计算每个簇坐标的均值作为质心）</p><blockquote><p>说明：<br><strong>A</strong>.比如一个新簇有3个样本：[[1,4], [2,5], [3,6]]，得到此簇的新质心=[(1+2+3)/3, (4+5+6)/3]<br><strong>B</strong>.经过step3，会得到k个新的质心，作为step2中使用的质心</p></blockquote><h2 id="Step4-是否停止K-means"><a href="#Step4-是否停止K-means" class="headerlink" title="Step4.是否停止K-means"></a>Step4.是否停止K-means</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;质心不再改变，或给定loop最大次数loopLimit</p><blockquote><p>说明：<br><strong>A</strong>当每个簇的质心，不再改变时就可以停止k-menas<br><strong>B</strong>.当loop次数超过looLimit时，停止k-means<br><strong>C</strong>.只需要满足两者的其中一个条件，就可以停止k-means<br><strong>C</strong>.如果Step4没有结束k-means，就再执行step2-step3-step4<br><strong>D</strong>.如果Step4结束了k-means，则就打印(或绘制)簇以及质心</p></blockquote><h1 id="四-python实现-代码详解"><a href="#四-python实现-代码详解" class="headerlink" title="四.python实现+代码详解"></a>四.python实现+代码详解</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以下是python得实例代码以及代码的详解，应该可以理解的。</p><pre><code>import random
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="K-means算法及python实现, Hexo,博客，python，C语言,机器学习，人工智能">
+    <meta name="description" content="走最远的路，爬最高的山，看最美的风景。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>K-means算法及python实现 | Flaneur</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/jquery/jquery.min.js"></script>
+    
+<link rel="alternate" href="/atom.xml" title="Flaneur" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Flaneur</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href class="waves-effect waves-light">
+
+      
+      <i class="fas fa-list" style="zoom: 0.6;"></i>
+      
+      <span>Medias</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/musics">
+          
+          <i class="fas fa-music" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Musics</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/movies">
+          
+          <i class="fas fa-film" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Movies</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/books">
+          
+          <i class="fas fa-book" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Books</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/galleries">
+          
+          <i class="fas fa-image" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Galleries</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Flaneur</div>
+        <div class="logo-desc">
+            
+            走最远的路，爬最高的山，看最美的风景。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-list"></i>
+			
+			Medias
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul style="background:  ;">
+              
+                <li>   
+				
+                  <a href="/musics " style="margin-left:75px" ;>
+				  
+				   <i class="fa fas fa-music" style="position: absolute;left:50px"></i>
+			      
+		          <span>Musics</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/movies " style="margin-left:75px" ;>
+				  
+				   <i class="fa fas fa-film" style="position: absolute;left:50px"></i>
+			      
+		          <span>Movies</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/books " style="margin-left:75px" ;>
+				  
+				   <i class="fa fas fa-book" style="position: absolute;left:50px"></i>
+			      
+		          <span>Books</span>
+                  </a>
+                </li>
+              
+                <li>   
+				
+                  <a href="/galleries " style="margin-left:75px" ;>
+				  
+				   <i class="fa fas fa-image" style="position: absolute;left:50px"></i>
+			      
+		          <span>Galleries</span>
+                  </a>
+                </li>
+               
+            </ul>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/HPU-Yz/HPU-Yz.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/HPU-Yz/HPU-Yz.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank" data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewbox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/14.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">K-means算法及python实现</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+        
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    .toc-fixed .toc-link::before{
+        position: fixed!important;/*当toc的位置改为fixed时，.toc-link::before也要改为fixed*/
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/机器学习/">
+                                <span class="chip bg-color">机器学习</span>
+                            </a>
+                        
+                            <a href="/tags/K-means/">
+                                <span class="chip bg-color">K-means</span>
+                            </a>
+                        
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/机器学习/" class="post-category">
+                                机器学习
+                            </a>
+                        
+                            <a href="/categories/机器学习/python/" class="post-category">
+                                python
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-07-19
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    11 分
+                </div>
+                
+
+                
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K-means(Thek-meansalgorithm)是机器学习十大经典算法之一，同时也是最为经典的无监督聚类（Unsupervised Clustering）算法。接触聚类算法，首先需要了解k-means算法的实现原理和步骤。本文将对k-means算法的基本原理和实现实例进行分析。</p>
+<h1 id="一-聚类算法的简介"><a href="#一-聚类算法的简介" class="headerlink" title="一.聚类算法的简介"></a>一.聚类算法的简介</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于”<strong>监督学习</strong>“(supervised learning)，其训练样本<strong>是带有标记信息</strong>的，并且监督学习的<strong>目的是</strong>：对带有标记的数据集进行模型学习，从而便于对新的样本进行分类。而在“<strong>无监督学习</strong>”(unsupervised learning)中，训练样本的标记信息是未知的，<strong>目标是</strong>通过对无标记训练样本的学习来揭示数据的内在性质及规律，为进一步的数据分析提供基础。对于无监督学习，应用最广的便是”<strong>聚类</strong>“(clustering)。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;”<strong>聚类算法</strong>“试图将数据集中的样本划分为若干个通常是不相交的子集，每个子集称为一个“簇”(cluster)，通过这样的划分，每个簇可能对应于一些潜在的概念或类别。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们可以通过下面这个图来理解：<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img-blog.csdnimg.cn/20190724144117607.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图是未做标记的样本集，通过他们的分布，我们很容易对上图中的样本做出以下几种划分。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当需要将其划分为两个簇时，即 k=2时：<br><img src="https://img-blog.csdnimg.cn/20190726155350351.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当需要将其划分为四个簇时，即 k=4 时：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img-blog.csdnimg.cn/20190724144431802.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h1 id="二-K-means聚类算法"><a href="#二-K-means聚类算法" class="headerlink" title="二.K-means聚类算法"></a>二.K-means聚类算法</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kmeans算法又名k均值算法,K-means算法中的k表示的是聚类为k个簇，means代表取每一个聚类中数据值的均值作为该簇的中心，或者称为质心，即用每一个的类的质心对该簇进行描述。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其算法思想大致为：先从样本集中随机选取 k个样本作为簇中心，并计算所有样本与这 k个“簇中心”的距离，对于每一个样本，将其划分到与其距离最近的“簇中心”所在的簇中，对于新的簇计算各个簇的新的“簇中心”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据以上描述，我们大致可以猜测到实现kmeans算法的主要四点：<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）簇个数 k 的选择<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）各个样本点到“簇中心”的距离<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（3）根据新划分的簇，更新“簇中心”<br>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（4）重复上述2、3过程，直至”簇中心”没有移动<br>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优缺点：</p>
+<ul>
+<li>优点：容易实现</li>
+<li>缺点：可能收敛到局部最小值，在大规模数据上收敛较慢</li>
+</ul>
+<h1 id="三-K-means算法步骤详解"><a href="#三-K-means算法步骤详解" class="headerlink" title="三.K-means算法步骤详解"></a>三.K-means算法步骤详解</h1><h2 id="Step1-K值的选择"><a href="#Step1-K值的选择" class="headerlink" title="Step1.K值的选择"></a>Step1.K值的选择</h2><p> k 的选择一般是按照实际需求进行决定，或在实现算法时直接给定 k 值。</p>
+<blockquote>
+<p>说明：<br> <strong>A</strong>.质心数量由用户给出，记为k，k-means最终得到的簇数量也是k<br> <strong>B</strong>.后来每次更新的质心的个数都和初始k值相等<br> <strong>C</strong>.k-means最后聚类的簇个数和用户指定的质心个数相等，一个质心对应一个簇，每个样本只聚类到一个簇里面<br> <strong>D</strong>.初始簇为空</p>
+</blockquote>
+<h2 id="Step2-距离度量"><a href="#Step2-距离度量" class="headerlink" title="Step2.距离度量"></a>Step2.距离度量</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将对象点分到距离聚类中心最近的那个簇中需要最近邻的度量策略，在欧式空间中采用的是欧式距离，在处理文档中采用的是余弦相似度函数，有时候也采用曼哈顿距离作为度量，不同的情况实用的度量公式是不同的。 </p>
+<h3 id="2-1-欧式距离"><a href="#2-1-欧式距离" class="headerlink" title="2.1.欧式距离"></a>2.1.欧式距离</h3><p><img src="https://img-blog.csdnimg.cn/20190724141524460.png" alt></p>
+<h3 id="2-2-曼哈顿距离"><a href="#2-2-曼哈顿距离" class="headerlink" title="2.2.曼哈顿距离"></a>2.2.曼哈顿距离</h3><p><img src="https://img-blog.csdnimg.cn/20190724141601149.png" alt></p>
+<h3 id="2-3-余弦相似度"><a href="#2-3-余弦相似度" class="headerlink" title="2.3.余弦相似度"></a>2.3.余弦相似度</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A与B表示向量(x1,y1)，(x2,y2)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分子为A与B的点乘，分母为二者各自的L2相乘，即将所有维度值的平方相加后开方。<br><img src="https://img-blog.csdnimg.cn/2019072611455719.png" alt></p>
+<blockquote>
+<p>说明：<br><strong>A</strong>.经过step2，得到k个新的簇，每个样本都被分到k个簇中的某一个簇<br><strong>B</strong>.得到k个新的簇后，当前的质心就会失效，需要计算每个新簇的自己的新质心</p>
+</blockquote>
+<h2 id="Step3-新质心的计算"><a href="#Step3-新质心的计算" class="headerlink" title="Step3.新质心的计算"></a>Step3.新质心的计算</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于分类后的产生的k个簇，分别计算到簇内其他点距离均值最小的点作为质心（对于拥有坐标的簇可以计算每个簇坐标的均值作为质心）</p>
+<blockquote>
+<p>说明：<br><strong>A</strong>.比如一个新簇有3个样本：[[1,4], [2,5], [3,6]]，得到此簇的新质心=[(1+2+3)/3,   (4+5+6)/3]<br><strong>B</strong>.经过step3，会得到k个新的质心，作为step2中使用的质心</p>
+</blockquote>
+<h2 id="Step4-是否停止K-means"><a href="#Step4-是否停止K-means" class="headerlink" title="Step4.是否停止K-means"></a>Step4.是否停止K-means</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;质心不再改变，或给定loop最大次数loopLimit  </p>
+<blockquote>
+<p>说明：<br><strong>A</strong>当每个簇的质心，不再改变时就可以停止k-menas<br><strong>B</strong>.当loop次数超过looLimit时，停止k-means<br><strong>C</strong>.只需要满足两者的其中一个条件，就可以停止k-means<br><strong>C</strong>.如果Step4没有结束k-means，就再执行step2-step3-step4<br><strong>D</strong>.如果Step4结束了k-means，则就打印(或绘制)簇以及质心</p>
+</blockquote>
+<h1 id="四-python实现-代码详解"><a href="#四-python实现-代码详解" class="headerlink" title="四.python实现+代码详解"></a>四.python实现+代码详解</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以下是python得实例代码以及代码的详解，应该可以理解的。</p>
+<pre><code>import random
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -67,14 +701,689 @@ if __name__==&#39;__main__&#39;:
       for j in range(len(centroids)):
         plt.scatter(centroids[j][0],centroids[j][1],marker=&#39;x&#39;,color=&#39;red&#39;,s=50,label=&#39;质心&#39;)
         plt.show
-</code></pre><h1 id="五-K-means算法补充"><a href="#五-K-means算法补充" class="headerlink" title="五.K-means算法补充"></a>五.K-means算法补充</h1><p>1.对初始化敏感，初始质点k给定的不同，可能会产生不同的聚类结果。如下图所示，右边是k=2的结果，这个就正好，而左图是k=3的结果，可以看到右上角得这两个簇应该是可以合并成一个簇的。</p><p>改进：<br>对k的选择可以先用一些算法分析数据的分布，如重心和密度等，然后选择合适的k<br><img src="https://img-blog.csdnimg.cn/20190726154810167.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>2.<strong>使用存在局限性</strong>，如下面这种非球状的数据分布就搞不定了：<br><img src="https://img-blog.csdnimg.cn/20190724161221112.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>3.数据集比较大的时候，<strong>收敛会比较慢</strong>。</p><p>4.最终会收敛。不管初始点如何选择，最终都会收敛。可是是全局收敛，也可能是局部收敛。</p><h1 id="六-小结"><a href="#六-小结" class="headerlink" title="六.小结"></a>六.小结</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. 聚类是一种无监督的学习方法。聚类区别于分类，即事先不知道要寻找的内容，没有预先设定好的目标变量。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. 聚类将数据点归到多个簇中，其中相似的数据点归为同一簇，而不相似的点归为不同的簇。相似度的计算方法有很多，具体的应用选择合适的相似度计算方法</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. K-means聚类算法，是一种广泛使用的聚类算法，其中k是需要指定的参数，即需要创建的簇的数目，K-means算法中的k个簇的质心可以通过随机的方式获得，但是这些点需要位于数据范围内。在算法中，计算每个点到质心得距离，选择距离最小的质心对应的簇作为该数据点的划分，然后再基于该分配过程后更新簇的质心。重复上述过程，直至各个簇的质心不再变化为止。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. K-means算法虽然有效，但是容易受到初始簇质心的情况而影响，有可能陷入局部最优解。为了解决这个问题，可以使用另外一种称为二分K-means的聚类算法。二分K-means算法首先将所有数据点分为一个簇；然后使用K-means（k=2）对其进行划分；下一次迭代时，选择使得SSE下降程度最大的簇进行划分；重复该过程，直至簇的个数达到指定的数目为止。实验表明，二分K-means算法的聚类效果要好于普通的K-means聚类算法。</p></div><hr><div class="reprint" id="reprint-statement"><div class="reprint__author"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-user">文章作者: </i></span><span class="reprint-info"><a href="https://hpu-yz.github.io" rel="external nofollow noreferrer">Flaneur</a></span></div><div class="reprint__type"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-link">文章链接: </i></span><span class="reprint-info"><a href="https://hpu-yz.github.io/2019/07/19/k-means-ju-lei-suan-fa-yuan-li-ji-python-shi-xian/">https://hpu-yz.github.io/2019/07/19/k-means-ju-lei-suan-fa-yuan-li-ji-python-shi-xian/</a></span></div><div class="reprint__notice"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-copyright">版权声明: </i></span><span class="reprint-info">本博客所有文章除特別声明外，均采用 <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a> 许可协议。转载请注明来源 <a href="https://hpu-yz.github.io" target="_blank">Flaneur</a> !</span></div></div><script async defer>document.addEventListener("copy", function (e) {
+</code></pre><h1 id="五-K-means算法补充"><a href="#五-K-means算法补充" class="headerlink" title="五.K-means算法补充"></a>五.K-means算法补充</h1><p>1.对初始化敏感，初始质点k给定的不同，可能会产生不同的聚类结果。如下图所示，右边是k=2的结果，这个就正好，而左图是k=3的结果，可以看到右上角得这两个簇应该是可以合并成一个簇的。</p>
+<p>改进：<br>对k的选择可以先用一些算法分析数据的分布，如重心和密度等，然后选择合适的k<br><img src="https://img-blog.csdnimg.cn/20190726154810167.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>2.<strong>使用存在局限性</strong>，如下面这种非球状的数据分布就搞不定了：<br><img src="https://img-blog.csdnimg.cn/20190724161221112.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>3.数据集比较大的时候，<strong>收敛会比较慢</strong>。</p>
+<p>4.最终会收敛。不管初始点如何选择，最终都会收敛。可是是全局收敛，也可能是局部收敛。</p>
+<h1 id="六-小结"><a href="#六-小结" class="headerlink" title="六.小结"></a>六.小结</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. 聚类是一种无监督的学习方法。聚类区别于分类，即事先不知道要寻找的内容，没有预先设定好的目标变量。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. 聚类将数据点归到多个簇中，其中相似的数据点归为同一簇，而不相似的点归为不同的簇。相似度的计算方法有很多，具体的应用选择合适的相似度计算方法</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. K-means聚类算法，是一种广泛使用的聚类算法，其中k是需要指定的参数，即需要创建的簇的数目，K-means算法中的k个簇的质心可以通过随机的方式获得，但是这些点需要位于数据范围内。在算法中，计算每个点到质心得距离，选择距离最小的质心对应的簇作为该数据点的划分，然后再基于该分配过程后更新簇的质心。重复上述过程，直至各个簇的质心不再变化为止。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. K-means算法虽然有效，但是容易受到初始簇质心的情况而影响，有可能陷入局部最优解。为了解决这个问题，可以使用另外一种称为二分K-means的聚类算法。二分K-means算法首先将所有数据点分为一个簇；然后使用K-means（k=2）对其进行划分；下一次迭代时，选择使得SSE下降程度最大的簇进行划分；重复该过程，直至簇的个数达到指定的数目为止。实验表明，二分K-means算法的聚类效果要好于普通的K-means聚类算法。</p>
+
+            </div>
+            <hr>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://hpu-yz.github.io" rel="external nofollow noreferrer">Flaneur</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://hpu-yz.github.io/2019/07/19/k-means-ju-lei-suan-fa-yuan-li-ji-python-shi-xian/">https://hpu-yz.github.io/2019/07/19/k-means-ju-lei-suan-fa-yuan-li-ji-python-shi-xian/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://hpu-yz.github.io" target="_blank">Flaneur</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
         let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
 
       function navToReprintStatement() {
         $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
-      }</script><div class="tag_share" style="display:block"><div class="post-meta__tag-list" style="display:inline-block"><div class="article-tag"><a href="/tags/机器学习/"><span class="chip bg-color">机器学习</span> </a><a href="/tags/python/"><span class="chip bg-color">python</span> </a><a href="/tags/K-means/"><span class="chip bg-color">K-means</span></a></div></div><div class="post_share" style="zoom:80%;width:fit-content;display:inline-block;float:right;margin:-.15rem 0"><link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css"><div id="article-share"><div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div><script src="/libs/share/js/social-share.min.js"></script></div></div></div><style>#reward{margin:40px 0;text-align:center}#reward .reward-link{font-size:1.4rem;line-height:38px}#reward .btn-floating:hover{box-shadow:0 6px 12px rgba(0,0,0,.2),0 5px 15px rgba(0,0,0,.2)}#rewardModal{width:320px;height:350px}#rewardModal .reward-title{margin:15px auto;padding-bottom:5px}#rewardModal .modal-content{padding:10px}#rewardModal .close{position:absolute;right:15px;top:15px;color:rgba(0,0,0,.5);font-size:1.3rem;line-height:20px;cursor:pointer}#rewardModal .close:hover{color:#ef5350;transform:scale(1.3);-moz-transform:scale(1.3);-webkit-transform:scale(1.3);-o-transform:scale(1.3)}#rewardModal .reward-tabs{margin:0 auto;width:210px}.reward-tabs .tabs{height:38px;margin:10px auto;padding-left:0}.reward-content ul{padding-left:0!important}.reward-tabs .tabs .tab{height:38px;line-height:38px}.reward-tabs .tab a{color:#fff;background-color:#ccc}.reward-tabs .tab a:hover{background-color:#ccc;color:#fff}.reward-tabs .wechat-tab .active{color:#fff!important;background-color:#22AB38!important}.reward-tabs .alipay-tab .active{color:#fff!important;background-color:#019FE8!important}.reward-tabs .reward-img{width:210px;height:210px}</style><div id="reward"><a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a><div id="rewardModal" class="modal"><div class="modal-content"><a class="close modal-close"><i class="fas fa-times"></i></a><h4 class="reward-title">你的赏识是我前进的动力</h4><div class="reward-content"><div class="reward-tabs"><ul class="tabs row"><li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li><li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li></ul><div id="alipay"><img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码"></div><div id="wechat"><img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码"></div></div></div></div></div></div><script>$(function(){$(".tabs").tabs()})</script></div></div><style>.valine-card{margin:1.5rem auto}.valine-card .card-content{padding:20px 20px 5px 20px}#vcomments textarea{box-sizing:border-box;background:url(/medias/comment_bg.png) 100% 100% no-repeat}#vcomments p{margin:2px 2px 10px;font-size:1.05rem;line-height:1.78rem}#vcomments blockquote p{text-indent:.2rem}#vcomments a{padding:0 2px;color:#4cbf30;font-weight:500;text-decoration:none}#vcomments img{max-width:100%;height:auto;cursor:pointer}#vcomments ol li{list-style-type:decimal}#vcomments ol,ul{display:block;padding-left:2em;word-spacing:.05rem}#vcomments ul li,ol li{display:list-item;line-height:1.8rem;font-size:1rem}#vcomments ul li{list-style-type:disc}#vcomments ul ul li{list-style-type:circle}#vcomments table,td,th{padding:12px 13px;border:1px solid #dfe2e5}#vcomments table,td,th{border:0}table tr:nth-child(2n),thead{background-color:#fafafa}#vcomments table th{background-color:#f2f2f2;min-width:80px}#vcomments table td{min-width:80px}#vcomments h1{font-size:1.85rem;font-weight:700;line-height:2.2rem}#vcomments h2{font-size:1.65rem;font-weight:700;line-height:1.9rem}#vcomments h3{font-size:1.45rem;font-weight:700;line-height:1.7rem}#vcomments h4{font-size:1.25rem;font-weight:700;line-height:1.5rem}#vcomments h5{font-size:1.1rem;font-weight:700;line-height:1.4rem}#vcomments h6{font-size:1rem;line-height:1.3rem}#vcomments p{font-size:1rem;line-height:1.5rem}#vcomments hr{margin:12px 0;border:0;border-top:1px solid #ccc}#vcomments blockquote{margin:15px 0;border-left:5px solid #42b983;padding:1rem .8rem .3rem .8rem;color:#666;background-color:rgba(66,185,131,.1)}#vcomments pre{font-family:monospace,monospace;padding:1.2em;margin:.5em 0;background:#272822;overflow:auto;border-radius:.3em;tab-size:4}#vcomments code{font-family:monospace,monospace;padding:1px 3px;font-size:.92rem;color:#e96900;background-color:#f8f8f8;border-radius:2px}#vcomments pre code{font-family:monospace,monospace;padding:0;color:#e8eaf6;background-color:#272822}#vcomments pre[class*=language-]{padding:1.2em;margin:.5em 0}#vcomments code[class*=language-],pre[class*=language-]{color:#e8eaf6}#vcomments [type=checkbox]:not(:checked),[type=checkbox]:checked{position:inherit;margin-left:-1.3rem;margin-right:.4rem;margin-top:-1px;vertical-align:middle;left:unset;visibility:visible}#vcomments b,strong{font-weight:700}#vcomments dfn{font-style:italic}#vcomments small{font-size:85%}#vcomments cite{font-style:normal}#vcomments mark{background-color:#fcf8e3;padding:.2em}#vcomments table,td,th{padding:12px 13px;border:1px solid #dfe2e5}table tr:nth-child(2n),thead{background-color:#fafafa}#vcomments table th{background-color:#f2f2f2;min-width:80px}#vcomments table td{min-width:80px}#vcomments [type=checkbox]:not(:checked),[type=checkbox]:checked{position:inherit;margin-left:-1.3rem;margin-right:.4rem;margin-top:-1px;vertical-align:middle;left:unset;visibility:visible}</style><div class="card valine-card" data-aos="fade-up"><div class="comment_headling" style="font-size:20px;font-weight:700;position:relative;padding-left:20px;top:15px;padding-bottom:5px"><i class="fas fa-comments fa-fw" aria-hidden="true"></i> <span>评论</span></div><div id="vcomments" class="card-content" style="display:grid"></div></div><script src="/libs/valine/av-min.js"></script><script src="/libs/valine/Valine.min.js"></script><script>new Valine({el:"#vcomments",appId:"gNvfNq61qvxgPJ2We41KkGhK-9Nh9j0Va",appKey:"hrC47QFpm6rC1BFn28YQXRdC",notify:!1,verify:!1,visitor:!0,avatar:"mm",pageSize:"10",lang:"zh-cn",placeholder:"just go go"})</script><article id="prenext-posts" class="prev-next articles"><div class="row article-row"><div class="article col s12 m6" data-aos="fade-up"><div class="article-badge left-badge text-color"><i class="fas fa-chevron-left"></i>&nbsp;上一篇</div><div class="card"><a href="/2019/07/20/k-zui-jin-lin-fen-lei-suan-fa-knn-ji-python-shi-xian/"><div class="card-image"><img src="/medias/featureimages/1.jpg" class="responsive-img" alt="KNN算法及python实现"> <span class="card-title">KNN算法及python实现</span></div></a><div class="card-content article-content"><div class="summary block-with-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN算法即K-Nearest Neighbor，也是机器学习十大经典算法之一。前文讲解了K-means算法，今天我们就继续讲KNN算法，两者看</div><div class="publish-info"><span class="publish-date"><i class="far fa-clock fa-fw icon-date"></i>2019-07-20 </span><span class="publish-author"><i class="fas fa-bookmark fa-fw icon-category"></i> <a href="/categories/机器学习/" class="post-category">机器学习 </a><a href="/categories/机器学习/python/" class="post-category">python</a></span></div></div><div class="card-action article-tags"><a href="/tags/机器学习/"><span class="chip bg-color">机器学习</span> </a><a href="/tags/KNN/"><span class="chip bg-color">KNN</span> </a><a href="/tags/python/"><span class="chip bg-color">python</span></a></div></div></div><div class="article col s12 m6" data-aos="fade-up"><div class="article-badge right-badge text-color">下一篇&nbsp;<i class="fas fa-chevron-right"></i></div><div class="card"><a href="/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/"><div class="card-image"><img src="/medias/featureimages/16.jpg" class="responsive-img" alt="数据集的划分--训练集、验证集和测试集"> <span class="card-title">数据集的划分--训练集、验证集和测试集</span></div></a><div class="card-content article-content"><div class="summary block-with-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。 为什么要划分数据集为训练</div><div class="publish-info"><span class="publish-date"><i class="far fa-clock fa-fw icon-date"></i>2019-07-18 </span><span class="publish-author"><i class="fas fa-bookmark fa-fw icon-category"></i> <a href="/categories/机器学习/" class="post-category">机器学习</a></span></div></div><div class="card-action article-tags"><a href="/tags/机器学习/"><span class="chip bg-color">机器学习</span> </a><a href="/tags/数据集/"><span class="chip bg-color">数据集</span></a></div></div></div></div></article></div><script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script><script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script><script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script><script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script><style type="text/css">code[class*=language-],pre[class*=language-]{white-space:pre!important}</style></div><div id="toc-aside" class="expanded col l3 hide-on-med-and-down"><div class="toc-widget"><div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div><div id="toc-content"></div></div></div></div><div id="floating-toc-btn" class="hide-on-med-and-down"><a class="btn-floating btn-large bg-color"><i class="fas fa-list-ul"></i></a></div><script src="/libs/tocbot/tocbot.min.js"></script><script>$(function () {
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/机器学习/">
+                                    <span class="chip bg-color">机器学习</span>
+                                </a>
+                            
+                                <a href="/tags/K-means/">
+                                    <span class="chip bg-color">K-means</span>
+                                </a>
+                            
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/valine/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'gNvfNq61qvxgPJ2We41KkGhK-9Nh9j0Va',
+        appKey: 'hrC47QFpm6rC1BFn28YQXRdC',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+    
+	
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/07/20/k-zui-jin-lin-fen-lei-suan-fa-knn-ji-python-shi-xian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="KNN算法及python实现">
+                        
+                        <span class="card-title">KNN算法及python实现</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN算法即K-Nearest Neighbor，也是机器学习十大经典算法之一。前文讲解了K-means算法，今天我们就继续讲KNN算法，两者看
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-07-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/机器学习/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            <a href="/categories/机器学习/python/" class="post-category">
+                                    python
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/机器学习/">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/KNN/">
+                        <span class="chip bg-color">KNN</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/07/18/ti-du-xia-jiang-fa-de-san-chong-xing-shi-bgd-sgd-mbgd-ji-python-shi-xian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/medias/featureimages/22.jpg" class="responsive-img" alt="梯度下降法的三种形式BGD、SGD、MBGD及python实现">
+                        
+                        <span class="card-title">梯度下降法的三种形式BGD、SGD、MBGD及python实现</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;梯度下降法作为机器学习中较常使用的优化算法，其有着三种不同的形式：批量梯度下降（Batch Gradient Descent）、随机梯度下降（S
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-07-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/机器学习/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            <a href="/categories/机器学习/python/" class="post-category">
+                                    python
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/机器学习/">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/梯度下降/">
+                        <span class="chip bg-color">梯度下降</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
         tocbot.init({
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
@@ -145,4 +1454,156 @@ if __name__==&#39;__main__&#39;:
             fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
-    });</script></main><footer class="page-footer bg-color"><div class="container row center-align" style="margin-bottom:0!important"><div class="col s12 m8 l8 copy-right">Copyright&nbsp;&copy; <span id="year">2019</span> <a href="https://hpu-yz.github.io" target="_blank">Flaneur</a> |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a><br>&nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">37.5k</span>&nbsp;字 <span id="busuanzi_container_site_pv">|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv" class="white-color"></span>&nbsp;次 </span><span id="busuanzi_container_site_uv">|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv" class="white-color"></span>&nbsp;人</span><br><br></div><div class="col s12 m4 l4 social-link social-statis"><a href="https://github.com/HPU-Yz" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50"><i class="fab fa-github"></i> </a><a href="mailto:2426545812@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50"><i class="fas fa-envelope-open"></i> </a><a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2426545812" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2426545812" data-position="top" data-delay="50"><i class="fab fa-qq"></i> </a><a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50"><i class="fas fa-rss"></i></a></div></div></footer><div class="progress-bar"></div><div id="searchModal" class="modal"><div class="modal-content"><div class="search-header"><span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span> <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input"></div><div id="searchResult"></div></div></div><script src="/js/search.js"></script><script type="text/javascript">$(function(){searchFunc("/search.xml","searchInput","searchResult")})</script><div id="backTop" class="top-scroll"><a class="btn-floating btn-large waves-effect waves-light" href="#!"><i class="fas fa-arrow-up"></i></a></div><script src="/libs/materialize/materialize.min.js"></script><script src="/libs/masonry/masonry.pkgd.min.js"></script><script src="/libs/aos/aos.js"></script><script src="/libs/scrollprogress/scrollProgress.min.js"></script><script src="/libs/lightGallery/js/lightgallery-all.min.js"></script><script src="/js/matery.js"></script><script>!function(){var t=document.createElement("script"),s=window.location.protocol.split(":")[0];"https"===s?t.src="https://zz.bdstatic.com/linksubmit/push.js":t.src="http://push.zhanzhang.baidu.com/push.js";var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}()</script><script src="/libs/others/clicklove.js" async></script><script async src="/libs/others/busuanzi.pure.mini.js"></script><script src="/libs/instantpage/instantpage.js" type="module"></script></body></html><!-- rebuild by neat -->
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="https://hpu-yz.github.io" target="_blank">Flaneur</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">37.5k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv" class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv" class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/HPU-Yz" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2426545812@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2426545812" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2426545812" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/gh/HPU-Yz/HPU-Yz.github.io/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
