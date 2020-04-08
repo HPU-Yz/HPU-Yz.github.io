@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Flaneur</title>
   
-  <subtitle>https://cdn.jsdelivr.net/gh/HPU-Yz/cdn-speed@1.0/medias/logo.png</subtitle>
+  <subtitle>Welocme</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hpu-yz.github.io/"/>
@@ -411,9 +411,9 @@
     
       <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="KNN" scheme="https://hpu-yz.github.io/tags/KNN/"/>
-    
       <category term="python" scheme="https://hpu-yz.github.io/tags/python/"/>
+    
+      <category term="KNN" scheme="https://hpu-yz.github.io/tags/KNN/"/>
     
   </entry>
   
@@ -444,9 +444,9 @@
     
       <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="python" scheme="https://hpu-yz.github.io/tags/python/"/>
-    
       <category term="K-means" scheme="https://hpu-yz.github.io/tags/K-means/"/>
+    
+      <category term="python" scheme="https://hpu-yz.github.io/tags/python/"/>
     
   </entry>
   
