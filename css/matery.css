@@ -248,10 +248,10 @@ mark {
 .container .row {
     margin-bottom: 0;
 }
-
+/*#EEB4B4#6CA6CD*/
 .bg-color {
-    background-image: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
-    opacity: 0.8
+    background-image: linear-gradient(to right, #EEB4B4 0%, #6CA6CD 100%);
+    opacity: 0.5s
 }
 
 .text-color {
