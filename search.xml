@@ -181,6 +181,137 @@ if __name__==&#39;__main__&#39;:
       </tags>
   </entry>
   <entry>
+    <title>OJ刷题-while(scanf(&quot;%d&quot;,&amp;n)!=EOF)</title>
+    <url>/2019/03/21/oj/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“测试输入包含若干测试实例。当N为0时，输入结束，该实例不被处理。”这句话 是最早我对OJ的印象 以前也没见过这种输入要求， 做第一道题的时候就卡住了 上网看别人的代码 都有一句 while(scanf(“%d”,&amp;n)!=EOF)”scanf 函数还能放while里啊… EOF是什么玩意儿呢…”</p>
+<blockquote>
+<h2 id="什么是OJ？"><a href="#什么是OJ？" class="headerlink" title="什么是OJ？"></a>什么是OJ？</h2></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先先介绍下什么是OJ吧(知道的同学可以跳过此部分)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Online Judge系统（简称OJ）是一个在线的判题系统。用户可以在线提交程序多种程序（如C、C++）源代码，系统对源代码进行编译和执行，并通过预先设计的测试数据来检验程序源代码的正确性。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一个用户提交的程序在Online Judge系统下执行时将受到比较严格的限制，包括运行时间限制，内存使用限制和安全限制等。用户程序执行的结果将被Online Judge系统捕捉并保存，然后再转交给一个裁判程序。该裁判程序或者比较用户程序的输出数据和标准输出样例的差别，或者检验用户程序的输出数据是否满足一定的逻辑条件。最后系统返回给用户一个状态：通过（Accepted,AC）、答案错误(Wrong Answer,WA)、超时(Time Limit Exceed,TLE)、超过输出限制（Output Limit Exceed,OLE)、超内存（Memory Limit Exceed,MLE）、运行时错误（Runtime Error,RE）、格式错误（Presentation Error,PE)、或是无法编译（Compile Error,CE），并返回程序使用的内存、运行时间等信息。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Online Judge系统最初使用于ACM-ICPC国际大学生程序设计竞赛和OI信息学奥林匹克竞赛中的自动判题和排名。现广泛应用于世界各地高校学生程序设计的训练、参赛队员的训练和选拔、各种程序设计竞赛以及数据结构和算法的学习和作业的自动提交判断中。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;知名的OJ有：RQNOJ,URAL,SPOJ,vijos,tyvj,USACO,sgu,pku(poj),zju(toj),tju,uva，HDU(HDOJ)等。</p>
+<blockquote>
+<h2 id="EOF是什么东东？"><a href="#EOF是什么东东？" class="headerlink" title="EOF是什么东东？"></a>EOF是什么东东？</h2></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EOF 是一个宏 ，一般定义为-1。<br>1.EOF用来判断文件结束的标记(end of file) 用在文件操作中,可以查下msdn 看它的定义:EOF is returned by       an I/O routine when the end-of-file (or in some cases, an error) is encountered<br>2.EOF表示输入流的结束。<br>3.在发送端套接字关闭后，接收端读套接字的read函数也会返回EOF.</p>
+<blockquote>
+<h2 id="while-scanf-EOF-流程图"><a href="#while-scanf-EOF-流程图" class="headerlink" title="while(scanf()!=EOF)流程图"></a>while(scanf()!=EOF)流程图</h2></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们学过的有三种循环：for，while，do-while。但while (scanf(“%d”, &amp;n) != EOF)不像以上的任何一种，接下来看一下它的流程图：<br><img src="/2019/03/21/oj/while-1/20140502221756328.png" alt="流程图"></p>
+<blockquote>
+<h2 id="OnlineJuge的评判时，该语句的作用"><a href="#OnlineJuge的评判时，该语句的作用" class="headerlink" title="OnlineJuge的评判时，该语句的作用"></a>OnlineJuge的评判时，该语句的作用</h2></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OJ评判的原理应该是这样的：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入：通过管道命令，将一个包含若干测试用例的文件作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为【标准输入流】，所以需要while(scanf() != EOF)来判断测试文件是否读完。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输出：通过管道命令，将【标准输出流】，输出到一个文件中。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评判：将程序的【输出文件】与【正确答案文件】进行比对：如果一样，则返回程序正确提示；否则返回程序错误的提示。</p>
+<blockquote>
+<h2 id="使用原理"><a href="#使用原理" class="headerlink" title="使用原理"></a>使用原理</h2></blockquote>
+<p>有人说 EOF等于-1 其实就是scanf函数的返回值 不等于-1时 继续进行循环</p>
+<p>有人说 EOF是处理到文件结束 不用EOF也可以</p>
+<p>……….</p>
+<p>很多天后终于把这个弄明白了</p>
+<p>scanf的返回值由后面的参数决定</p>
+<p>scanf(“%d%d”, &amp;a, &amp;b);</p>
+<p>如果a和b都被成功读入，那么scanf的返回值就是2</p>
+<p>如果只有a被成功读入，返回值为1</p>
+<p>如果a和b都未被成功读入，返回值为0</p>
+<p>如果遇到错误或遇到end of file，返回值为EOF，且返回值为int型.</p>
+<blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上是我个人所述，若有什么不对的地方或者有补充的地方，还希望各位指点指点，大家可以一起学习，一起进步！</p>
+]]></content>
+      <categories>
+        <category>OJ</category>
+      </categories>
+      <tags>
+        <tag>OJ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KNN算法及python实现</title>
+    <url>/2019/07/20/k-zui-jin-lin-fen-lei-suan-fa-knn-ji-python-shi-xian/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN算法即K-Nearest Neighbor，也是机器学习十大经典算法之一。前文讲解了K-means算法，今天我们就继续讲KNN算法，两者看起来挺相似的，但区别还是很大的，看完本片文章你就会明白了。</p>
+<h1 id="一、引入"><a href="#一、引入" class="headerlink" title="一、引入"></a>一、引入</h1><p>问题：确定绿色圆是属于红色三角形、还是蓝色正方形？<br><img src="https://img-blog.csdnimg.cn/20190729110829508.png" alt><br>KNN的思想：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从上图中我们可以看到，图中的数据集是良好的数据，即都打好了label，一类是蓝色的正方形，一类是红色的三角形，那个绿色的圆形是我们待分类的数据。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果K=3，那么离绿色点最近的有2个红色三角形和1个蓝色的正方形，这3个点投票，于是绿色的这个待分类点属于红色的三角形<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果K=5，那么离绿色点最近的有2个红色三角形和3个蓝色的正方形，这5个点投票，于是绿色的这个待分类点属于蓝色的正方形<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;即如果一个样本在特征空间中的k个最相邻的样本中，大多数属于某一个类别，则该样本也属于这个类别。我们可以看到，KNN本质是基于一种数据统计的方法！其实很多机器学习算法也是基于数据统计的。</p>
+<h1 id="二、KNN算法"><a href="#二、KNN算法" class="headerlink" title="二、KNN算法"></a>二、KNN算法</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN即K-最近邻分类算法（K-Nearest Neighbor），是一种memory-based learning，也叫instance-based learning，属于lazy learning。即它没有明显的前期训练过程，而是程序开始运行时，把数据集加载到内存后，不需要进行训练，就可以开始分类了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN也是一种监督学习算法，通过计算新数据与训练数据特征值之间的距离，然后选取K(K&gt;=1)个距离最近的邻居进行分类判(投票法)或者回归。若K=1，新数据被简单分配给其近邻的类。</p>
+<h2 id="2-步骤"><a href="#2-步骤" class="headerlink" title="2.步骤"></a>2.步骤</h2><p>1）计算测试数据与各个训练数据之间的距离；</p>
+<blockquote>
+<p>(计算距离的方式前文讲k-means时说过，不清楚的可以去查看以下➡<a href="https://hpu-yz.github.io/2019/07/19/K-means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8Apython%E5%AE%9E%E7%8E%B0/">传送门</a>)</p>
+</blockquote>
+<p>2）按照距离的递增关系进行排序；</p>
+<p>3）选取距离最小的K个点；</p>
+<blockquote>
+<p>K值是由自己来确定的</p>
+</blockquote>
+<p>4）确定前K个点所在类别的出现频率；</p>
+<p>5）返回前K个点中出现频率最高的类别作为测试数据的预测分类。</p>
+<blockquote>
+<p>说明：对于步骤5的预测分类有以下两种方法</p>
+<ol>
+<li>多数表决法：多数表决法类似于投票的过程，也就是在 K 个邻居中选择类别最多的种类作为测试样本的类别。</li>
+<li>加权表决法：根据距离的远近，对近邻的投票进行加权，距离越近则权重越大，通过权重计算结果最大值的类为测试样本的类别。</li>
+</ol>
+</blockquote>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>1)  非参数统计方法：不需要引入参数<br>2)  K的选择：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K = 1时，将待分类样本划入与其最接近的样本的类。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K = |X|时，仅根据训练样本进行频率统计，将待分类样本划入最多的类。<br>K需要合理选择，太小容易受干扰，太大增加计算复杂性。<br>3)  算法的复杂度：维度灾难，当维数增加时，所需的训练样本数急剧增加，一般采用降维处理。</p>
+<h1 id="三、算法优缺点"><a href="#三、算法优缺点" class="headerlink" title="三、算法优缺点"></a>三、算法优缺点</h1><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
+<li>简单、有效。 </li>
+<li>重新训练的代价较低(类别体系的变化和训练集的变化，在Web环境和电子商务应用中是很常见的)。 </li>
+<li>计算时间和空间线性于训练集的规模(在一些场合不算太大)。 </li>
+<li>由于KNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因此对于类域的交叉或重叠较多的待分样本集来说，KNN方法较其他方法更为适合。 </li>
+<li>该算法比较适用于样本容量比较大的类域的自动分类，而那些样本容量较小的类域采用这种算法比较容易产生误分。 </li>
+</ol>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
+<li>KNN算法是懒散学习方法(lazy learning)，而一些积极学习的算法要快很多。 </li>
+<li>需要存储全部的训练样本 </li>
+<li>输出的可解释性不强，例如决策树的可解释性较强。 </li>
+<li>该算法在分类时有个主要的不足是，当样本不平衡时，如一个类的样本容量很大，而其他类样本容量很小时，有可能导致当输入一个新样本时，该样本的K个邻居中大容量类的样本占多数。该算法只计算最近的邻居样本，某一类的样本数量很大，那么或者这类样本并不接近目标样本，或者这类样本很靠近目标样本。无论怎样，数量并不能影响运行结果。可以采用权值的方法(和该样本距离小的邻居权值大)来改进。 </li>
+<li>计算量较大。目前常用的解决方法是事先对已知样本点进行剪辑，事先去除对分类作用不大的样本。</li>
+</ol>
+<h1 id="四、KNN与K-means的区别"><a href="#四、KNN与K-means的区别" class="headerlink" title="四、KNN与K-means的区别"></a>四、KNN与K-means的区别</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;废话不多说，咱直接上图：<br><img src="https://img-blog.csdnimg.cn/2019072911370194.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>相似点：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虽然两者有很大且别，但两者也有共同之处。都包含了一个过程：给定一个点，在数据集找离它最近的点，即都用到了NN(Nearest Neighbor)算法。</p>
+<h1 id="五、python实例实现"><a href="#五、python实例实现" class="headerlink" title="五、python实例实现"></a>五、python实例实现</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下面引入一个实例，通过python代码具体看下KNN算法的流程。</p>
+<pre><code>from numpy import *
+import operator
+
+dataSet = array([[1.0,1.1],[1.0,1.0],[0,0],[0,0.1]])
+labels = [&#39;A&#39;,&#39;A&#39;,&#39;B&#39;,&#39;B&#39;]
+
+def classify0(inX,dataSet,labels,k):
+
+    #求出样本集的行数，也就是labels标签的数目
+    dataSetSize = dataSet.shape[0]
+
+    #构造输入值和样本集的差值矩阵
+    diffMat = tile(inX,(dataSetSize,1)) - dataSet
+
+    #计算欧式距离
+    sqDiffMat = diffMat**2
+    sqDistances = sqDiffMat.sum(axis=1)
+    distances = sqDistances**0.5
+
+    #求距离从小到大排序的序号
+    sortedDistIndicies = distances.argsort()
+
+    #对距离最小的k个点统计对应的样本标签
+    classCount = {}
+    for i in range(k):
+        #取第i+1邻近的样本对应的类别标签
+        voteIlabel = labels[sortedDistIndicies[i]]
+        #以标签为key，标签出现的次数为value将统计到的标签及出现次数写进字典
+        classCount[voteIlabel] = classCount.get(voteIlabel,0) + 1
+
+    #对字典按value从大到小排序
+    sortedClassCount = sorted(classCount.items(),key=operator.itemgetter(1),reverse=True)
+
+    #返回排序后字典中最大value对应的key
+    return sortedClassCount[0][0]
+if __name__ == &#39;__main__&#39;:
+    print(classify0([1.1,0],dataSet,labels,3))
+</code></pre>]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>python</tag>
+        <tag>KNN</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python判断离散数学的合式公式</title>
     <url>/2019/03/17/python-pan-duan-chi-san-shu-xue-de-he-shi-gong-shi/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你没有听错，用python程序来解决离散数学的逻辑推理问题，我当我第一次听老师说的时候也很吃惊（再说上学期的Python学的也不咋地…..😩)，但经老师讲解后才知道，使用python解题不仅效率高，而且准确性也很强的，所以还是有必要学习以下的。</p>
@@ -287,134 +418,79 @@ if &#39;(&#39; or &#39;)&#39; in S :
       </tags>
   </entry>
   <entry>
-    <title>KNN算法及python实现</title>
-    <url>/2019/07/20/k-zui-jin-lin-fen-lei-suan-fa-knn-ji-python-shi-xian/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN算法即K-Nearest Neighbor，也是机器学习十大经典算法之一。前文讲解了K-means算法，今天我们就继续讲KNN算法，两者看起来挺相似的，但区别还是很大的，看完本片文章你就会明白了。</p>
-<h1 id="一、引入"><a href="#一、引入" class="headerlink" title="一、引入"></a>一、引入</h1><p>问题：确定绿色圆是属于红色三角形、还是蓝色正方形？<br><img src="https://img-blog.csdnimg.cn/20190729110829508.png" alt><br>KNN的思想：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从上图中我们可以看到，图中的数据集是良好的数据，即都打好了label，一类是蓝色的正方形，一类是红色的三角形，那个绿色的圆形是我们待分类的数据。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果K=3，那么离绿色点最近的有2个红色三角形和1个蓝色的正方形，这3个点投票，于是绿色的这个待分类点属于红色的三角形<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果K=5，那么离绿色点最近的有2个红色三角形和3个蓝色的正方形，这5个点投票，于是绿色的这个待分类点属于蓝色的正方形<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;即如果一个样本在特征空间中的k个最相邻的样本中，大多数属于某一个类别，则该样本也属于这个类别。我们可以看到，KNN本质是基于一种数据统计的方法！其实很多机器学习算法也是基于数据统计的。</p>
-<h1 id="二、KNN算法"><a href="#二、KNN算法" class="headerlink" title="二、KNN算法"></a>二、KNN算法</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN即K-最近邻分类算法（K-Nearest Neighbor），是一种memory-based learning，也叫instance-based learning，属于lazy learning。即它没有明显的前期训练过程，而是程序开始运行时，把数据集加载到内存后，不需要进行训练，就可以开始分类了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN也是一种监督学习算法，通过计算新数据与训练数据特征值之间的距离，然后选取K(K&gt;=1)个距离最近的邻居进行分类判(投票法)或者回归。若K=1，新数据被简单分配给其近邻的类。</p>
-<h2 id="2-步骤"><a href="#2-步骤" class="headerlink" title="2.步骤"></a>2.步骤</h2><p>1）计算测试数据与各个训练数据之间的距离；</p>
+    <title>python动态规划解决矩阵连乘</title>
+    <url>/2020/03/05/python-dong-tai-gui-hua-jie-jue-ju-zhen-lian-cheng/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划算法与分治法类似，其基本思想也就是将待求解的问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解，简单概括为自顶向下分解，自底向上求解。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与分治法不同的是，适合于用动态规划法求解的问题，经分解得到的子问题往往不是相互独立的，换句话说，就是前面解决过的子问题，在后面的子问题中又碰到了前面解决过的子问题，子问题之间是有联系的。如果用分治法，有些同样的子问题会被重复计算几次，这样就很浪费时间了。所以动态规划是为了解决分治法的弊端而提出的，动态规划的基本思想就是，用一个表来记录所有已经解决过的子问题的答案，不管该子问题在以后是否会被用到，只要它被计算过，就将其结果填入表中，以后碰到同样的子问题，就可以从表中直接调用该子问题的答案，而不需要再计算一次。具体的动态规划的算法多种多样，但他们都具有相同的填表式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划的适用场合，一般适用于解最优化问题，例如矩阵连乘问题、最长公共子序列、背包问题等等。</p>
+<h2 id="矩阵连乘问题描述"><a href="#矩阵连乘问题描述" class="headerlink" title="矩阵连乘问题描述"></a>矩阵连乘问题描述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;给定n个矩阵：A1,A2,…,An，其中Ai与Ai+1是可乘的，i=1，2…，n-1。确定计算矩阵连乘积的计算次序，使得依此次序计算矩阵连乘积需要的数乘次数最少。输入数据为矩阵个数和每个矩阵规模，输出结果为计算矩阵连乘积的计算次序和最少数乘次数。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若A是一个p × q的矩阵，B是一个q × r的矩阵，则其乘积C=AB是一个p × r的矩阵。数乘次数是p × q × r.</p>
+<h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>A(3 × 5)A(5 × 7)A(7 × 2)的连乘次数和括号划分有关系吗？</p>
 <blockquote>
-<p>(计算距离的方式前文讲k-means时说过，不清楚的可以去查看以下➡<a href="https://hpu-yz.github.io/2019/07/19/K-means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8Apython%E5%AE%9E%E7%8E%B0/">传送门</a>)</p>
+<p>(A(3 × 5)A(5 × 7))A(7 × 2)             相乘次数： (3 × 5 <em> 7)+(3 × 7 × 2) = 147<br>A(3 × 5)(A(5 × 7)A(7 × 2))             相乘次数： (5 × 7 </em> 2)+(3 × 5 × 2) = 100</p>
 </blockquote>
-<p>2）按照距离的递增关系进行排序；</p>
-<p>3）选取距离最小的K个点；</p>
+<p>答案很明显是有关系的。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><blockquote>
+<p>求 A1A2A3…An 定义   AiAi+1…Ak…Aj-1Aj   子列， 可看成是Ai…Ak，Ak…Aj<br>确定k的位置，然后按照递归的思想来逐步解决 求得结果后，使i=1，j=n原问题即可求解。</p>
+</blockquote>
+<p>建立递归关系（状态转移方程）</p>
 <blockquote>
-<p>K值是由自己来确定的</p>
+<p>设 Ai…Aj相乘 的最小数乘次数存储于m[i][j]中。<br>S[i][j]存储最佳断开位置。<br>A1：P0 × P1<br>A2：P1 × P2<br>A3：P2 × P3<br>…<br>Ai：Pi-1 × Pi<br>Ai+1：Pi × Pi+1<br> …<br> An：Pn-1 × Pn<br> P0 × P1 × P2 … × Pn——n+1个</p>
 </blockquote>
-<p>4）确定前K个点所在类别的出现频率；</p>
-<p>5）返回前K个点中出现频率最高的类别作为测试数据的预测分类。</p>
+<p>当i=j时，m[i][j] = 0;<br>当i&lt;j时，m[i][j] = m[i][k]+m[k+1][j]+Pi-1PkPj<br>k在i，j之间取值，取值范围为i&lt;=k&lt;j<br>有递推关系如下：<br><img src="https://img-blog.csdnimg.cn/20200305183034898.png" alt><br>动态规划的最优子结构性质是：</p>
 <blockquote>
-<p>说明：对于步骤5的预测分类有以下两种方法</p>
-<ol>
-<li>多数表决法：多数表决法类似于投票的过程，也就是在 K 个邻居中选择类别最多的种类作为测试样本的类别。</li>
-<li>加权表决法：根据距离的远近，对近邻的投票进行加权，距离越近则权重越大，通过权重计算结果最大值的类为测试样本的类别。</li>
-</ol>
+<p>问题的最优解包含了其子问题的最优解。<br>最优子结构性质是问题可用动态规划法求解的显著特征。<br>Ai…Ak，Ak+1…Aj的最优划分也包含在Ai…Aj的最优划分中</p>
 </blockquote>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>1)  非参数统计方法：不需要引入参数<br>2)  K的选择：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K = 1时，将待分类样本划入与其最接近的样本的类。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K = |X|时，仅根据训练样本进行频率统计，将待分类样本划入最多的类。<br>K需要合理选择，太小容易受干扰，太大增加计算复杂性。<br>3)  算法的复杂度：维度灾难，当维数增加时，所需的训练样本数急剧增加，一般采用降维处理。</p>
-<h1 id="三、算法优缺点"><a href="#三、算法优缺点" class="headerlink" title="三、算法优缺点"></a>三、算法优缺点</h1><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
-<li>简单、有效。 </li>
-<li>重新训练的代价较低(类别体系的变化和训练集的变化，在Web环境和电子商务应用中是很常见的)。 </li>
-<li>计算时间和空间线性于训练集的规模(在一些场合不算太大)。 </li>
-<li>由于KNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因此对于类域的交叉或重叠较多的待分样本集来说，KNN方法较其他方法更为适合。 </li>
-<li>该算法比较适用于样本容量比较大的类域的自动分类，而那些样本容量较小的类域采用这种算法比较容易产生误分。 </li>
-</ol>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
-<li>KNN算法是懒散学习方法(lazy learning)，而一些积极学习的算法要快很多。 </li>
-<li>需要存储全部的训练样本 </li>
-<li>输出的可解释性不强，例如决策树的可解释性较强。 </li>
-<li>该算法在分类时有个主要的不足是，当样本不平衡时，如一个类的样本容量很大，而其他类样本容量很小时，有可能导致当输入一个新样本时，该样本的K个邻居中大容量类的样本占多数。该算法只计算最近的邻居样本，某一类的样本数量很大，那么或者这类样本并不接近目标样本，或者这类样本很靠近目标样本。无论怎样，数量并不能影响运行结果。可以采用权值的方法(和该样本距离小的邻居权值大)来改进。 </li>
-<li>计算量较大。目前常用的解决方法是事先对已知样本点进行剪辑，事先去除对分类作用不大的样本。</li>
-</ol>
-<h1 id="四、KNN与K-means的区别"><a href="#四、KNN与K-means的区别" class="headerlink" title="四、KNN与K-means的区别"></a>四、KNN与K-means的区别</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;废话不多说，咱直接上图：<br><img src="https://img-blog.csdnimg.cn/2019072911370194.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>相似点：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虽然两者有很大且别，但两者也有共同之处。都包含了一个过程：给定一个点，在数据集找离它最近的点，即都用到了NN(Nearest Neighbor)算法。</p>
-<h1 id="五、python实例实现"><a href="#五、python实例实现" class="headerlink" title="五、python实例实现"></a>五、python实例实现</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下面引入一个实例，通过python代码具体看下KNN算法的流程。</p>
-<pre><code>from numpy import *
-import operator
+<p>在计算出最优值m[i][j]后，可递归地由s[i][j]构造出相应的最优解。</p>
+<h2 id="python代码实现"><a href="#python代码实现" class="headerlink" title="python代码实现"></a>python代码实现</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> random
+<span class="token keyword">from</span> pandas <span class="token keyword">import</span> <span class="token operator">*</span>
 
-dataSet = array([[1.0,1.1],[1.0,1.0],[0,0],[0,0.1]])
-labels = [&#39;A&#39;,&#39;A&#39;,&#39;B&#39;,&#39;B&#39;]
+input <span class="token operator">=</span> int<span class="token punctuation">(</span>input<span class="token punctuation">(</span><span class="token string">"输入矩阵数："</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+matrix <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">2</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">:</span>                         <span class="token comment" spellcheck="true">#生成矩阵</span>
+    <span class="token keyword">if</span> i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> random<span class="token punctuation">.</span>randrange<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+        matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> random<span class="token punctuation">.</span>randrange<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> matrix<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+        matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> random<span class="token punctuation">.</span>randrange<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+m <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> input <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">]</span>         <span class="token comment" spellcheck="true">#记录连乘次数</span>
+s <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> input <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">]</span>         <span class="token comment" spellcheck="true">#记录括号位置</span>
+<span class="token keyword">def</span> <span class="token function">MatrixMultiplication</span><span class="token punctuation">(</span>inp<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>inp<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">for</span> r <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> inp<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>inp<span class="token operator">-</span>r<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            j <span class="token operator">=</span> i <span class="token operator">+</span> r
+            m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> m<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">+</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> matrix<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+            s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token operator">+</span><span class="token number">1</span>
+            <span class="token keyword">for</span> k <span class="token keyword">in</span> range<span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> j<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                judge <span class="token operator">=</span> m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">+</span> m<span class="token punctuation">[</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">+</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> matrix<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> matrix<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+                <span class="token keyword">if</span> judge <span class="token operator">&lt;</span> m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                    m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> judge
+                    s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> k<span class="token operator">+</span><span class="token number">1</span>
+<span class="token keyword">def</span> <span class="token function">printmatrix</span><span class="token punctuation">(</span>left<span class="token punctuation">,</span> right<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> left <span class="token operator">==</span> right<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token operator">+</span>str<span class="token punctuation">(</span>left<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"("</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
+        printmatrix<span class="token punctuation">(</span>left<span class="token punctuation">,</span> s<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        printmatrix<span class="token punctuation">(</span>s<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">,</span> right<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">")"</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
+MatrixMultiplication<span class="token punctuation">(</span>input<span class="token punctuation">)</span>
+dm <span class="token operator">=</span> DataFrame<span class="token punctuation">(</span>m<span class="token punctuation">,</span> index<span class="token operator">=</span>list<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> input<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> columns<span class="token operator">=</span>list<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> input<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+ds <span class="token operator">=</span> DataFrame<span class="token punctuation">(</span>s<span class="token punctuation">,</span> index<span class="token operator">=</span>list<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> input<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> columns<span class="token operator">=</span>list<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> input<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>matrix<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"数乘次数：\n"</span><span class="token punctuation">,</span> dm<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"括号位置：\n"</span><span class="token punctuation">,</span> ds<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"最终结果："</span><span class="token punctuation">)</span>
+printmatrix<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> input<span class="token number">-1</span><span class="token punctuation">)</span>
 
-def classify0(inX,dataSet,labels,k):
-
-    #求出样本集的行数，也就是labels标签的数目
-    dataSetSize = dataSet.shape[0]
-
-    #构造输入值和样本集的差值矩阵
-    diffMat = tile(inX,(dataSetSize,1)) - dataSet
-
-    #计算欧式距离
-    sqDiffMat = diffMat**2
-    sqDistances = sqDiffMat.sum(axis=1)
-    distances = sqDistances**0.5
-
-    #求距离从小到大排序的序号
-    sortedDistIndicies = distances.argsort()
-
-    #对距离最小的k个点统计对应的样本标签
-    classCount = {}
-    for i in range(k):
-        #取第i+1邻近的样本对应的类别标签
-        voteIlabel = labels[sortedDistIndicies[i]]
-        #以标签为key，标签出现的次数为value将统计到的标签及出现次数写进字典
-        classCount[voteIlabel] = classCount.get(voteIlabel,0) + 1
-
-    #对字典按value从大到小排序
-    sortedClassCount = sorted(classCount.items(),key=operator.itemgetter(1),reverse=True)
-
-    #返回排序后字典中最大value对应的key
-    return sortedClassCount[0][0]
-if __name__ == &#39;__main__&#39;:
-    print(classify0([1.1,0],dataSet,labels,3))
-</code></pre>]]></content>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
       <categories>
-        <category>机器学习</category>
         <category>python</category>
       </categories>
       <tags>
-        <tag>机器学习</tag>
         <tag>python</tag>
-        <tag>KNN</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OJ刷题-while(scanf(&quot;%d&quot;,&amp;n)!=EOF)</title>
-    <url>/2019/03/21/oj/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“测试输入包含若干测试实例。当N为0时，输入结束，该实例不被处理。”这句话 是最早我对OJ的印象 以前也没见过这种输入要求， 做第一道题的时候就卡住了 上网看别人的代码 都有一句 while(scanf(“%d”,&amp;n)!=EOF)”scanf 函数还能放while里啊… EOF是什么玩意儿呢…”</p>
-<blockquote>
-<h2 id="什么是OJ？"><a href="#什么是OJ？" class="headerlink" title="什么是OJ？"></a>什么是OJ？</h2></blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先先介绍下什么是OJ吧(知道的同学可以跳过此部分)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Online Judge系统（简称OJ）是一个在线的判题系统。用户可以在线提交程序多种程序（如C、C++）源代码，系统对源代码进行编译和执行，并通过预先设计的测试数据来检验程序源代码的正确性。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一个用户提交的程序在Online Judge系统下执行时将受到比较严格的限制，包括运行时间限制，内存使用限制和安全限制等。用户程序执行的结果将被Online Judge系统捕捉并保存，然后再转交给一个裁判程序。该裁判程序或者比较用户程序的输出数据和标准输出样例的差别，或者检验用户程序的输出数据是否满足一定的逻辑条件。最后系统返回给用户一个状态：通过（Accepted,AC）、答案错误(Wrong Answer,WA)、超时(Time Limit Exceed,TLE)、超过输出限制（Output Limit Exceed,OLE)、超内存（Memory Limit Exceed,MLE）、运行时错误（Runtime Error,RE）、格式错误（Presentation Error,PE)、或是无法编译（Compile Error,CE），并返回程序使用的内存、运行时间等信息。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Online Judge系统最初使用于ACM-ICPC国际大学生程序设计竞赛和OI信息学奥林匹克竞赛中的自动判题和排名。现广泛应用于世界各地高校学生程序设计的训练、参赛队员的训练和选拔、各种程序设计竞赛以及数据结构和算法的学习和作业的自动提交判断中。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;知名的OJ有：RQNOJ,URAL,SPOJ,vijos,tyvj,USACO,sgu,pku(poj),zju(toj),tju,uva，HDU(HDOJ)等。</p>
-<blockquote>
-<h2 id="EOF是什么东东？"><a href="#EOF是什么东东？" class="headerlink" title="EOF是什么东东？"></a>EOF是什么东东？</h2></blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EOF 是一个宏 ，一般定义为-1。<br>1.EOF用来判断文件结束的标记(end of file) 用在文件操作中,可以查下msdn 看它的定义:EOF is returned by       an I/O routine when the end-of-file (or in some cases, an error) is encountered<br>2.EOF表示输入流的结束。<br>3.在发送端套接字关闭后，接收端读套接字的read函数也会返回EOF.</p>
-<blockquote>
-<h2 id="while-scanf-EOF-流程图"><a href="#while-scanf-EOF-流程图" class="headerlink" title="while(scanf()!=EOF)流程图"></a>while(scanf()!=EOF)流程图</h2></blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们学过的有三种循环：for，while，do-while。但while (scanf(“%d”, &amp;n) != EOF)不像以上的任何一种，接下来看一下它的流程图：<br><img src="/2019/03/21/oj/while-1/20140502221756328.png" alt="流程图"></p>
-<blockquote>
-<h2 id="OnlineJuge的评判时，该语句的作用"><a href="#OnlineJuge的评判时，该语句的作用" class="headerlink" title="OnlineJuge的评判时，该语句的作用"></a>OnlineJuge的评判时，该语句的作用</h2></blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OJ评判的原理应该是这样的：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入：通过管道命令，将一个包含若干测试用例的文件作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为【标准输入流】，所以需要while(scanf() != EOF)来判断测试文件是否读完。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输出：通过管道命令，将【标准输出流】，输出到一个文件中。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评判：将程序的【输出文件】与【正确答案文件】进行比对：如果一样，则返回程序正确提示；否则返回程序错误的提示。</p>
-<blockquote>
-<h2 id="使用原理"><a href="#使用原理" class="headerlink" title="使用原理"></a>使用原理</h2></blockquote>
-<p>有人说 EOF等于-1 其实就是scanf函数的返回值 不等于-1时 继续进行循环</p>
-<p>有人说 EOF是处理到文件结束 不用EOF也可以</p>
-<p>……….</p>
-<p>很多天后终于把这个弄明白了</p>
-<p>scanf的返回值由后面的参数决定</p>
-<p>scanf(“%d%d”, &amp;a, &amp;b);</p>
-<p>如果a和b都被成功读入，那么scanf的返回值就是2</p>
-<p>如果只有a被成功读入，返回值为1</p>
-<p>如果a和b都未被成功读入，返回值为0</p>
-<p>如果遇到错误或遇到end of file，返回值为EOF，且返回值为int型.</p>
-<blockquote>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2></blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上是我个人所述，若有什么不对的地方或者有补充的地方，还希望各位指点指点，大家可以一起学习，一起进步！</p>
-]]></content>
-      <categories>
-        <category>OJ</category>
-      </categories>
-      <tags>
-        <tag>OJ</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -548,222 +624,101 @@ targets <span class="token operator">=</span> soup<span class="token punctuation
       </tags>
   </entry>
   <entry>
-    <title>人工神经网络（ANN）</title>
-    <url>/2019/07/26/ren-gong-shen-jing-wang-luo-ann/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初学人工智能不久，今天碰上了人工神经网（ANN），开始学的时候很懵，一大堆理论、公式、推导…..作为一名小白，还是很痛苦的，不过经过摸索，大概了 解了什么是ANN，公式的推导以及一些其他问题，下面我就总结下自己的理解，一方面作为自己的笔记，日后方便巩固；另一方面，也可以分享给其他有意者。</p>
-<h1 id="一、什么是神经网络"><a href="#一、什么是神经网络" class="headerlink" title="一、什么是神经网络"></a>一、什么是神经网络</h1><h2 id="1-单层神经网络"><a href="#1-单层神经网络" class="headerlink" title="1.单层神经网络"></a>1.单层神经网络</h2><p>首先以单层神经元为例解释人工神经元是如何工作的<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjMwMjYzZC5wbmc" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x1,x2,…, xN：神经元的输入。这些可以从输入层实际观测或者是一个隐藏层的中间值（隐藏层即介于输入与输出之间的所有节点组成的一层。后面讲到多层神经网络是会再跟大家解释的）。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X0：偏置单元。这是常值添加到激活函数的输入（类似数学里y＝ax+b中使直线不过原点的常数b）。即截距项，通常有＋1值。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w0,w1,w2,…,wN：对应每个输入的权重。甚至偏置单元也是有权重的。</p>
-<p>a:神经元的输出。计算如下：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjQ2NzM2Zi5wbmc" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;式子里的f是已知的激活函数，f使神经网络（单层乃至多层）非常灵活并且具有能估计复杂的非线性关系的能力。在简单情况下可以是一个高斯函数、逻辑函数、双曲线函数或者甚至上是一个线性函数。利用神经网络可让其实现三个基本功能：与、或、非（AND, OR, NOT）。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里引入一个例子：and功能实现如下<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjc3YjA2Yy5wbmc" alt><br>神经元输出：a = f( -1.5 + x1 + x2 )</p>
-<p>这样大家就很容易理解其工作原理，其实就是对输入值赋予不同权重，经过激活函数输出的过程。</p>
-<h2 id="2-多层神经网络"><a href="#2-多层神经网络" class="headerlink" title="2.多层神经网络"></a>2.多层神经网络</h2><h3 id="2-1-网络结构"><a href="#2-1-网络结构" class="headerlink" title="2.1 网络结构"></a>2.1 网络结构</h3><p>清楚了单层神经网络，多层神经网络也好理解了，就相当于多个单层的叠加成多层的过程。<br><img src="https://img-blog.csdnimg.cn/20190811204232448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br><strong>神经网络分为三种类型的层</strong>：</p>
-<p>输入层：神经网络最左边的一层，通过这些神经元输入需要训练观察的样本，即初始输入数据的一层。</p>
-<p>隐藏层：介于输入与输出之间的所有节点组成的一层。帮助神经网络学习数据间的复杂关系，即对数据进行处理的层。</p>
-<p>输出层：由前两层得到神经网络最后一层，即最后结果输出的一层。</p>
-<h3 id="2-2-传递函数-激活函数"><a href="#2-2-传递函数-激活函数" class="headerlink" title="2.2 传递函数/激活函数"></a>2.2 传递函数/激活函数</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前面每一层输入经过线性变换wx+b后还用到了sigmoid函数，在神经网络的结构中被称为传递函数或者激活函数。除了sigmoid，还有tanh、relu等别的激活函数。激活函数使线性的结果非线性化。</p>
-<h3 id="2-3-为什么需要传递函数"><a href="#2-3-为什么需要传递函数" class="headerlink" title="2.3 为什么需要传递函数"></a>2.3 为什么需要传递函数</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单理解上，如果不加激活函数，无论多少层隐层，最终的结果还是原始输入的线性变化，这样一层隐层就可以达到结果，就没有多层感知器的意义了。所以每个隐层都会配一个激活函数，提供非线性变化。</p>
-<h1 id="二、BP算法"><a href="#二、BP算法" class="headerlink" title="二、BP算法"></a>二、BP算法</h1><h2 id="1-BP算法基本思想"><a href="#1-BP算法基本思想" class="headerlink" title="1.BP算法基本思想"></a>1.BP算法基本思想</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP算法全称叫作误差反向传播(error Back Propagation，或者也叫作误差逆传播)算法。其算法基本思想为：在上述的前馈网络中，输入信号经输入层输入，通过隐层计算由输出层输出，输出值与标记值比较，若有误差，将误差反向由输出层向输入层传播，在这个过程中，利用梯度下降算法对神经元权值进行调整。</p>
-<h2 id="2-BP算法的推导"><a href="#2-BP算法的推导" class="headerlink" title="2.BP算法的推导"></a>2.BP算法的推导</h2><h3 id="2-1-数学基础理论"><a href="#2-1-数学基础理论" class="headerlink" title="2.1 数学基础理论"></a>2.1 数学基础理论</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP算法中核心的数学工具就是微积分的<strong>链式求导法则</strong>。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMjQxMzk3LWMwN2Q1ODFjOTJkYWViZWMucG5n" alt></p>
-<h3 id="2-2推导过程"><a href="#2-2推导过程" class="headerlink" title="2.2推导过程"></a>2.2推导过程</h3><p><img src="https://img-blog.csdnimg.cn/20190811205148228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<ol>
-<li><strong>正向传播求损失，反向传播回传误差</strong></li>
-<li>根据误差信号修正每层的权重 </li>
-<li>f是激活函数；f(netj)是隐层的输出； f(netk）是输出层的输出O; d是target</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结合BP网络结构，误差由输出展开至输入的过程如下：<br><img src="https://img-blog.csdnimg.cn/20190811205328707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>有了误差E，通过求偏导就可以求得最优的权重。（不要忘记学习率） </p>
-<p><img src="https://img-blog.csdnimg.cn/2019081120540142.png" alt></p>
-<h2 id="3-举例说明"><a href="#3-举例说明" class="headerlink" title="3. 举例说明"></a>3. 举例说明</h2><p><img src="https://img-blog.csdnimg.cn/20190811205641720.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>图中元素：<br>两个输入；<br>隐层: b1, w1, w2, w3, w4 (都有初始值）<br>输出层：b2, w5, w6, w7, w8（赋了初始值）</p>
-<h3 id="3-1-前向传播"><a href="#3-1-前向传播" class="headerlink" title="3.1 前向传播"></a>3.1 前向传播</h3><p><img src="https://img-blog.csdnimg.cn/20190811205743162.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>则误差：<br><img src="https://img-blog.csdnimg.cn/20190811205806851.png" alt></p>
-<h3 id="3-2-反向传播"><a href="#3-2-反向传播" class="headerlink" title="3.2 反向传播"></a>3.2 反向传播</h3><p><img src="https://img-blog.csdnimg.cn/20190811205859442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>参数更新：<br><img src="https://img-blog.csdnimg.cn/20190811205921617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>求误差对w1的偏导 ：<br><img src="https://img-blog.csdnimg.cn/20190811205940706.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>注意，w1对两个输出的误差都有影响<br>通过以上过程可以更新所有权重，就可以再次迭代更新了，直到满足条件。</p>
-<h1 id="三、python代码实现"><a href="#三、python代码实现" class="headerlink" title="三、python代码实现"></a>三、python代码实现</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上述例子，用python可写出如下代码，并附有详解：</p>
-<pre><code>import numpy as np
-import matplotlib.pyplot as plt
-import math
-a=np.array([0.05,0.1])           #a1,a2的输入值
-weight1=np.array([[0.15,0.25],[0.2,0.3]])   #a1对b1,b2的权重，a2对b1，b2的权重
-weight2=np.array([[0.4,0.5],[0.45,0.55]])     #b1对c1,c2的权重，b2对c1，c2的权重
-target=np.array([0.01,0.99])
-d1=0.35   #输入层的偏置（1）的权重
-d2=0.6    #隐藏层的偏置（1）的权重
-β=0.5    #学习效率
-
-#一：前向传播
-
-#计算输入层到隐藏层的输入值，得矩阵netb1,netb2
-netb=np.dot(a,weight1)+d1
-
-#计算隐藏层的输出值,得到矩阵outb1,outb2
-m=[]
-for i in range(len(netb)):
-    outb=1.0 / (1.0 + math.exp(-netb[i]))
-    m.append(outb)
-m=np.array(m)
-
-#计算隐藏层到输出层的输入值，得矩阵netc1,netc2
-netc=np.dot(m,weight2)+d2
-
-#计算隐藏层的输出值,得到矩阵outc1,outc2
-n=[]
-for i in range(len(netc)):
-    outc=1.0 / (1.0 + math.exp(-netc[i]))
-    n.append(outc)
-n=np.array(n)
-
-#二：反向传播
-count=0 #计数
-e=0     #误差  
-E=[]    #统计误差
-#梯度下降
-while True:
-  count+=1
-
-  #总误差对w1-w4的偏导
-  pd1=(-(target[0]-n[0])*n[0]*(1-n[0])*weight2[0][0]-(target[1]-n[1])*n[1]*(1-n[1])*weight2[0][1])*m[0]*(1-m[0])*a[0]
-  pd2=(-(target[0]-n[0])*n[0]*(1-n[0])*weight2[0][0]-(target[1]-n[1])*n[1]*(1-n[1])*weight2[0][1])*m[0]*(1-m[0])*a[1]
-  pd3=(-(target[0]-n[0])*n[0]*(1-n[0])*weight2[1][0]-(target[1]-n[1])*n[1]*(1-n[1])*weight2[0][1])*m[0]*(1-m[0])*a[0]                          
-  pd4=(-(target[0]-n[0])*n[0]*(1-n[0])*weight2[1][1]-(target[1]-n[1])*n[1]*(1-n[1])*weight2[0][1])*m[0]*(1-m[0])*a[1]
-  weight1[0][0]=weight1[0][0]-β*pd1
-  weight1[1][0]=weight1[1][0]-β*pd2
-  weight1[0][1]=weight1[0][1]-β*pd3
-  weight1[1][1]=weight1[1][1]-β*pd4
-
-  #总误差对w5-w8的偏导
-  pd5=-(target[0]-n[0])*n[0]*(1-n[0])*m[0]
-  pd6=-(target[0]-n[0])*n[0]*(1-n[0])*m[1]
-  pd7=-(target[1]-n[1])*n[1]*(1-n[1])*m[0]
-  pd8=-(target[1]-n[1])*n[1]*(1-n[1])*m[1]
-  weight2[0][0]=weight2[0][0]-β*pd5
-  weight2[1][0]=weight2[1][0]-β*pd6
-  weight2[0][1]=weight2[0][1]-β*pd7
-  weight2[1][1]=weight2[1][1]-β*pd8
-
-  netb=np.dot(a,weight1)+d1
-  m=[]
-  for i in range(len(netb)):
-    outb=1.0 / (1.0 + math.exp(-netb[i]))
-    m.append(outb)
-  m=np.array(m)
-  netc=np.dot(m,weight2)+d2
-  n=[]
-  for i in range(len(netc)):
-    outc=1.0 / (1.0 + math.exp(-netc[i]))
-    n.append(outc)
-  n=np.array(n)
-
-  #计算总误差
-  for j in range(len(n)):
-    e += (target[j]-n[j])**2/2
-  E.append(e)
-  #判断
-  if e&lt;0.0000001:
-    break
-  else:
-      e=0
-print(count)
-print(e)
-print(n)
-plt.plot(range(len(E)),E,label=&#39;error&#39;)
-plt.legend() 
-plt.xlabel(&#39;time&#39;)
-plt.ylabel(&#39;error&#39;)
-plt.show()
-</code></pre><h1 id="四、BP神经网络的优缺点"><a href="#四、BP神经网络的优缺点" class="headerlink" title="四、BP神经网络的优缺点"></a>四、BP神经网络的优缺点</h1><p><strong>BP神经网络的优点：</strong></p>
-<ol>
-<li>非线性映射能力</li>
-<li>泛化能力  </li>
-<li>容错能力，允许输入样本中带有较大误差甚至个别错误。反应正确规律的知识来自全体样本，个别样本中的误差不能左右对权矩阵的调整</li>
-</ol>
-<p><strong>BP神经网络的缺陷：</strong></p>
-<ol>
-<li>需要的参数过多，而且参数的选择没有有效的方法。确定一个BP神经网络需要知道：网络的层数、每一层神经元的个数和权值。权值可以通过学习得到，如果，隐层神经元数量太多会引起过学习，如果隐层神经元个数太少会引起欠学习。此外学习率的选择也是需要考虑。目前来说，对于参数的确定缺少一个简单有效的方法，所以导致算法很不稳定；</li>
-<li>属于监督学习，对于样本有较大依赖性，网络学习的逼近和推广能力与样本有很大关系，如果样本集合代表性差，样本矛盾多，存在冗余样本，网络就很难达到预期的性能；</li>
-<li>由于权值是随机给定的，所以BP神经网络具有不可重现性；</li>
-</ol>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>BP算法</tag>
-        <tag>人工神经网络（ANN）</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python动态规划解决矩阵连乘</title>
-    <url>/2020/03/05/python-dong-tai-gui-hua-jie-jue-ju-zhen-lian-cheng/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划算法与分治法类似，其基本思想也就是将待求解的问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解，简单概括为自顶向下分解，自底向上求解。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与分治法不同的是，适合于用动态规划法求解的问题，经分解得到的子问题往往不是相互独立的，换句话说，就是前面解决过的子问题，在后面的子问题中又碰到了前面解决过的子问题，子问题之间是有联系的。如果用分治法，有些同样的子问题会被重复计算几次，这样就很浪费时间了。所以动态规划是为了解决分治法的弊端而提出的，动态规划的基本思想就是，用一个表来记录所有已经解决过的子问题的答案，不管该子问题在以后是否会被用到，只要它被计算过，就将其结果填入表中，以后碰到同样的子问题，就可以从表中直接调用该子问题的答案，而不需要再计算一次。具体的动态规划的算法多种多样，但他们都具有相同的填表式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划的适用场合，一般适用于解最优化问题，例如矩阵连乘问题、最长公共子序列、背包问题等等。</p>
-<h2 id="矩阵连乘问题描述"><a href="#矩阵连乘问题描述" class="headerlink" title="矩阵连乘问题描述"></a>矩阵连乘问题描述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;给定n个矩阵：A1,A2,…,An，其中Ai与Ai+1是可乘的，i=1，2…，n-1。确定计算矩阵连乘积的计算次序，使得依此次序计算矩阵连乘积需要的数乘次数最少。输入数据为矩阵个数和每个矩阵规模，输出结果为计算矩阵连乘积的计算次序和最少数乘次数。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若A是一个p × q的矩阵，B是一个q × r的矩阵，则其乘积C=AB是一个p × r的矩阵。数乘次数是p × q × r.</p>
-<h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>A(3 × 5)A(5 × 7)A(7 × 2)的连乘次数和括号划分有关系吗？</p>
+    <title>python+离散数学→逻辑演算</title>
+    <url>/2019/04/02/python-chi-san-shu-xue-luo-ji-yan-suan/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇探讨的是一道逻辑演算推理题。有两种方法，一种是常规的离散数学逻辑演算，另一种则是用python程序来解决。本篇将探究两种方法： python+离散数学→逻辑演算。</p>
 <blockquote>
-<p>(A(3 × 5)A(5 × 7))A(7 × 2)             相乘次数： (3 × 5 <em> 7)+(3 × 7 × 2) = 147<br>A(3 × 5)(A(5 × 7)A(7 × 2))             相乘次数： (5 × 7 </em> 2)+(3 × 5 × 2) = 100</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在某次研讨会的中间休息时间，3名与会者根据王教授的口音对他是哪个省市的人判断如下：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲:王教授不是苏州人，是上海人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙:王教授不是上海人，是苏州人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙:王教授既不是上海人，也不是杭州人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;听完这3人的判断后，王教授笑着说，你们3人中有一人说得全对，有一人说对了一半，另一人全不对。试用逻辑演算分析王教授到底是哪里人.</p>
 </blockquote>
-<p>答案很明显是有关系的。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><blockquote>
-<p>求 A1A2A3…An 定义   AiAi+1…Ak…Aj-1Aj   子列， 可看成是Ai…Ak，Ak…Aj<br>确定k的位置，然后按照递归的思想来逐步解决 求得结果后，使i=1，j=n原问题即可求解。</p>
-</blockquote>
-<p>建立递归关系（状态转移方程）</p>
 <blockquote>
-<p>设 Ai…Aj相乘 的最小数乘次数存储于m[i][j]中。<br>S[i][j]存储最佳断开位置。<br>A1：P0 × P1<br>A2：P1 × P2<br>A3：P2 × P3<br>…<br>Ai：Pi-1 × Pi<br>Ai+1：Pi × Pi+1<br> …<br> An：Pn-1 × Pn<br> P0 × P1 × P2 … × Pn——n+1个</p>
-</blockquote>
-<p>当i=j时，m[i][j] = 0;<br>当i&lt;j时，m[i][j] = m[i][k]+m[k+1][j]+Pi-1PkPj<br>k在i，j之间取值，取值范围为i&lt;=k&lt;j<br>有递推关系如下：<br><img src="https://img-blog.csdnimg.cn/20200305183034898.png" alt><br>动态规划的最优子结构性质是：</p>
+<h2 id="常规推理"><a href="#常规推理" class="headerlink" title="常规推理"></a>常规推理</h2></blockquote>
+<p>设命题&nbsp;&nbsp;&nbsp;&nbsp;p:王教授是苏州人；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q:王教授是上海人；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r:王教授是杭州人；</p>
+<p>用p,q,r表示甲乙丙的观点如下：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲：￢p∧q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙：p∧￢q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙：￢q∧￢r              </p>
+<p>其中一人全对，一人对一半，另一人全错。</p>
+<p>即其中一个真命题，两个假命题。先找真命题</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲全对：B1=￢p∧q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲对一半：B2=(￢p∧￢q) ∨(p∧q)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲全错：B3=p∧￢q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙全对：C1= p∧￢q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙对一半：C2=(￢p∧￢q) ∨(p∧q)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙全错：C3=￢p∧q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙全对：D1=￢q∧￢r</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙对一半：D2=(q∧￢r) ∨( ￢q∧r)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙全错：D3=q∧r</p>
+<p>有王教授那句话可以写：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E=（B1∧C2∧D3）∨(B1∧C3∧D2) ∨(B2∧C1∧D3) ∨(B2∧C3∧D1) ∨(B3∧C1∧D2) ∨(B3∧C2∧D1)</p>
+<p>是真命题</p>
+<p>而B1∧C2∧D3⇔(￢p∧q) ∧((￢p∧￢q) ∨(p∧q)) ∧(q∧r)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q) ∧((￢p∧￢q) ∧(q∧r) ∨ (p∧q) ∧(q∧r))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q) ∧(0∨(p∧q∧r))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q)∧(p∧q∧r)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔0</p>
+<p>其他同理类似可得：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B1C3D2⇔￢p∧q∧￢r</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B2C1D3⇔0</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B2C3D1⇔0</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B3C1D2⇔p∧￢q∧r</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B3C2D1⇔0</p>
+<p>所以E⇔(￢p∧q∧￢r) ∨(p∧￢q∧r)</p>
+<p>而pqr中只能有一个是真的，所以p∧q⇔0，p∧r⇔0，q∧r⇔0</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E⇔(￢p∧q∧￢r) ∨0</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔￢p∧q∧￢r</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔1</p>
+<p>所以p为假，q为真，r为假，王教授是上海人。</p>
 <blockquote>
-<p>问题的最优解包含了其子问题的最优解。<br>最优子结构性质是问题可用动态规划法求解的显著特征。<br>Ai…Ak，Ak+1…Aj的最优划分也包含在Ai…Aj的最优划分中</p>
+<h2 id="python程序实现"><a href="#python程序实现" class="headerlink" title="python程序实现"></a>python程序实现</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以下是上述过程的代码实现，并附有代码详解，有兴趣的小伙伴可以看一看。</p>
 </blockquote>
-<p>在计算出最优值m[i][j]后，可递归地由s[i][j]构造出相应的最优解。</p>
-<h2 id="python代码实现"><a href="#python代码实现" class="headerlink" title="python代码实现"></a>python代码实现</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> random
-<span class="token keyword">from</span> pandas <span class="token keyword">import</span> <span class="token operator">*</span>
+<pre><code>for p in range(2):                                  #p:王教授是苏州人
+    for q in range(2):                              #q:王教授是上海人
+        for r in range(2):                          #r:王教授是杭州人
+         #以下三行表示p,q,r不可能同时为真的情况
+         if (p == 1 and q == 1): continue
+         if (p == 1 and r == 1): continue
+         if (q == 1 and r == 1): continue
 
-input <span class="token operator">=</span> int<span class="token punctuation">(</span>input<span class="token punctuation">(</span><span class="token string">"输入矩阵数："</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-matrix <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">2</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">]</span>
-<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">:</span>                         <span class="token comment" spellcheck="true">#生成矩阵</span>
-    <span class="token keyword">if</span> i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
-        matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> random<span class="token punctuation">.</span>randrange<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
-        matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> random<span class="token punctuation">.</span>randrange<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
-    <span class="token keyword">else</span><span class="token punctuation">:</span>
-        matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> matrix<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
-        matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> random<span class="token punctuation">.</span>randrange<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
-m <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> input <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">]</span>         <span class="token comment" spellcheck="true">#记录连乘次数</span>
-s <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> input <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">]</span>         <span class="token comment" spellcheck="true">#记录括号位置</span>
-<span class="token keyword">def</span> <span class="token function">MatrixMultiplication</span><span class="token punctuation">(</span>inp<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>inp<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
-    <span class="token keyword">for</span> r <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> inp<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>inp<span class="token operator">-</span>r<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            j <span class="token operator">=</span> i <span class="token operator">+</span> r
-            m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> m<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">+</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> matrix<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
-            s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token operator">+</span><span class="token number">1</span>
-            <span class="token keyword">for</span> k <span class="token keyword">in</span> range<span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> j<span class="token punctuation">)</span><span class="token punctuation">:</span>
-                judge <span class="token operator">=</span> m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">+</span> m<span class="token punctuation">[</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">+</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> matrix<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> matrix<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
-                <span class="token keyword">if</span> judge <span class="token operator">&lt;</span> m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">:</span>
-                    m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> judge
-                    s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> k<span class="token operator">+</span><span class="token number">1</span>
-<span class="token keyword">def</span> <span class="token function">printmatrix</span><span class="token punctuation">(</span>left<span class="token punctuation">,</span> right<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> left <span class="token operator">==</span> right<span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token operator">+</span>str<span class="token punctuation">(</span>left<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
-    <span class="token keyword">else</span><span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"("</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
-        printmatrix<span class="token punctuation">(</span>left<span class="token punctuation">,</span> s<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-        printmatrix<span class="token punctuation">(</span>s<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">,</span> right<span class="token punctuation">)</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">")"</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
-MatrixMultiplication<span class="token punctuation">(</span>input<span class="token punctuation">)</span>
-dm <span class="token operator">=</span> DataFrame<span class="token punctuation">(</span>m<span class="token punctuation">,</span> index<span class="token operator">=</span>list<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> input<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> columns<span class="token operator">=</span>list<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> input<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-ds <span class="token operator">=</span> DataFrame<span class="token punctuation">(</span>s<span class="token punctuation">,</span> index<span class="token operator">=</span>list<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> input<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> columns<span class="token operator">=</span>list<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> input<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>matrix<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"数乘次数：\n"</span><span class="token punctuation">,</span> dm<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"括号位置：\n"</span><span class="token punctuation">,</span> ds<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"最终结果："</span><span class="token punctuation">)</span>
-printmatrix<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> input<span class="token number">-1</span><span class="token punctuation">)</span>
+         Jia = (not p) and q                        #甲的判断
+         Yi = p and (not q)                         #乙的判断
+         Bing = (not q) and (not r)                 #丙的判断
 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+         B1 = (not p) and q                         #甲的判断全对
+         B2 = ((not p) and (not q))or (p and q)     #甲的判断一半对
+         B3 = p and (not q)                         #甲的判断全错
+
+         C1 = p and (not q)                         #乙的判断全对
+         C2 = (p and q) or ((not p) and (not q))    #乙的判断一半对
+         C3 = (not p) and q                         #乙的判断全错
+
+         D1 = (not q) and (not r)                   #丙的判断全对
+         D2 = ((not q) and r) or (q and(not r))     #丙的判断一半对
+         D3 = q and r                               #丙的判断全错
+
+         #王教授所说的话
+         E = (B1 and C2 and D3) \
+           or(B1 and C3 and D2) \
+           or(B2 and C1 and D3) \
+           or(B2 and C3 and D1) \
+           or(B3 and C1 and D2) \
+           or(B3 and C2 and D1)
+
+         #符合王教授所的E值
+         if E==1 :
+           print(&quot;%d,%d,%d E=%d,Jia=%d,Yi=%d,Bing=%d&quot;%(p,q,r,E,Jia,Yi,Bing))
+
+
+</code></pre><blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其实用python解决离散数学的逻辑推理题比直接推理效率更高而且准确性也高，并且在遇到复杂的逻辑推理时，很容易把自己绕晕，半天也解不出来，倒不如我们可以让计算机帮我们解决，只需写几十行代码，就可以罗列出复杂的关系，何乐而不为呢，所以我们可以多学学这种解题方法！😁</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>python</category>
+        <category>离散</category>
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>动态规划</tag>
+        <tag>离散</tag>
       </tags>
   </entry>
   <entry>
@@ -842,6 +797,94 @@ printmatrix<span class="token punctuation">(</span><span class="token number">0<
       </categories>
       <tags>
         <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>多种相似度计算的python实现</title>
+    <url>/2019/07/24/duo-chong-xiang-si-du-ji-suan-de-python-shi-xian/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中有很多地方要计算相似度，比如聚类分析和协同过滤。计算相似度的有许多方法，其中有欧几里德距离(欧式距离)、曼哈顿距离、Jaccard系数和皮尔逊相关度等等。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们这里把一些常用的相似度计算方法，用python进行实现以下。大家都是初学者，我认为把公式先写下来，然后再写代码去实现比较好。 </p>
+<h2 id="欧几里德距离-欧式距离"><a href="#欧几里德距离-欧式距离" class="headerlink" title="欧几里德距离(欧式距离)"></a>欧几里德距离(欧式距离)</h2><p>几个数据集之间的相似度一般是基于每对对象间的距离计算。最常用的当然是欧几里德距离，其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204320390.png" alt></p>
+<pre><code>#-*-coding:utf-8 -*-
+
+#计算欧几里德距离：
+def euclidean(p,q):
+#如果两数据集数目不同，计算两者之间都对应有的数
+same = 0
+for i in p:
+    if i in q:
+        same +=1
+
+#计算欧几里德距离,并将其标准化
+e = sum([(p[i] - q[i])**2 for i in range(same)])
+return 1/(1+e**.5)
+</code></pre><p>我们用数据集可以去算一下： </p>
+<pre><code>p = [1,3,2,3,4,3]
+q = [1,3,4,3,2,3,4,3]
+print euclidean(p,q)
+</code></pre><p>得出结果是：0.261203874964</p>
+<h2 id="皮尔逊相关度"><a href="#皮尔逊相关度" class="headerlink" title="皮尔逊相关度"></a>皮尔逊相关度</h2><p>几个数据集中出现异常值的时候，欧几里德距离就不如皮尔逊相关度‘稳定’，它会在出现偏差时倾向于给出更好的结果。其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204538985.png" alt></p>
+<pre><code>-*-coding:utf-8 -*-
+
+#计算皮尔逊相关度：
+def pearson(p,q):
+#只计算两者共同有的
+    same = 0
+    for i in p:
+        if i in q:
+            same +=1
+
+    n = same
+    #分别求p，q的和
+    sumx = sum([p[i] for i in range(n)])
+    sumy = sum([q[i] for i in range(n)])
+    #分别求出p，q的平方和
+    sumxsq = sum([p[i]**2 for i in range(n)])
+    sumysq = sum([q[i]**2 for i in range(n)])
+    #求出p，q的乘积和
+    sumxy = sum([p[i]*q[i] for i in range(n)])
+    # print sumxy
+    #求出pearson相关系数
+    up = sumxy - sumx*sumy/n
+    down = ((sumxsq - pow(sumxsq,2)/n)*(sumysq - pow(sumysq,2)/n))**.5
+    #若down为零则不能计算，return 0
+    if down == 0 :return 0
+    r = up/down
+    return r
+</code></pre><p>用同样的数据集去计算：</p>
+<pre><code>p = [1,3,2,3,4,3]
+q = [1,3,4,3,2,3,4,3]
+print pearson(p,q)
+</code></pre><p>得出结果是：0.00595238095238</p>
+<h2 id="曼哈顿距离"><a href="#曼哈顿距离" class="headerlink" title="曼哈顿距离"></a>曼哈顿距离</h2><p>曼哈顿距离是另一种相似度计算方法，不是经常需要，但是我们仍然学会如何用python去实现，其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204709370.png" alt></p>
+<pre><code>#-*-coding:utf-8 -*-
+
+#计算曼哈顿距离：
+def manhattan(p,q):
+#只计算两者共同有的
+    same = 0
+    for i in p:
+        if i in q:
+        same += 1
+#计算曼哈顿距离
+    n = same
+    vals = range(n)
+    distance = sum(abs(p[i] - q[i]) for i in vals)
+    return distance
+</code></pre><p>用以上的数据集去计算：</p>
+<pre><code>p = [1,3,2,3,4,3]
+q = [1,3,4,3,2,3,4,3]
+print manhattan(p,q)
+</code></pre><p>得出结果为4</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里只讲述了三种相似度的计算方法，事实上还有很多种，由于我也是刚学，其他的方法还不是很了解，以后碰到了再补上。一般情况下，这三种方法是最常用的，足够我们使用了。</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>python</tag>
+        <tag>相似度</tag>
       </tags>
   </entry>
   <entry>
@@ -1001,101 +1044,97 @@ printmatrix<span class="token punctuation">(</span><span class="token number">0<
       </tags>
   </entry>
   <entry>
-    <title>python+离散数学→逻辑演算</title>
-    <url>/2019/04/02/python-chi-san-shu-xue-luo-ji-yan-suan/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇探讨的是一道逻辑演算推理题。有两种方法，一种是常规的离散数学逻辑演算，另一种则是用python程序来解决。本篇将探究两种方法： python+离散数学→逻辑演算。</p>
-<blockquote>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在某次研讨会的中间休息时间，3名与会者根据王教授的口音对他是哪个省市的人判断如下：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲:王教授不是苏州人，是上海人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙:王教授不是上海人，是苏州人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙:王教授既不是上海人，也不是杭州人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;听完这3人的判断后，王教授笑着说，你们3人中有一人说得全对，有一人说对了一半，另一人全不对。试用逻辑演算分析王教授到底是哪里人.</p>
-</blockquote>
-<blockquote>
-<h2 id="常规推理"><a href="#常规推理" class="headerlink" title="常规推理"></a>常规推理</h2></blockquote>
-<p>设命题&nbsp;&nbsp;&nbsp;&nbsp;p:王教授是苏州人；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q:王教授是上海人；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r:王教授是杭州人；</p>
-<p>用p,q,r表示甲乙丙的观点如下：</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲：￢p∧q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙：p∧￢q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙：￢q∧￢r              </p>
-<p>其中一人全对，一人对一半，另一人全错。</p>
-<p>即其中一个真命题，两个假命题。先找真命题</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲全对：B1=￢p∧q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲对一半：B2=(￢p∧￢q) ∨(p∧q)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲全错：B3=p∧￢q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙全对：C1= p∧￢q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙对一半：C2=(￢p∧￢q) ∨(p∧q)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙全错：C3=￢p∧q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙全对：D1=￢q∧￢r</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙对一半：D2=(q∧￢r) ∨( ￢q∧r)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙全错：D3=q∧r</p>
-<p>有王教授那句话可以写：</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E=（B1∧C2∧D3）∨(B1∧C3∧D2) ∨(B2∧C1∧D3) ∨(B2∧C3∧D1) ∨(B3∧C1∧D2) ∨(B3∧C2∧D1)</p>
-<p>是真命题</p>
-<p>而B1∧C2∧D3⇔(￢p∧q) ∧((￢p∧￢q) ∨(p∧q)) ∧(q∧r)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q) ∧((￢p∧￢q) ∧(q∧r) ∨ (p∧q) ∧(q∧r))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q) ∧(0∨(p∧q∧r))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q)∧(p∧q∧r)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔0</p>
-<p>其他同理类似可得：</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B1C3D2⇔￢p∧q∧￢r</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B2C1D3⇔0</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B2C3D1⇔0</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B3C1D2⇔p∧￢q∧r</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B3C2D1⇔0</p>
-<p>所以E⇔(￢p∧q∧￢r) ∨(p∧￢q∧r)</p>
-<p>而pqr中只能有一个是真的，所以p∧q⇔0，p∧r⇔0，q∧r⇔0</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E⇔(￢p∧q∧￢r) ∨0</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔￢p∧q∧￢r</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔1</p>
-<p>所以p为假，q为真，r为假，王教授是上海人。</p>
-<blockquote>
-<h2 id="python程序实现"><a href="#python程序实现" class="headerlink" title="python程序实现"></a>python程序实现</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以下是上述过程的代码实现，并附有代码详解，有兴趣的小伙伴可以看一看。</p>
-</blockquote>
-<pre><code>for p in range(2):                                  #p:王教授是苏州人
-    for q in range(2):                              #q:王教授是上海人
-        for r in range(2):                          #r:王教授是杭州人
-         #以下三行表示p,q,r不可能同时为真的情况
-         if (p == 1 and q == 1): continue
-         if (p == 1 and r == 1): continue
-         if (q == 1 and r == 1): continue
+    <title>推荐系统之矩阵分解(MF)及其python实现</title>
+    <url>/2019/07/23/tui-jian-xi-tong-zhi-ju-zhen-fen-jie-mf-ji-qi-python-shi-xian/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目前推荐系统中用的最多的就是矩阵分解方法，在Netflix Prize推荐系统大赛中取得突出效果。以用户-项目评分矩阵为例，矩阵分解就是预测出评分矩阵中的缺失值，然后根据预测值以某种方式向用户推荐。今天以“用户-项目评分矩阵R（M×N）”说明矩阵分解方式的原理以及python实现。</p>
+<h1 id="一、矩阵分解"><a href="#一、矩阵分解" class="headerlink" title="一、矩阵分解"></a>一、矩阵分解</h1><h2 id="1-案例引入"><a href="#1-案例引入" class="headerlink" title="1.案例引入"></a>1.案例引入</h2><p>有如下R(5,4)的打分矩阵：（“-”表示用户没有打分）</p>
+<p>其中打分矩阵R(n,m)是n行和m列，n表示user个数，m行表示item个数<br><img src="https://img-blog.csdnimg.cn/20190727200249638.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>那么，如何根据目前的矩阵R（5,4）如何对未打分的商品进行评分的预测（如何得到分值为0的用户的打分值）？</p>
+<p>——矩阵分解的思想可以解决这个问题，其实这种思想可以看作是有监督的机器学习问题（回归问题）。</p>
+<p>矩阵分解的过程中，,矩阵R可以近似表示为矩阵P与矩阵Q的乘积：<br><img src="https://img-blog.csdnimg.cn/2019072720060093.png" alt><br>矩阵P(n,k)表示n个user和k个特征之间的关系矩阵，这k个特征是一个中间变量，矩阵Q(k,m)的转置是矩阵Q(m,k)，矩阵Q(m,k)表示m个item和K个特征之间的关系矩阵，这里的k值是自己控制的，可以使用交叉验证的方法获得最佳的k值。为了得到近似的R(n,m)，必须求出矩阵P和Q，如何求它们呢？</p>
+<h2 id="2-推导步骤"><a href="#2-推导步骤" class="headerlink" title="2.推导步骤"></a>2.推导步骤</h2><ol>
+<li>首先令：<br><img src="https://img-blog.csdnimg.cn/2019072720192687.png" alt="式子1"></li>
+<li>对于式子1的左边项，表示的是r^ 第i行，第j列的元素值，对于如何衡量，我们分解的好坏呢，式子2，给出了衡量标准，也就是损失函数，平方项损失，最后的目标，就是每一个元素(非缺失值)的e(i,j)的总和最小值<br> <img src="https://img-blog.csdnimg.cn/20190727202015695.png" alt="式子2"></li>
+<li>使用梯度下降法获得修正的p和q分量：<ul>
+<li><strong>求解损失函数的负梯度</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727202620356.png" alt></li>
+<li><strong>根据负梯度的方向更新变量</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727202652714.png" alt></li>
+</ul>
+</li>
+<li><p>不停迭代直到算法最终收敛（直到sum(e^2) &lt;=阈值，即梯度下降结束条件：f(x)的真实值和预测值小于自己设定的阈值）</p>
+</li>
+<li><p>为了防止过拟合，增加正则化项</p>
+</li>
+</ol>
+<h2 id="3-加入正则项的损失函数求解"><a href="#3-加入正则项的损失函数求解" class="headerlink" title="3.加入正则项的损失函数求解"></a>3.加入正则项的损失函数求解</h2><ol>
+<li>通常在求解的过程中，为了能够有较好的泛化能力，会在损失函数中加入正则项，以对参数进行约束，加入正则L2范数的损失函数为：<br> <img src="https://img-blog.csdnimg.cn/20190727203202194.png" alt><br> 对正则化不清楚的，公式可化为：<br> <img src="https://img-blog.csdnimg.cn/20190727203315849.png" alt></li>
+<li>使用梯度下降法获得修正的p和q分量：<ul>
+<li><strong>求解损失函数的负梯度</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727203526974.png" alt></li>
+<li><strong>根据负梯度的方向更新变量</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727203554346.png" alt></li>
+</ul>
+</li>
+</ol>
+<h2 id="4-预测"><a href="#4-预测" class="headerlink" title="4.预测"></a>4.预测</h2><p>预测利用上述的过程，我们可以得到矩阵和，这样便可以为用户 i 对商品 j 进行打分：<br> <img src="https://img-blog.csdnimg.cn/20190727203756990.png" alt></p>
+<h1 id="二、python代码实现"><a href="#二、python代码实现" class="headerlink" title="二、python代码实现"></a>二、python代码实现</h1><p>以下是根据上文的评分例子做的一个矩阵分解算法，并且附有代码详解。</p>
+<pre><code>from math import *
+import numpy
+import matplotlib.pyplot as plt
 
-         Jia = (not p) and q                        #甲的判断
-         Yi = p and (not q)                         #乙的判断
-         Bing = (not q) and (not r)                 #丙的判断
+def matrix_factorization(R,P,Q,K,steps=5000,alpha=0.0002,beta=0.02): #矩阵因子分解函数，steps：梯度下降次数；alpha：步长；beta：β。
+    Q=Q.T                 # .T操作表示矩阵的转置
+    result=[]
+    for step in range(steps): #梯度下降
+        for i in range(len(R)):
+            for j in range(len(R[i])):
+                    eij=R[i][j]-numpy.dot(P[i,:],Q[:,j])       # .DOT表示矩阵相乘
+                    for k in range(K):
+                      if R[i][j]&gt;0:        #限制评分大于零
+                        P[i][k]=P[i][k]+alpha*(2*eij*Q[k][j]-beta*P[i][k])   #增加正则化，并对损失函数求导，然后更新变量P
+                        Q[k][j]=Q[k][j]+alpha*(2*eij*P[i][k]-beta*Q[k][j])   #增加正则化，并对损失函数求导，然后更新变量Q
+        eR=numpy.dot(P,Q)  
+        e=0
+        for i in range(len(R)):
+            for j in range(len(R[i])):
+              if R[i][j]&gt;0:
+                    e=e+pow(R[i][j]-numpy.dot(P[i,:],Q[:,j]),2)      #损失函数求和
+                    for k in range(K):
+                        e=e+(beta/2)*(pow(P[i][k],2)+pow(Q[k][j],2)) #加入正则化后的损失函数求和
+        result.append(e)
+        if e&lt;0.001:           #判断是否收敛，0.001为阈值
+            break
+    return P,Q.T,result
 
-         B1 = (not p) and q                         #甲的判断全对
-         B2 = ((not p) and (not q))or (p and q)     #甲的判断一半对
-         B3 = p and (not q)                         #甲的判断全错
-
-         C1 = p and (not q)                         #乙的判断全对
-         C2 = (p and q) or ((not p) and (not q))    #乙的判断一半对
-         C3 = (not p) and q                         #乙的判断全错
-
-         D1 = (not q) and (not r)                   #丙的判断全对
-         D2 = ((not q) and r) or (q and(not r))     #丙的判断一半对
-         D3 = q and r                               #丙的判断全错
-
-         #王教授所说的话
-         E = (B1 and C2 and D3) \
-           or(B1 and C3 and D2) \
-           or(B2 and C1 and D3) \
-           or(B2 and C3 and D1) \
-           or(B3 and C1 and D2) \
-           or(B3 and C2 and D1)
-
-         #符合王教授所的E值
-         if E==1 :
-           print(&quot;%d,%d,%d E=%d,Jia=%d,Yi=%d,Bing=%d&quot;%(p,q,r,E,Jia,Yi,Bing))
-
-
-</code></pre><blockquote>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其实用python解决离散数学的逻辑推理题比直接推理效率更高而且准确性也高，并且在遇到复杂的逻辑推理时，很容易把自己绕晕，半天也解不出来，倒不如我们可以让计算机帮我们解决，只需写几十行代码，就可以罗列出复杂的关系，何乐而不为呢，所以我们可以多学学这种解题方法！😁</p>
-</blockquote>
-]]></content>
+if __name__ == &#39;__main__&#39;:   #主函数
+    R=[                 #原始矩阵
+        [5,3,0,1],
+        [4,0,0,1],
+        [1,1,0,5],
+        [1,0,0,4],
+        [0,1,5,4]
+    ]
+    R=numpy.array(R)
+    N=len(R)    #原矩阵R的行数
+    M=len(R[0]) #原矩阵R的列数
+    K=3    #K值可根据需求改变
+    P=numpy.random.rand(N,K) #随机生成一个 N行 K列的矩阵
+    Q=numpy.random.rand(M,K) #随机生成一个 M行 K列的矩阵
+    nP,nQ,result=matrix_factorization(R,P,Q,K)
+    print(R)         #输出原矩阵
+    R_MF=numpy.dot(nP,nQ.T)
+    print(R_MF)      #输出新矩阵
+    #画图
+    plt.plot(range(len(result)),result)
+    plt.xlabel(&quot;time&quot;)
+    plt.ylabel(&quot;loss&quot;)
+    plt.show()
+</code></pre>]]></content>
       <categories>
+        <category>机器学习</category>
         <category>python</category>
-        <category>离散</category>
       </categories>
       <tags>
+        <tag>机器学习</tag>
         <tag>python</tag>
-        <tag>离散</tag>
+        <tag>推荐系统</tag>
+        <tag>矩阵分解</tag>
       </tags>
   </entry>
   <entry>
@@ -1227,279 +1266,142 @@ if __name__==&#39;__main__&#39;:
       </categories>
       <tags>
         <tag>机器学习</tag>
+        <tag>推荐系统</tag>
         <tag>协同过滤（CF）</tag>
-        <tag>推荐系统</tag>
       </tags>
   </entry>
   <entry>
-    <title>推荐系统之矩阵分解(MF)及其python实现</title>
-    <url>/2019/07/23/tui-jian-xi-tong-zhi-ju-zhen-fen-jie-mf-ji-qi-python-shi-xian/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目前推荐系统中用的最多的就是矩阵分解方法，在Netflix Prize推荐系统大赛中取得突出效果。以用户-项目评分矩阵为例，矩阵分解就是预测出评分矩阵中的缺失值，然后根据预测值以某种方式向用户推荐。今天以“用户-项目评分矩阵R（M×N）”说明矩阵分解方式的原理以及python实现。</p>
-<h1 id="一、矩阵分解"><a href="#一、矩阵分解" class="headerlink" title="一、矩阵分解"></a>一、矩阵分解</h1><h2 id="1-案例引入"><a href="#1-案例引入" class="headerlink" title="1.案例引入"></a>1.案例引入</h2><p>有如下R(5,4)的打分矩阵：（“-”表示用户没有打分）</p>
-<p>其中打分矩阵R(n,m)是n行和m列，n表示user个数，m行表示item个数<br><img src="https://img-blog.csdnimg.cn/20190727200249638.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>那么，如何根据目前的矩阵R（5,4）如何对未打分的商品进行评分的预测（如何得到分值为0的用户的打分值）？</p>
-<p>——矩阵分解的思想可以解决这个问题，其实这种思想可以看作是有监督的机器学习问题（回归问题）。</p>
-<p>矩阵分解的过程中，,矩阵R可以近似表示为矩阵P与矩阵Q的乘积：<br><img src="https://img-blog.csdnimg.cn/2019072720060093.png" alt><br>矩阵P(n,k)表示n个user和k个特征之间的关系矩阵，这k个特征是一个中间变量，矩阵Q(k,m)的转置是矩阵Q(m,k)，矩阵Q(m,k)表示m个item和K个特征之间的关系矩阵，这里的k值是自己控制的，可以使用交叉验证的方法获得最佳的k值。为了得到近似的R(n,m)，必须求出矩阵P和Q，如何求它们呢？</p>
-<h2 id="2-推导步骤"><a href="#2-推导步骤" class="headerlink" title="2.推导步骤"></a>2.推导步骤</h2><ol>
-<li>首先令：<br><img src="https://img-blog.csdnimg.cn/2019072720192687.png" alt="式子1"></li>
-<li>对于式子1的左边项，表示的是r^ 第i行，第j列的元素值，对于如何衡量，我们分解的好坏呢，式子2，给出了衡量标准，也就是损失函数，平方项损失，最后的目标，就是每一个元素(非缺失值)的e(i,j)的总和最小值<br> <img src="https://img-blog.csdnimg.cn/20190727202015695.png" alt="式子2"></li>
-<li>使用梯度下降法获得修正的p和q分量：<ul>
-<li><strong>求解损失函数的负梯度</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727202620356.png" alt></li>
-<li><strong>根据负梯度的方向更新变量</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727202652714.png" alt></li>
-</ul>
-</li>
-<li><p>不停迭代直到算法最终收敛（直到sum(e^2) &lt;=阈值，即梯度下降结束条件：f(x)的真实值和预测值小于自己设定的阈值）</p>
-</li>
-<li><p>为了防止过拟合，增加正则化项</p>
-</li>
+    <title>人工神经网络（ANN）</title>
+    <url>/2019/07/26/ren-gong-shen-jing-wang-luo-ann/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初学人工智能不久，今天碰上了人工神经网（ANN），开始学的时候很懵，一大堆理论、公式、推导…..作为一名小白，还是很痛苦的，不过经过摸索，大概了 解了什么是ANN，公式的推导以及一些其他问题，下面我就总结下自己的理解，一方面作为自己的笔记，日后方便巩固；另一方面，也可以分享给其他有意者。</p>
+<h1 id="一、什么是神经网络"><a href="#一、什么是神经网络" class="headerlink" title="一、什么是神经网络"></a>一、什么是神经网络</h1><h2 id="1-单层神经网络"><a href="#1-单层神经网络" class="headerlink" title="1.单层神经网络"></a>1.单层神经网络</h2><p>首先以单层神经元为例解释人工神经元是如何工作的<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjMwMjYzZC5wbmc" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x1,x2,…, xN：神经元的输入。这些可以从输入层实际观测或者是一个隐藏层的中间值（隐藏层即介于输入与输出之间的所有节点组成的一层。后面讲到多层神经网络是会再跟大家解释的）。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X0：偏置单元。这是常值添加到激活函数的输入（类似数学里y＝ax+b中使直线不过原点的常数b）。即截距项，通常有＋1值。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w0,w1,w2,…,wN：对应每个输入的权重。甚至偏置单元也是有权重的。</p>
+<p>a:神经元的输出。计算如下：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjQ2NzM2Zi5wbmc" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;式子里的f是已知的激活函数，f使神经网络（单层乃至多层）非常灵活并且具有能估计复杂的非线性关系的能力。在简单情况下可以是一个高斯函数、逻辑函数、双曲线函数或者甚至上是一个线性函数。利用神经网络可让其实现三个基本功能：与、或、非（AND, OR, NOT）。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里引入一个例子：and功能实现如下<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjc3YjA2Yy5wbmc" alt><br>神经元输出：a = f( -1.5 + x1 + x2 )</p>
+<p>这样大家就很容易理解其工作原理，其实就是对输入值赋予不同权重，经过激活函数输出的过程。</p>
+<h2 id="2-多层神经网络"><a href="#2-多层神经网络" class="headerlink" title="2.多层神经网络"></a>2.多层神经网络</h2><h3 id="2-1-网络结构"><a href="#2-1-网络结构" class="headerlink" title="2.1 网络结构"></a>2.1 网络结构</h3><p>清楚了单层神经网络，多层神经网络也好理解了，就相当于多个单层的叠加成多层的过程。<br><img src="https://img-blog.csdnimg.cn/20190811204232448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br><strong>神经网络分为三种类型的层</strong>：</p>
+<p>输入层：神经网络最左边的一层，通过这些神经元输入需要训练观察的样本，即初始输入数据的一层。</p>
+<p>隐藏层：介于输入与输出之间的所有节点组成的一层。帮助神经网络学习数据间的复杂关系，即对数据进行处理的层。</p>
+<p>输出层：由前两层得到神经网络最后一层，即最后结果输出的一层。</p>
+<h3 id="2-2-传递函数-激活函数"><a href="#2-2-传递函数-激活函数" class="headerlink" title="2.2 传递函数/激活函数"></a>2.2 传递函数/激活函数</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前面每一层输入经过线性变换wx+b后还用到了sigmoid函数，在神经网络的结构中被称为传递函数或者激活函数。除了sigmoid，还有tanh、relu等别的激活函数。激活函数使线性的结果非线性化。</p>
+<h3 id="2-3-为什么需要传递函数"><a href="#2-3-为什么需要传递函数" class="headerlink" title="2.3 为什么需要传递函数"></a>2.3 为什么需要传递函数</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单理解上，如果不加激活函数，无论多少层隐层，最终的结果还是原始输入的线性变化，这样一层隐层就可以达到结果，就没有多层感知器的意义了。所以每个隐层都会配一个激活函数，提供非线性变化。</p>
+<h1 id="二、BP算法"><a href="#二、BP算法" class="headerlink" title="二、BP算法"></a>二、BP算法</h1><h2 id="1-BP算法基本思想"><a href="#1-BP算法基本思想" class="headerlink" title="1.BP算法基本思想"></a>1.BP算法基本思想</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP算法全称叫作误差反向传播(error Back Propagation，或者也叫作误差逆传播)算法。其算法基本思想为：在上述的前馈网络中，输入信号经输入层输入，通过隐层计算由输出层输出，输出值与标记值比较，若有误差，将误差反向由输出层向输入层传播，在这个过程中，利用梯度下降算法对神经元权值进行调整。</p>
+<h2 id="2-BP算法的推导"><a href="#2-BP算法的推导" class="headerlink" title="2.BP算法的推导"></a>2.BP算法的推导</h2><h3 id="2-1-数学基础理论"><a href="#2-1-数学基础理论" class="headerlink" title="2.1 数学基础理论"></a>2.1 数学基础理论</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP算法中核心的数学工具就是微积分的<strong>链式求导法则</strong>。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMjQxMzk3LWMwN2Q1ODFjOTJkYWViZWMucG5n" alt></p>
+<h3 id="2-2推导过程"><a href="#2-2推导过程" class="headerlink" title="2.2推导过程"></a>2.2推导过程</h3><p><img src="https://img-blog.csdnimg.cn/20190811205148228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<ol>
+<li><strong>正向传播求损失，反向传播回传误差</strong></li>
+<li>根据误差信号修正每层的权重 </li>
+<li>f是激活函数；f(netj)是隐层的输出； f(netk）是输出层的输出O; d是target</li>
 </ol>
-<h2 id="3-加入正则项的损失函数求解"><a href="#3-加入正则项的损失函数求解" class="headerlink" title="3.加入正则项的损失函数求解"></a>3.加入正则项的损失函数求解</h2><ol>
-<li>通常在求解的过程中，为了能够有较好的泛化能力，会在损失函数中加入正则项，以对参数进行约束，加入正则L2范数的损失函数为：<br> <img src="https://img-blog.csdnimg.cn/20190727203202194.png" alt><br> 对正则化不清楚的，公式可化为：<br> <img src="https://img-blog.csdnimg.cn/20190727203315849.png" alt></li>
-<li>使用梯度下降法获得修正的p和q分量：<ul>
-<li><strong>求解损失函数的负梯度</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727203526974.png" alt></li>
-<li><strong>根据负梯度的方向更新变量</strong>：<br><img src="https://img-blog.csdnimg.cn/20190727203554346.png" alt></li>
-</ul>
-</li>
-</ol>
-<h2 id="4-预测"><a href="#4-预测" class="headerlink" title="4.预测"></a>4.预测</h2><p>预测利用上述的过程，我们可以得到矩阵和，这样便可以为用户 i 对商品 j 进行打分：<br> <img src="https://img-blog.csdnimg.cn/20190727203756990.png" alt></p>
-<h1 id="二、python代码实现"><a href="#二、python代码实现" class="headerlink" title="二、python代码实现"></a>二、python代码实现</h1><p>以下是根据上文的评分例子做的一个矩阵分解算法，并且附有代码详解。</p>
-<pre><code>from math import *
-import numpy
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结合BP网络结构，误差由输出展开至输入的过程如下：<br><img src="https://img-blog.csdnimg.cn/20190811205328707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>有了误差E，通过求偏导就可以求得最优的权重。（不要忘记学习率） </p>
+<p><img src="https://img-blog.csdnimg.cn/2019081120540142.png" alt></p>
+<h2 id="3-举例说明"><a href="#3-举例说明" class="headerlink" title="3. 举例说明"></a>3. 举例说明</h2><p><img src="https://img-blog.csdnimg.cn/20190811205641720.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>图中元素：<br>两个输入；<br>隐层: b1, w1, w2, w3, w4 (都有初始值）<br>输出层：b2, w5, w6, w7, w8（赋了初始值）</p>
+<h3 id="3-1-前向传播"><a href="#3-1-前向传播" class="headerlink" title="3.1 前向传播"></a>3.1 前向传播</h3><p><img src="https://img-blog.csdnimg.cn/20190811205743162.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>则误差：<br><img src="https://img-blog.csdnimg.cn/20190811205806851.png" alt></p>
+<h3 id="3-2-反向传播"><a href="#3-2-反向传播" class="headerlink" title="3.2 反向传播"></a>3.2 反向传播</h3><p><img src="https://img-blog.csdnimg.cn/20190811205859442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>参数更新：<br><img src="https://img-blog.csdnimg.cn/20190811205921617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>求误差对w1的偏导 ：<br><img src="https://img-blog.csdnimg.cn/20190811205940706.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>注意，w1对两个输出的误差都有影响<br>通过以上过程可以更新所有权重，就可以再次迭代更新了，直到满足条件。</p>
+<h1 id="三、python代码实现"><a href="#三、python代码实现" class="headerlink" title="三、python代码实现"></a>三、python代码实现</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上述例子，用python可写出如下代码，并附有详解：</p>
+<pre><code>import numpy as np
 import matplotlib.pyplot as plt
+import math
+a=np.array([0.05,0.1])           #a1,a2的输入值
+weight1=np.array([[0.15,0.25],[0.2,0.3]])   #a1对b1,b2的权重，a2对b1，b2的权重
+weight2=np.array([[0.4,0.5],[0.45,0.55]])     #b1对c1,c2的权重，b2对c1，c2的权重
+target=np.array([0.01,0.99])
+d1=0.35   #输入层的偏置（1）的权重
+d2=0.6    #隐藏层的偏置（1）的权重
+β=0.5    #学习效率
 
-def matrix_factorization(R,P,Q,K,steps=5000,alpha=0.0002,beta=0.02): #矩阵因子分解函数，steps：梯度下降次数；alpha：步长；beta：β。
-    Q=Q.T                 # .T操作表示矩阵的转置
-    result=[]
-    for step in range(steps): #梯度下降
-        for i in range(len(R)):
-            for j in range(len(R[i])):
-                    eij=R[i][j]-numpy.dot(P[i,:],Q[:,j])       # .DOT表示矩阵相乘
-                    for k in range(K):
-                      if R[i][j]&gt;0:        #限制评分大于零
-                        P[i][k]=P[i][k]+alpha*(2*eij*Q[k][j]-beta*P[i][k])   #增加正则化，并对损失函数求导，然后更新变量P
-                        Q[k][j]=Q[k][j]+alpha*(2*eij*P[i][k]-beta*Q[k][j])   #增加正则化，并对损失函数求导，然后更新变量Q
-        eR=numpy.dot(P,Q)  
-        e=0
-        for i in range(len(R)):
-            for j in range(len(R[i])):
-              if R[i][j]&gt;0:
-                    e=e+pow(R[i][j]-numpy.dot(P[i,:],Q[:,j]),2)      #损失函数求和
-                    for k in range(K):
-                        e=e+(beta/2)*(pow(P[i][k],2)+pow(Q[k][j],2)) #加入正则化后的损失函数求和
-        result.append(e)
-        if e&lt;0.001:           #判断是否收敛，0.001为阈值
-            break
-    return P,Q.T,result
+#一：前向传播
 
-if __name__ == &#39;__main__&#39;:   #主函数
-    R=[                 #原始矩阵
-        [5,3,0,1],
-        [4,0,0,1],
-        [1,1,0,5],
-        [1,0,0,4],
-        [0,1,5,4]
-    ]
-    R=numpy.array(R)
-    N=len(R)    #原矩阵R的行数
-    M=len(R[0]) #原矩阵R的列数
-    K=3    #K值可根据需求改变
-    P=numpy.random.rand(N,K) #随机生成一个 N行 K列的矩阵
-    Q=numpy.random.rand(M,K) #随机生成一个 M行 K列的矩阵
-    nP,nQ,result=matrix_factorization(R,P,Q,K)
-    print(R)         #输出原矩阵
-    R_MF=numpy.dot(nP,nQ.T)
-    print(R_MF)      #输出新矩阵
-    #画图
-    plt.plot(range(len(result)),result)
-    plt.xlabel(&quot;time&quot;)
-    plt.ylabel(&quot;loss&quot;)
-    plt.show()
-</code></pre>]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>python</tag>
-        <tag>推荐系统</tag>
-        <tag>矩阵分解</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>多种相似度计算的python实现</title>
-    <url>/2019/07/24/duo-chong-xiang-si-du-ji-suan-de-python-shi-xian/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中有很多地方要计算相似度，比如聚类分析和协同过滤。计算相似度的有许多方法，其中有欧几里德距离(欧式距离)、曼哈顿距离、Jaccard系数和皮尔逊相关度等等。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们这里把一些常用的相似度计算方法，用python进行实现以下。大家都是初学者，我认为把公式先写下来，然后再写代码去实现比较好。 </p>
-<h2 id="欧几里德距离-欧式距离"><a href="#欧几里德距离-欧式距离" class="headerlink" title="欧几里德距离(欧式距离)"></a>欧几里德距离(欧式距离)</h2><p>几个数据集之间的相似度一般是基于每对对象间的距离计算。最常用的当然是欧几里德距离，其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204320390.png" alt></p>
-<pre><code>#-*-coding:utf-8 -*-
+#计算输入层到隐藏层的输入值，得矩阵netb1,netb2
+netb=np.dot(a,weight1)+d1
 
-#计算欧几里德距离：
-def euclidean(p,q):
-#如果两数据集数目不同，计算两者之间都对应有的数
-same = 0
-for i in p:
-    if i in q:
-        same +=1
+#计算隐藏层的输出值,得到矩阵outb1,outb2
+m=[]
+for i in range(len(netb)):
+    outb=1.0 / (1.0 + math.exp(-netb[i]))
+    m.append(outb)
+m=np.array(m)
 
-#计算欧几里德距离,并将其标准化
-e = sum([(p[i] - q[i])**2 for i in range(same)])
-return 1/(1+e**.5)
-</code></pre><p>我们用数据集可以去算一下： </p>
-<pre><code>p = [1,3,2,3,4,3]
-q = [1,3,4,3,2,3,4,3]
-print euclidean(p,q)
-</code></pre><p>得出结果是：0.261203874964</p>
-<h2 id="皮尔逊相关度"><a href="#皮尔逊相关度" class="headerlink" title="皮尔逊相关度"></a>皮尔逊相关度</h2><p>几个数据集中出现异常值的时候，欧几里德距离就不如皮尔逊相关度‘稳定’，它会在出现偏差时倾向于给出更好的结果。其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204538985.png" alt></p>
-<pre><code>-*-coding:utf-8 -*-
+#计算隐藏层到输出层的输入值，得矩阵netc1,netc2
+netc=np.dot(m,weight2)+d2
 
-#计算皮尔逊相关度：
-def pearson(p,q):
-#只计算两者共同有的
-    same = 0
-    for i in p:
-        if i in q:
-            same +=1
+#计算隐藏层的输出值,得到矩阵outc1,outc2
+n=[]
+for i in range(len(netc)):
+    outc=1.0 / (1.0 + math.exp(-netc[i]))
+    n.append(outc)
+n=np.array(n)
 
-    n = same
-    #分别求p，q的和
-    sumx = sum([p[i] for i in range(n)])
-    sumy = sum([q[i] for i in range(n)])
-    #分别求出p，q的平方和
-    sumxsq = sum([p[i]**2 for i in range(n)])
-    sumysq = sum([q[i]**2 for i in range(n)])
-    #求出p，q的乘积和
-    sumxy = sum([p[i]*q[i] for i in range(n)])
-    # print sumxy
-    #求出pearson相关系数
-    up = sumxy - sumx*sumy/n
-    down = ((sumxsq - pow(sumxsq,2)/n)*(sumysq - pow(sumysq,2)/n))**.5
-    #若down为零则不能计算，return 0
-    if down == 0 :return 0
-    r = up/down
-    return r
-</code></pre><p>用同样的数据集去计算：</p>
-<pre><code>p = [1,3,2,3,4,3]
-q = [1,3,4,3,2,3,4,3]
-print pearson(p,q)
-</code></pre><p>得出结果是：0.00595238095238</p>
-<h2 id="曼哈顿距离"><a href="#曼哈顿距离" class="headerlink" title="曼哈顿距离"></a>曼哈顿距离</h2><p>曼哈顿距离是另一种相似度计算方法，不是经常需要，但是我们仍然学会如何用python去实现，其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204709370.png" alt></p>
-<pre><code>#-*-coding:utf-8 -*-
+#二：反向传播
+count=0 #计数
+e=0     #误差  
+E=[]    #统计误差
+#梯度下降
+while True:
+  count+=1
 
-#计算曼哈顿距离：
-def manhattan(p,q):
-#只计算两者共同有的
-    same = 0
-    for i in p:
-        if i in q:
-        same += 1
-#计算曼哈顿距离
-    n = same
-    vals = range(n)
-    distance = sum(abs(p[i] - q[i]) for i in vals)
-    return distance
-</code></pre><p>用以上的数据集去计算：</p>
-<pre><code>p = [1,3,2,3,4,3]
-q = [1,3,4,3,2,3,4,3]
-print manhattan(p,q)
-</code></pre><p>得出结果为4</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里只讲述了三种相似度的计算方法，事实上还有很多种，由于我也是刚学，其他的方法还不是很了解，以后碰到了再补上。一般情况下，这三种方法是最常用的，足够我们使用了。</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>python</tag>
-        <tag>相似度</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>暑期培训第一次测试题总结</title>
-    <url>/2019/07/22/shu-qi-pei-xun-di-yi-ci-ce-shi-ti-zong-jie/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里是一些暑期培训第一次测试题的部分解释，经过这次测试的摧残，总结备录一下，方便日后回顾复习。</p>
-<h2 id="Feeling"><a href="#Feeling" class="headerlink" title="Feeling"></a>Feeling</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经过几天的学习，7月22日下午，进行了第一次检测。开始以为会让我们推导一些公式什么的，结果当拿到测试题的时候，一首凉凉送给自己……开始的选择题和填空题还能接受，看到简答题，这都是什么，有种似曾相识的感觉，但就是写不出来。为时四十分钟的考试结束后，不到半个小时成绩就出来了，虽然成绩不那么好，但排名还行，然后学长给我们进行了讲解答疑，发现自己学的有点粗糙，没有注意那些细节性问题和概念，学以致用这方面也是有点差的。</p>
-<h2 id="Test-1"><a href="#Test-1" class="headerlink" title="Test 1"></a>Test 1</h2><h3 id="为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set"><a href="#为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set" class="headerlink" title="为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?"></a>为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校验集是用于调整超参数的，从而更好的优化训练模型。测试集是用于在完成神经网络训练过程后,为了客观评价模型在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,而且测试集<strong>不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标</strong>。</p>
-<p>（备注：不清楚这三个数据集概念及其作用的，可看下我以前写的关于这些的一篇文章。传送门：）</p>
-<h2 id="Test-2"><a href="#Test-2" class="headerlink" title="Test 2"></a>Test 2</h2><h3 id="批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？"><a href="#批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？" class="headerlink" title="批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？"></a>批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们要先知道什么是BGD和SGD，从两者的运算方法上，我们就可以得知不同之处。</p>
-<p>（1）批量梯度下降法（Batch Gradient Descent） ：在更新参数时都使用所有的样本来进行更新。</p>
-<ul>
-<li>优点：<strong>全局最优解</strong>，能保证每一次更新权值，都能降低损失函数；易于并行实现。</li>
-<li>缺点：当样本数目很多时，训练过程会很慢。</li>
-</ul>
-<p>（2）随机梯度下降法（Stochastic Gradient Descent）：在更新参数时都使用一个样本来进行更新。每一次跟新参数都用一个样本，更新很多次。如果样本量很大的情况（例如几十万），那么可能只用其中几万条或者几千条的样本，就已经将参数迭代到最优解了，对比上面的批量梯度下降，迭代一次需要用到十几万训练样本，一次迭代不可能最优，如果迭代10次的话就需要遍历训练样本10次，这种方式计算复杂度太高。</p>
-<ul>
-<li>优点：训练速度快；</li>
-<li>缺点：准确度下降，<strong>并不是全局最优</strong>；不易于并行实现。从迭代的次数上来看，随机梯度下降法迭代的次数较多，在解空间的搜索过程看起来很盲目。噪音很多，使得它并不是每次迭代都向着整体最优化方向。</li>
-</ul>
-<h2 id="Test-3"><a href="#Test-3" class="headerlink" title="Test 3"></a>Test 3</h2><h3 id="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"><a href="#当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？" class="headerlink" title="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"></a>当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;废话不多说，直接上图：<br><img src="https://img-blog.csdnimg.cn/20190722174826448.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="Test-4"><a href="#Test-4" class="headerlink" title="Test 4"></a>Test 4</h2><h3 id="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"><a href="#假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？" class="headerlink" title="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"></a>假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于逻辑回归，把权重初始化为0当然也是可以的，但是对于一个神经网络，如果你把权重或者参数都初始化为0，那么梯度下降将不会起作用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果权值全初始化为0，则<strong>无法更新权值</strong>。这是由于前向传播中，所有节点输出值均相同，由于此处使用了sigmod激活函数，所以此处所有神经节点输出都为1/2，而在反向传播每个节点输出值对损失函数的偏导时，涉及到对权值相乘后的求和，该项永远为0，故所乘的结果也必然为0，这样在计算权值对算是函数的偏导时，其偏导必然为0，所有权值偏导都为0，那么就不要指望使用梯度下降法能更新权值了，自然神经网络的训练也就无法进行下去了。</p>
-<h2 id="Test-5"><a href="#Test-5" class="headerlink" title="Test 5"></a>Test 5</h2><h3 id="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"><a href="#在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？" class="headerlink" title="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"></a>在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;神经网络中的梯度不稳定指的是<strong>梯度消失</strong>和<strong>梯度爆炸</strong>问题。<br>（备注：对于这两种问题的具体解释和为什么会出现这种问题，以及解决方法，这里不具体讨论了，我会在以后的文章中具体解释到的。）</p>
-<h2 id="Test-6"><a href="#Test-6" class="headerlink" title="Test 6"></a>Test 6</h2><h3 id="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"><a href="#为什么在神经网络中使用交叉熵而不是均方差作为误差函数？" class="headerlink" title="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"></a>为什么在神经网络中使用交叉熵而不是均方差作为误差函数？</h3><pre><code>1. 神经网络中如果预测值与实际值的误差越大，那么在反向传播训练的过程中，各种参数调整的幅度就要更大，从而使训练更快收敛，如果预测值与实际值的误差小，各种参数调整的幅度就要小，从而减少震荡。
+  #总误差对w1-w4的偏导
+  pd1=(-(target[0]-n[0])*n[0]*(1-n[0])*weight2[0][0]-(target[1]-n[1])*n[1]*(1-n[1])*weight2[0][1])*m[0]*(1-m[0])*a[0]
+  pd2=(-(target[0]-n[0])*n[0]*(1-n[0])*weight2[0][0]-(target[1]-n[1])*n[1]*(1-n[1])*weight2[0][1])*m[0]*(1-m[0])*a[1]
+  pd3=(-(target[0]-n[0])*n[0]*(1-n[0])*weight2[1][0]-(target[1]-n[1])*n[1]*(1-n[1])*weight2[0][1])*m[0]*(1-m[0])*a[0]                          
+  pd4=(-(target[0]-n[0])*n[0]*(1-n[0])*weight2[1][1]-(target[1]-n[1])*n[1]*(1-n[1])*weight2[0][1])*m[0]*(1-m[0])*a[1]
+  weight1[0][0]=weight1[0][0]-β*pd1
+  weight1[1][0]=weight1[1][0]-β*pd2
+  weight1[0][1]=weight1[0][1]-β*pd3
+  weight1[1][1]=weight1[1][1]-β*pd4
 
-2. 使用平方误差损失函数，误差增大参数的梯度会增大，但是当误差很大时，参数的梯度就会又减小了。
+  #总误差对w5-w8的偏导
+  pd5=-(target[0]-n[0])*n[0]*(1-n[0])*m[0]
+  pd6=-(target[0]-n[0])*n[0]*(1-n[0])*m[1]
+  pd7=-(target[1]-n[1])*n[1]*(1-n[1])*m[0]
+  pd8=-(target[1]-n[1])*n[1]*(1-n[1])*m[1]
+  weight2[0][0]=weight2[0][0]-β*pd5
+  weight2[1][0]=weight2[1][0]-β*pd6
+  weight2[0][1]=weight2[0][1]-β*pd7
+  weight2[1][1]=weight2[1][1]-β*pd8
 
-3. 使用交叉熵损失是函数，误差越大参数的梯度也越大，能够快速收敛。
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（备注：对于结论的推导过程会总结在另一篇文章里。）</p>
-]]></content>
-      <categories>
-        <category>测试题</category>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>测试题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>朴素贝叶斯算法</title>
-    <url>/2019/08/05/po-su-bei-xie-si-suan-fa/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是流行的十大算法之一，该算法是有监督的学习算法，解决的是分类问题，如客户是否流失、是否值得投资、信用等级评定等多分类问题。<strong>该算法的优点在于简单易懂、学习效率高、在某些领域的分类问题中能够与决策树、神经网络相媲美。</strong>但由于该算法以自变量之间的独立（条件特征独立）性和连续变量的正态性假设为前提，就会导致算法精度在某种程度上受影响。</p>
-<h1 id="一、问题的提出"><a href="#一、问题的提出" class="headerlink" title="一、问题的提出"></a>一、问题的提出</h1><p>先举一个具体的例子：</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“一所学校里面有 60% 的男生，40% 的女生。男生总是穿长裤，女生则一半穿长裤一半穿裙子。有了这些信息之后我们可以容易地计算“随机选取一个学生，他（她）穿长裤的概率和穿裙子的概率是多大”，这个就是前面说的“正向概率”的计算。然而，假设你走在校园中，迎面走来一个穿长裤的学生（很不幸的是你高度近似，你只看得见他（她）穿的是否长裤，而无法确定他（她）的性别），你能够推断出他（她）是男生的概率是多大吗？”</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们来算一算：假设学校里面人的总数是 U 个。60% 的男生都穿长裤，于是我们得到了 U <em> P(Boy) </em> P(Pants|Boy) 个穿长裤的（男生）（其中 P(Boy) 是男生的概率 = 60%，这里可以简单的理解为男生的比例；P(Pants|Boy) 是条件概率，即在 Boy 这个条件下穿长裤的概率是多大，这里是 100% ，因为所有男生都穿长裤）。40% 的女生里面又有一半（50%）是穿长裤的，于是我们又得到了 U <em> P(Girl) </em> P(Pants|Girl) 个穿长裤的（女生）。加起来一共是 U <em> P(Boy) </em> P(Pants|Boy) + U <em> P(Girl) </em> P(Pants|Girl) 个穿长裤的，其中有 U <em> P(Girl) </em> P(Pants|Girl) 个女生。两者一比就是你要求的答案。<br>下面我们把这个答案形式化一下：我们要求的是 P(Girl|Pants) （穿长裤的人里面有多少女生），我们计算的结果是 U <em> P(Girl) </em> P(Pants|Girl) / [U <em> P(Boy) </em> P(Pants|Boy) + U <em> P(Girl) </em> P(Pants|Girl)] 。容易发现这里校园内人的总数是无关的，可以消去。于是得到</p>
-<p><strong>P(Girl|Pants) = P(Girl) <em> P(Pants|Girl) / [P(Boy) </em> P(Pants|Boy) + P(Girl) * P(Pants|Girl)]</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意，如果把上式收缩起来，分母其实就是 P(Pants) ，分子其实就是 P(Pants, Girl) 。而这个比例很自然地就读作：在穿长裤的人（ P(Pants) ）里面有多少（穿长裤）的女孩（ P(Pants, Girl) ）。<br>进一步得到公式的一般形式：</p>
-<p><strong>P(B|A) = P(A|B) <em> P(B) / [P(A|B) </em> P(B) + P(A|~B) * P(~B) ]</strong></p>
-<p>收缩起来就是：<strong>P(B|A) = P(AB) / P(A)</strong><br>其实这个就等于：<strong>P(B|A) * P(A) = P(AB)</strong></p>
-<h1 id="二、正式的定义"><a href="#二、正式的定义" class="headerlink" title="二、正式的定义"></a>二、正式的定义</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是基于贝叶斯定理与特征条件独立假设的分类方法，然后依据被分类项属于各个类的概率，概率最大者即为所划分的类别。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设输入空间X=（x1,x2,x3…xn），输出类标记为Y=（y1,y2,y3…yn）。x的集合记为X，称为属性集。一般X和Y的关系不确定的，你只能在某种程度上说x有多大可能性属于类y1，比如说x有80%的可能性属于类y1，这时可以把X和Y看做是随机变量，P(Y|X)称为Y的<strong>后验概率</strong>（posterior probability），与之相对的P(Y)称为Y的<strong>先验概率</strong>（prior probability），P(X=x|Y=y1)称之为<strong>条件概率</strong>。</p>
-<p><strong>先验概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过经验来判断事情发生的概率，比如说“贝叶死”的发病率是万分之一，就是先验概率。再比如南方的梅雨季是 6-7 月，就是通过往年的气候总结出来的经验，这个时候下雨的概率就比其他时间高出很多。</p>
-<p><strong>后验概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;后验概率就是发生结果之后，推测原因的概率。比如说某人查出来了患有“贝叶死”，那么患病的原因可能是 A、B 或 C。患有“贝叶死”是因为原因 A 的概率就是后验概率。它是属于条件概率的一种。</p>
-<p><strong>条件概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;事件 A 在另外一个事件 B 已经发生条件下的发生概率，表示为 P(A|B)，读作“在 B 发生的条件下 A 发生的概率”。比如原因 A 的条件下，患有“贝叶死”的概率，就是条件概率。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单说来就是：贝叶斯分类算法的理论基于贝叶斯公式：<br><img src="https://img-blog.csdnimg.cn/20190816085605498.png" alt></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中P(A|B)称为<strong>条件概率</strong>，P(B)<strong>先验概率</strong>，对应P(B|A)为<strong>后验概率</strong>。朴素贝叶斯分类器基于一个简单的假定，即给定的目标值属性之间是相互独立。贝叶斯公式之所以有用是因为在日常生活中，我们可以很容易得到P(A|B)，而很难得出P(B|A)，但我们更关心P(B|A)，所以就可以根据贝叶斯公式来计算。</p>
-<h1 id="三、应用举例"><a href="#三、应用举例" class="headerlink" title="三、应用举例"></a>三、应用举例</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如下表所示，训练数据学习一个朴素贝叶斯分类器并确定x=(2,S)T的类标记y。表中x1、x2为特征，取值的集合分别为X1={1,2,3}，X2={S,M,L}，类标记Y={1,-1}</p>
-<p><img src="https://img-blog.csdnimg.cn/20190816084258206.png" alt><br>根据贝叶斯算法得到如下概率：</p>
-<p>P(Y=1)=9/15，P(Y=-1)=6/15</p>
-<p>P(X1=1|Y=1)=2/9，P(X1=2|Y=1)=3/9，P(X1=3|Y=1)=4/9</p>
-<p>P(X2=S|Y=1)=1/9，P(X2=M|Y=1)=4/9，P(X2=L|Y=1)=4/9</p>
-<p>P(X1=1|Y=-1)=3/6，P(X1=2|Y=-1)=2/6，P(X1=3|Y=-1)=1/6</p>
-<p>P(X2=S|Y=-1)=3/6，P(X2=M|Y=-1)=2/6，P((X2=L|Y=-1)=1/6</p>
-<p>所以对于给定的x=(2,S)T计算：</p>
-<p>P(Y=1)P(X1=2|Y=1)P(X2=S|Y=1)=(9/15)(3/9)(1/9)=1/45</p>
-<p>P(Y=-1)P(X1=2|Y=-1)P(X2=S|Y=-1)=(6/15)(2/6)(1/6)=1/15</p>
-<p>所以分类结果为y=-1</p>
-<h1 id="四、朴素贝叶斯算法的优缺点"><a href="#四、朴素贝叶斯算法的优缺点" class="headerlink" title="四、朴素贝叶斯算法的优缺点"></a>四、朴素贝叶斯算法的优缺点</h1><p><strong>优点：</strong></p>
+  netb=np.dot(a,weight1)+d1
+  m=[]
+  for i in range(len(netb)):
+    outb=1.0 / (1.0 + math.exp(-netb[i]))
+    m.append(outb)
+  m=np.array(m)
+  netc=np.dot(m,weight2)+d2
+  n=[]
+  for i in range(len(netc)):
+    outc=1.0 / (1.0 + math.exp(-netc[i]))
+    n.append(outc)
+  n=np.array(n)
+
+  #计算总误差
+  for j in range(len(n)):
+    e += (target[j]-n[j])**2/2
+  E.append(e)
+  #判断
+  if e&lt;0.0000001:
+    break
+  else:
+      e=0
+print(count)
+print(e)
+print(n)
+plt.plot(range(len(E)),E,label=&#39;error&#39;)
+plt.legend() 
+plt.xlabel(&#39;time&#39;)
+plt.ylabel(&#39;error&#39;)
+plt.show()
+</code></pre><h1 id="四、BP神经网络的优缺点"><a href="#四、BP神经网络的优缺点" class="headerlink" title="四、BP神经网络的优缺点"></a>四、BP神经网络的优缺点</h1><p><strong>BP神经网络的优点：</strong></p>
 <ol>
-<li>朴素贝叶斯模型发源于古典数学理论，有着坚实的数学基础，以及稳定的分类效率；</li>
-<li>对大数量训练和查询时具有较高的速度。即使使用超大规模的训练集，针对每个项目通常也只会有相对较少的特征数，并且对项目的训练和分类也仅仅是特征概率的数学运算而已；</li>
-<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练（即可以实时的对新增的样本进行训练）；</li>
-<li>对缺失数据不太敏感，算法也比较简单，常用于文本分类；</li>
-<li>朴素贝叶斯对结果解释容易理解。</li>
+<li>非线性映射能力</li>
+<li>泛化能力  </li>
+<li>容错能力，允许输入样本中带有较大误差甚至个别错误。反应正确规律的知识来自全体样本，个别样本中的误差不能左右对权矩阵的调整</li>
 </ol>
-<p> <strong>缺点</strong></p>
+<p><strong>BP神经网络的缺陷：</strong></p>
 <ol>
-<li>需要计算先验概率；</li>
-<li>分类决策存在错误率；</li>
-<li>对输入数据的表达形式很敏感；</li>
-<li>由于使用了样本属性独立性的假设，所以如果样本属性有关联时其效果不好。</li>
-</ol>
-<h1 id="五、应用领域"><a href="#五、应用领域" class="headerlink" title="五、应用领域"></a>五、应用领域</h1><ol>
-<li>欺诈检测中使用较多；</li>
-<li>一封电子邮件是否是垃圾邮件；</li>
-<li>一篇文章应该分到科技、政治，还是体育类；</li>
-<li>一段文字表达的是积极的情绪还是消极的情绪；</li>
-<li>人脸识别</li>
+<li>需要的参数过多，而且参数的选择没有有效的方法。确定一个BP神经网络需要知道：网络的层数、每一层神经元的个数和权值。权值可以通过学习得到，如果，隐层神经元数量太多会引起过学习，如果隐层神经元个数太少会引起欠学习。此外学习率的选择也是需要考虑。目前来说，对于参数的确定缺少一个简单有效的方法，所以导致算法很不稳定；</li>
+<li>属于监督学习，对于样本有较大依赖性，网络学习的逼近和推广能力与样本有很大关系，如果样本集合代表性差，样本矛盾多，存在冗余样本，网络就很难达到预期的性能；</li>
+<li>由于权值是随机给定的，所以BP神经网络具有不可重现性；</li>
 </ol>
 ]]></content>
       <categories>
@@ -1507,98 +1409,8 @@ print manhattan(p,q)
       </categories>
       <tags>
         <tag>机器学习</tag>
-        <tag>朴素贝叶斯算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数据集的划分--训练集、验证集和测试集</title>
-    <url>/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。</p>
-<h2 id="为什么要划分数据集为训练集、验证集和测试集？"><a href="#为什么要划分数据集为训练集、验证集和测试集？" class="headerlink" title="为什么要划分数据集为训练集、验证集和测试集？"></a>为什么要划分数据集为训练集、验证集和测试集？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;做科研，就要提出问题，找到解决方法，并证明其有效性。这里的工作有3个部分，一个是提出问题，一个是找到解决方法，另一个是证明有效性。每一个部分都可以作为科研的对象，研究的越靠前，则越偏向科学，越靠后，则越偏向技术，因此叫做科学与技术。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在人工智能领域，证明一个模型的有效性，就是对于某一问题，有一些数据，而我们提出的模型可以（部分）解决这个问题，那如何来证明呢？这和我们平时的考试也是一样的，证明我们掌握了某类知识，就是去参加考试。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;好，那么如何设计考试，让这个考试可以较为客观的考察出每个人的能力呢（注意，不是让每个人都得最高分）？回想我们的高中阶段，有一些教材，让我们平时学习其基本知识（训练集），有一些模拟考试，让我们知道我们到底掌握的怎么样，然后再改进我们的学习（验证集），最后的高考决定我们的去向（测试集）。这样的类比，是不是就很清楚了。</p>
-<h2 id="训练集、验证集和测试集"><a href="#训练集、验证集和测试集" class="headerlink" title="训练集、验证集和测试集"></a>训练集、验证集和测试集</h2><pre><code>1. **训练集**：顾名思义指的是用于训练的样本集合,主要用来训练神经网络中的参数。
-
-2. **验证集**：从字面意思理解即为用于验证模型性能的样本集合.不同神经网络在训练集上训练结束后,通过验证集来比较判断各个模型的性能.这里的不同模型主要是指对应不同超参数的神经网络,也可以指完全不同结构的神经网络。
-
-3. **测试集**：对于训练完成的神经网络,测试集用于客观的评价神经网络的性能。
-</code></pre><h2 id="如何划分训练集、验证集和测试集"><a href="#如何划分训练集、验证集和测试集" class="headerlink" title="如何划分训练集、验证集和测试集"></a>如何划分训练集、验证集和测试集</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个问题其实非常基础，也非常明确，在Scikit-learn里提供了各种各样的划分方法。无论是单一的训练集、验证集和测试集，还是进行交叉验证，你都会找到调用的方法，因此我们这里主要介绍两种常见的方法。</p>
-<pre><code>1. 前人给出训练集、验证集和测试集
-  对于这种情况，那么只能跟随前人的数据划分进行，一般的比赛也是如此。一定不要使用测试集来调整性能（测试集已知的情况下），尽管存在使用这种方法来提升模型的性能的行为，但是我们并不推荐这么做。最正常的做法应当是使用训练集来学习，并使用验证集来调整超参数。当在验证集上取得最优的模型时，此时就可以使用此模型的超参数来重新训练（训练集+验证集），并用测试集评估最终的性能。
-    我们首先说明加入验证集重新训练和不加有啥区别，从理论上讲，一方面学习的样本增多，应当是会提升模型性能的，第二，其在验证集上取得最优的模型与验证集的分布的契合度是最高的，因此最终的模型会更接近验证集的分布。
-    其次再说明验证集和测试集上的性能差异。事实上，在验证集上取得最优的模型，未必在测试集上取得最优。其原因就是训练的模型是否对于该问题有着较好的泛化能力，即没有对验证集产生过拟合现象。正因为有这种情况的发生，才会有人使用测试集的最优值作为最终的结果（而不管验证集的好坏）。
-
-2. 前人没有明确给出数据集的划分
-  这时候可以采取第一种划分方法，对于样本数较小的数据集，同样可以采取交叉验证的方法。
-    交叉验证的方法的使用场景有很多，我们这里是针对不同的模型的性能好坏进行评估。
-    使用交叉验证，可以获得更为客观的性能差异。当使用第一种方法时，我们更建议使用P值来做显著性检验，从而保证性能差异的客观性。而使用第二种方法，即交叉验证时，我们选取其性能表现的均值作为最终的结果，更能体现该模型的泛化能力。
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.存在验证集<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里五倍交叉验证是用于进行调参，此时不接触测试集。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据集首先划分出训练集与测试集（可以是4:1或者9:1）。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其次，在训练集中，再划分出验证集（通常也是4:1或者9：1）<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后对于训练集和验证集进行5折交叉验证，选取出最优的超参数，然后把训练集和验证集一起训练出最终的模型。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.不存在验证集<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该情况通常是对比不同的模型，如自己的模型和别人的模型的性能好坏。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只需要把数据集划分为训练集和测试集即可，然后选取5次试验的平均值作为最终的性能评价。</p>
-<h2 id="验证集和测试集的区别"><a href="#验证集和测试集的区别" class="headerlink" title="验证集和测试集的区别"></a>验证集和测试集的区别</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;那么,训练集、校验集和测试集之间又有什么区别呢?一般而言,训练集与后两者之间较易分辨,校验集和测试集之间的概念较易混淆.个人是从下面的角度来理解的:</p>
-<ul>
-<li><p>神经网络在网络结构确定的情况下,有两部分影响模型最终的性能,一是普通参数(比如权重w和偏置b),另一个是超参数(例如学习率,网络层数).普通参数我们在训练集上进行训练,超参数我们一般人工指定(比较不同超参数的模型在校验集上的性能).那为什么我们不像普通参数一样在训练集上训练超参数呢?(花书给出了解答)一是：超参数一般难以优化(无法像普通参数一样通过梯度下降的方式进行优化).二是：超参数很多时候不适合在训练集上进行训练,例如,如果在训练集上训练能控制模型容量的超参数,这些超参数总会被训练成使得模型容量最大的参数(因为模型容量越大,训练误差越小),所以训练集上训练超参数的结果就是模型绝对过拟合.</p>
-</li>
-<li><p>正因为超参数无法在训练集上进行训练,因此我们单独设立了一个验证集,用于选择(人工训练)最优的超参数.因为验证集是用于选择超参数的,因此校验集和训练集是独立不重叠的.</p>
-</li>
-<li><p>测试集是用于在完成神经网络训练过程后,为了<strong>客观评价模型</strong>在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,因此测试与验证集和训练集之间也是独立不重叠的,而且测试集不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标.</p>
-</li>
-</ul>
-<p>为了方便清楚直观的了解，上一个表格：<br><img src="https://img-blog.csdnimg.cn/20190724110042475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至此,我们可以将神经网络完整的训练过程归结为一下两个步骤:</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.训练普通参数.在训练集(给定超参数)上利用学习算法,训练普通参数,使得模型在训练集上的误差降低到可接受的程度(一般接近人类的水平).</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.’训练’超参数.在验证集上验证网络的generalization error(泛化能力),并根据模型性能对超参数进行调整.</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重复1和2两个步骤,直至网络在验证集上取得较低的generalization error.此时完整的训练过程结束.在完成参数和超参数的训练后,在测试集上测试网络的性能.</p>
-<h2 id="附言"><a href="#附言" class="headerlink" title="附言"></a>附言</h2><p>说到底：</p>
-<ul>
-<li><p>验证集是一定需要的；</p>
-</li>
-<li><p>如果验证集具有足够泛化代表性，是不需要再整出什么测试集的；</p>
-</li>
-<li><p>整个测试集往往就是为了在验证集只是非训练集一个小子集的情况下，好奇一下那个靠训练集（训练）和验证集（调参）多次接力训练出来的模型是不是具有了泛化性能，因而加试一下图个确定。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>数据集</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>浅谈机器学习-分类和聚类的区别</title>
-    <url>/2019/08/01/qian-tan-ji-qi-xue-xi-fen-lei-he-ju-lei-de-qu-bie/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习中有两类的大问题，一个是分类，一个是聚类。在我们的生活中，我们常常没有过多的去区分这两个概念，觉得聚类就是分类，分类也差不多就是聚类，下面，我们就具体来研究下分类与聚类之间在数据挖掘中本质的区别。</p>
-<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>分类有如下几种说法，但表达的意思是相同的。</p>
-<ul>
-<li>分类（classification）:分类任务就是通过学习得到一个目标函数f，把每个属性集x映射到一个预先定义的类标号y中。</li>
-<li>分类是根据一些给定的已知类别标号的样本，训练某种学习机器（即得到某种目标函数），使它能够对未知类别的样本进行分类。这属于supervised learning（监督学习）。</li>
-<li>分类：通过学习来得到样本属性与类标号之间的关系。<br>用自己的话来说，就是我们根据已知的一些样本（包括属性与类标号）来得到分类模型（即得到样本属性与类标号之间的函数），然后通过此目标函数来对只包含属性的样本数据进行分类。</li>
-</ul>
-<p><strong>分类算法的局限</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类作为一种监督学习方法，要求必须事先明确知道各个类别的信息，并且断言所有待分类项都有一个类别与之对应。但是很多时候上述条件得不到满足，尤其是在处理海量数据的时候，如果通过预处理使得数据满足分类算法的要求，则代价非常大，这时候可以考虑使用聚类算法。</p>
-<h1 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h1><p>聚类的相关的一些概念如下</p>
-<ul>
-<li>聚类指事先并不知道任何样本的类别标号，希望通过某种算法来把一组未知类别的样本划分成若干类别，聚类的时候，我们并不关心某一类是什么，我们需要实现的目标只是把相似的东西聚到一起，这在机器学习中被称作 unsupervised learning （无监督学习）</li>
-<li>通常，人们根据样本间的某种距离或者相似性来定义聚类，即把相似的（或距离近的）样本聚为同一类，而把不相似的（或距离远的）样本归在其他类。</li>
-<li>聚类的目标：组内的对象相互之间时相似的（相关的），而不同组中的对象是不同的（不相关的）。组内的相似性越大，组间差别越大，聚类就越好。</li>
-</ul>
-<h1 id="分类与聚类的比较"><a href="#分类与聚类的比较" class="headerlink" title="分类与聚类的比较"></a>分类与聚类的比较</h1><ul>
-<li>分类：有训练数据，且训练数据包含输入和输出（有监督学习），已知分类的类别（即训练数据的输出）。学习出一个模型，用该模型对未分好类（预测数据）的数据进行预测分类（已知的类别中）。</li>
-<li>聚类：训练数据只有输入（无监督学习）。训练过程即预测过程（聚类过程），且不知道类别，甚至不知道有多少个类别，类别的数量需要指定（K-means）,也可以直接通过算法学习出来（DBSCAN）。只能通过特征的相似性对样本分类。该过程即聚类。</li>
-<li>聚类分析是研究如何在没有训练的条件下把样本划分为若干类。</li>
-<li>在分类中，对于目标数据库中存在哪些类是知道的，要做的就是将每一条记录分别属于哪一类标记出来。</li>
-<li>聚类需要解决的问题是将已给定的若干无标记的模式聚集起来使之成为有意义的聚类，聚类是在预先不知道目标数据库到底有多少类的情况下，希望将所有的记录组成不同的类或者说聚类，并且使得在这种分类情况下，以某种度量（例如：距离）为标准的相似性，在同一聚类之间最小化，而在不同聚类之间最大化。</li>
-<li>与分类不同，无监督学习不依赖预先定义的类或带类标记的训练实例，需要由聚类学习算法自动确定标记，而分类学习的实例或数据样本有类别标记。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>分类</tag>
-        <tag>聚类</tag>
+        <tag>BP算法</tag>
+        <tag>人工神经网络（ANN）</tag>
       </tags>
   </entry>
   <entry>
@@ -1763,6 +1575,158 @@ plt.show()
       </tags>
   </entry>
   <entry>
+    <title>朴素贝叶斯算法</title>
+    <url>/2019/08/05/po-su-bei-xie-si-suan-fa/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是流行的十大算法之一，该算法是有监督的学习算法，解决的是分类问题，如客户是否流失、是否值得投资、信用等级评定等多分类问题。<strong>该算法的优点在于简单易懂、学习效率高、在某些领域的分类问题中能够与决策树、神经网络相媲美。</strong>但由于该算法以自变量之间的独立（条件特征独立）性和连续变量的正态性假设为前提，就会导致算法精度在某种程度上受影响。</p>
+<h1 id="一、问题的提出"><a href="#一、问题的提出" class="headerlink" title="一、问题的提出"></a>一、问题的提出</h1><p>先举一个具体的例子：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“一所学校里面有 60% 的男生，40% 的女生。男生总是穿长裤，女生则一半穿长裤一半穿裙子。有了这些信息之后我们可以容易地计算“随机选取一个学生，他（她）穿长裤的概率和穿裙子的概率是多大”，这个就是前面说的“正向概率”的计算。然而，假设你走在校园中，迎面走来一个穿长裤的学生（很不幸的是你高度近似，你只看得见他（她）穿的是否长裤，而无法确定他（她）的性别），你能够推断出他（她）是男生的概率是多大吗？”</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们来算一算：假设学校里面人的总数是 U 个。60% 的男生都穿长裤，于是我们得到了 U <em> P(Boy) </em> P(Pants|Boy) 个穿长裤的（男生）（其中 P(Boy) 是男生的概率 = 60%，这里可以简单的理解为男生的比例；P(Pants|Boy) 是条件概率，即在 Boy 这个条件下穿长裤的概率是多大，这里是 100% ，因为所有男生都穿长裤）。40% 的女生里面又有一半（50%）是穿长裤的，于是我们又得到了 U <em> P(Girl) </em> P(Pants|Girl) 个穿长裤的（女生）。加起来一共是 U <em> P(Boy) </em> P(Pants|Boy) + U <em> P(Girl) </em> P(Pants|Girl) 个穿长裤的，其中有 U <em> P(Girl) </em> P(Pants|Girl) 个女生。两者一比就是你要求的答案。<br>下面我们把这个答案形式化一下：我们要求的是 P(Girl|Pants) （穿长裤的人里面有多少女生），我们计算的结果是 U <em> P(Girl) </em> P(Pants|Girl) / [U <em> P(Boy) </em> P(Pants|Boy) + U <em> P(Girl) </em> P(Pants|Girl)] 。容易发现这里校园内人的总数是无关的，可以消去。于是得到</p>
+<p><strong>P(Girl|Pants) = P(Girl) <em> P(Pants|Girl) / [P(Boy) </em> P(Pants|Boy) + P(Girl) * P(Pants|Girl)]</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意，如果把上式收缩起来，分母其实就是 P(Pants) ，分子其实就是 P(Pants, Girl) 。而这个比例很自然地就读作：在穿长裤的人（ P(Pants) ）里面有多少（穿长裤）的女孩（ P(Pants, Girl) ）。<br>进一步得到公式的一般形式：</p>
+<p><strong>P(B|A) = P(A|B) <em> P(B) / [P(A|B) </em> P(B) + P(A|~B) * P(~B) ]</strong></p>
+<p>收缩起来就是：<strong>P(B|A) = P(AB) / P(A)</strong><br>其实这个就等于：<strong>P(B|A) * P(A) = P(AB)</strong></p>
+<h1 id="二、正式的定义"><a href="#二、正式的定义" class="headerlink" title="二、正式的定义"></a>二、正式的定义</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是基于贝叶斯定理与特征条件独立假设的分类方法，然后依据被分类项属于各个类的概率，概率最大者即为所划分的类别。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设输入空间X=（x1,x2,x3…xn），输出类标记为Y=（y1,y2,y3…yn）。x的集合记为X，称为属性集。一般X和Y的关系不确定的，你只能在某种程度上说x有多大可能性属于类y1，比如说x有80%的可能性属于类y1，这时可以把X和Y看做是随机变量，P(Y|X)称为Y的<strong>后验概率</strong>（posterior probability），与之相对的P(Y)称为Y的<strong>先验概率</strong>（prior probability），P(X=x|Y=y1)称之为<strong>条件概率</strong>。</p>
+<p><strong>先验概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过经验来判断事情发生的概率，比如说“贝叶死”的发病率是万分之一，就是先验概率。再比如南方的梅雨季是 6-7 月，就是通过往年的气候总结出来的经验，这个时候下雨的概率就比其他时间高出很多。</p>
+<p><strong>后验概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;后验概率就是发生结果之后，推测原因的概率。比如说某人查出来了患有“贝叶死”，那么患病的原因可能是 A、B 或 C。患有“贝叶死”是因为原因 A 的概率就是后验概率。它是属于条件概率的一种。</p>
+<p><strong>条件概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;事件 A 在另外一个事件 B 已经发生条件下的发生概率，表示为 P(A|B)，读作“在 B 发生的条件下 A 发生的概率”。比如原因 A 的条件下，患有“贝叶死”的概率，就是条件概率。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单说来就是：贝叶斯分类算法的理论基于贝叶斯公式：<br><img src="https://img-blog.csdnimg.cn/20190816085605498.png" alt></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中P(A|B)称为<strong>条件概率</strong>，P(B)<strong>先验概率</strong>，对应P(B|A)为<strong>后验概率</strong>。朴素贝叶斯分类器基于一个简单的假定，即给定的目标值属性之间是相互独立。贝叶斯公式之所以有用是因为在日常生活中，我们可以很容易得到P(A|B)，而很难得出P(B|A)，但我们更关心P(B|A)，所以就可以根据贝叶斯公式来计算。</p>
+<h1 id="三、应用举例"><a href="#三、应用举例" class="headerlink" title="三、应用举例"></a>三、应用举例</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如下表所示，训练数据学习一个朴素贝叶斯分类器并确定x=(2,S)T的类标记y。表中x1、x2为特征，取值的集合分别为X1={1,2,3}，X2={S,M,L}，类标记Y={1,-1}</p>
+<p><img src="https://img-blog.csdnimg.cn/20190816084258206.png" alt><br>根据贝叶斯算法得到如下概率：</p>
+<p>P(Y=1)=9/15，P(Y=-1)=6/15</p>
+<p>P(X1=1|Y=1)=2/9，P(X1=2|Y=1)=3/9，P(X1=3|Y=1)=4/9</p>
+<p>P(X2=S|Y=1)=1/9，P(X2=M|Y=1)=4/9，P(X2=L|Y=1)=4/9</p>
+<p>P(X1=1|Y=-1)=3/6，P(X1=2|Y=-1)=2/6，P(X1=3|Y=-1)=1/6</p>
+<p>P(X2=S|Y=-1)=3/6，P(X2=M|Y=-1)=2/6，P((X2=L|Y=-1)=1/6</p>
+<p>所以对于给定的x=(2,S)T计算：</p>
+<p>P(Y=1)P(X1=2|Y=1)P(X2=S|Y=1)=(9/15)(3/9)(1/9)=1/45</p>
+<p>P(Y=-1)P(X1=2|Y=-1)P(X2=S|Y=-1)=(6/15)(2/6)(1/6)=1/15</p>
+<p>所以分类结果为y=-1</p>
+<h1 id="四、朴素贝叶斯算法的优缺点"><a href="#四、朴素贝叶斯算法的优缺点" class="headerlink" title="四、朴素贝叶斯算法的优缺点"></a>四、朴素贝叶斯算法的优缺点</h1><p><strong>优点：</strong></p>
+<ol>
+<li>朴素贝叶斯模型发源于古典数学理论，有着坚实的数学基础，以及稳定的分类效率；</li>
+<li>对大数量训练和查询时具有较高的速度。即使使用超大规模的训练集，针对每个项目通常也只会有相对较少的特征数，并且对项目的训练和分类也仅仅是特征概率的数学运算而已；</li>
+<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练（即可以实时的对新增的样本进行训练）；</li>
+<li>对缺失数据不太敏感，算法也比较简单，常用于文本分类；</li>
+<li>朴素贝叶斯对结果解释容易理解。</li>
+</ol>
+<p> <strong>缺点</strong></p>
+<ol>
+<li>需要计算先验概率；</li>
+<li>分类决策存在错误率；</li>
+<li>对输入数据的表达形式很敏感；</li>
+<li>由于使用了样本属性独立性的假设，所以如果样本属性有关联时其效果不好。</li>
+</ol>
+<h1 id="五、应用领域"><a href="#五、应用领域" class="headerlink" title="五、应用领域"></a>五、应用领域</h1><ol>
+<li>欺诈检测中使用较多；</li>
+<li>一封电子邮件是否是垃圾邮件；</li>
+<li>一篇文章应该分到科技、政治，还是体育类；</li>
+<li>一段文字表达的是积极的情绪还是消极的情绪；</li>
+<li>人脸识别</li>
+</ol>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>朴素贝叶斯算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>暑期培训第一次测试题总结</title>
+    <url>/2019/07/22/shu-qi-pei-xun-di-yi-ci-ce-shi-ti-zong-jie/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里是一些暑期培训第一次测试题的部分解释，经过这次测试的摧残，总结备录一下，方便日后回顾复习。</p>
+<h2 id="Feeling"><a href="#Feeling" class="headerlink" title="Feeling"></a>Feeling</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经过几天的学习，7月22日下午，进行了第一次检测。开始以为会让我们推导一些公式什么的，结果当拿到测试题的时候，一首凉凉送给自己……开始的选择题和填空题还能接受，看到简答题，这都是什么，有种似曾相识的感觉，但就是写不出来。为时四十分钟的考试结束后，不到半个小时成绩就出来了，虽然成绩不那么好，但排名还行，然后学长给我们进行了讲解答疑，发现自己学的有点粗糙，没有注意那些细节性问题和概念，学以致用这方面也是有点差的。</p>
+<h2 id="Test-1"><a href="#Test-1" class="headerlink" title="Test 1"></a>Test 1</h2><h3 id="为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set"><a href="#为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set" class="headerlink" title="为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?"></a>为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校验集是用于调整超参数的，从而更好的优化训练模型。测试集是用于在完成神经网络训练过程后,为了客观评价模型在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,而且测试集<strong>不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标</strong>。</p>
+<p>（备注：不清楚这三个数据集概念及其作用的，可看下我以前写的关于这些的一篇文章。传送门：）</p>
+<h2 id="Test-2"><a href="#Test-2" class="headerlink" title="Test 2"></a>Test 2</h2><h3 id="批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？"><a href="#批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？" class="headerlink" title="批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？"></a>批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们要先知道什么是BGD和SGD，从两者的运算方法上，我们就可以得知不同之处。</p>
+<p>（1）批量梯度下降法（Batch Gradient Descent） ：在更新参数时都使用所有的样本来进行更新。</p>
+<ul>
+<li>优点：<strong>全局最优解</strong>，能保证每一次更新权值，都能降低损失函数；易于并行实现。</li>
+<li>缺点：当样本数目很多时，训练过程会很慢。</li>
+</ul>
+<p>（2）随机梯度下降法（Stochastic Gradient Descent）：在更新参数时都使用一个样本来进行更新。每一次跟新参数都用一个样本，更新很多次。如果样本量很大的情况（例如几十万），那么可能只用其中几万条或者几千条的样本，就已经将参数迭代到最优解了，对比上面的批量梯度下降，迭代一次需要用到十几万训练样本，一次迭代不可能最优，如果迭代10次的话就需要遍历训练样本10次，这种方式计算复杂度太高。</p>
+<ul>
+<li>优点：训练速度快；</li>
+<li>缺点：准确度下降，<strong>并不是全局最优</strong>；不易于并行实现。从迭代的次数上来看，随机梯度下降法迭代的次数较多，在解空间的搜索过程看起来很盲目。噪音很多，使得它并不是每次迭代都向着整体最优化方向。</li>
+</ul>
+<h2 id="Test-3"><a href="#Test-3" class="headerlink" title="Test 3"></a>Test 3</h2><h3 id="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"><a href="#当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？" class="headerlink" title="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"></a>当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;废话不多说，直接上图：<br><img src="https://img-blog.csdnimg.cn/20190722174826448.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="Test-4"><a href="#Test-4" class="headerlink" title="Test 4"></a>Test 4</h2><h3 id="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"><a href="#假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？" class="headerlink" title="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"></a>假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于逻辑回归，把权重初始化为0当然也是可以的，但是对于一个神经网络，如果你把权重或者参数都初始化为0，那么梯度下降将不会起作用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果权值全初始化为0，则<strong>无法更新权值</strong>。这是由于前向传播中，所有节点输出值均相同，由于此处使用了sigmod激活函数，所以此处所有神经节点输出都为1/2，而在反向传播每个节点输出值对损失函数的偏导时，涉及到对权值相乘后的求和，该项永远为0，故所乘的结果也必然为0，这样在计算权值对算是函数的偏导时，其偏导必然为0，所有权值偏导都为0，那么就不要指望使用梯度下降法能更新权值了，自然神经网络的训练也就无法进行下去了。</p>
+<h2 id="Test-5"><a href="#Test-5" class="headerlink" title="Test 5"></a>Test 5</h2><h3 id="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"><a href="#在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？" class="headerlink" title="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"></a>在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;神经网络中的梯度不稳定指的是<strong>梯度消失</strong>和<strong>梯度爆炸</strong>问题。<br>（备注：对于这两种问题的具体解释和为什么会出现这种问题，以及解决方法，这里不具体讨论了，我会在以后的文章中具体解释到的。）</p>
+<h2 id="Test-6"><a href="#Test-6" class="headerlink" title="Test 6"></a>Test 6</h2><h3 id="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"><a href="#为什么在神经网络中使用交叉熵而不是均方差作为误差函数？" class="headerlink" title="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"></a>为什么在神经网络中使用交叉熵而不是均方差作为误差函数？</h3><pre><code>1. 神经网络中如果预测值与实际值的误差越大，那么在反向传播训练的过程中，各种参数调整的幅度就要更大，从而使训练更快收敛，如果预测值与实际值的误差小，各种参数调整的幅度就要小，从而减少震荡。
+
+2. 使用平方误差损失函数，误差增大参数的梯度会增大，但是当误差很大时，参数的梯度就会又减小了。
+
+3. 使用交叉熵损失是函数，误差越大参数的梯度也越大，能够快速收敛。
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（备注：对于结论的推导过程会总结在另一篇文章里。）</p>
+]]></content>
+      <categories>
+        <category>测试题</category>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>测试题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据集的划分--训练集、验证集和测试集</title>
+    <url>/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。</p>
+<h2 id="为什么要划分数据集为训练集、验证集和测试集？"><a href="#为什么要划分数据集为训练集、验证集和测试集？" class="headerlink" title="为什么要划分数据集为训练集、验证集和测试集？"></a>为什么要划分数据集为训练集、验证集和测试集？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;做科研，就要提出问题，找到解决方法，并证明其有效性。这里的工作有3个部分，一个是提出问题，一个是找到解决方法，另一个是证明有效性。每一个部分都可以作为科研的对象，研究的越靠前，则越偏向科学，越靠后，则越偏向技术，因此叫做科学与技术。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在人工智能领域，证明一个模型的有效性，就是对于某一问题，有一些数据，而我们提出的模型可以（部分）解决这个问题，那如何来证明呢？这和我们平时的考试也是一样的，证明我们掌握了某类知识，就是去参加考试。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;好，那么如何设计考试，让这个考试可以较为客观的考察出每个人的能力呢（注意，不是让每个人都得最高分）？回想我们的高中阶段，有一些教材，让我们平时学习其基本知识（训练集），有一些模拟考试，让我们知道我们到底掌握的怎么样，然后再改进我们的学习（验证集），最后的高考决定我们的去向（测试集）。这样的类比，是不是就很清楚了。</p>
+<h2 id="训练集、验证集和测试集"><a href="#训练集、验证集和测试集" class="headerlink" title="训练集、验证集和测试集"></a>训练集、验证集和测试集</h2><pre><code>1. **训练集**：顾名思义指的是用于训练的样本集合,主要用来训练神经网络中的参数。
+
+2. **验证集**：从字面意思理解即为用于验证模型性能的样本集合.不同神经网络在训练集上训练结束后,通过验证集来比较判断各个模型的性能.这里的不同模型主要是指对应不同超参数的神经网络,也可以指完全不同结构的神经网络。
+
+3. **测试集**：对于训练完成的神经网络,测试集用于客观的评价神经网络的性能。
+</code></pre><h2 id="如何划分训练集、验证集和测试集"><a href="#如何划分训练集、验证集和测试集" class="headerlink" title="如何划分训练集、验证集和测试集"></a>如何划分训练集、验证集和测试集</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个问题其实非常基础，也非常明确，在Scikit-learn里提供了各种各样的划分方法。无论是单一的训练集、验证集和测试集，还是进行交叉验证，你都会找到调用的方法，因此我们这里主要介绍两种常见的方法。</p>
+<pre><code>1. 前人给出训练集、验证集和测试集
+  对于这种情况，那么只能跟随前人的数据划分进行，一般的比赛也是如此。一定不要使用测试集来调整性能（测试集已知的情况下），尽管存在使用这种方法来提升模型的性能的行为，但是我们并不推荐这么做。最正常的做法应当是使用训练集来学习，并使用验证集来调整超参数。当在验证集上取得最优的模型时，此时就可以使用此模型的超参数来重新训练（训练集+验证集），并用测试集评估最终的性能。
+    我们首先说明加入验证集重新训练和不加有啥区别，从理论上讲，一方面学习的样本增多，应当是会提升模型性能的，第二，其在验证集上取得最优的模型与验证集的分布的契合度是最高的，因此最终的模型会更接近验证集的分布。
+    其次再说明验证集和测试集上的性能差异。事实上，在验证集上取得最优的模型，未必在测试集上取得最优。其原因就是训练的模型是否对于该问题有着较好的泛化能力，即没有对验证集产生过拟合现象。正因为有这种情况的发生，才会有人使用测试集的最优值作为最终的结果（而不管验证集的好坏）。
+
+2. 前人没有明确给出数据集的划分
+  这时候可以采取第一种划分方法，对于样本数较小的数据集，同样可以采取交叉验证的方法。
+    交叉验证的方法的使用场景有很多，我们这里是针对不同的模型的性能好坏进行评估。
+    使用交叉验证，可以获得更为客观的性能差异。当使用第一种方法时，我们更建议使用P值来做显著性检验，从而保证性能差异的客观性。而使用第二种方法，即交叉验证时，我们选取其性能表现的均值作为最终的结果，更能体现该模型的泛化能力。
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.存在验证集<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里五倍交叉验证是用于进行调参，此时不接触测试集。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据集首先划分出训练集与测试集（可以是4:1或者9:1）。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其次，在训练集中，再划分出验证集（通常也是4:1或者9：1）<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后对于训练集和验证集进行5折交叉验证，选取出最优的超参数，然后把训练集和验证集一起训练出最终的模型。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.不存在验证集<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该情况通常是对比不同的模型，如自己的模型和别人的模型的性能好坏。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只需要把数据集划分为训练集和测试集即可，然后选取5次试验的平均值作为最终的性能评价。</p>
+<h2 id="验证集和测试集的区别"><a href="#验证集和测试集的区别" class="headerlink" title="验证集和测试集的区别"></a>验证集和测试集的区别</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;那么,训练集、校验集和测试集之间又有什么区别呢?一般而言,训练集与后两者之间较易分辨,校验集和测试集之间的概念较易混淆.个人是从下面的角度来理解的:</p>
+<ul>
+<li><p>神经网络在网络结构确定的情况下,有两部分影响模型最终的性能,一是普通参数(比如权重w和偏置b),另一个是超参数(例如学习率,网络层数).普通参数我们在训练集上进行训练,超参数我们一般人工指定(比较不同超参数的模型在校验集上的性能).那为什么我们不像普通参数一样在训练集上训练超参数呢?(花书给出了解答)一是：超参数一般难以优化(无法像普通参数一样通过梯度下降的方式进行优化).二是：超参数很多时候不适合在训练集上进行训练,例如,如果在训练集上训练能控制模型容量的超参数,这些超参数总会被训练成使得模型容量最大的参数(因为模型容量越大,训练误差越小),所以训练集上训练超参数的结果就是模型绝对过拟合.</p>
+</li>
+<li><p>正因为超参数无法在训练集上进行训练,因此我们单独设立了一个验证集,用于选择(人工训练)最优的超参数.因为验证集是用于选择超参数的,因此校验集和训练集是独立不重叠的.</p>
+</li>
+<li><p>测试集是用于在完成神经网络训练过程后,为了<strong>客观评价模型</strong>在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,因此测试与验证集和训练集之间也是独立不重叠的,而且测试集不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标.</p>
+</li>
+</ul>
+<p>为了方便清楚直观的了解，上一个表格：<br><img src="https://img-blog.csdnimg.cn/20190724110042475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至此,我们可以将神经网络完整的训练过程归结为一下两个步骤:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.训练普通参数.在训练集(给定超参数)上利用学习算法,训练普通参数,使得模型在训练集上的误差降低到可接受的程度(一般接近人类的水平).</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.’训练’超参数.在验证集上验证网络的generalization error(泛化能力),并根据模型性能对超参数进行调整.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重复1和2两个步骤,直至网络在验证集上取得较低的generalization error.此时完整的训练过程结束.在完成参数和超参数的训练后,在测试集上测试网络的性能.</p>
+<h2 id="附言"><a href="#附言" class="headerlink" title="附言"></a>附言</h2><p>说到底：</p>
+<ul>
+<li><p>验证集是一定需要的；</p>
+</li>
+<li><p>如果验证集具有足够泛化代表性，是不需要再整出什么测试集的；</p>
+</li>
+<li><p>整个测试集往往就是为了在验证集只是非训练集一个小子集的情况下，好奇一下那个靠训练集（训练）和验证集（调参）多次接力训练出来的模型是不是具有了泛化性能，因而加试一下图个确定。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>数据集</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>浅谈机器学习-回归与分类的区别</title>
     <url>/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习的主要任务便是聚焦于两个问题：分类和回归。本文将浅谈下两者的区别。</p>
@@ -1782,8 +1746,44 @@ plt.show()
       </categories>
       <tags>
         <tag>机器学习</tag>
-        <tag>分类</tag>
         <tag>回归</tag>
+        <tag>分类</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浅谈机器学习-分类和聚类的区别</title>
+    <url>/2019/08/01/qian-tan-ji-qi-xue-xi-fen-lei-he-ju-lei-de-qu-bie/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习中有两类的大问题，一个是分类，一个是聚类。在我们的生活中，我们常常没有过多的去区分这两个概念，觉得聚类就是分类，分类也差不多就是聚类，下面，我们就具体来研究下分类与聚类之间在数据挖掘中本质的区别。</p>
+<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>分类有如下几种说法，但表达的意思是相同的。</p>
+<ul>
+<li>分类（classification）:分类任务就是通过学习得到一个目标函数f，把每个属性集x映射到一个预先定义的类标号y中。</li>
+<li>分类是根据一些给定的已知类别标号的样本，训练某种学习机器（即得到某种目标函数），使它能够对未知类别的样本进行分类。这属于supervised learning（监督学习）。</li>
+<li>分类：通过学习来得到样本属性与类标号之间的关系。<br>用自己的话来说，就是我们根据已知的一些样本（包括属性与类标号）来得到分类模型（即得到样本属性与类标号之间的函数），然后通过此目标函数来对只包含属性的样本数据进行分类。</li>
+</ul>
+<p><strong>分类算法的局限</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类作为一种监督学习方法，要求必须事先明确知道各个类别的信息，并且断言所有待分类项都有一个类别与之对应。但是很多时候上述条件得不到满足，尤其是在处理海量数据的时候，如果通过预处理使得数据满足分类算法的要求，则代价非常大，这时候可以考虑使用聚类算法。</p>
+<h1 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h1><p>聚类的相关的一些概念如下</p>
+<ul>
+<li>聚类指事先并不知道任何样本的类别标号，希望通过某种算法来把一组未知类别的样本划分成若干类别，聚类的时候，我们并不关心某一类是什么，我们需要实现的目标只是把相似的东西聚到一起，这在机器学习中被称作 unsupervised learning （无监督学习）</li>
+<li>通常，人们根据样本间的某种距离或者相似性来定义聚类，即把相似的（或距离近的）样本聚为同一类，而把不相似的（或距离远的）样本归在其他类。</li>
+<li>聚类的目标：组内的对象相互之间时相似的（相关的），而不同组中的对象是不同的（不相关的）。组内的相似性越大，组间差别越大，聚类就越好。</li>
+</ul>
+<h1 id="分类与聚类的比较"><a href="#分类与聚类的比较" class="headerlink" title="分类与聚类的比较"></a>分类与聚类的比较</h1><ul>
+<li>分类：有训练数据，且训练数据包含输入和输出（有监督学习），已知分类的类别（即训练数据的输出）。学习出一个模型，用该模型对未分好类（预测数据）的数据进行预测分类（已知的类别中）。</li>
+<li>聚类：训练数据只有输入（无监督学习）。训练过程即预测过程（聚类过程），且不知道类别，甚至不知道有多少个类别，类别的数量需要指定（K-means）,也可以直接通过算法学习出来（DBSCAN）。只能通过特征的相似性对样本分类。该过程即聚类。</li>
+<li>聚类分析是研究如何在没有训练的条件下把样本划分为若干类。</li>
+<li>在分类中，对于目标数据库中存在哪些类是知道的，要做的就是将每一条记录分别属于哪一类标记出来。</li>
+<li>聚类需要解决的问题是将已给定的若干无标记的模式聚集起来使之成为有意义的聚类，聚类是在预先不知道目标数据库到底有多少类的情况下，希望将所有的记录组成不同的类或者说聚类，并且使得在这种分类情况下，以某种度量（例如：距离）为标准的相似性，在同一聚类之间最小化，而在不同聚类之间最大化。</li>
+<li>与分类不同，无监督学习不依赖预先定义的类或带类标记的训练实例，需要由聚类学习算法自动确定标记，而分类学习的实例或数据样本有类别标记。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>分类</tag>
+        <tag>聚类</tag>
       </tags>
   </entry>
 </search>
