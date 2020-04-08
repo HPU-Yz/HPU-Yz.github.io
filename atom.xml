@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Flaneur</title>
   
-  <subtitle>Welocme</subtitle>
+  <subtitle>https://cdn.jsdelivr.net/gh/HPU-Yz/cdn-speed@1.0/medias/logo.png</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hpu-yz.github.io/"/>
-  <updated>2020-04-08T03:51:06.251Z</updated>
+  <updated>2020-04-08T09:04:23.279Z</updated>
   <id>https://hpu-yz.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://hpu-yz.github.io/2020/03/20/python-pa-chong-pa-qu-dou-ban-top250-dian-ying-pai-xing-bang/"/>
     <id>https://hpu-yz.github.io/2020/03/20/python-pa-chong-pa-qu-dou-ban-top250-dian-ying-pai-xing-bang/</id>
     <published>2020-03-19T16:00:00.000Z</published>
-    <updated>2020-04-08T03:51:06.251Z</updated>
+    <updated>2020-04-08T09:04:23.279Z</updated>
     
     <summary type="html">
     
@@ -52,7 +52,7 @@
     <link href="https://hpu-yz.github.io/2020/03/18/xiao-wang-zi-zheng-yin-wei-ni-wei-ni-de-mei-gui-hua-fei-liao-shi-jian-zhe-cai-shi-ni-de-mei-gui-bian-de-ru-ci-chong-yao/"/>
     <id>https://hpu-yz.github.io/2020/03/18/xiao-wang-zi-zheng-yin-wei-ni-wei-ni-de-mei-gui-hua-fei-liao-shi-jian-zhe-cai-shi-ni-de-mei-gui-bian-de-ru-ci-chong-yao/</id>
     <published>2020-03-17T16:00:00.000Z</published>
-    <updated>2020-04-08T03:19:18.878Z</updated>
+    <updated>2020-04-08T08:59:59.730Z</updated>
     
     <summary type="html">
     
@@ -79,7 +79,7 @@
     <link href="https://hpu-yz.github.io/2020/03/05/python-dong-tai-gui-hua-jie-jue-ju-zhen-lian-cheng/"/>
     <id>https://hpu-yz.github.io/2020/03/05/python-dong-tai-gui-hua-jie-jue-ju-zhen-lian-cheng/</id>
     <published>2020-03-04T16:00:00.000Z</published>
-    <updated>2020-04-08T03:47:22.985Z</updated>
+    <updated>2020-04-08T09:03:39.899Z</updated>
     
     <summary type="html">
     
@@ -110,7 +110,7 @@
     <link href="https://hpu-yz.github.io/2019/08/05/po-su-bei-xie-si-suan-fa/"/>
     <id>https://hpu-yz.github.io/2019/08/05/po-su-bei-xie-si-suan-fa/</id>
     <published>2019-08-04T16:00:00.000Z</published>
-    <updated>2020-04-08T03:38:26.015Z</updated>
+    <updated>2020-04-08T09:02:33.564Z</updated>
     
     <summary type="html">
     
@@ -135,42 +135,11 @@
   </entry>
   
   <entry>
-    <title>浅谈机器学习-回归与分类的区别</title>
-    <link href="https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/"/>
-    <id>https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/</id>
-    <published>2019-07-31T16:00:00.000Z</published>
-    <updated>2020-04-08T03:18:36.676Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://hpu-yz.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="回归" scheme="https://hpu-yz.github.io/tags/%E5%9B%9E%E5%BD%92/"/>
-    
-      <category term="分类" scheme="https://hpu-yz.github.io/tags/%E5%88%86%E7%B1%BB/"/>
-    
-  </entry>
-  
-  <entry>
     <title>浅谈机器学习-分类和聚类的区别</title>
     <link href="https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-fen-lei-he-ju-lei-de-qu-bie/"/>
     <id>https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-fen-lei-he-ju-lei-de-qu-bie/</id>
     <published>2019-07-31T16:00:00.000Z</published>
-    <updated>2020-04-08T03:18:25.477Z</updated>
+    <updated>2020-04-08T09:02:37.970Z</updated>
     
     <summary type="html">
     
@@ -197,11 +166,42 @@
   </entry>
   
   <entry>
+    <title>浅谈机器学习-回归与分类的区别</title>
+    <link href="https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/"/>
+    <id>https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/</id>
+    <published>2019-07-31T16:00:00.000Z</published>
+    <updated>2020-04-08T09:02:42.464Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://hpu-yz.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="分类" scheme="https://hpu-yz.github.io/tags/%E5%88%86%E7%B1%BB/"/>
+    
+      <category term="回归" scheme="https://hpu-yz.github.io/tags/%E5%9B%9E%E5%BD%92/"/>
+    
+  </entry>
+  
+  <entry>
     <title>卷积神经网络（CNN）</title>
     <link href="https://hpu-yz.github.io/2019/07/30/juan-ji-shen-jing-wang-luo-cnn/"/>
     <id>https://hpu-yz.github.io/2019/07/30/juan-ji-shen-jing-wang-luo-cnn/</id>
     <published>2019-07-29T16:00:00.000Z</published>
-    <updated>2020-04-08T03:20:45.901Z</updated>
+    <updated>2020-04-08T09:02:28.919Z</updated>
     
     <summary type="html">
     
@@ -230,7 +230,7 @@
     <link href="https://hpu-yz.github.io/2019/07/28/ji-yu-xie-tong-guo-lu-cf-suan-fa-de-tui-jian-xi-tong/"/>
     <id>https://hpu-yz.github.io/2019/07/28/ji-yu-xie-tong-guo-lu-cf-suan-fa-de-tui-jian-xi-tong/</id>
     <published>2019-07-27T16:00:00.000Z</published>
-    <updated>2020-04-08T03:26:10.032Z</updated>
+    <updated>2020-04-08T09:02:20.767Z</updated>
     
     <summary type="html">
     
@@ -261,7 +261,7 @@
     <link href="https://hpu-yz.github.io/2019/07/26/ren-gong-shen-jing-wang-luo-ann/"/>
     <id>https://hpu-yz.github.io/2019/07/26/ren-gong-shen-jing-wang-luo-ann/</id>
     <published>2019-07-25T16:00:00.000Z</published>
-    <updated>2020-04-08T03:27:37.174Z</updated>
+    <updated>2020-04-08T09:02:46.516Z</updated>
     
     <summary type="html">
     
@@ -292,7 +292,7 @@
     <link href="https://hpu-yz.github.io/2019/07/24/duo-chong-xiang-si-du-ji-suan-de-python-shi-xian/"/>
     <id>https://hpu-yz.github.io/2019/07/24/duo-chong-xiang-si-du-ji-suan-de-python-shi-xian/</id>
     <published>2019-07-23T16:00:00.000Z</published>
-    <updated>2020-04-08T03:50:09.045Z</updated>
+    <updated>2020-04-08T09:02:14.682Z</updated>
     
     <summary type="html">
     
@@ -325,7 +325,7 @@
     <link href="https://hpu-yz.github.io/2019/07/23/tui-jian-xi-tong-zhi-ju-zhen-fen-jie-mf-ji-qi-python-shi-xian/"/>
     <id>https://hpu-yz.github.io/2019/07/23/tui-jian-xi-tong-zhi-ju-zhen-fen-jie-mf-ji-qi-python-shi-xian/</id>
     <published>2019-07-22T16:00:00.000Z</published>
-    <updated>2020-04-08T03:31:33.998Z</updated>
+    <updated>2020-04-08T09:03:15.461Z</updated>
     
     <summary type="html">
     
@@ -360,7 +360,7 @@
     <link href="https://hpu-yz.github.io/2019/07/22/shu-qi-pei-xun-di-yi-ci-ce-shi-ti-zong-jie/"/>
     <id>https://hpu-yz.github.io/2019/07/22/shu-qi-pei-xun-di-yi-ci-ce-shi-ti-zong-jie/</id>
     <published>2019-07-21T16:00:00.000Z</published>
-    <updated>2020-04-08T03:32:26.066Z</updated>
+    <updated>2020-04-08T09:02:50.455Z</updated>
     
     <summary type="html">
     
@@ -389,7 +389,7 @@
     <link href="https://hpu-yz.github.io/2019/07/20/k-zui-jin-lin-fen-lei-suan-fa-knn-ji-python-shi-xian/"/>
     <id>https://hpu-yz.github.io/2019/07/20/k-zui-jin-lin-fen-lei-suan-fa-knn-ji-python-shi-xian/</id>
     <published>2019-07-19T16:00:00.000Z</published>
-    <updated>2020-04-08T03:33:58.473Z</updated>
+    <updated>2020-04-08T09:03:24.147Z</updated>
     
     <summary type="html">
     
@@ -422,7 +422,7 @@
     <link href="https://hpu-yz.github.io/2019/07/19/k-means-ju-lei-suan-fa-yuan-li-ji-python-shi-xian/"/>
     <id>https://hpu-yz.github.io/2019/07/19/k-means-ju-lei-suan-fa-yuan-li-ji-python-shi-xian/</id>
     <published>2019-07-18T16:00:00.000Z</published>
-    <updated>2020-04-08T03:39:00.185Z</updated>
+    <updated>2020-04-08T09:03:27.588Z</updated>
     
     <summary type="html">
     
@@ -455,7 +455,7 @@
     <link href="https://hpu-yz.github.io/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/"/>
     <id>https://hpu-yz.github.io/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/</id>
     <published>2019-07-17T16:00:00.000Z</published>
-    <updated>2020-04-08T03:39:53.032Z</updated>
+    <updated>2020-04-08T09:02:55.502Z</updated>
     
     <summary type="html">
     
@@ -484,7 +484,7 @@
     <link href="https://hpu-yz.github.io/2019/07/18/ti-du-xia-jiang-fa-de-san-chong-xing-shi-bgd-sgd-mbgd-ji-python-shi-xian/"/>
     <id>https://hpu-yz.github.io/2019/07/18/ti-du-xia-jiang-fa-de-san-chong-xing-shi-bgd-sgd-mbgd-ji-python-shi-xian/</id>
     <published>2019-07-17T16:00:00.000Z</published>
-    <updated>2020-04-08T03:41:13.141Z</updated>
+    <updated>2020-04-08T09:03:11.513Z</updated>
     
     <summary type="html">
     
@@ -517,7 +517,7 @@
     <link href="https://hpu-yz.github.io/2019/04/02/python-chi-san-shu-xue-luo-ji-yan-suan/"/>
     <id>https://hpu-yz.github.io/2019/04/02/python-chi-san-shu-xue-luo-ji-yan-suan/</id>
     <published>2019-04-01T16:00:00.000Z</published>
-    <updated>2020-04-08T03:44:04.643Z</updated>
+    <updated>2020-04-08T09:03:35.776Z</updated>
     
     <summary type="html">
     
@@ -548,7 +548,7 @@
     <link href="https://hpu-yz.github.io/2019/03/21/oj/"/>
     <id>https://hpu-yz.github.io/2019/03/21/oj/</id>
     <published>2019-03-20T16:00:00.000Z</published>
-    <updated>2020-04-08T03:43:35.025Z</updated>
+    <updated>2020-04-08T09:03:31.802Z</updated>
     
     <summary type="html">
     
@@ -575,7 +575,7 @@
     <link href="https://hpu-yz.github.io/2019/03/17/python-pan-duan-chi-san-shu-xue-de-he-shi-gong-shi/"/>
     <id>https://hpu-yz.github.io/2019/03/17/python-pan-duan-chi-san-shu-xue-de-he-shi-gong-shi/</id>
     <published>2019-03-16T16:00:00.000Z</published>
-    <updated>2020-04-08T03:45:29.545Z</updated>
+    <updated>2020-04-08T09:04:05.040Z</updated>
     
     <summary type="html">
     
@@ -606,7 +606,7 @@
     <link href="https://hpu-yz.github.io/2019/03/15/hexo-bo-ke-da-jian/"/>
     <id>https://hpu-yz.github.io/2019/03/15/hexo-bo-ke-da-jian/</id>
     <published>2019-03-14T16:00:00.000Z</published>
-    <updated>2020-04-08T03:46:50.482Z</updated>
+    <updated>2020-04-08T09:03:19.774Z</updated>
     
     <summary type="html">
     
