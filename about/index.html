@@ -29,282 +29,12 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
     
-<style type="text/css" lang="css">
-    #loading-container{
-        position: fixed;
-        top: 0;
-        left: 0;
-        min-height: 100vh;
-        width: 100vw;
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background: #FFF;
-        text-align: center;
-        /* loader页面消失采用渐隐的方式*/
-        -webkit-transition: opacity 1s ease;
-        -moz-transition: opacity 1s ease;
-        -o-transition: opacity 1s ease;
-        transition: opacity 1s ease;
-    }
-    .loading-image{
-        width: 120px;
-        height: 50px;
-        transform: translate(-50%);
-    }
-
-    .loading-image div:nth-child(2) {
-        -webkit-animation: pacman-balls 1s linear 0s infinite;
-        animation: pacman-balls 1s linear 0s infinite
-    }
-
-    .loading-image div:nth-child(3) {
-        -webkit-animation: pacman-balls 1s linear .33s infinite;
-        animation: pacman-balls 1s linear .33s infinite
-    }
-
-    .loading-image div:nth-child(4) {
-        -webkit-animation: pacman-balls 1s linear .66s infinite;
-        animation: pacman-balls 1s linear .66s infinite
-    }
-
-    .loading-image div:nth-child(5) {
-        -webkit-animation: pacman-balls 1s linear .99s infinite;
-        animation: pacman-balls 1s linear .99s infinite
-    }
-
-   .loading-image div:first-of-type {
-        width: 0;
-        height: 0;
-        border: 25px solid #49b1f5;
-        border-right-color: transparent;
-        border-radius: 25px;
-        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
-        animation: rotate_pacman_half_up .5s 0s infinite;
-    }
-    .loading-image div:nth-child(2) {
-        width: 0;
-        height: 0;
-        border: 25px solid #49b1f5;
-        border-right-color: transparent;
-        border-radius: 25px;
-        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
-        animation: rotate_pacman_half_down .5s 0s infinite;
-        margin-top: -50px;
-    }
-    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
-
-    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
-
-    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
-
-    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
-
-    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
-
-    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
-
-
-    .loading-image div:nth-child(3),
-    .loading-image div:nth-child(4),
-    .loading-image div:nth-child(5),
-    .loading-image div:nth-child(6){
-        background-color: #49b1f5;
-        width: 15px;
-        height: 15px;
-        border-radius: 100%;
-        margin: 2px;
-        width: 10px;
-        height: 10px;
-        position: absolute;
-        transform: translateY(-6.25px);
-        top: 25px;
-        left: 100px;
-    }
-    .loading-text{
-        margin-bottom: 20vh;
-        text-align: center;
-        color: #2c3e50;
-        font-size: 2rem;
-        box-sizing: border-box;
-        padding: 0 10px;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    }
-    @media only screen and (max-width: 500px) {
-         .loading-text{
-            font-size: 1.5rem;
-         }
-    }
-    .fadeout {
-        opacity: 0;
-        filter: alpha(opacity=0);
-    }
-    /* logo出现动画 */
-    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
-    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
- </style>
- <script>
-(function () {
-    const loaded = function(){
-       setTimeout(function(){
-            const loader = document.getElementById("loading-container");
-            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
-            // document.getElementById("body-wrap").style.display="flex";
-            setTimeout(function(){
-                loader.style.display="none";
-            },1000); 
-        },1000);//强制显示loading page 1s  
-    };
-    loaded();
-})()
- </script><link rel="alternate" href="/atom.xml" title="Flaneur" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="Flaneur" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><style type="text/css" lang="css">
-    #loading-container{
-        position: fixed;
-        top: 0;
-        left: 0;
-        min-height: 100vh;
-        width: 100vw;
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background: #FFF;
-        text-align: center;
-        /* loader页面消失采用渐隐的方式*/
-        -webkit-transition: opacity 1s ease;
-        -moz-transition: opacity 1s ease;
-        -o-transition: opacity 1s ease;
-        transition: opacity 1s ease;
-    }
-    .loading-image{
-        width: 120px;
-        height: 50px;
-        transform: translate(-50%);
-    }
-
-    .loading-image div:nth-child(2) {
-        -webkit-animation: pacman-balls 1s linear 0s infinite;
-        animation: pacman-balls 1s linear 0s infinite
-    }
-
-    .loading-image div:nth-child(3) {
-        -webkit-animation: pacman-balls 1s linear .33s infinite;
-        animation: pacman-balls 1s linear .33s infinite
-    }
-
-    .loading-image div:nth-child(4) {
-        -webkit-animation: pacman-balls 1s linear .66s infinite;
-        animation: pacman-balls 1s linear .66s infinite
-    }
-
-    .loading-image div:nth-child(5) {
-        -webkit-animation: pacman-balls 1s linear .99s infinite;
-        animation: pacman-balls 1s linear .99s infinite
-    }
-
-   .loading-image div:first-of-type {
-        width: 0;
-        height: 0;
-        border: 25px solid #49b1f5;
-        border-right-color: transparent;
-        border-radius: 25px;
-        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
-        animation: rotate_pacman_half_up .5s 0s infinite;
-    }
-    .loading-image div:nth-child(2) {
-        width: 0;
-        height: 0;
-        border: 25px solid #49b1f5;
-        border-right-color: transparent;
-        border-radius: 25px;
-        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
-        animation: rotate_pacman_half_down .5s 0s infinite;
-        margin-top: -50px;
-    }
-    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
-
-    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
-
-    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
-
-    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
-
-    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
-
-    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
-    .loading-image div:nth-child(3),
-    .loading-image div:nth-child(4),
-    .loading-image div:nth-child(5),
-    .loading-image div:nth-child(6){
-        background-color: #49b1f5;
-        width: 15px;
-        height: 15px;
-        border-radius: 100%;
-        margin: 2px;
-        width: 10px;
-        height: 10px;
-        position: absolute;
-        transform: translateY(-6.25px);
-        top: 25px;
-        left: 100px;
-    }
-    .loading-text{
-        margin-bottom: 20vh;
-        text-align: center;
-        color: #2c3e50;
-        font-size: 2rem;
-        box-sizing: border-box;
-        padding: 0 10px;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    }
-    @media only screen and (max-width: 500px) {
-         .loading-text{
-            font-size: 1.5rem;
-         }
-    }
-    .fadeout {
-        opacity: 0;
-        filter: alpha(opacity=0);
-    }
-    /* logo出现动画 */
-    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
-    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
- </style>
- <script>
-(function () {
-    const loaded = function(){
-       setTimeout(function(){
-            const loader = document.getElementById("loading-container");
-            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
-            // document.getElementById("body-wrap").style.display="flex";
-            setTimeout(function(){
-                loader.style.display="none";
-            },1000); 
-        },1000);//强制显示loading page 1s  
-    };
-    loaded();
-})()
- </script></head>
-
-
-
- <div id="loading-container">
-     <p class="loading-text">玩命加载中 . . . </p> 
-     <div class="loading-image">
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div> 
-         <div></div>
-     </div>
- </div><body>
+<body>
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
@@ -671,6 +401,19 @@
     <div id="aboutme" class="container about-container">
         <div class="card">
             <div class="card-content">
+                <div class="card-content article-card-content">
+                        <div class="title center-align" data-aos="zoom-in-up">
+                            <i class="fa fa-address-book"></i>&nbsp;&nbsp;myCV
+                        </div>
+                        <div id="articleContent" data-aos="fade-up">
+                            
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-content">
                 <div class="row">
                     <div class="post-statis col l4 hide-on-med-and-down" data-aos="zoom-in-right">
                         
@@ -904,7 +647,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"Hexo","value":1},{"name":"机器学习","value":13},{"name":"OJ","value":1},{"name":"python","value":4},{"name":"python","value":5},{"name":"生活","value":1},{"name":"算法","value":1},{"name":"离散","value":2},{"name":"爬虫","value":1}],
+                data: [{"name":"Hexo","value":1},{"name":"python","value":4},{"name":"机器学习","value":13},{"name":"算法","value":1},{"name":"离散","value":2},{"name":"OJ","value":1},{"name":"爬虫","value":1},{"name":"python","value":5},{"name":"生活","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -928,7 +671,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["机器学习","python","离散","推荐系统","分类","Hexo","博客搭建","KNN","OJ","动态规划"]
+                data: ["机器学习","python","离散","推荐系统","分类","Hexo","博客搭建","KNN","K-means","动态规划"]
             }
         ],
         yAxis: [
@@ -1044,6 +787,14 @@
             
             
             
+            
+            
+            <a href="/tags/离散/">
+                <span class="chip center-align waves-effect waves-light chip-default">离散</span>
+            </a>
+            
+            
+            
             <a href="/tags/机器学习/">
                 <span class="chip center-align waves-effect waves-light chip-default">机器学习</span>
             </a>
@@ -1056,10 +807,8 @@
             
             
             
-            
-            
-            <a href="/tags/OJ/">
-                <span class="chip center-align waves-effect waves-light chip-default">OJ</span>
+            <a href="/tags/K-means/">
+                <span class="chip center-align waves-effect waves-light chip-default">K-means</span>
             </a>
             
             
@@ -1070,14 +819,38 @@
             
             
             
-            <a href="/tags/K-means/">
-                <span class="chip center-align waves-effect waves-light chip-default">K-means</span>
+            <a href="/tags/OJ/">
+                <span class="chip center-align waves-effect waves-light chip-default">OJ</span>
             </a>
             
             
             
-            <a href="/tags/离散/">
-                <span class="chip center-align waves-effect waves-light chip-default">离散</span>
+            <a href="/tags/爬虫/">
+                <span class="chip center-align waves-effect waves-light chip-default">爬虫</span>
+            </a>
+            
+            
+            
+            <a href="/tags/协同过滤（CF）/">
+                <span class="chip center-align waves-effect waves-light chip-default">协同过滤（CF）</span>
+            </a>
+            
+            
+            
+            <a href="/tags/推荐系统/">
+                <span class="chip center-align waves-effect waves-light chip-default">推荐系统</span>
+            </a>
+            
+            
+            
+            <a href="/tags/生活/">
+                <span class="chip center-align waves-effect waves-light chip-default">生活</span>
+            </a>
+            
+            
+            
+            <a href="/tags/卷积神经网络（CNN）/">
+                <span class="chip center-align waves-effect waves-light chip-default">卷积神经网络（CNN）</span>
             </a>
             
             
@@ -1094,32 +867,8 @@
             
             
             
-            <a href="/tags/爬虫/">
-                <span class="chip center-align waves-effect waves-light chip-default">爬虫</span>
-            </a>
-            
-            
-            
-            <a href="/tags/生活/">
-                <span class="chip center-align waves-effect waves-light chip-default">生活</span>
-            </a>
-            
-            
-            
-            <a href="/tags/推荐系统/">
-                <span class="chip center-align waves-effect waves-light chip-default">推荐系统</span>
-            </a>
-            
-            
-            
             <a href="/tags/矩阵分解/">
                 <span class="chip center-align waves-effect waves-light chip-default">矩阵分解</span>
-            </a>
-            
-            
-            
-            <a href="/tags/协同过滤（CF）/">
-                <span class="chip center-align waves-effect waves-light chip-default">协同过滤（CF）</span>
             </a>
             
             
@@ -1130,26 +879,14 @@
             
             
             
-            <a href="/tags/卷积神经网络（CNN）/">
-                <span class="chip center-align waves-effect waves-light chip-default">卷积神经网络（CNN）</span>
-            </a>
-            
-            
-            
             <a href="/tags/测试题/">
                 <span class="chip center-align waves-effect waves-light chip-default">测试题</span>
             </a>
             
             
             
-            <a href="/tags/分类/">
-                <span class="chip center-align waves-effect waves-light chip-default">分类</span>
-            </a>
-            
-            
-            
-            <a href="/tags/聚类/">
-                <span class="chip center-align waves-effect waves-light chip-default">聚类</span>
+            <a href="/tags/梯度下降/">
+                <span class="chip center-align waves-effect waves-light chip-default">梯度下降</span>
             </a>
             
             
@@ -1172,8 +909,14 @@
             
             
             
-            <a href="/tags/梯度下降/">
-                <span class="chip center-align waves-effect waves-light chip-default">梯度下降</span>
+            <a href="/tags/分类/">
+                <span class="chip center-align waves-effect waves-light chip-default">分类</span>
+            </a>
+            
+            
+            
+            <a href="/tags/聚类/">
+                <span class="chip center-align waves-effect waves-light chip-default">聚类</span>
             </a>
             
             
