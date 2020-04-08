@@ -1,6 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hexo博客搭建</title>
+    <url>/2019/03/15/hexo-bo-ke-da-jian/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇文章用于介绍Hexo个人博客的搭建过程，这也是我搭建本博客后的第一篇文章，分享一下搭建方法，有兴趣的小伙伴也可以自主搭建一个属于自己的博客！<br>   首先<strong>感谢大家的来访支持</strong>！<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自己本来开始做的是html网页，网页做完之后需要购买服务器和域名（价格不便宜）才能运营，还要定期维护它，对于我个人只是感兴趣做个自己的网页，单单做个html网页就很费力气了，实在是没有精力和时间运营它，所以也没有必要去购买服务器和域名（性价比低），但我做的html网页在我自己的电脑上还是可以运营的（感兴趣的小伙伴可以联系我，一起探讨做html网页的方法）。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其次，现在市面上的博客有很多，如CSDN，博客园等平台，可以直接在上面发表，也有很多优点，但缺点是比较不自由，会受到各种限制和恶心的广告。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以我选择了直接在github page平台上托管我的博客，这样可以安心写作，也不需要定期维护，而且hexo作为一个快速简洁的博客框架，用它来搭建博客也很简单。我在两天内完成了Hexo-Github个人博客的基本搭建（其实搭建不难，自己脑子笨，做的慢些了……）<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这里记录一下我的第搭建一个博客，并给大家分享一下搭建的流程，以及在搭建过程中遇到的问题和解决方案。如果你也有搭建个人博客的想法，希望能给你一点经验帮助。 大家都是新手，可以分享经验，互相交流学习的。</p>
+<h2 id="搭建经历"><a href="#搭建经历" class="headerlink" title="搭建经历"></a>搭建经历</h2><ul>
+<li>❤2019-3-13：初次看到Hexo-Github搭建个人博客，很感兴趣，便开始了自己博客的搭建；</li>
+<li>❤2019-3-14：完成了博客的基本搭建（可以运营），并上传了第一篇文章； </li>
+<li>❤2019-3-17：博客搭建工作全部完结（主题优化，程序添加，分类管理……）;</li>
+<li>❤未完待续……</li>
+</ul>
+<h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><pre><code>1. 安装Git
+2. 安装Node.js
+3. 安装Hexo
+4. 注册Github账号并创建新仓库
+5. 生产SSH添加到Github
+6. 将Hexo部署到Github
+7. 修改主题
+8. 优化主题
+</code></pre><h3 id="1-安装Git"><a href="#1-安装Git" class="headerlink" title="1.安装Git"></a>1.安装Git</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直接到<a href="https://git-scm.com/" target="_blank" rel="noopener">Git官网</a>下载就行了，右键点击软件使用Git Bash的命令行工具，以后就用这个工具来使用Git</p>
+<h3 id="2-安装Node-js"><a href="#2-安装Node-js" class="headerlink" title="2.安装Node.js"></a>2.安装Node.js</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装同Git一样，也是到<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网</a>下载就可以了。</p>
+<h3 id="3-安装Hexo"><a href="#3-安装Hexo" class="headerlink" title="3.安装Hexo"></a>3.安装Hexo</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用下载好的Git Bash来下载Hexo，代码如下：</p>
+<pre><code> npm install hexo-cli -g
+</code></pre><h3 id="4-注册Github账号并创建一个新的仓库"><a href="#4-注册Github账号并创建一个新的仓库" class="headerlink" title="4.注册Github账号并创建一个新的仓库"></a>4.注册Github账号并创建一个新的仓库</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/" target="_blank" rel="noopener">Github</a>是一个很好的开源项目托管平台，大部分人应该都注册的有账号（有账号的小伙伴可以跳过这步），即使没有注册过也没有关系，只需现在注册下就行了，请参考<a href="https://www.jianshu.com/p/f51062941573" target="_blank" rel="noopener">Github基础设置及使用详解</a>，里面的有详细的注册过程,过程也很简单。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注册过账号后，先创建一个新的仓库（创建的具体方法上面的那个网站也有详细过程，但这里需要注意的是，创建的仓库名一定要是 <code>name.github.io</code>,其中name为你注册的Github的用户名，修改成你自己的。</p>
+<h3 id="5-生成SSH添加到Github"><a href="#5-生成SSH添加到Github" class="headerlink" title="5.生成SSH添加到Github"></a>5.生成SSH添加到Github</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先配置SSH，同样使用Git Bash,输入一下代码：</p>
+<pre><code> ssh-keygen -t rsa -C &quot;邮件地址&quot;
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中”邮件地址”是你注册Github时填写的邮箱（输入时双引号要带上），输入后要连续按回车键，再等待回应。它会回复：</p>
+<pre><code>Enter file in which to save the key (/c/Users/lenovo/.ssh/id_rsa):
+
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后进入<code>(/c/Users/lenovo/.ssh/id_rsa.pub)</code>,将里面的内容复制下来，再进入Github官网，到GitHub设置-&gt;SSH and GPG keys-&gt;New SSH key，粘贴此处并确定。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;再回到Git Bash,输入一下代码：</p>
+<pre><code>ssh -T git@github.com
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用于测试SSH是否配置好，看到<code>You&#39;ve successfully authenticated, but GitHub does not provide shell access.</code>则说明配置好了，否则无法使用hexo d。</p>
+<h3 id="6-将Hexo部署到Github"><a href="#6-将Hexo部署到Github" class="headerlink" title="6. 将Hexo部署到Github"></a>6. 将Hexo部署到Github</h3><h4 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-初始化Hexo"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-初始化Hexo" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初始化Hexo"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初始化Hexo</h4><pre><code>hexo init Blog                    
+cd Blog    
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blog可修该城其他名字；cd Blog 指打开Blog文件夹。</p>
+<h4 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-安装Hexo扩展"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-安装Hexo扩展" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装Hexo扩展"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装Hexo扩展</h4><pre><code>npm install hexo-deployer-git --save
+npm install
+</code></pre><h4 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-本地调试"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-本地调试" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本地调试"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本地调试</h4><pre><code>hexo clean
+hexo g                        
+hexo s                        
+
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexo s是开启本地预览服务，打开浏览器访问<a href="http://localhost:4000" target="_blank" rel="noopener"> http://localhost:4000</a> 即可看到内容。</p>
+<h4 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-上传到Github-Pages"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-上传到Github-Pages" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传到Github Pages"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传到Github Pages</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传之前，打开站点配置文件_config.yml，位于站点根目录下，修改最后一部分为如下部分。</p>
+<pre><code>deploy:
+  type: git
+  repository: git@github.com:name/name.github.io.git    #name修改为你的Github用户名
+  branch: master
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传到Github</p>
+<pre><code>hexo clean
+hexo g                        
+hexo d
+</code></pre><h3 id="7-修改主题"><a href="#7-修改主题" class="headerlink" title="7.修改主题"></a>7.修改主题</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主题位置在themes目录下，默认为landscape主题。可从官网<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a>选择各种下载（得看个人喜好了），推荐NexT主题，以下为安装方法。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装过程就一行代码，站点根目录下运行。</p>
+<pre><code>git clone https://github.com/theme-next/hexo-theme-next themes/next
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后打开站点配置文件_config.yml，找到theme： landscape，把landscape修改为next就可以了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;到现在你就已经搭建好了一个属于你自己的博客平台了，赶紧去熟悉熟悉它吧。👍</p>
+<h3 id="8-主题优化"><a href="#8-主题优化" class="headerlink" title="8.主题优化"></a>8.主题优化</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其实刚才我们已经搭建好了，并且也可以使用了，但我们仍可以使我们的博客变得更加好看吸引人，以及添加更多的小功能，使我们有更好的体验，也就是进行主题优化。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但由于主题优化内容比较多，所以在这就先不讲解了，不用担心，我会在后续的博客文章中持续更新关于如何进行主题优化，使我们的博客变得“高大上”。🤞</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>博客搭建</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>KNN算法及python实现</title>
     <url>/2019/07/20/k-zui-jin-lin-fen-lei-suan-fa-knn-ji-python-shi-xian/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN算法即K-Nearest Neighbor，也是机器学习十大经典算法之一。前文讲解了K-means算法，今天我们就继续讲KNN算法，两者看起来挺相似的，但区别还是很大的，看完本片文章你就会明白了。</p>
@@ -87,69 +150,6 @@ if __name__ == &#39;__main__&#39;:
         <tag>机器学习</tag>
         <tag>KNN</tag>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo博客搭建</title>
-    <url>/2019/03/15/hexo-bo-ke-da-jian/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇文章用于介绍Hexo个人博客的搭建过程，这也是我搭建本博客后的第一篇文章，分享一下搭建方法，有兴趣的小伙伴也可以自主搭建一个属于自己的博客！<br>   首先<strong>感谢大家的来访支持</strong>！<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自己本来开始做的是html网页，网页做完之后需要购买服务器和域名（价格不便宜）才能运营，还要定期维护它，对于我个人只是感兴趣做个自己的网页，单单做个html网页就很费力气了，实在是没有精力和时间运营它，所以也没有必要去购买服务器和域名（性价比低），但我做的html网页在我自己的电脑上还是可以运营的（感兴趣的小伙伴可以联系我，一起探讨做html网页的方法）。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其次，现在市面上的博客有很多，如CSDN，博客园等平台，可以直接在上面发表，也有很多优点，但缺点是比较不自由，会受到各种限制和恶心的广告。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以我选择了直接在github page平台上托管我的博客，这样可以安心写作，也不需要定期维护，而且hexo作为一个快速简洁的博客框架，用它来搭建博客也很简单。我在两天内完成了Hexo-Github个人博客的基本搭建（其实搭建不难，自己脑子笨，做的慢些了……）<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这里记录一下我的第搭建一个博客，并给大家分享一下搭建的流程，以及在搭建过程中遇到的问题和解决方案。如果你也有搭建个人博客的想法，希望能给你一点经验帮助。 大家都是新手，可以分享经验，互相交流学习的。</p>
-<h2 id="搭建经历"><a href="#搭建经历" class="headerlink" title="搭建经历"></a>搭建经历</h2><ul>
-<li>❤2019-3-13：初次看到Hexo-Github搭建个人博客，很感兴趣，便开始了自己博客的搭建；</li>
-<li>❤2019-3-14：完成了博客的基本搭建（可以运营），并上传了第一篇文章； </li>
-<li>❤2019-3-17：博客搭建工作全部完结（主题优化，程序添加，分类管理……）;</li>
-<li>❤未完待续……</li>
-</ul>
-<h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><pre><code>1. 安装Git
-2. 安装Node.js
-3. 安装Hexo
-4. 注册Github账号并创建新仓库
-5. 生产SSH添加到Github
-6. 将Hexo部署到Github
-7. 修改主题
-8. 优化主题
-</code></pre><h3 id="1-安装Git"><a href="#1-安装Git" class="headerlink" title="1.安装Git"></a>1.安装Git</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直接到<a href="https://git-scm.com/" target="_blank" rel="noopener">Git官网</a>下载就行了，右键点击软件使用Git Bash的命令行工具，以后就用这个工具来使用Git</p>
-<h3 id="2-安装Node-js"><a href="#2-安装Node-js" class="headerlink" title="2.安装Node.js"></a>2.安装Node.js</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装同Git一样，也是到<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网</a>下载就可以了。</p>
-<h3 id="3-安装Hexo"><a href="#3-安装Hexo" class="headerlink" title="3.安装Hexo"></a>3.安装Hexo</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用下载好的Git Bash来下载Hexo，代码如下：</p>
-<pre><code> npm install hexo-cli -g
-</code></pre><h3 id="4-注册Github账号并创建一个新的仓库"><a href="#4-注册Github账号并创建一个新的仓库" class="headerlink" title="4.注册Github账号并创建一个新的仓库"></a>4.注册Github账号并创建一个新的仓库</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/" target="_blank" rel="noopener">Github</a>是一个很好的开源项目托管平台，大部分人应该都注册的有账号（有账号的小伙伴可以跳过这步），即使没有注册过也没有关系，只需现在注册下就行了，请参考<a href="https://www.jianshu.com/p/f51062941573" target="_blank" rel="noopener">Github基础设置及使用详解</a>，里面的有详细的注册过程,过程也很简单。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注册过账号后，先创建一个新的仓库（创建的具体方法上面的那个网站也有详细过程，但这里需要注意的是，创建的仓库名一定要是 <code>name.github.io</code>,其中name为你注册的Github的用户名，修改成你自己的。</p>
-<h3 id="5-生成SSH添加到Github"><a href="#5-生成SSH添加到Github" class="headerlink" title="5.生成SSH添加到Github"></a>5.生成SSH添加到Github</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先配置SSH，同样使用Git Bash,输入一下代码：</p>
-<pre><code> ssh-keygen -t rsa -C &quot;邮件地址&quot;
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中”邮件地址”是你注册Github时填写的邮箱（输入时双引号要带上），输入后要连续按回车键，再等待回应。它会回复：</p>
-<pre><code>Enter file in which to save the key (/c/Users/lenovo/.ssh/id_rsa):
-
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后进入<code>(/c/Users/lenovo/.ssh/id_rsa.pub)</code>,将里面的内容复制下来，再进入Github官网，到GitHub设置-&gt;SSH and GPG keys-&gt;New SSH key，粘贴此处并确定。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;再回到Git Bash,输入一下代码：</p>
-<pre><code>ssh -T git@github.com
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用于测试SSH是否配置好，看到<code>You&#39;ve successfully authenticated, but GitHub does not provide shell access.</code>则说明配置好了，否则无法使用hexo d。</p>
-<h3 id="6-将Hexo部署到Github"><a href="#6-将Hexo部署到Github" class="headerlink" title="6. 将Hexo部署到Github"></a>6. 将Hexo部署到Github</h3><h4 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-初始化Hexo"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-初始化Hexo" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初始化Hexo"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初始化Hexo</h4><pre><code>hexo init Blog                    
-cd Blog    
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blog可修该城其他名字；cd Blog 指打开Blog文件夹。</p>
-<h4 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-安装Hexo扩展"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-安装Hexo扩展" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装Hexo扩展"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装Hexo扩展</h4><pre><code>npm install hexo-deployer-git --save
-npm install
-</code></pre><h4 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-本地调试"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-本地调试" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本地调试"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本地调试</h4><pre><code>hexo clean
-hexo g                        
-hexo s                        
-
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexo s是开启本地预览服务，打开浏览器访问<a href="http://localhost:4000" target="_blank" rel="noopener"> http://localhost:4000</a> 即可看到内容。</p>
-<h4 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-上传到Github-Pages"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-上传到Github-Pages" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传到Github Pages"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传到Github Pages</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传之前，打开站点配置文件_config.yml，位于站点根目录下，修改最后一部分为如下部分。</p>
-<pre><code>deploy:
-  type: git
-  repository: git@github.com:name/name.github.io.git    #name修改为你的Github用户名
-  branch: master
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传到Github</p>
-<pre><code>hexo clean
-hexo g                        
-hexo d
-</code></pre><h3 id="7-修改主题"><a href="#7-修改主题" class="headerlink" title="7.修改主题"></a>7.修改主题</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主题位置在themes目录下，默认为landscape主题。可从官网<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a>选择各种下载（得看个人喜好了），推荐NexT主题，以下为安装方法。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装过程就一行代码，站点根目录下运行。</p>
-<pre><code>git clone https://github.com/theme-next/hexo-theme-next themes/next
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后打开站点配置文件_config.yml，找到theme： landscape，把landscape修改为next就可以了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;到现在你就已经搭建好了一个属于你自己的博客平台了，赶紧去熟悉熟悉它吧。👍</p>
-<h3 id="8-主题优化"><a href="#8-主题优化" class="headerlink" title="8.主题优化"></a>8.主题优化</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其实刚才我们已经搭建好了，并且也可以使用了，但我们仍可以使我们的博客变得更加好看吸引人，以及添加更多的小功能，使我们有更好的体验，也就是进行主题优化。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但由于主题优化内容比较多，所以在这就先不讲解了，不用担心，我会在后续的博客文章中持续更新关于如何进行主题优化，使我们的博客变得“高大上”。🤞</p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>博客搭建</tag>
       </tags>
   </entry>
   <entry>
@@ -267,230 +267,6 @@ if __name__==&#39;__main__&#39;:
         <tag>机器学习</tag>
         <tag>python</tag>
         <tag>K-means</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Python判断离散数学的合式公式</title>
-    <url>/2019/03/17/python-pan-duan-chi-san-shu-xue-de-he-shi-gong-shi/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你没有听错，用python程序来解决离散数学的逻辑推理问题，我当我第一次听老师说的时候也很吃惊（再说上学期的Python学的也不咋地…..😩)，但经老师讲解后才知道，使用python解题不仅效率高，而且准确性也很强的，所以还是有必要学习以下的。</p>
-<h2 id="判断是否为合式公式"><a href="#判断是否为合式公式" class="headerlink" title="判断是否为合式公式"></a>判断是否为合式公式</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一个题目就是判断一个公式是否为合式公式，这也是最基础的，因为只有当在输入的合式公式正确的情况下，才能进一步的运算解题，所以先讲解一下怎么判断合式公式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先要知道<strong>什么是合式公式</strong>？<br>(1)原子命题常项或变项是合式公式；<br>(2)如果A是合式公式，则（-A）也是合式公式（- 表示非）；<br>(3)如果A，B是合式公式，则（A<em>B）、（A+B）、（A &lt; B）、（ A ~ B）也是合式公式；(此处 </em> 合取 + 析取 &lt; 代表条件 ~ 代表双条件)<br>(4)只有有限次地应用(1)～(3)所包含的命题变元，联结词和括号的符号串才是合式公式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>个人思路</strong>：<br>输入字符串，扫描字符串，把所含的各关联词分区出来，在判断每个关联词使用是否正确<br>比如不合规则的情况：<br>(1) 关联词所处位置不对<br>(2) 关联词的连续使用<br>(3) 括号不匹配<br>(4) ……..<br>程序中可能会有bug，希望大佬们多多指教</p>
-<h2 id="这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。"><a href="#这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。" class="headerlink" title="这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。"></a>这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。</h2><h4 id="废话不多说，直接上代码😎"><a href="#废话不多说，直接上代码😎" class="headerlink" title="废话不多说，直接上代码😎"></a>废话不多说，直接上代码😎</h4><pre><code>import re
-print(&quot;定义‘!’为否定联结词&quot;)
-print(&quot;定义‘&amp;’为合取联结词&quot;)
-print(&quot;定义‘-’为析取联结词&quot;)
-print(&quot;定义‘&gt;’为蕴含联结词&quot;)
-print(&quot;定义‘~’为等价联结词&quot;)
-print(&quot;如果公式错误，会指出哪里错误；如果公式正确，则什么也不输出&quot;)
-S =input(&quot;请输入需要判断的公式：&quot;)
-T = list(S)
-if S[0] in [&#39;&amp;&#39;,&#39;-&#39;,&#39;)&#39;,&#39;~&#39;,&#39;&gt;&#39;] :
-    print(&quot;不是合式公式&quot;)
-a ,b,c,d,f =&quot;!&quot; , &quot;&amp;&quot; ,&quot;-&quot; , &quot;&gt;&quot; , &quot;~&quot;
-if a in T:
-        Q = [m.start() for m in re.finditer(a, S)]
-        for i in Q :
-            if S[-1] == &#39;!&#39; :
-                print (&quot;‘!’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[i+1] in [&#39;&amp;&#39;,&#39;!&#39;,&#39;-&#39;,&#39;)&#39;,&#39;~&#39;,&#39;&gt;&#39;]:
-                print(&quot;‘!’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[i-1] in [&#39;!&#39;]:
-                print(&quot;‘!’联结词使用错误，不是合式公式！&quot;)
-                break
-if b in T:
-        W = [m.start() for m in re.finditer(b, S)]
-        for y in W :
-            if S[-1] == &#39;&amp;&#39; :
-                print (&quot;‘&amp;’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[y+1] in [&#39;-&#39;,&#39;)&#39;,&#39;~&#39;,&#39;&gt;&#39;,&#39;&amp;&#39;] :
-                print(&quot;‘&amp;’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[y-1] in [&#39;-&#39;,&#39;(&#39;,&#39;~&#39;,&#39;&gt;&#39;,&#39;&amp;&#39;] :
-                print(&quot;‘&amp;’联结词使用错误，不是合式公式&quot;)
-                break
-if c in T:
-        E = [m.start() for m in re.finditer(c, S)]
-        for h in E :
-            if S[-1] == &#39;-&#39; :
-                print(&quot;‘-’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[h+1] in (&#39;)&#39;,&#39;&gt;&#39;,&#39;~&#39;,&#39;-&#39;) :
-                print(&quot;‘-’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[h-1] in (&#39;&amp;&#39;,&#39;-&#39;,&#39;&gt;&#39;,&#39;~&#39;) :
-                print(&quot;‘-’联结词使用错误，不是合式公式&quot;)
-                break
-if d in T:
-        R = [m.start() for m in re.finditer(d, S)]
-        for k in R :
-            if S[-1] == &#39;&gt;&#39; :
-                print (&quot;‘&gt;’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[k+1] in [&#39;)&#39;,&#39;&gt;&#39;] :
-                print(&quot;‘&gt;’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[k-1] in  [&#39;(&#39;,&#39;&gt;&#39;] :
-                print(&quot;‘&gt;’联结词使用错误，不是合式公式&quot;)
-                break
-if f in T:
-        O = [m.start() for m in re.finditer(f, S)]
-        for v in O :
-            if S[-1] == &#39;~&#39; :
-                print(&quot;‘~’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[v+1] in [&#39;)&#39;,&#39;~&#39;] :
-                print(&quot;‘~’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[v-1] in [&#39;(&#39;,&#39;~&#39;] :
-                print(&quot;‘~’联结词使用错误，不是合式公式&quot;)
-                break
-if &#39;(&#39; or &#39;)&#39; in S :
-        e = 0
-        klb =[]
-        for i in S :
-            if i == &#39;(&#39;:
-                klb.append(i)
-            if i == &#39;)&#39;:
-                if len(klb)==0:
-                    e=1
-                    break
-                else :
-                    klb.pop()
-        if len(klb)!=0 :
-            e = 1
-        if e==1:
-            print(&quot;括号使用错误，不是合式公式&quot;)
-
-
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我也是小白，程序哪里可能有些不足之处，请多多指教，如果你有更好的解题方法或思路，可以联系我，大家可以一起学习，一起进步的！😊</p>
-]]></content>
-      <categories>
-        <category>python</category>
-        <category>离散</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>离散</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OJ刷题-while(scanf(&quot;%d&quot;,&amp;n)!=EOF)</title>
-    <url>/2019/03/21/oj/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“测试输入包含若干测试实例。当N为0时，输入结束，该实例不被处理。”这句话 是最早我对OJ的印象 以前也没见过这种输入要求， 做第一道题的时候就卡住了 上网看别人的代码 都有一句 while(scanf(“%d”,&amp;n)!=EOF)”scanf 函数还能放while里啊… EOF是什么玩意儿呢…”</p>
-<blockquote>
-<h2 id="什么是OJ？"><a href="#什么是OJ？" class="headerlink" title="什么是OJ？"></a>什么是OJ？</h2></blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先先介绍下什么是OJ吧(知道的同学可以跳过此部分)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Online Judge系统（简称OJ）是一个在线的判题系统。用户可以在线提交程序多种程序（如C、C++）源代码，系统对源代码进行编译和执行，并通过预先设计的测试数据来检验程序源代码的正确性。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一个用户提交的程序在Online Judge系统下执行时将受到比较严格的限制，包括运行时间限制，内存使用限制和安全限制等。用户程序执行的结果将被Online Judge系统捕捉并保存，然后再转交给一个裁判程序。该裁判程序或者比较用户程序的输出数据和标准输出样例的差别，或者检验用户程序的输出数据是否满足一定的逻辑条件。最后系统返回给用户一个状态：通过（Accepted,AC）、答案错误(Wrong Answer,WA)、超时(Time Limit Exceed,TLE)、超过输出限制（Output Limit Exceed,OLE)、超内存（Memory Limit Exceed,MLE）、运行时错误（Runtime Error,RE）、格式错误（Presentation Error,PE)、或是无法编译（Compile Error,CE），并返回程序使用的内存、运行时间等信息。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Online Judge系统最初使用于ACM-ICPC国际大学生程序设计竞赛和OI信息学奥林匹克竞赛中的自动判题和排名。现广泛应用于世界各地高校学生程序设计的训练、参赛队员的训练和选拔、各种程序设计竞赛以及数据结构和算法的学习和作业的自动提交判断中。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;知名的OJ有：RQNOJ,URAL,SPOJ,vijos,tyvj,USACO,sgu,pku(poj),zju(toj),tju,uva，HDU(HDOJ)等。</p>
-<blockquote>
-<h2 id="EOF是什么东东？"><a href="#EOF是什么东东？" class="headerlink" title="EOF是什么东东？"></a>EOF是什么东东？</h2></blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EOF 是一个宏 ，一般定义为-1。<br>1.EOF用来判断文件结束的标记(end of file) 用在文件操作中,可以查下msdn 看它的定义:EOF is returned by       an I/O routine when the end-of-file (or in some cases, an error) is encountered<br>2.EOF表示输入流的结束。<br>3.在发送端套接字关闭后，接收端读套接字的read函数也会返回EOF.</p>
-<blockquote>
-<h2 id="while-scanf-EOF-流程图"><a href="#while-scanf-EOF-流程图" class="headerlink" title="while(scanf()!=EOF)流程图"></a>while(scanf()!=EOF)流程图</h2></blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们学过的有三种循环：for，while，do-while。但while (scanf(“%d”, &amp;n) != EOF)不像以上的任何一种，接下来看一下它的流程图：<br><img src="/2019/03/21/oj/while-1/20140502221756328.png" alt="流程图"></p>
-<blockquote>
-<h2 id="OnlineJuge的评判时，该语句的作用"><a href="#OnlineJuge的评判时，该语句的作用" class="headerlink" title="OnlineJuge的评判时，该语句的作用"></a>OnlineJuge的评判时，该语句的作用</h2></blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OJ评判的原理应该是这样的：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入：通过管道命令，将一个包含若干测试用例的文件作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为【标准输入流】，所以需要while(scanf() != EOF)来判断测试文件是否读完。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输出：通过管道命令，将【标准输出流】，输出到一个文件中。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评判：将程序的【输出文件】与【正确答案文件】进行比对：如果一样，则返回程序正确提示；否则返回程序错误的提示。</p>
-<blockquote>
-<h2 id="使用原理"><a href="#使用原理" class="headerlink" title="使用原理"></a>使用原理</h2></blockquote>
-<p>有人说 EOF等于-1 其实就是scanf函数的返回值 不等于-1时 继续进行循环</p>
-<p>有人说 EOF是处理到文件结束 不用EOF也可以</p>
-<p>……….</p>
-<p>很多天后终于把这个弄明白了</p>
-<p>scanf的返回值由后面的参数决定</p>
-<p>scanf(“%d%d”, &amp;a, &amp;b);</p>
-<p>如果a和b都被成功读入，那么scanf的返回值就是2</p>
-<p>如果只有a被成功读入，返回值为1</p>
-<p>如果a和b都未被成功读入，返回值为0</p>
-<p>如果遇到错误或遇到end of file，返回值为EOF，且返回值为int型.</p>
-<blockquote>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2></blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上是我个人所述，若有什么不对的地方或者有补充的地方，还希望各位指点指点，大家可以一起学习，一起进步！</p>
-]]></content>
-      <categories>
-        <category>OJ</category>
-      </categories>
-      <tags>
-        <tag>OJ</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python动态规划解决矩阵连乘</title>
-    <url>/2020/03/05/python-dong-tai-gui-hua-jie-jue-ju-zhen-lian-cheng/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划算法与分治法类似，其基本思想也就是将待求解的问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解，简单概括为自顶向下分解，自底向上求解。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与分治法不同的是，适合于用动态规划法求解的问题，经分解得到的子问题往往不是相互独立的，换句话说，就是前面解决过的子问题，在后面的子问题中又碰到了前面解决过的子问题，子问题之间是有联系的。如果用分治法，有些同样的子问题会被重复计算几次，这样就很浪费时间了。所以动态规划是为了解决分治法的弊端而提出的，动态规划的基本思想就是，用一个表来记录所有已经解决过的子问题的答案，不管该子问题在以后是否会被用到，只要它被计算过，就将其结果填入表中，以后碰到同样的子问题，就可以从表中直接调用该子问题的答案，而不需要再计算一次。具体的动态规划的算法多种多样，但他们都具有相同的填表式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划的适用场合，一般适用于解最优化问题，例如矩阵连乘问题、最长公共子序列、背包问题等等。</p>
-<h2 id="矩阵连乘问题描述"><a href="#矩阵连乘问题描述" class="headerlink" title="矩阵连乘问题描述"></a>矩阵连乘问题描述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;给定n个矩阵：A1,A2,…,An，其中Ai与Ai+1是可乘的，i=1，2…，n-1。确定计算矩阵连乘积的计算次序，使得依此次序计算矩阵连乘积需要的数乘次数最少。输入数据为矩阵个数和每个矩阵规模，输出结果为计算矩阵连乘积的计算次序和最少数乘次数。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若A是一个p × q的矩阵，B是一个q × r的矩阵，则其乘积C=AB是一个p × r的矩阵。数乘次数是p × q × r.</p>
-<h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>A(3 × 5)A(5 × 7)A(7 × 2)的连乘次数和括号划分有关系吗？</p>
-<blockquote>
-<p>(A(3 × 5)A(5 × 7))A(7 × 2)             相乘次数： (3 × 5 <em> 7)+(3 × 7 × 2) = 147<br>A(3 × 5)(A(5 × 7)A(7 × 2))             相乘次数： (5 × 7 </em> 2)+(3 × 5 × 2) = 100</p>
-</blockquote>
-<p>答案很明显是有关系的。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><blockquote>
-<p>求 A1A2A3…An 定义   AiAi+1…Ak…Aj-1Aj   子列， 可看成是Ai…Ak，Ak…Aj<br>确定k的位置，然后按照递归的思想来逐步解决 求得结果后，使i=1，j=n原问题即可求解。</p>
-</blockquote>
-<p>建立递归关系（状态转移方程）</p>
-<blockquote>
-<p>设 Ai…Aj相乘 的最小数乘次数存储于m[i][j]中。<br>S[i][j]存储最佳断开位置。<br>A1：P0 × P1<br>A2：P1 × P2<br>A3：P2 × P3<br>…<br>Ai：Pi-1 × Pi<br>Ai+1：Pi × Pi+1<br> …<br> An：Pn-1 × Pn<br> P0 × P1 × P2 … × Pn——n+1个</p>
-</blockquote>
-<p>当i=j时，m[i][j] = 0;<br>当i&lt;j时，m[i][j] = m[i][k]+m[k+1][j]+Pi-1PkPj<br>k在i，j之间取值，取值范围为i&lt;=k&lt;j<br>有递推关系如下：<br><img src="https://img-blog.csdnimg.cn/20200305183034898.png" alt><br>动态规划的最优子结构性质是：</p>
-<blockquote>
-<p>问题的最优解包含了其子问题的最优解。<br>最优子结构性质是问题可用动态规划法求解的显著特征。<br>Ai…Ak，Ak+1…Aj的最优划分也包含在Ai…Aj的最优划分中</p>
-</blockquote>
-<p>在计算出最优值m[i][j]后，可递归地由s[i][j]构造出相应的最优解。</p>
-<h2 id="python代码实现"><a href="#python代码实现" class="headerlink" title="python代码实现"></a>python代码实现</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> random
-<span class="token keyword">from</span> pandas <span class="token keyword">import</span> <span class="token operator">*</span>
-
-input <span class="token operator">=</span> int<span class="token punctuation">(</span>input<span class="token punctuation">(</span><span class="token string">"输入矩阵数："</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-matrix <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">2</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">]</span>
-<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">:</span>                         <span class="token comment" spellcheck="true">#生成矩阵</span>
-    <span class="token keyword">if</span> i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
-        matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> random<span class="token punctuation">.</span>randrange<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
-        matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> random<span class="token punctuation">.</span>randrange<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
-    <span class="token keyword">else</span><span class="token punctuation">:</span>
-        matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> matrix<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
-        matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> random<span class="token punctuation">.</span>randrange<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
-m <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> input <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">]</span>         <span class="token comment" spellcheck="true">#记录连乘次数</span>
-s <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> input <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">]</span>         <span class="token comment" spellcheck="true">#记录括号位置</span>
-<span class="token keyword">def</span> <span class="token function">MatrixMultiplication</span><span class="token punctuation">(</span>inp<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>inp<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
-    <span class="token keyword">for</span> r <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> inp<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>inp<span class="token operator">-</span>r<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            j <span class="token operator">=</span> i <span class="token operator">+</span> r
-            m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> m<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">+</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> matrix<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
-            s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token operator">+</span><span class="token number">1</span>
-            <span class="token keyword">for</span> k <span class="token keyword">in</span> range<span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> j<span class="token punctuation">)</span><span class="token punctuation">:</span>
-                judge <span class="token operator">=</span> m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">+</span> m<span class="token punctuation">[</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">+</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> matrix<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> matrix<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
-                <span class="token keyword">if</span> judge <span class="token operator">&lt;</span> m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">:</span>
-                    m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> judge
-                    s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> k<span class="token operator">+</span><span class="token number">1</span>
-<span class="token keyword">def</span> <span class="token function">printmatrix</span><span class="token punctuation">(</span>left<span class="token punctuation">,</span> right<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> left <span class="token operator">==</span> right<span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token operator">+</span>str<span class="token punctuation">(</span>left<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
-    <span class="token keyword">else</span><span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"("</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
-        printmatrix<span class="token punctuation">(</span>left<span class="token punctuation">,</span> s<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-        printmatrix<span class="token punctuation">(</span>s<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">,</span> right<span class="token punctuation">)</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">")"</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
-MatrixMultiplication<span class="token punctuation">(</span>input<span class="token punctuation">)</span>
-dm <span class="token operator">=</span> DataFrame<span class="token punctuation">(</span>m<span class="token punctuation">,</span> index<span class="token operator">=</span>list<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> input<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> columns<span class="token operator">=</span>list<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> input<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-ds <span class="token operator">=</span> DataFrame<span class="token punctuation">(</span>s<span class="token punctuation">,</span> index<span class="token operator">=</span>list<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> input<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> columns<span class="token operator">=</span>list<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> input<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>matrix<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"数乘次数：\n"</span><span class="token punctuation">,</span> dm<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"括号位置：\n"</span><span class="token punctuation">,</span> ds<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"最终结果："</span><span class="token punctuation">)</span>
-printmatrix<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> input<span class="token number">-1</span><span class="token punctuation">)</span>
-
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -624,81 +400,45 @@ targets <span class="token operator">=</span> soup<span class="token punctuation
       </tags>
   </entry>
   <entry>
-    <title>【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”</title>
-    <url>/2020/03/18/xiao-wang-zi-zheng-yin-wei-ni-wei-ni-de-mei-gui-hua-fei-liao-shi-jian-zhe-cai-shi-ni-de-mei-gui-bian-de-ru-ci-chong-yao/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这是法国名著《小王子》中一个有名的寓言故事，这个童话，实在太有智慧灵性了。人与人之间，不也是一样道理吗？我不得不承认，我被触动了。</p>
-<h2 id="【小王子】"><a href="#【小王子】" class="headerlink" title="【小王子】"></a>【小王子】</h2><p> 有一天，小王子的星球上，不知从哪里来了一颗种子，后来忽然发了芽。小王子小心翼翼地监护着这株与众不同的嫩芽。小王子看到嫩芽长出一个巨大的花蕾，感到从中一定会产生奇迹。但是，这朵花儿却躲在她那绿茵茵的房间里，梳妆打扮没个完。一天清晨，正好当太阳升起的时候，她露面了。</p>
-<p>   她，精心做了那么许多的准备，却伸着懒腰打着呵欠说：“哎呀！我刚刚睡醒。。。请原谅。。。瞧我的头发还是乱蓬蓬的。。。”</p>
-<p>   小王子此时抑制不住自己那爱慕之情。</p>
-<p>“你真美！”</p>
-<p>“是么？你可知道，太阳是和我同时诞生的。。。”</p>
-<p>   小王子看得出，这花儿很不谦虚，不过，她确实楚楚动人。</p>
-<p>“我想，是该吃早点的时候了吧？”她随后又说，“请您记得我需要。。。”</p>
-<p>   小王子感到十分惭愧，于是去提了一壶清水来给她浇灌。</p>
-<p>   不久，她就以她的多疑的虚荣心来折磨小王子。例如，有一天，她谈起她身上长着的四根刺时，她对小王子说：“老虎么，让它们带着它们的利抓来吧！”</p>
-<p>“我的星球上根本没有老虎，”小王子反驳说，“而且老虎是不吃草的。”</p>
-<p>   花儿娇嗔地说：“我可不是草。”</p>
-<p>“请原谅！”</p>
-<p>“我不怕什么老虎，可是我受不了穿堂风，您没有屏风吗？”</p>
-<p>   小王子思忖着：“受不了穿堂风。。。这对一株植物来说，太不幸了。这朵花儿有点难弄…”</p>
-<p>   这时，她故意咳得更响，好使他良心受责备。</p>
-<p>   尽管小王子真心诚意爱这朵花儿，这样一来，他开始对她产生怀疑了。小王子对一些无关紧要的话，看得过分认真，结果使自己很苦恼。</p>
-<p>   小王子选择了离开，去旅行。</p>
-<p>   临行那天早上，当小王子最后一次浇花，准备为她盖上玻璃罩子时，他觉得自己想哭出来。</p>
-<p>“再见了！”他对花儿说。</p>
-<p>   花儿咳嗽起来，但并不是由于感冒。她终于开口说：“我真傻，我请求你的原谅。祝你幸福。”她居然没有一句责备他的话，这实在使他感到意外。他站在那里手足无措，玻璃罩举在半空。他不懂得这份脉脉的柔情。</p>
-<p>   “的确，我爱你。”花儿对他说，“但是你一点儿都没体会到，这实在是我的错。再说也没有用了。不过，你过去也和我一样的傻。希望你今后幸福。。。把罩子放到一边去吧，我用不着它了。”</p>
-<p>“要是风。。。”</p>
-<p>“我的感冒并没有那么厉害。。。晚间的凉风对我有好处。我是花儿呀。”</p>
-<p>“要是虫子野兽。。。”</p>
-<p>“我要是想结识蝴蝶，我就应当忍受得了两三只小毛虫在身上爬。据说，这很美妙。如果没有蝴蝶和毛虫，还有谁来看我呢？你么，你又远在天边。至于大动物，我并不怕，我有爪子。”</p>
-<p>   她天真地伸出她那四根刺，随后又说：“别这样磨磨蹭蹭啦，这挺叫人烦心！你既然决定走，那就快走吧！” </p>
-<p> 她是怕小王子看见她哭。这是一朵有傲气的花。。。 </p>
-<p>   有一天，小王子对我倾诉：“我当时什么也不懂！我应该根据她的行动，而不是根据她的话判断她。她对我散发芳香，她使我的生活充满阳光。我真不该离开她。我本应看得出她耍的那些小花招后面隐藏着的一片柔情。花儿是多么里外不一致！我当时年纪太小，不懂得爱她。”</p>
-<p>   小王子走着走着，这时候，一只狐狸出现了。</p>
-<p>“你好！”狐狸说。</p>
-<p>“你好！”小王子彬彬有礼地回答。但回头一看，什么也没有看见。</p>
-<p>“我就在这儿。”那声音说，“在苹果树下。”</p>
-<p>“你是谁？”小王子说，“你真漂亮。”</p>
-<p>“我是狐狸。”狐狸说。</p>
-<p>“来跟我玩玩吧。”小王子建议说，“我很不开心。。。”</p>
-<p>“我不能跟你玩，”狐狸说，“我还没经过驯养。”</p>
-<p>“啊，对不起！”小王子说。但是，想了一想后，他又说：“什么叫做驯养？”</p>
-<p>   狐狸说：“意思就是：建立一种关系。”</p>
-<p>“建立关系？”</p>
-<p>   “一点不错，”狐狸说，“在我看来，你只不过是一个小男孩，跟成千上万的男孩毫无两样。我不需要你，你也不需要我。对你来说我只不过是一只狐狸，跟成千上万的狐狸毫无两样。但是，你如果驯养了我，那么我们俩就彼此相互需要。对我来说，你是世界上独一无二的；我在你看来，也是世界上独一无二的。。。”</p>
-<p>   狐狸叹口气说：“世上没有十全十美的事，我的生活很单调枯燥，但是，如果你驯养了我，我的生活就会充满阳光。我会听得出一种与众不同的脚步声。别的脚步声会使我往洞里钻，你的脚步声却像音乐一般，把我从洞里召唤出来。还有，你看！那边的麦田，你看见了吗？我不吃面包，麦子对我来说，一点也没用。麦田不能引起我什么联想，这真使人扫兴！但是，你有金色的头发。一旦你驯养了我，那就会十分美妙！麦子，黄澄澄，会使我联想到你，而且我甚至会喜欢风吹麦浪的沙沙声。。。”</p>
-<p>   狐狸没说下去，盯着小王子看了好久。</p>
-<p>“请你。。。驯养我吧！”他说。</p>
-<p>   “我是很愿意的，”小王子回答道，“可是我的时间不多。我还要认识一些新朋友，了解许许多多的事。”</p>
-<p>   “人们只能了解自己所驯养的东西，”狐狸说，“人们不会有时间去了解任何东西。他们想要什么东西，都往商店去买现成的。可是，世界上没有可以购买朋友的商店，所以人也就得不到朋友。你要朋友，就请驯养我吧！”</p>
-<p>“要驯养，该怎样做呢？”小王子说。</p>
-<p>   “必须非常耐心。”狐狸回答道，“首先，你离我远一点，像这样，坐在草地上。我用眼梢瞅着你，你一句话也别说。话语往往是误会的根源。不过，每天你坐得更靠近我一些。。。”</p>
-<p>   第二天，小王子又来了。</p>
-<p>   “最好还是在同一时间来，”狐狸说，“比如说，你在下午四点钟来，一到三点钟我就开始感到幸福了。时间越接近，我就越感到幸福。到了四点钟，我就会坐立不安，焦虑重重；我就会发现幸福的代价。可是，你如果想什么时间来就什么时间来，我就不知道什么时候准备好我的心。。。应当有一定的常规。”</p>
-<p>“常规是什么？”小王子问道。</p>
-<p>   “这也是被人差不多忘得一干二净的事，”狐狸说，“这就是使某一天与其他日子不同，使某一时刻与其他时刻不同。比如说，猎人也有一种常规。他们每星期四都和乡村里的姑娘跳舞。星期四就成为我开心的日子！我甚至可以一直逛到葡萄园。要是猎人什么时候都去跳舞，这一天和其他日子没什么不同，那我就终年没放假的日子了。”</p>
-<p>   于是小王子驯养了狐狸。当小王子快要离开时，狐狸说：“哎！。。。我想哭。”</p>
-<p>   “这是你自己的错，我从未想过要使你难受，但是，你却要我驯养你。。。”小王子说。</p>
-<p>“是这样！”狐狸说。</p>
-<p>“可是你现在又要哭！”小王子说。</p>
-<p>“当然啦。”狐狸说。</p>
-<p>“这样对你有什么好处。”</p>
-<p>“对我有好处。”狐狸说，“有了麦子的颜色。”</p>
-<p>   小王子走了。路上他碰见满园的玫瑰花儿。</p>
-<p>   满园的玫瑰花儿向小王子用力点着头微笑，小王子说：“你们很美，但你们是空虚的。没有人会为你们去死。当然，我的那朵玫瑰，一个普通的过路人会认为她们和你们是一样的。可是，她单独一朵比你们全体更可贵，因为我给她浇过水，因为我为她盖过罩子，因为我给她用屏风挡风，因为我倾听过她的怨艾，她的夸口，有时甚至倾听她的沉默。因为她是我的玫瑰花。”</p>
-<p>   小王子又回到狐狸身旁：“再见了。。。狐狸”</p>
-<p>“再见了。”狐狸说，“本质的东西，眼睛是看不到的，只有用心灵看。”</p>
-<p>“本质的东西，眼睛是看不到的，只有用心灵看。”小王子重复这句话，以免忘记。</p>
-<p>“正是因为我对我的玫瑰，花费了时间，才使花儿变得那么重要。”小王子重复这句话，以免忘记。</p>
-<p>“这个真理，已经被人忘记了，”狐狸说，“但是你千万不要忘记。对你驯养的东西，你要永远负责。你必须对你的花儿负责。。。”</p>
-<p>“我要对我的花儿负责。”小王子又重复跟着说，为了牢牢记住。</p>
-<h4 id="摘自《小王子》"><a href="#摘自《小王子》" class="headerlink" title="摘自《小王子》"></a>摘自《小王子》</h4>]]></content>
+    <title>OJ刷题-while(scanf(&quot;%d&quot;,&amp;n)!=EOF)</title>
+    <url>/2019/03/21/oj/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“测试输入包含若干测试实例。当N为0时，输入结束，该实例不被处理。”这句话 是最早我对OJ的印象 以前也没见过这种输入要求， 做第一道题的时候就卡住了 上网看别人的代码 都有一句 while(scanf(“%d”,&amp;n)!=EOF)”scanf 函数还能放while里啊… EOF是什么玩意儿呢…”</p>
+<blockquote>
+<h2 id="什么是OJ？"><a href="#什么是OJ？" class="headerlink" title="什么是OJ？"></a>什么是OJ？</h2></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先先介绍下什么是OJ吧(知道的同学可以跳过此部分)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Online Judge系统（简称OJ）是一个在线的判题系统。用户可以在线提交程序多种程序（如C、C++）源代码，系统对源代码进行编译和执行，并通过预先设计的测试数据来检验程序源代码的正确性。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一个用户提交的程序在Online Judge系统下执行时将受到比较严格的限制，包括运行时间限制，内存使用限制和安全限制等。用户程序执行的结果将被Online Judge系统捕捉并保存，然后再转交给一个裁判程序。该裁判程序或者比较用户程序的输出数据和标准输出样例的差别，或者检验用户程序的输出数据是否满足一定的逻辑条件。最后系统返回给用户一个状态：通过（Accepted,AC）、答案错误(Wrong Answer,WA)、超时(Time Limit Exceed,TLE)、超过输出限制（Output Limit Exceed,OLE)、超内存（Memory Limit Exceed,MLE）、运行时错误（Runtime Error,RE）、格式错误（Presentation Error,PE)、或是无法编译（Compile Error,CE），并返回程序使用的内存、运行时间等信息。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Online Judge系统最初使用于ACM-ICPC国际大学生程序设计竞赛和OI信息学奥林匹克竞赛中的自动判题和排名。现广泛应用于世界各地高校学生程序设计的训练、参赛队员的训练和选拔、各种程序设计竞赛以及数据结构和算法的学习和作业的自动提交判断中。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;知名的OJ有：RQNOJ,URAL,SPOJ,vijos,tyvj,USACO,sgu,pku(poj),zju(toj),tju,uva，HDU(HDOJ)等。</p>
+<blockquote>
+<h2 id="EOF是什么东东？"><a href="#EOF是什么东东？" class="headerlink" title="EOF是什么东东？"></a>EOF是什么东东？</h2></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EOF 是一个宏 ，一般定义为-1。<br>1.EOF用来判断文件结束的标记(end of file) 用在文件操作中,可以查下msdn 看它的定义:EOF is returned by       an I/O routine when the end-of-file (or in some cases, an error) is encountered<br>2.EOF表示输入流的结束。<br>3.在发送端套接字关闭后，接收端读套接字的read函数也会返回EOF.</p>
+<blockquote>
+<h2 id="while-scanf-EOF-流程图"><a href="#while-scanf-EOF-流程图" class="headerlink" title="while(scanf()!=EOF)流程图"></a>while(scanf()!=EOF)流程图</h2></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们学过的有三种循环：for，while，do-while。但while (scanf(“%d”, &amp;n) != EOF)不像以上的任何一种，接下来看一下它的流程图：<br><img src="/2019/03/21/oj/while-1/20140502221756328.png" alt="流程图"></p>
+<blockquote>
+<h2 id="OnlineJuge的评判时，该语句的作用"><a href="#OnlineJuge的评判时，该语句的作用" class="headerlink" title="OnlineJuge的评判时，该语句的作用"></a>OnlineJuge的评判时，该语句的作用</h2></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OJ评判的原理应该是这样的：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入：通过管道命令，将一个包含若干测试用例的文件作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为【标准输入流】，所以需要while(scanf() != EOF)来判断测试文件是否读完。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输出：通过管道命令，将【标准输出流】，输出到一个文件中。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评判：将程序的【输出文件】与【正确答案文件】进行比对：如果一样，则返回程序正确提示；否则返回程序错误的提示。</p>
+<blockquote>
+<h2 id="使用原理"><a href="#使用原理" class="headerlink" title="使用原理"></a>使用原理</h2></blockquote>
+<p>有人说 EOF等于-1 其实就是scanf函数的返回值 不等于-1时 继续进行循环</p>
+<p>有人说 EOF是处理到文件结束 不用EOF也可以</p>
+<p>……….</p>
+<p>很多天后终于把这个弄明白了</p>
+<p>scanf的返回值由后面的参数决定</p>
+<p>scanf(“%d%d”, &amp;a, &amp;b);</p>
+<p>如果a和b都被成功读入，那么scanf的返回值就是2</p>
+<p>如果只有a被成功读入，返回值为1</p>
+<p>如果a和b都未被成功读入，返回值为0</p>
+<p>如果遇到错误或遇到end of file，返回值为EOF，且返回值为int型.</p>
+<blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上是我个人所述，若有什么不对的地方或者有补充的地方，还希望各位指点指点，大家可以一起学习，一起进步！</p>
+]]></content>
       <categories>
-        <category>生活</category>
+        <category>OJ</category>
       </categories>
       <tags>
-        <tag>生活</tag>
+        <tag>OJ</tag>
       </tags>
   </entry>
   <entry>
@@ -797,6 +537,399 @@ targets <span class="token operator">=</span> soup<span class="token punctuation
       <tags>
         <tag>python</tag>
         <tag>离散</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python判断离散数学的合式公式</title>
+    <url>/2019/03/17/python-pan-duan-chi-san-shu-xue-de-he-shi-gong-shi/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你没有听错，用python程序来解决离散数学的逻辑推理问题，我当我第一次听老师说的时候也很吃惊（再说上学期的Python学的也不咋地…..😩)，但经老师讲解后才知道，使用python解题不仅效率高，而且准确性也很强的，所以还是有必要学习以下的。</p>
+<h2 id="判断是否为合式公式"><a href="#判断是否为合式公式" class="headerlink" title="判断是否为合式公式"></a>判断是否为合式公式</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一个题目就是判断一个公式是否为合式公式，这也是最基础的，因为只有当在输入的合式公式正确的情况下，才能进一步的运算解题，所以先讲解一下怎么判断合式公式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先要知道<strong>什么是合式公式</strong>？<br>(1)原子命题常项或变项是合式公式；<br>(2)如果A是合式公式，则（-A）也是合式公式（- 表示非）；<br>(3)如果A，B是合式公式，则（A<em>B）、（A+B）、（A &lt; B）、（ A ~ B）也是合式公式；(此处 </em> 合取 + 析取 &lt; 代表条件 ~ 代表双条件)<br>(4)只有有限次地应用(1)～(3)所包含的命题变元，联结词和括号的符号串才是合式公式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>个人思路</strong>：<br>输入字符串，扫描字符串，把所含的各关联词分区出来，在判断每个关联词使用是否正确<br>比如不合规则的情况：<br>(1) 关联词所处位置不对<br>(2) 关联词的连续使用<br>(3) 括号不匹配<br>(4) ……..<br>程序中可能会有bug，希望大佬们多多指教</p>
+<h2 id="这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。"><a href="#这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。" class="headerlink" title="这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。"></a>这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。</h2><h4 id="废话不多说，直接上代码😎"><a href="#废话不多说，直接上代码😎" class="headerlink" title="废话不多说，直接上代码😎"></a>废话不多说，直接上代码😎</h4><pre><code>import re
+print(&quot;定义‘!’为否定联结词&quot;)
+print(&quot;定义‘&amp;’为合取联结词&quot;)
+print(&quot;定义‘-’为析取联结词&quot;)
+print(&quot;定义‘&gt;’为蕴含联结词&quot;)
+print(&quot;定义‘~’为等价联结词&quot;)
+print(&quot;如果公式错误，会指出哪里错误；如果公式正确，则什么也不输出&quot;)
+S =input(&quot;请输入需要判断的公式：&quot;)
+T = list(S)
+if S[0] in [&#39;&amp;&#39;,&#39;-&#39;,&#39;)&#39;,&#39;~&#39;,&#39;&gt;&#39;] :
+    print(&quot;不是合式公式&quot;)
+a ,b,c,d,f =&quot;!&quot; , &quot;&amp;&quot; ,&quot;-&quot; , &quot;&gt;&quot; , &quot;~&quot;
+if a in T:
+        Q = [m.start() for m in re.finditer(a, S)]
+        for i in Q :
+            if S[-1] == &#39;!&#39; :
+                print (&quot;‘!’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[i+1] in [&#39;&amp;&#39;,&#39;!&#39;,&#39;-&#39;,&#39;)&#39;,&#39;~&#39;,&#39;&gt;&#39;]:
+                print(&quot;‘!’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[i-1] in [&#39;!&#39;]:
+                print(&quot;‘!’联结词使用错误，不是合式公式！&quot;)
+                break
+if b in T:
+        W = [m.start() for m in re.finditer(b, S)]
+        for y in W :
+            if S[-1] == &#39;&amp;&#39; :
+                print (&quot;‘&amp;’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[y+1] in [&#39;-&#39;,&#39;)&#39;,&#39;~&#39;,&#39;&gt;&#39;,&#39;&amp;&#39;] :
+                print(&quot;‘&amp;’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[y-1] in [&#39;-&#39;,&#39;(&#39;,&#39;~&#39;,&#39;&gt;&#39;,&#39;&amp;&#39;] :
+                print(&quot;‘&amp;’联结词使用错误，不是合式公式&quot;)
+                break
+if c in T:
+        E = [m.start() for m in re.finditer(c, S)]
+        for h in E :
+            if S[-1] == &#39;-&#39; :
+                print(&quot;‘-’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[h+1] in (&#39;)&#39;,&#39;&gt;&#39;,&#39;~&#39;,&#39;-&#39;) :
+                print(&quot;‘-’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[h-1] in (&#39;&amp;&#39;,&#39;-&#39;,&#39;&gt;&#39;,&#39;~&#39;) :
+                print(&quot;‘-’联结词使用错误，不是合式公式&quot;)
+                break
+if d in T:
+        R = [m.start() for m in re.finditer(d, S)]
+        for k in R :
+            if S[-1] == &#39;&gt;&#39; :
+                print (&quot;‘&gt;’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[k+1] in [&#39;)&#39;,&#39;&gt;&#39;] :
+                print(&quot;‘&gt;’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[k-1] in  [&#39;(&#39;,&#39;&gt;&#39;] :
+                print(&quot;‘&gt;’联结词使用错误，不是合式公式&quot;)
+                break
+if f in T:
+        O = [m.start() for m in re.finditer(f, S)]
+        for v in O :
+            if S[-1] == &#39;~&#39; :
+                print(&quot;‘~’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[v+1] in [&#39;)&#39;,&#39;~&#39;] :
+                print(&quot;‘~’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[v-1] in [&#39;(&#39;,&#39;~&#39;] :
+                print(&quot;‘~’联结词使用错误，不是合式公式&quot;)
+                break
+if &#39;(&#39; or &#39;)&#39; in S :
+        e = 0
+        klb =[]
+        for i in S :
+            if i == &#39;(&#39;:
+                klb.append(i)
+            if i == &#39;)&#39;:
+                if len(klb)==0:
+                    e=1
+                    break
+                else :
+                    klb.pop()
+        if len(klb)!=0 :
+            e = 1
+        if e==1:
+            print(&quot;括号使用错误，不是合式公式&quot;)
+
+
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我也是小白，程序哪里可能有些不足之处，请多多指教，如果你有更好的解题方法或思路，可以联系我，大家可以一起学习，一起进步的！😊</p>
+]]></content>
+      <categories>
+        <category>python</category>
+        <category>离散</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>离散</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python动态规划解决矩阵连乘</title>
+    <url>/2020/03/05/python-dong-tai-gui-hua-jie-jue-ju-zhen-lian-cheng/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划算法与分治法类似，其基本思想也就是将待求解的问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解，简单概括为自顶向下分解，自底向上求解。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与分治法不同的是，适合于用动态规划法求解的问题，经分解得到的子问题往往不是相互独立的，换句话说，就是前面解决过的子问题，在后面的子问题中又碰到了前面解决过的子问题，子问题之间是有联系的。如果用分治法，有些同样的子问题会被重复计算几次，这样就很浪费时间了。所以动态规划是为了解决分治法的弊端而提出的，动态规划的基本思想就是，用一个表来记录所有已经解决过的子问题的答案，不管该子问题在以后是否会被用到，只要它被计算过，就将其结果填入表中，以后碰到同样的子问题，就可以从表中直接调用该子问题的答案，而不需要再计算一次。具体的动态规划的算法多种多样，但他们都具有相同的填表式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划的适用场合，一般适用于解最优化问题，例如矩阵连乘问题、最长公共子序列、背包问题等等。</p>
+<h2 id="矩阵连乘问题描述"><a href="#矩阵连乘问题描述" class="headerlink" title="矩阵连乘问题描述"></a>矩阵连乘问题描述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;给定n个矩阵：A1,A2,…,An，其中Ai与Ai+1是可乘的，i=1，2…，n-1。确定计算矩阵连乘积的计算次序，使得依此次序计算矩阵连乘积需要的数乘次数最少。输入数据为矩阵个数和每个矩阵规模，输出结果为计算矩阵连乘积的计算次序和最少数乘次数。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若A是一个p × q的矩阵，B是一个q × r的矩阵，则其乘积C=AB是一个p × r的矩阵。数乘次数是p × q × r.</p>
+<h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>A(3 × 5)A(5 × 7)A(7 × 2)的连乘次数和括号划分有关系吗？</p>
+<blockquote>
+<p>(A(3 × 5)A(5 × 7))A(7 × 2)             相乘次数： (3 × 5 <em> 7)+(3 × 7 × 2) = 147<br>A(3 × 5)(A(5 × 7)A(7 × 2))             相乘次数： (5 × 7 </em> 2)+(3 × 5 × 2) = 100</p>
+</blockquote>
+<p>答案很明显是有关系的。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><blockquote>
+<p>求 A1A2A3…An 定义   AiAi+1…Ak…Aj-1Aj   子列， 可看成是Ai…Ak，Ak…Aj<br>确定k的位置，然后按照递归的思想来逐步解决 求得结果后，使i=1，j=n原问题即可求解。</p>
+</blockquote>
+<p>建立递归关系（状态转移方程）</p>
+<blockquote>
+<p>设 Ai…Aj相乘 的最小数乘次数存储于m[i][j]中。<br>S[i][j]存储最佳断开位置。<br>A1：P0 × P1<br>A2：P1 × P2<br>A3：P2 × P3<br>…<br>Ai：Pi-1 × Pi<br>Ai+1：Pi × Pi+1<br> …<br> An：Pn-1 × Pn<br> P0 × P1 × P2 … × Pn——n+1个</p>
+</blockquote>
+<p>当i=j时，m[i][j] = 0;<br>当i&lt;j时，m[i][j] = m[i][k]+m[k+1][j]+Pi-1PkPj<br>k在i，j之间取值，取值范围为i&lt;=k&lt;j<br>有递推关系如下：<br><img src="https://img-blog.csdnimg.cn/20200305183034898.png" alt><br>动态规划的最优子结构性质是：</p>
+<blockquote>
+<p>问题的最优解包含了其子问题的最优解。<br>最优子结构性质是问题可用动态规划法求解的显著特征。<br>Ai…Ak，Ak+1…Aj的最优划分也包含在Ai…Aj的最优划分中</p>
+</blockquote>
+<p>在计算出最优值m[i][j]后，可递归地由s[i][j]构造出相应的最优解。</p>
+<h2 id="python代码实现"><a href="#python代码实现" class="headerlink" title="python代码实现"></a>python代码实现</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> random
+<span class="token keyword">from</span> pandas <span class="token keyword">import</span> <span class="token operator">*</span>
+
+input <span class="token operator">=</span> int<span class="token punctuation">(</span>input<span class="token punctuation">(</span><span class="token string">"输入矩阵数："</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+matrix <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">2</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">:</span>                         <span class="token comment" spellcheck="true">#生成矩阵</span>
+    <span class="token keyword">if</span> i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> random<span class="token punctuation">.</span>randrange<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+        matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> random<span class="token punctuation">.</span>randrange<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> matrix<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+        matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> random<span class="token punctuation">.</span>randrange<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+m <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> input <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">]</span>         <span class="token comment" spellcheck="true">#记录连乘次数</span>
+s <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> input <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">]</span>         <span class="token comment" spellcheck="true">#记录括号位置</span>
+<span class="token keyword">def</span> <span class="token function">MatrixMultiplication</span><span class="token punctuation">(</span>inp<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>inp<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">for</span> r <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> inp<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>inp<span class="token operator">-</span>r<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            j <span class="token operator">=</span> i <span class="token operator">+</span> r
+            m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> m<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">+</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> matrix<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+            s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token operator">+</span><span class="token number">1</span>
+            <span class="token keyword">for</span> k <span class="token keyword">in</span> range<span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> j<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                judge <span class="token operator">=</span> m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">+</span> m<span class="token punctuation">[</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">+</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> matrix<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> matrix<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+                <span class="token keyword">if</span> judge <span class="token operator">&lt;</span> m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                    m<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> judge
+                    s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> k<span class="token operator">+</span><span class="token number">1</span>
+<span class="token keyword">def</span> <span class="token function">printmatrix</span><span class="token punctuation">(</span>left<span class="token punctuation">,</span> right<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> left <span class="token operator">==</span> right<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token operator">+</span>str<span class="token punctuation">(</span>left<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"("</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
+        printmatrix<span class="token punctuation">(</span>left<span class="token punctuation">,</span> s<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        printmatrix<span class="token punctuation">(</span>s<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">,</span> right<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">")"</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
+MatrixMultiplication<span class="token punctuation">(</span>input<span class="token punctuation">)</span>
+dm <span class="token operator">=</span> DataFrame<span class="token punctuation">(</span>m<span class="token punctuation">,</span> index<span class="token operator">=</span>list<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> input<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> columns<span class="token operator">=</span>list<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> input<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+ds <span class="token operator">=</span> DataFrame<span class="token punctuation">(</span>s<span class="token punctuation">,</span> index<span class="token operator">=</span>list<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> input<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> columns<span class="token operator">=</span>list<span class="token punctuation">(</span>range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> input<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>matrix<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"数乘次数：\n"</span><span class="token punctuation">,</span> dm<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"括号位置：\n"</span><span class="token punctuation">,</span> ds<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"最终结果："</span><span class="token punctuation">)</span>
+printmatrix<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> input<span class="token number">-1</span><span class="token punctuation">)</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【小王子】“正因为你为你的玫瑰花费了时间，这才使你的玫瑰变得如此重要。”</title>
+    <url>/2020/03/18/xiao-wang-zi-zheng-yin-wei-ni-wei-ni-de-mei-gui-hua-fei-liao-shi-jian-zhe-cai-shi-ni-de-mei-gui-bian-de-ru-ci-chong-yao/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这是法国名著《小王子》中一个有名的寓言故事，这个童话，实在太有智慧灵性了。人与人之间，不也是一样道理吗？我不得不承认，我被触动了。</p>
+<h2 id="【小王子】"><a href="#【小王子】" class="headerlink" title="【小王子】"></a>【小王子】</h2><p> 有一天，小王子的星球上，不知从哪里来了一颗种子，后来忽然发了芽。小王子小心翼翼地监护着这株与众不同的嫩芽。小王子看到嫩芽长出一个巨大的花蕾，感到从中一定会产生奇迹。但是，这朵花儿却躲在她那绿茵茵的房间里，梳妆打扮没个完。一天清晨，正好当太阳升起的时候，她露面了。</p>
+<p>   她，精心做了那么许多的准备，却伸着懒腰打着呵欠说：“哎呀！我刚刚睡醒。。。请原谅。。。瞧我的头发还是乱蓬蓬的。。。”</p>
+<p>   小王子此时抑制不住自己那爱慕之情。</p>
+<p>“你真美！”</p>
+<p>“是么？你可知道，太阳是和我同时诞生的。。。”</p>
+<p>   小王子看得出，这花儿很不谦虚，不过，她确实楚楚动人。</p>
+<p>“我想，是该吃早点的时候了吧？”她随后又说，“请您记得我需要。。。”</p>
+<p>   小王子感到十分惭愧，于是去提了一壶清水来给她浇灌。</p>
+<p>   不久，她就以她的多疑的虚荣心来折磨小王子。例如，有一天，她谈起她身上长着的四根刺时，她对小王子说：“老虎么，让它们带着它们的利抓来吧！”</p>
+<p>“我的星球上根本没有老虎，”小王子反驳说，“而且老虎是不吃草的。”</p>
+<p>   花儿娇嗔地说：“我可不是草。”</p>
+<p>“请原谅！”</p>
+<p>“我不怕什么老虎，可是我受不了穿堂风，您没有屏风吗？”</p>
+<p>   小王子思忖着：“受不了穿堂风。。。这对一株植物来说，太不幸了。这朵花儿有点难弄…”</p>
+<p>   这时，她故意咳得更响，好使他良心受责备。</p>
+<p>   尽管小王子真心诚意爱这朵花儿，这样一来，他开始对她产生怀疑了。小王子对一些无关紧要的话，看得过分认真，结果使自己很苦恼。</p>
+<p>   小王子选择了离开，去旅行。</p>
+<p>   临行那天早上，当小王子最后一次浇花，准备为她盖上玻璃罩子时，他觉得自己想哭出来。</p>
+<p>“再见了！”他对花儿说。</p>
+<p>   花儿咳嗽起来，但并不是由于感冒。她终于开口说：“我真傻，我请求你的原谅。祝你幸福。”她居然没有一句责备他的话，这实在使他感到意外。他站在那里手足无措，玻璃罩举在半空。他不懂得这份脉脉的柔情。</p>
+<p>   “的确，我爱你。”花儿对他说，“但是你一点儿都没体会到，这实在是我的错。再说也没有用了。不过，你过去也和我一样的傻。希望你今后幸福。。。把罩子放到一边去吧，我用不着它了。”</p>
+<p>“要是风。。。”</p>
+<p>“我的感冒并没有那么厉害。。。晚间的凉风对我有好处。我是花儿呀。”</p>
+<p>“要是虫子野兽。。。”</p>
+<p>“我要是想结识蝴蝶，我就应当忍受得了两三只小毛虫在身上爬。据说，这很美妙。如果没有蝴蝶和毛虫，还有谁来看我呢？你么，你又远在天边。至于大动物，我并不怕，我有爪子。”</p>
+<p>   她天真地伸出她那四根刺，随后又说：“别这样磨磨蹭蹭啦，这挺叫人烦心！你既然决定走，那就快走吧！” </p>
+<p> 她是怕小王子看见她哭。这是一朵有傲气的花。。。 </p>
+<p>   有一天，小王子对我倾诉：“我当时什么也不懂！我应该根据她的行动，而不是根据她的话判断她。她对我散发芳香，她使我的生活充满阳光。我真不该离开她。我本应看得出她耍的那些小花招后面隐藏着的一片柔情。花儿是多么里外不一致！我当时年纪太小，不懂得爱她。”</p>
+<p>   小王子走着走着，这时候，一只狐狸出现了。</p>
+<p>“你好！”狐狸说。</p>
+<p>“你好！”小王子彬彬有礼地回答。但回头一看，什么也没有看见。</p>
+<p>“我就在这儿。”那声音说，“在苹果树下。”</p>
+<p>“你是谁？”小王子说，“你真漂亮。”</p>
+<p>“我是狐狸。”狐狸说。</p>
+<p>“来跟我玩玩吧。”小王子建议说，“我很不开心。。。”</p>
+<p>“我不能跟你玩，”狐狸说，“我还没经过驯养。”</p>
+<p>“啊，对不起！”小王子说。但是，想了一想后，他又说：“什么叫做驯养？”</p>
+<p>   狐狸说：“意思就是：建立一种关系。”</p>
+<p>“建立关系？”</p>
+<p>   “一点不错，”狐狸说，“在我看来，你只不过是一个小男孩，跟成千上万的男孩毫无两样。我不需要你，你也不需要我。对你来说我只不过是一只狐狸，跟成千上万的狐狸毫无两样。但是，你如果驯养了我，那么我们俩就彼此相互需要。对我来说，你是世界上独一无二的；我在你看来，也是世界上独一无二的。。。”</p>
+<p>   狐狸叹口气说：“世上没有十全十美的事，我的生活很单调枯燥，但是，如果你驯养了我，我的生活就会充满阳光。我会听得出一种与众不同的脚步声。别的脚步声会使我往洞里钻，你的脚步声却像音乐一般，把我从洞里召唤出来。还有，你看！那边的麦田，你看见了吗？我不吃面包，麦子对我来说，一点也没用。麦田不能引起我什么联想，这真使人扫兴！但是，你有金色的头发。一旦你驯养了我，那就会十分美妙！麦子，黄澄澄，会使我联想到你，而且我甚至会喜欢风吹麦浪的沙沙声。。。”</p>
+<p>   狐狸没说下去，盯着小王子看了好久。</p>
+<p>“请你。。。驯养我吧！”他说。</p>
+<p>   “我是很愿意的，”小王子回答道，“可是我的时间不多。我还要认识一些新朋友，了解许许多多的事。”</p>
+<p>   “人们只能了解自己所驯养的东西，”狐狸说，“人们不会有时间去了解任何东西。他们想要什么东西，都往商店去买现成的。可是，世界上没有可以购买朋友的商店，所以人也就得不到朋友。你要朋友，就请驯养我吧！”</p>
+<p>“要驯养，该怎样做呢？”小王子说。</p>
+<p>   “必须非常耐心。”狐狸回答道，“首先，你离我远一点，像这样，坐在草地上。我用眼梢瞅着你，你一句话也别说。话语往往是误会的根源。不过，每天你坐得更靠近我一些。。。”</p>
+<p>   第二天，小王子又来了。</p>
+<p>   “最好还是在同一时间来，”狐狸说，“比如说，你在下午四点钟来，一到三点钟我就开始感到幸福了。时间越接近，我就越感到幸福。到了四点钟，我就会坐立不安，焦虑重重；我就会发现幸福的代价。可是，你如果想什么时间来就什么时间来，我就不知道什么时候准备好我的心。。。应当有一定的常规。”</p>
+<p>“常规是什么？”小王子问道。</p>
+<p>   “这也是被人差不多忘得一干二净的事，”狐狸说，“这就是使某一天与其他日子不同，使某一时刻与其他时刻不同。比如说，猎人也有一种常规。他们每星期四都和乡村里的姑娘跳舞。星期四就成为我开心的日子！我甚至可以一直逛到葡萄园。要是猎人什么时候都去跳舞，这一天和其他日子没什么不同，那我就终年没放假的日子了。”</p>
+<p>   于是小王子驯养了狐狸。当小王子快要离开时，狐狸说：“哎！。。。我想哭。”</p>
+<p>   “这是你自己的错，我从未想过要使你难受，但是，你却要我驯养你。。。”小王子说。</p>
+<p>“是这样！”狐狸说。</p>
+<p>“可是你现在又要哭！”小王子说。</p>
+<p>“当然啦。”狐狸说。</p>
+<p>“这样对你有什么好处。”</p>
+<p>“对我有好处。”狐狸说，“有了麦子的颜色。”</p>
+<p>   小王子走了。路上他碰见满园的玫瑰花儿。</p>
+<p>   满园的玫瑰花儿向小王子用力点着头微笑，小王子说：“你们很美，但你们是空虚的。没有人会为你们去死。当然，我的那朵玫瑰，一个普通的过路人会认为她们和你们是一样的。可是，她单独一朵比你们全体更可贵，因为我给她浇过水，因为我为她盖过罩子，因为我给她用屏风挡风，因为我倾听过她的怨艾，她的夸口，有时甚至倾听她的沉默。因为她是我的玫瑰花。”</p>
+<p>   小王子又回到狐狸身旁：“再见了。。。狐狸”</p>
+<p>“再见了。”狐狸说，“本质的东西，眼睛是看不到的，只有用心灵看。”</p>
+<p>“本质的东西，眼睛是看不到的，只有用心灵看。”小王子重复这句话，以免忘记。</p>
+<p>“正是因为我对我的玫瑰，花费了时间，才使花儿变得那么重要。”小王子重复这句话，以免忘记。</p>
+<p>“这个真理，已经被人忘记了，”狐狸说，“但是你千万不要忘记。对你驯养的东西，你要永远负责。你必须对你的花儿负责。。。”</p>
+<p>“我要对我的花儿负责。”小王子又重复跟着说，为了牢牢记住。</p>
+<h4 id="摘自《小王子》"><a href="#摘自《小王子》" class="headerlink" title="摘自《小王子》"></a>摘自《小王子》</h4>]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于协同过滤（CF）算法的推荐系统</title>
+    <url>/2019/07/28/ji-yu-xie-tong-guo-lu-cf-suan-fa-de-tui-jian-xi-tong/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着计算机领域技术的高速发展，电子商务时代的普及，个性化的推荐系统深入生活应用的各个方面。个性化推荐算法是推荐系统中最核心的技术，在很大程度上决定了电子商务推荐系统性能的优劣。而协同过滤推荐是个性化推荐系统应用最为广泛的技术，协同过滤推荐主要分为基于用户的协同过滤推荐、基于项目的协同过滤推荐和基于模型的协同过滤推荐。</p>
+<h1 id="一、协同过滤算法描述"><a href="#一、协同过滤算法描述" class="headerlink" title="一、协同过滤算法描述"></a>一、协同过滤算法描述</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大数据时代产生了海量的数据，里面蕴含了丰富的价值。但是，大数据体量之大、种类之繁以及产生速率之快，海量的数据并不都是有价值的，用户从海量的数据中提取有用的、针对性的信息需要花费很大的时间成本。比如，当你面对如此多的电影列表，你想找到一部最符合自己兴趣的电影，因为电影数量之多，你不可能把所有的电影简介都看一遍。那么怎么解决这个问题呢？电影平台搜集你过去看过的全部电影，分析了解你对什么类型电影感兴趣，然后针对性的把你感兴趣的电影主动的罗列给你，你不用花费太多的精力便可快速找到满足自己需求的电影。推荐算法便是为解决这类实际需求而诞生了。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 推荐系统应用数据分析技术，找出用户最可能喜欢的东西推荐给用户，现在很多电子商务网站都有这个应用。目前用的比较多、比较成熟的推荐算法是协同过滤（Collaborative Filtering，简称CF）推荐算法，CF的基本思想是根据用户之前的喜好以及其他兴趣相近的用户的选择来给用户推荐物品。<br><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2hpLmNzZG4ubmV0L2F0dGFjaG1lbnQvMjAxMjAzLzE2LzBfMTMzMTkwOTY5MFhVcEkuZ2lm" alt><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如图所示，在CF中，用m×n的矩阵表示用户对物品的喜好情况，一般用打分表示用户对物品的喜好程度，分数越高表示越喜欢这个物品，0表示没有买过该物品。图中行表示一个用户，列表示一个物品，Uij表示用户i对物品j的打分情况。CF分为两个过程，一个为预测过程，另一个为推荐过程。预测过程是预测用户对没有购买过的物品的可能打分值，推荐是根据预测阶段的结果推荐用户最可能喜欢的一个或Top-N个物品。</p>
+<h1 id="二、协同过滤的实现"><a href="#二、协同过滤的实现" class="headerlink" title="二、协同过滤的实现"></a>二、协同过滤的实现</h1><p>要实现协同过滤的推荐算法，要进行以下三个步骤：</p>
+<ul>
+<li>收集数据</li>
+<li>找到相似用户或物品</li>
+<li>进行推荐</li>
+</ul>
+<h2 id="1、收集数据"><a href="#1、收集数据" class="headerlink" title="1、收集数据"></a>1、收集数据</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里的数据指的都是用户的历史行为数据，比如用户的购买历史，关注，收藏行为，或者发表了某些评论，给某个物品打了多少分等等，这些都可以用来作为数据供推荐算法使用，服务于推荐算法。需要特别指出的在于，不同的数据准确性不同，在使用时需要考虑到噪音所带来的影响。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要从用户的行为和偏好中发现规律，并基于此给予推荐，如何收集用户的偏好信息成为系统推荐效果最基础的决定因素。用户有很多方式向系统提供自己的偏好信息，而且不同的应用也可能大不相同，如下图：<br><img src="https://img-blog.csdnimg.cn/20190813212211411.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="2、找到相似用户或物品"><a href="#2、找到相似用户或物品" class="headerlink" title="2、找到相似用户或物品"></a>2、找到相似用户或物品</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这一步其实就是计算用户间以及物品间的相似度。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关于相似度的计算，现有的几种基本方法都是基于向量（Vector）的，其实也就是计算两个向量的距离，距离越近相似度越大。在推荐的场景中，在用户 - 物品偏好的二维矩阵中，我们可以将一个用户对所有物品的偏好作为一个向量来计算用户之间的相似度，或者将所有用户对某个物品的偏好作为一个向量来计算物品之间的相似度。下面我们详细介绍几种常用的相似度计算方法：<br><img src="https://img-blog.csdnimg.cn/20190813212300649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<p>下一步是作出预测。你可以运用下面的公式做一个预测：<br><img src="https://img-blog.csdn.net/20180408164703642" alt></p>
+<h2 id="3、进行推荐"><a href="#3、进行推荐" class="headerlink" title="3、进行推荐"></a>3、进行推荐</h2><h3 id="3-1、基于用户的协同过滤推荐-User-based-Collaborative-Filtering-Recommendation"><a href="#3-1、基于用户的协同过滤推荐-User-based-Collaborative-Filtering-Recommendation" class="headerlink" title="3.1、基于用户的协同过滤推荐(User-based Collaborative Filtering Recommendation)"></a>3.1、基于用户的协同过滤推荐(User-based Collaborative Filtering Recommendation)</h3><p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基于用户的协同过滤推荐算法先使用统计技术寻找与目标用户有相同喜好的邻居，然后根据目标用户的邻居的喜好产生向目标用户的推荐。基本原理就是利用用户访问行为的相似性来互相推荐用户可能感兴趣的资源，如图所示：</p>
+<p><img src="https://img-blog.csdn.net/20161020214409502" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图示意出基于用户的协同过滤推荐机制的基本原理，假设用户 A 喜欢物品 A、物品 C，用户 B 喜欢物品 B，用户 C 喜欢物品 A 、物品 C 和物品 D；从这些用户的历史喜好信息中，我们可以发现用户 A 和用户 C 的口味和偏好是比较类似的，同时用户 C 还喜欢物品 D，那么我们可以推断用户 A 可能也喜欢物品 D，因此可以将物品 D 推荐给用户 A。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基于用户的协同过滤推荐机制和基于人口统计学的推荐机制都是计算用户的相似度，并基于“邻居”用户群计算推荐，但它们所不同的是如何计算用户的相似度，基于人口统计学的机制只考虑用户本身的特征，而基于用户的协同过滤机制可是在用户的历史偏好的数据上计算用户的相似度，它的基本假设是，喜欢类似物品的用户可能有相同或者相似的口味和偏好。</p>
+<h3 id="3-2、基于项目的协同过滤推荐-Item-based-Collaborative-Filtering-Recommendation"><a href="#3-2、基于项目的协同过滤推荐-Item-based-Collaborative-Filtering-Recommendation" class="headerlink" title="3.2、基于项目的协同过滤推荐(Item-based Collaborative Filtering Recommendation)"></a>3.2、基于项目的协同过滤推荐(Item-based Collaborative Filtering Recommendation)</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据所有用户对物品或者信息的评价，发现物品和物品之间的相似度，然后根据用户的历史偏好信息将类似的物品推荐给该用户，如图所示：<br><img src="https://img-blog.csdn.net/20160821160630777" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图表明基于项目的协同过滤推荐的基本原理，用户A喜欢物品A和物品C，用户B喜欢物品A、物品B和物品C，用户C喜欢物品A，从这些用户的历史喜好中可以认为物品A与物品C比较类似，喜欢物品A的都喜欢物品C，基于这个判断用户C可能也喜欢物品C，所以推荐系统将物品C推荐给用户C。<br>       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 基于项目的协同过滤推荐和基于内容的协同过滤推荐都是基于物品相似度预测推荐，只是相似度度量的方法不一样，前者是从用户历史的偏好推断，而后者是基于物品本身的属性特征信息。</p>
+<h3 id="3-3、UserCF和ItemCF的区别"><a href="#3-3、UserCF和ItemCF的区别" class="headerlink" title="3.3、UserCF和ItemCF的区别"></a>3.3、UserCF和ItemCF的区别</h3><p><img src="https://img-blog.csdn.net/20170107105218959" alt></p>
+<h1 id="三、算法实例"><a href="#三、算法实例" class="headerlink" title="三、算法实例"></a>三、算法实例</h1><p>以ItemCF为例子具体介绍下整个算法流程。<br><strong>算法流程：</strong></p>
+<ol>
+<li>构建用户–&gt;物品的倒排；</li>
+<li>构建物品与物品的同现矩阵；</li>
+<li>计算物品之间的相似度，即计算相似矩阵；</li>
+<li>根据用户的历史记录，给用户推荐物品；</li>
+</ol>
+<h2 id="算法流程1"><a href="#算法流程1" class="headerlink" title="算法流程1"></a>算法流程1</h2><p>构建用户–&gt;物品的倒排<br>如下表，行表示用户，列表示物品，1表示用户喜欢该物品<br><img src="https://img-blog.csdnimg.cn/20190814085502109.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<pre><code>例如python构建的数据格式如下
+{
+&#39;A&#39;: {&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;}, 
+&#39;B&#39;: {&#39;c&#39;: &#39;1&#39;, &#39;b&#39;: &#39;1&#39;, &#39;e&#39;: &#39;1&#39;}, 
+&#39;C&#39;: {&#39;c&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;}, 
+&#39;D&#39;: {&#39;c&#39;: &#39;1&#39;, &#39;b&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;},
+&#39;E&#39;: {&#39;a&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;}
+}
+</code></pre><h2 id="算法流程2"><a href="#算法流程2" class="headerlink" title="算法流程2"></a>算法流程2</h2><p>构建物品与物品的同现矩阵</p>
+<p>共现矩阵C表示同时喜欢两个物品的用户数，是根据用户物品倒排表计算出来的。如根据上面的用户物品倒排表可以计算出如下的共现矩阵C：<br><img src="https://img-blog.csdnimg.cn/20190814085654185.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="算法流程3"><a href="#算法流程3" class="headerlink" title="算法流程3"></a>算法流程3</h2><p>计算物品之间的相似度，即计算相似矩阵</p>
+<p>其中两个物品之间的相似度如何计算？<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设|N(i)|表示喜欢物品i的用户数，|N(i)⋂N(j)|表示同时喜欢物品i，j的用户数，则物品i与物品j的相似度为： </p>
+<p><img src="https://img-blog.csdnimg.cn/20190814090106195.png" alt></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1)式有一个问题，当物品j是一个很热门的商品时，人人都喜欢，那么wijwij就会很接近于1，即(1)式会让很多物品都和热门商品有一个很大的相似度，所以可以改进一下公式：</p>
+<p><img src="https://img-blog.csdnimg.cn/2019081409030146.png" alt></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;算法流程2中的共现矩阵C其实就是式(2)的分子，矩阵N（用于计算分母）表示喜欢某物品的用户数（是总的用户数），则(2)式中的分母便很容易求解出来了。</p>
+<p>矩阵N如下所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190814090318574.png" alt></p>
+<p>利用式（2）便能计算物品之间的余弦相似矩阵如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/2019081409034757.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="算法流程4"><a href="#算法流程4" class="headerlink" title="算法流程4"></a>算法流程4</h2><p>根据用户的历史记录，给用户推荐物品；</p>
+<p>最终推荐的是什么物品，是由预测兴趣度决定的。</p>
+<p><strong>物品j预测兴趣度=用户喜欢的物品i的兴趣度×物品i和物品j的相似度</strong></p>
+<p>例如：A用户喜欢a，b，d ，兴趣度分别为1,1,1</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;推荐c的预测兴趣度=1X0.67+1X0.58=1.25<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;推荐e的预测兴趣度=1X0.58=0.58</p>
+<h1 id="四、python实现案例"><a href="#四、python实现案例" class="headerlink" title="四、python实现案例"></a>四、python实现案例</h1><pre><code>from math import sqrt
+import operator
+
+#1.构建用户--&gt;物品的倒排
+def loadData(files):
+    data ={}
+    for line in files:
+        user,score,item=line.split(&quot;,&quot;)  #按&quot;,&quot;将每组数据单独分开,并将每组的数据赋予对应变量
+        data.setdefault(user,{})
+        data[user][item]=score
+    print (&quot;----1.用户：物品的倒排----&quot;)
+    print (data)
+    return data
+
+#2.计算
+# 2.1 构造物品--&gt;物品的共现矩阵
+# 2.2 计算物品与物品的相似矩阵
+def similarity(data):
+    # 2.1 构造物品：物品的共现矩阵
+    N={};#喜欢物品i的总人数
+    C={};#喜欢物品i也喜欢物品j的人数
+    for user,item in data.items():
+        for i,score in item.items():
+            N.setdefault(i,0)
+            N[i]+=1
+            C.setdefault(i,{})
+            for j,scores in item.items():
+                if j not in i:
+                    C[i].setdefault(j,0)
+                    C[i][j]+=1
+
+    print (&quot;---2.构造的共现矩阵---&quot;)
+    print (&#39;N:&#39;,N)
+    print (&#39;C:&#39;,C)
+
+    #2.2 计算物品与物品的相似矩阵
+    W={};
+    for i,item in C.items():
+        W.setdefault(i,{})
+        for j,item2 in item.items():
+            W[i].setdefault(j,0)
+            W[i][j]=C[i][j]/sqrt(N[i]*N[j])
+    print (&quot;---3.构造的相似矩阵---&quot;)
+    print (W)
+    return W
+
+#3.根据用户的历史记录，给用户推荐物品
+def recommandList(data,W,user,k=3,N=10):
+    rank={}
+    for i,score in data[user].items():#获得用户user历史记录，如A用户的历史记录为{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;}
+        for j,w in sorted(W[i].items(),key=operator.itemgetter(1),reverse=True)[0:k]:#获得与物品i相似的k个物品
+            if j not in data[user].keys():#该相似的物品不在用户user的记录里
+                rank.setdefault(j,0)
+                rank[j]+=float(score) * w
+
+    print (&quot;---4.推荐----&quot;)
+    print (sorted(rank.items(),key=operator.itemgetter(1),reverse=True)[0:N])
+    return sorted(rank.items(),key=operator.itemgetter(1),reverse=True)[0:N]
+
+if __name__==&#39;__main__&#39;:
+    #用户，兴趣度，物品
+    uid_score_bid = [&#39;A,1,a&#39;, &#39;A,1,b&#39;, &#39;A,1,d&#39;, &#39;B,1,b&#39;, &#39;B,1,c&#39;, &#39;B,1,e&#39;, &#39;C,1,c&#39;, &#39;C,1,d&#39;, &#39;D,1,b&#39;, &#39;D,1,c&#39;, &#39;D,1,d&#39;,
+                     &#39;E,1,a&#39;, &#39;E,1,d&#39;]
+    data=loadData(uid_score_bid)#获得数据
+    W=similarity(data)#计算物品相似矩阵
+    recommandList(data,W,&#39;A&#39;,3,10)#推荐
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了方便理解python的实现过程，这里只用了少数数据集并是手输上去的，具体情况运用可再加段代码用于读取并处理数据文件。</p>
+<h1 id="五、算法的优缺点"><a href="#五、算法的优缺点" class="headerlink" title="五、算法的优缺点"></a>五、算法的优缺点</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个算法实现起来也比较简单，但是在实际应用中有时候也会有问题的。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如一些非常流行的商品可能很多人都喜欢，这种商品推荐给你就没什么意义了，所以计算的时候需要对这种商品加一个权重或者把这种商品完全去掉也行。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;再有，对于一些通用的东西，比如买书的时候的工具书，如现代汉语词典，新华字典神马的，通用性太强了，推荐也没什么必要了。</p>
+<p><strong>UserCF和ItemCF优缺点的对比</strong><br><img src="https://img-blog.csdnimg.cn/20190814083729968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>协同过滤（CF）</tag>
+        <tag>推荐系统</tag>
       </tags>
   </entry>
   <entry>
@@ -940,227 +1073,6 @@ plt.show()
         <tag>机器学习</tag>
         <tag>BP算法</tag>
         <tag>人工神经网络（ANN）</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>多种相似度计算的python实现</title>
-    <url>/2019/07/24/duo-chong-xiang-si-du-ji-suan-de-python-shi-xian/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中有很多地方要计算相似度，比如聚类分析和协同过滤。计算相似度的有许多方法，其中有欧几里德距离(欧式距离)、曼哈顿距离、Jaccard系数和皮尔逊相关度等等。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们这里把一些常用的相似度计算方法，用python进行实现以下。大家都是初学者，我认为把公式先写下来，然后再写代码去实现比较好。 </p>
-<h2 id="欧几里德距离-欧式距离"><a href="#欧几里德距离-欧式距离" class="headerlink" title="欧几里德距离(欧式距离)"></a>欧几里德距离(欧式距离)</h2><p>几个数据集之间的相似度一般是基于每对对象间的距离计算。最常用的当然是欧几里德距离，其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204320390.png" alt></p>
-<pre><code>#-*-coding:utf-8 -*-
-
-#计算欧几里德距离：
-def euclidean(p,q):
-#如果两数据集数目不同，计算两者之间都对应有的数
-same = 0
-for i in p:
-    if i in q:
-        same +=1
-
-#计算欧几里德距离,并将其标准化
-e = sum([(p[i] - q[i])**2 for i in range(same)])
-return 1/(1+e**.5)
-</code></pre><p>我们用数据集可以去算一下： </p>
-<pre><code>p = [1,3,2,3,4,3]
-q = [1,3,4,3,2,3,4,3]
-print euclidean(p,q)
-</code></pre><p>得出结果是：0.261203874964</p>
-<h2 id="皮尔逊相关度"><a href="#皮尔逊相关度" class="headerlink" title="皮尔逊相关度"></a>皮尔逊相关度</h2><p>几个数据集中出现异常值的时候，欧几里德距离就不如皮尔逊相关度‘稳定’，它会在出现偏差时倾向于给出更好的结果。其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204538985.png" alt></p>
-<pre><code>-*-coding:utf-8 -*-
-
-#计算皮尔逊相关度：
-def pearson(p,q):
-#只计算两者共同有的
-    same = 0
-    for i in p:
-        if i in q:
-            same +=1
-
-    n = same
-    #分别求p，q的和
-    sumx = sum([p[i] for i in range(n)])
-    sumy = sum([q[i] for i in range(n)])
-    #分别求出p，q的平方和
-    sumxsq = sum([p[i]**2 for i in range(n)])
-    sumysq = sum([q[i]**2 for i in range(n)])
-    #求出p，q的乘积和
-    sumxy = sum([p[i]*q[i] for i in range(n)])
-    # print sumxy
-    #求出pearson相关系数
-    up = sumxy - sumx*sumy/n
-    down = ((sumxsq - pow(sumxsq,2)/n)*(sumysq - pow(sumysq,2)/n))**.5
-    #若down为零则不能计算，return 0
-    if down == 0 :return 0
-    r = up/down
-    return r
-</code></pre><p>用同样的数据集去计算：</p>
-<pre><code>p = [1,3,2,3,4,3]
-q = [1,3,4,3,2,3,4,3]
-print pearson(p,q)
-</code></pre><p>得出结果是：0.00595238095238</p>
-<h2 id="曼哈顿距离"><a href="#曼哈顿距离" class="headerlink" title="曼哈顿距离"></a>曼哈顿距离</h2><p>曼哈顿距离是另一种相似度计算方法，不是经常需要，但是我们仍然学会如何用python去实现，其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204709370.png" alt></p>
-<pre><code>#-*-coding:utf-8 -*-
-
-#计算曼哈顿距离：
-def manhattan(p,q):
-#只计算两者共同有的
-    same = 0
-    for i in p:
-        if i in q:
-        same += 1
-#计算曼哈顿距离
-    n = same
-    vals = range(n)
-    distance = sum(abs(p[i] - q[i]) for i in vals)
-    return distance
-</code></pre><p>用以上的数据集去计算：</p>
-<pre><code>p = [1,3,2,3,4,3]
-q = [1,3,4,3,2,3,4,3]
-print manhattan(p,q)
-</code></pre><p>得出结果为4</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里只讲述了三种相似度的计算方法，事实上还有很多种，由于我也是刚学，其他的方法还不是很了解，以后碰到了再补上。一般情况下，这三种方法是最常用的，足够我们使用了。</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>python</tag>
-        <tag>相似度</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于协同过滤（CF）算法的推荐系统</title>
-    <url>/2019/07/28/ji-yu-xie-tong-guo-lu-cf-suan-fa-de-tui-jian-xi-tong/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着计算机领域技术的高速发展，电子商务时代的普及，个性化的推荐系统深入生活应用的各个方面。个性化推荐算法是推荐系统中最核心的技术，在很大程度上决定了电子商务推荐系统性能的优劣。而协同过滤推荐是个性化推荐系统应用最为广泛的技术，协同过滤推荐主要分为基于用户的协同过滤推荐、基于项目的协同过滤推荐和基于模型的协同过滤推荐。</p>
-<h1 id="一、协同过滤算法描述"><a href="#一、协同过滤算法描述" class="headerlink" title="一、协同过滤算法描述"></a>一、协同过滤算法描述</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大数据时代产生了海量的数据，里面蕴含了丰富的价值。但是，大数据体量之大、种类之繁以及产生速率之快，海量的数据并不都是有价值的，用户从海量的数据中提取有用的、针对性的信息需要花费很大的时间成本。比如，当你面对如此多的电影列表，你想找到一部最符合自己兴趣的电影，因为电影数量之多，你不可能把所有的电影简介都看一遍。那么怎么解决这个问题呢？电影平台搜集你过去看过的全部电影，分析了解你对什么类型电影感兴趣，然后针对性的把你感兴趣的电影主动的罗列给你，你不用花费太多的精力便可快速找到满足自己需求的电影。推荐算法便是为解决这类实际需求而诞生了。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 推荐系统应用数据分析技术，找出用户最可能喜欢的东西推荐给用户，现在很多电子商务网站都有这个应用。目前用的比较多、比较成熟的推荐算法是协同过滤（Collaborative Filtering，简称CF）推荐算法，CF的基本思想是根据用户之前的喜好以及其他兴趣相近的用户的选择来给用户推荐物品。<br><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2hpLmNzZG4ubmV0L2F0dGFjaG1lbnQvMjAxMjAzLzE2LzBfMTMzMTkwOTY5MFhVcEkuZ2lm" alt><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如图所示，在CF中，用m×n的矩阵表示用户对物品的喜好情况，一般用打分表示用户对物品的喜好程度，分数越高表示越喜欢这个物品，0表示没有买过该物品。图中行表示一个用户，列表示一个物品，Uij表示用户i对物品j的打分情况。CF分为两个过程，一个为预测过程，另一个为推荐过程。预测过程是预测用户对没有购买过的物品的可能打分值，推荐是根据预测阶段的结果推荐用户最可能喜欢的一个或Top-N个物品。</p>
-<h1 id="二、协同过滤的实现"><a href="#二、协同过滤的实现" class="headerlink" title="二、协同过滤的实现"></a>二、协同过滤的实现</h1><p>要实现协同过滤的推荐算法，要进行以下三个步骤：</p>
-<ul>
-<li>收集数据</li>
-<li>找到相似用户或物品</li>
-<li>进行推荐</li>
-</ul>
-<h2 id="1、收集数据"><a href="#1、收集数据" class="headerlink" title="1、收集数据"></a>1、收集数据</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里的数据指的都是用户的历史行为数据，比如用户的购买历史，关注，收藏行为，或者发表了某些评论，给某个物品打了多少分等等，这些都可以用来作为数据供推荐算法使用，服务于推荐算法。需要特别指出的在于，不同的数据准确性不同，在使用时需要考虑到噪音所带来的影响。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要从用户的行为和偏好中发现规律，并基于此给予推荐，如何收集用户的偏好信息成为系统推荐效果最基础的决定因素。用户有很多方式向系统提供自己的偏好信息，而且不同的应用也可能大不相同，如下图：<br><img src="https://img-blog.csdnimg.cn/20190813212211411.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="2、找到相似用户或物品"><a href="#2、找到相似用户或物品" class="headerlink" title="2、找到相似用户或物品"></a>2、找到相似用户或物品</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这一步其实就是计算用户间以及物品间的相似度。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关于相似度的计算，现有的几种基本方法都是基于向量（Vector）的，其实也就是计算两个向量的距离，距离越近相似度越大。在推荐的场景中，在用户 - 物品偏好的二维矩阵中，我们可以将一个用户对所有物品的偏好作为一个向量来计算用户之间的相似度，或者将所有用户对某个物品的偏好作为一个向量来计算物品之间的相似度。下面我们详细介绍几种常用的相似度计算方法：<br><img src="https://img-blog.csdnimg.cn/20190813212300649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<p>下一步是作出预测。你可以运用下面的公式做一个预测：<br><img src="https://img-blog.csdn.net/20180408164703642" alt></p>
-<h2 id="3、进行推荐"><a href="#3、进行推荐" class="headerlink" title="3、进行推荐"></a>3、进行推荐</h2><h3 id="3-1、基于用户的协同过滤推荐-User-based-Collaborative-Filtering-Recommendation"><a href="#3-1、基于用户的协同过滤推荐-User-based-Collaborative-Filtering-Recommendation" class="headerlink" title="3.1、基于用户的协同过滤推荐(User-based Collaborative Filtering Recommendation)"></a>3.1、基于用户的协同过滤推荐(User-based Collaborative Filtering Recommendation)</h3><p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基于用户的协同过滤推荐算法先使用统计技术寻找与目标用户有相同喜好的邻居，然后根据目标用户的邻居的喜好产生向目标用户的推荐。基本原理就是利用用户访问行为的相似性来互相推荐用户可能感兴趣的资源，如图所示：</p>
-<p><img src="https://img-blog.csdn.net/20161020214409502" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图示意出基于用户的协同过滤推荐机制的基本原理，假设用户 A 喜欢物品 A、物品 C，用户 B 喜欢物品 B，用户 C 喜欢物品 A 、物品 C 和物品 D；从这些用户的历史喜好信息中，我们可以发现用户 A 和用户 C 的口味和偏好是比较类似的，同时用户 C 还喜欢物品 D，那么我们可以推断用户 A 可能也喜欢物品 D，因此可以将物品 D 推荐给用户 A。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基于用户的协同过滤推荐机制和基于人口统计学的推荐机制都是计算用户的相似度，并基于“邻居”用户群计算推荐，但它们所不同的是如何计算用户的相似度，基于人口统计学的机制只考虑用户本身的特征，而基于用户的协同过滤机制可是在用户的历史偏好的数据上计算用户的相似度，它的基本假设是，喜欢类似物品的用户可能有相同或者相似的口味和偏好。</p>
-<h3 id="3-2、基于项目的协同过滤推荐-Item-based-Collaborative-Filtering-Recommendation"><a href="#3-2、基于项目的协同过滤推荐-Item-based-Collaborative-Filtering-Recommendation" class="headerlink" title="3.2、基于项目的协同过滤推荐(Item-based Collaborative Filtering Recommendation)"></a>3.2、基于项目的协同过滤推荐(Item-based Collaborative Filtering Recommendation)</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据所有用户对物品或者信息的评价，发现物品和物品之间的相似度，然后根据用户的历史偏好信息将类似的物品推荐给该用户，如图所示：<br><img src="https://img-blog.csdn.net/20160821160630777" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图表明基于项目的协同过滤推荐的基本原理，用户A喜欢物品A和物品C，用户B喜欢物品A、物品B和物品C，用户C喜欢物品A，从这些用户的历史喜好中可以认为物品A与物品C比较类似，喜欢物品A的都喜欢物品C，基于这个判断用户C可能也喜欢物品C，所以推荐系统将物品C推荐给用户C。<br>       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 基于项目的协同过滤推荐和基于内容的协同过滤推荐都是基于物品相似度预测推荐，只是相似度度量的方法不一样，前者是从用户历史的偏好推断，而后者是基于物品本身的属性特征信息。</p>
-<h3 id="3-3、UserCF和ItemCF的区别"><a href="#3-3、UserCF和ItemCF的区别" class="headerlink" title="3.3、UserCF和ItemCF的区别"></a>3.3、UserCF和ItemCF的区别</h3><p><img src="https://img-blog.csdn.net/20170107105218959" alt></p>
-<h1 id="三、算法实例"><a href="#三、算法实例" class="headerlink" title="三、算法实例"></a>三、算法实例</h1><p>以ItemCF为例子具体介绍下整个算法流程。<br><strong>算法流程：</strong></p>
-<ol>
-<li>构建用户–&gt;物品的倒排；</li>
-<li>构建物品与物品的同现矩阵；</li>
-<li>计算物品之间的相似度，即计算相似矩阵；</li>
-<li>根据用户的历史记录，给用户推荐物品；</li>
-</ol>
-<h2 id="算法流程1"><a href="#算法流程1" class="headerlink" title="算法流程1"></a>算法流程1</h2><p>构建用户–&gt;物品的倒排<br>如下表，行表示用户，列表示物品，1表示用户喜欢该物品<br><img src="https://img-blog.csdnimg.cn/20190814085502109.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<pre><code>例如python构建的数据格式如下
-{
-&#39;A&#39;: {&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;}, 
-&#39;B&#39;: {&#39;c&#39;: &#39;1&#39;, &#39;b&#39;: &#39;1&#39;, &#39;e&#39;: &#39;1&#39;}, 
-&#39;C&#39;: {&#39;c&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;}, 
-&#39;D&#39;: {&#39;c&#39;: &#39;1&#39;, &#39;b&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;},
-&#39;E&#39;: {&#39;a&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;}
-}
-</code></pre><h2 id="算法流程2"><a href="#算法流程2" class="headerlink" title="算法流程2"></a>算法流程2</h2><p>构建物品与物品的同现矩阵</p>
-<p>共现矩阵C表示同时喜欢两个物品的用户数，是根据用户物品倒排表计算出来的。如根据上面的用户物品倒排表可以计算出如下的共现矩阵C：<br><img src="https://img-blog.csdnimg.cn/20190814085654185.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="算法流程3"><a href="#算法流程3" class="headerlink" title="算法流程3"></a>算法流程3</h2><p>计算物品之间的相似度，即计算相似矩阵</p>
-<p>其中两个物品之间的相似度如何计算？<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设|N(i)|表示喜欢物品i的用户数，|N(i)⋂N(j)|表示同时喜欢物品i，j的用户数，则物品i与物品j的相似度为： </p>
-<p><img src="https://img-blog.csdnimg.cn/20190814090106195.png" alt></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1)式有一个问题，当物品j是一个很热门的商品时，人人都喜欢，那么wijwij就会很接近于1，即(1)式会让很多物品都和热门商品有一个很大的相似度，所以可以改进一下公式：</p>
-<p><img src="https://img-blog.csdnimg.cn/2019081409030146.png" alt></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;算法流程2中的共现矩阵C其实就是式(2)的分子，矩阵N（用于计算分母）表示喜欢某物品的用户数（是总的用户数），则(2)式中的分母便很容易求解出来了。</p>
-<p>矩阵N如下所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/20190814090318574.png" alt></p>
-<p>利用式（2）便能计算物品之间的余弦相似矩阵如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/2019081409034757.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="算法流程4"><a href="#算法流程4" class="headerlink" title="算法流程4"></a>算法流程4</h2><p>根据用户的历史记录，给用户推荐物品；</p>
-<p>最终推荐的是什么物品，是由预测兴趣度决定的。</p>
-<p><strong>物品j预测兴趣度=用户喜欢的物品i的兴趣度×物品i和物品j的相似度</strong></p>
-<p>例如：A用户喜欢a，b，d ，兴趣度分别为1,1,1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;推荐c的预测兴趣度=1X0.67+1X0.58=1.25<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;推荐e的预测兴趣度=1X0.58=0.58</p>
-<h1 id="四、python实现案例"><a href="#四、python实现案例" class="headerlink" title="四、python实现案例"></a>四、python实现案例</h1><pre><code>from math import sqrt
-import operator
-
-#1.构建用户--&gt;物品的倒排
-def loadData(files):
-    data ={}
-    for line in files:
-        user,score,item=line.split(&quot;,&quot;)  #按&quot;,&quot;将每组数据单独分开,并将每组的数据赋予对应变量
-        data.setdefault(user,{})
-        data[user][item]=score
-    print (&quot;----1.用户：物品的倒排----&quot;)
-    print (data)
-    return data
-
-#2.计算
-# 2.1 构造物品--&gt;物品的共现矩阵
-# 2.2 计算物品与物品的相似矩阵
-def similarity(data):
-    # 2.1 构造物品：物品的共现矩阵
-    N={};#喜欢物品i的总人数
-    C={};#喜欢物品i也喜欢物品j的人数
-    for user,item in data.items():
-        for i,score in item.items():
-            N.setdefault(i,0)
-            N[i]+=1
-            C.setdefault(i,{})
-            for j,scores in item.items():
-                if j not in i:
-                    C[i].setdefault(j,0)
-                    C[i][j]+=1
-
-    print (&quot;---2.构造的共现矩阵---&quot;)
-    print (&#39;N:&#39;,N)
-    print (&#39;C:&#39;,C)
-
-    #2.2 计算物品与物品的相似矩阵
-    W={};
-    for i,item in C.items():
-        W.setdefault(i,{})
-        for j,item2 in item.items():
-            W[i].setdefault(j,0)
-            W[i][j]=C[i][j]/sqrt(N[i]*N[j])
-    print (&quot;---3.构造的相似矩阵---&quot;)
-    print (W)
-    return W
-
-#3.根据用户的历史记录，给用户推荐物品
-def recommandList(data,W,user,k=3,N=10):
-    rank={}
-    for i,score in data[user].items():#获得用户user历史记录，如A用户的历史记录为{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;}
-        for j,w in sorted(W[i].items(),key=operator.itemgetter(1),reverse=True)[0:k]:#获得与物品i相似的k个物品
-            if j not in data[user].keys():#该相似的物品不在用户user的记录里
-                rank.setdefault(j,0)
-                rank[j]+=float(score) * w
-
-    print (&quot;---4.推荐----&quot;)
-    print (sorted(rank.items(),key=operator.itemgetter(1),reverse=True)[0:N])
-    return sorted(rank.items(),key=operator.itemgetter(1),reverse=True)[0:N]
-
-if __name__==&#39;__main__&#39;:
-    #用户，兴趣度，物品
-    uid_score_bid = [&#39;A,1,a&#39;, &#39;A,1,b&#39;, &#39;A,1,d&#39;, &#39;B,1,b&#39;, &#39;B,1,c&#39;, &#39;B,1,e&#39;, &#39;C,1,c&#39;, &#39;C,1,d&#39;, &#39;D,1,b&#39;, &#39;D,1,c&#39;, &#39;D,1,d&#39;,
-                     &#39;E,1,a&#39;, &#39;E,1,d&#39;]
-    data=loadData(uid_score_bid)#获得数据
-    W=similarity(data)#计算物品相似矩阵
-    recommandList(data,W,&#39;A&#39;,3,10)#推荐
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了方便理解python的实现过程，这里只用了少数数据集并是手输上去的，具体情况运用可再加段代码用于读取并处理数据文件。</p>
-<h1 id="五、算法的优缺点"><a href="#五、算法的优缺点" class="headerlink" title="五、算法的优缺点"></a>五、算法的优缺点</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个算法实现起来也比较简单，但是在实际应用中有时候也会有问题的。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如一些非常流行的商品可能很多人都喜欢，这种商品推荐给你就没什么意义了，所以计算的时候需要对这种商品加一个权重或者把这种商品完全去掉也行。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;再有，对于一些通用的东西，比如买书的时候的工具书，如现代汉语词典，新华字典神马的，通用性太强了，推荐也没什么必要了。</p>
-<p><strong>UserCF和ItemCF优缺点的对比</strong><br><img src="https://img-blog.csdnimg.cn/20190814083729968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>协同过滤（CF）</tag>
-        <tag>推荐系统</tag>
       </tags>
   </entry>
   <entry>
@@ -1317,6 +1229,94 @@ if __name__==&#39;__main__&#39;:
       <tags>
         <tag>机器学习</tag>
         <tag>卷积神经网络（CNN）</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>多种相似度计算的python实现</title>
+    <url>/2019/07/24/duo-chong-xiang-si-du-ji-suan-de-python-shi-xian/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中有很多地方要计算相似度，比如聚类分析和协同过滤。计算相似度的有许多方法，其中有欧几里德距离(欧式距离)、曼哈顿距离、Jaccard系数和皮尔逊相关度等等。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们这里把一些常用的相似度计算方法，用python进行实现以下。大家都是初学者，我认为把公式先写下来，然后再写代码去实现比较好。 </p>
+<h2 id="欧几里德距离-欧式距离"><a href="#欧几里德距离-欧式距离" class="headerlink" title="欧几里德距离(欧式距离)"></a>欧几里德距离(欧式距离)</h2><p>几个数据集之间的相似度一般是基于每对对象间的距离计算。最常用的当然是欧几里德距离，其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204320390.png" alt></p>
+<pre><code>#-*-coding:utf-8 -*-
+
+#计算欧几里德距离：
+def euclidean(p,q):
+#如果两数据集数目不同，计算两者之间都对应有的数
+same = 0
+for i in p:
+    if i in q:
+        same +=1
+
+#计算欧几里德距离,并将其标准化
+e = sum([(p[i] - q[i])**2 for i in range(same)])
+return 1/(1+e**.5)
+</code></pre><p>我们用数据集可以去算一下： </p>
+<pre><code>p = [1,3,2,3,4,3]
+q = [1,3,4,3,2,3,4,3]
+print euclidean(p,q)
+</code></pre><p>得出结果是：0.261203874964</p>
+<h2 id="皮尔逊相关度"><a href="#皮尔逊相关度" class="headerlink" title="皮尔逊相关度"></a>皮尔逊相关度</h2><p>几个数据集中出现异常值的时候，欧几里德距离就不如皮尔逊相关度‘稳定’，它会在出现偏差时倾向于给出更好的结果。其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204538985.png" alt></p>
+<pre><code>-*-coding:utf-8 -*-
+
+#计算皮尔逊相关度：
+def pearson(p,q):
+#只计算两者共同有的
+    same = 0
+    for i in p:
+        if i in q:
+            same +=1
+
+    n = same
+    #分别求p，q的和
+    sumx = sum([p[i] for i in range(n)])
+    sumy = sum([q[i] for i in range(n)])
+    #分别求出p，q的平方和
+    sumxsq = sum([p[i]**2 for i in range(n)])
+    sumysq = sum([q[i]**2 for i in range(n)])
+    #求出p，q的乘积和
+    sumxy = sum([p[i]*q[i] for i in range(n)])
+    # print sumxy
+    #求出pearson相关系数
+    up = sumxy - sumx*sumy/n
+    down = ((sumxsq - pow(sumxsq,2)/n)*(sumysq - pow(sumysq,2)/n))**.5
+    #若down为零则不能计算，return 0
+    if down == 0 :return 0
+    r = up/down
+    return r
+</code></pre><p>用同样的数据集去计算：</p>
+<pre><code>p = [1,3,2,3,4,3]
+q = [1,3,4,3,2,3,4,3]
+print pearson(p,q)
+</code></pre><p>得出结果是：0.00595238095238</p>
+<h2 id="曼哈顿距离"><a href="#曼哈顿距离" class="headerlink" title="曼哈顿距离"></a>曼哈顿距离</h2><p>曼哈顿距离是另一种相似度计算方法，不是经常需要，但是我们仍然学会如何用python去实现，其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204709370.png" alt></p>
+<pre><code>#-*-coding:utf-8 -*-
+
+#计算曼哈顿距离：
+def manhattan(p,q):
+#只计算两者共同有的
+    same = 0
+    for i in p:
+        if i in q:
+        same += 1
+#计算曼哈顿距离
+    n = same
+    vals = range(n)
+    distance = sum(abs(p[i] - q[i]) for i in vals)
+    return distance
+</code></pre><p>用以上的数据集去计算：</p>
+<pre><code>p = [1,3,2,3,4,3]
+q = [1,3,4,3,2,3,4,3]
+print manhattan(p,q)
+</code></pre><p>得出结果为4</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里只讲述了三种相似度的计算方法，事实上还有很多种，由于我也是刚学，其他的方法还不是很了解，以后碰到了再补上。一般情况下，这三种方法是最常用的，足够我们使用了。</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>python</tag>
+        <tag>相似度</tag>
       </tags>
   </entry>
   <entry>
