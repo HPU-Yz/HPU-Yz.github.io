@@ -128,58 +128,6 @@
     
   </li>
   
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href class="waves-effect waves-light">
-
-      
-      <i class="fas fa-list" style="zoom: 0.6;"></i>
-      
-      <span>Medias</span>
-      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
-    </a>
-    <ul class="sub-nav menus_item_child ">
-      
-      <li>
-        <a href="/musics">
-          
-          <i class="fas fa-music" style="margin-top: -20px; zoom: 0.6;"></i>
-          
-          <span>Musics</span>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/movies">
-          
-          <i class="fas fa-film" style="margin-top: -20px; zoom: 0.6;"></i>
-          
-          <span>Movies</span>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/books">
-          
-          <i class="fas fa-book" style="margin-top: -20px; zoom: 0.6;"></i>
-          
-          <span>Books</span>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/galleries">
-          
-          <i class="fas fa-image" style="margin-top: -20px; zoom: 0.6;"></i>
-          
-          <span>Galleries</span>
-        </a>
-      </li>
-      
-    </ul>
-    
-  </li>
-  
   <li>
     <a href="#searchModal" class="modal-trigger waves-effect waves-light">
       <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
@@ -279,61 +227,6 @@
 			
 			友情链接
 		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="javascript:;">
-			
-				<i class="fa-fw fas fa-list"></i>
-			
-			Medias
-			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
-		</a>
-            <ul style="background:  ;">
-              
-                <li>   
-				
-                  <a href="/musics " style="margin-left:75px" ;>
-				  
-				   <i class="fa fas fa-music" style="position: absolute;left:50px"></i>
-			      
-		          <span>Musics</span>
-                  </a>
-                </li>
-              
-                <li>   
-				
-                  <a href="/movies " style="margin-left:75px" ;>
-				  
-				   <i class="fa fas fa-film" style="position: absolute;left:50px"></i>
-			      
-		          <span>Movies</span>
-                  </a>
-                </li>
-              
-                <li>   
-				
-                  <a href="/books " style="margin-left:75px" ;>
-				  
-				   <i class="fa fas fa-book" style="position: absolute;left:50px"></i>
-			      
-		          <span>Books</span>
-                  </a>
-                </li>
-              
-                <li>   
-				
-                  <a href="/galleries " style="margin-left:75px" ;>
-				  
-				   <i class="fa fas fa-image" style="position: absolute;left:50px"></i>
-			      
-		          <span>Galleries</span>
-                  </a>
-                </li>
-               
-            </ul>
           
         </li>
         
@@ -532,8 +425,36 @@
                 </div>
 
                 <div class="introduction center-align" data-aos="fade-up">If you wish to succeed, you should use persistence as your good friend, experience as your reference, prudence as your brother and hope as your sentry.</div>
+            
+            <div class="card-content">
+                <div class="card-content article-card-content">
+                        <div class="title center-align" data-aos="zoom-in-up">
+                            <i class="fa fa-address-book"></i>&nbsp;&nbsp;简介
+                        </div>
+                        <div id="articleContent" data-aos="fade-up">
+                            <ul>
+<li>杨 志</li>
+<li>河南理工大学本科在读</li>
+<li>小弟初来乍到，还请各位江湖大佬多多关照…</li>
+<li>联系方式：<ul>
+<li>QQ：2426545812</li>
+<li>Email：<a href="mailto:2426545812@qq.com" target="_blank" rel="noopener">2426545812@qq.com</a></li>
+</ul>
+</li>
+</ul>
 
-                <style type="text/css">
+                        </div>
+                </div>
+            </div>
+                
+
+
+            </div>
+        </div>
+        <div class="card">
+            
+
+            <style type="text/css">
     #posts-chart,
     #categories-chart,
     #tags-chart {
@@ -634,7 +555,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"Hexo","value":1},{"name":"机器学习","value":13},{"name":"python","value":4},{"name":"OJ","value":1},{"name":"python","value":5},{"name":"离散","value":2},{"name":"生活","value":1},{"name":"爬虫","value":1},{"name":"算法","value":1}],
+                data: [{"name":"机器学习","value":13},{"name":"Hexo","value":1},{"name":"OJ","value":1},{"name":"python","value":5},{"name":"python","value":4},{"name":"生活","value":1},{"name":"离散","value":2},{"name":"爬虫","value":1},{"name":"算法","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -658,7 +579,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["机器学习","python","离散","推荐系统","分类","Hexo","博客搭建","KNN","K-means","OJ"]
+                data: ["机器学习","python","离散","推荐系统","分类","K-means","Hexo","博客搭建","OJ","KNN"]
             }
         ],
         yAxis: [
@@ -699,21 +620,6 @@
     categoriesChart.setOption(categoriesOption);
     tagsChart.setOption(tagsOption);
 </script>
-
-
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-content">
-                <div class="card-content article-card-content">
-                        <div class="title center-align" data-aos="zoom-in-up">
-                            <i class="fa fa-address-book"></i>&nbsp;&nbsp;简介
-                        </div>
-                        <div id="articleContent" data-aos="fade-up">
-                            
-                        </div>
-                </div>
-            </div>
             
 
             
@@ -776,6 +682,20 @@
         <div class="tag-chips center-align">
             
             
+            <a href="/tags/机器学习/">
+                <span class="chip center-align waves-effect waves-light chip-default">机器学习</span>
+            </a>
+            
+            
+            
+            <a href="/tags/K-means/">
+                <span class="chip center-align waves-effect waves-light chip-default">K-means</span>
+            </a>
+            
+            
+            
+            
+            
             <a href="/tags/Hexo/">
                 <span class="chip center-align waves-effect waves-light chip-default">Hexo</span>
             </a>
@@ -788,8 +708,8 @@
             
             
             
-            <a href="/tags/机器学习/">
-                <span class="chip center-align waves-effect waves-light chip-default">机器学习</span>
+            <a href="/tags/OJ/">
+                <span class="chip center-align waves-effect waves-light chip-default">OJ</span>
             </a>
             
             
@@ -800,22 +720,8 @@
             
             
             
-            
-            
-            <a href="/tags/K-means/">
-                <span class="chip center-align waves-effect waves-light chip-default">K-means</span>
-            </a>
-            
-            
-            
             <a href="/tags/离散/">
                 <span class="chip center-align waves-effect waves-light chip-default">离散</span>
-            </a>
-            
-            
-            
-            <a href="/tags/OJ/">
-                <span class="chip center-align waves-effect waves-light chip-default">OJ</span>
             </a>
             
             
@@ -826,26 +732,8 @@
             
             
             
-            <a href="/tags/BP算法/">
-                <span class="chip center-align waves-effect waves-light chip-default">BP算法</span>
-            </a>
-            
-            
-            
-            <a href="/tags/人工神经网络（ANN）/">
-                <span class="chip center-align waves-effect waves-light chip-default">人工神经网络（ANN）</span>
-            </a>
-            
-            
-            
             <a href="/tags/动态规划/">
                 <span class="chip center-align waves-effect waves-light chip-default">动态规划</span>
-            </a>
-            
-            
-            
-            <a href="/tags/相似度/">
-                <span class="chip center-align waves-effect waves-light chip-default">相似度</span>
             </a>
             
             
@@ -862,6 +750,18 @@
             
             
             
+            <a href="/tags/BP算法/">
+                <span class="chip center-align waves-effect waves-light chip-default">BP算法</span>
+            </a>
+            
+            
+            
+            <a href="/tags/人工神经网络（ANN）/">
+                <span class="chip center-align waves-effect waves-light chip-default">人工神经网络（ANN）</span>
+            </a>
+            
+            
+            
             <a href="/tags/协同过滤（CF）/">
                 <span class="chip center-align waves-effect waves-light chip-default">协同过滤（CF）</span>
             </a>
@@ -874,14 +774,20 @@
             
             
             
-            <a href="/tags/测试题/">
-                <span class="chip center-align waves-effect waves-light chip-default">测试题</span>
+            <a href="/tags/矩阵分解/">
+                <span class="chip center-align waves-effect waves-light chip-default">矩阵分解</span>
             </a>
             
             
             
-            <a href="/tags/矩阵分解/">
-                <span class="chip center-align waves-effect waves-light chip-default">矩阵分解</span>
+            <a href="/tags/相似度/">
+                <span class="chip center-align waves-effect waves-light chip-default">相似度</span>
+            </a>
+            
+            
+            
+            <a href="/tags/数据集/">
+                <span class="chip center-align waves-effect waves-light chip-default">数据集</span>
             </a>
             
             
@@ -892,8 +798,8 @@
             
             
             
-            <a href="/tags/数据集/">
-                <span class="chip center-align waves-effect waves-light chip-default">数据集</span>
+            <a href="/tags/测试题/">
+                <span class="chip center-align waves-effect waves-light chip-default">测试题</span>
             </a>
             
             
@@ -929,6 +835,47 @@
 
             
 
+            
+            
+<div id="myGallery" class="my-gallery">
+    <div class="title center-align" data-aos="zoom-in-up">
+        <i class="far fa-image"></i>&nbsp;&nbsp;相册
+    </div>
+    <div class="row">
+        
+        
+        <div class="photo col s12 m6 l4" data-aos="fade-up">
+            <div class="img-item" data-src="https://cdn.jsdelivr.net/gh/HPU-Yz/cdn-speed@1.0/medias/featureimages/0.jpg">
+                <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/cdn-speed@1.0/medias/featureimages/0.jpg" class="responsive-img">
+            </div>
+        </div>
+        
+        <div class="photo col s12 m6 l4" data-aos="fade-up">
+            <div class="img-item" data-src="https://cdn.jsdelivr.net/gh/HPU-Yz/cdn-speed@1.0/medias/featureimages/1.jpg">
+                <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/cdn-speed@1.0/medias/featureimages/1.jpg" class="responsive-img">
+            </div>
+        </div>
+        
+        <div class="photo col s12 m6 l4" data-aos="fade-up">
+            <div class="img-item" data-src="https://cdn.jsdelivr.net/gh/HPU-Yz/cdn-speed@1.0/medias/featureimages/2.jpg">
+                <img src="https://cdn.jsdelivr.net/gh/HPU-Yz/cdn-speed@1.0/medias/featureimages/2.jpg" class="responsive-img">
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+<script>
+    $(function () {
+        let animateClass = 'animated pulse';
+        $('#myGallery .photo').hover(function () {
+            $(this).addClass(animateClass);
+        }, function () {
+            $(this).removeClass(animateClass);
+        });
+    });
+</script>
             
         </div>
     </div>
