@@ -64,112 +64,6 @@ hexo d
       </tags>
   </entry>
   <entry>
-    <title>Python判断合式公式</title>
-    <url>/2019/03/17/python-pan-duan-chi-san-shu-xue-de-he-shi-gong-shi/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你没有听错，用python程序来解决离散数学的逻辑推理问题，我当我第一次听老师说的时候也很吃惊（再说上学期的Python学的也不咋地…..😩)，但经老师讲解后才知道，使用python解题不仅效率高，而且准确性也很强的，所以还是有必要学习一下的。</p>
-<h2 id="判断是否为合式公式"><a href="#判断是否为合式公式" class="headerlink" title="判断是否为合式公式"></a>判断是否为合式公式</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一个题目就是判断一个公式是否为合式公式，这也是最基础的，因为只有当在输入的合式公式正确的情况下，才能进一步的运算解题，所以先讲解一下怎么判断合式公式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先要知道<strong>什么是合式公式</strong>？<br>(1)原子命题常项或变项是合式公式；<br>(2)如果A是合式公式，则（-A）也是合式公式（- 表示非）；<br>(3)如果A，B是合式公式，则（A<em>B）、（A+B）、（A &lt; B）、（ A ~ B）也是合式公式；(此处 </em> 合取 + 析取 &lt; 代表条件 ~ 代表双条件)<br>(4)只有有限次地应用(1)～(3)所包含的命题变元，联结词和括号的符号串才是合式公式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>个人思路</strong>：<br>输入字符串，扫描字符串，把所含的各关联词分区出来，在判断每个关联词使用是否正确<br>比如不合规则的情况：<br>(1) 关联词所处位置不对<br>(2) 关联词的连续使用<br>(3) 括号不匹配<br>(4) ……..<br>程序中可能会有bug，希望大佬们多多指教</p>
-<h2 id="这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。"><a href="#这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。" class="headerlink" title="这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。"></a>这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。</h2><h4 id="废话不多说，直接上代码😎"><a href="#废话不多说，直接上代码😎" class="headerlink" title="废话不多说，直接上代码😎"></a>废话不多说，直接上代码😎</h4><pre><code>import re
-print(&quot;定义‘!’为否定联结词&quot;)
-print(&quot;定义‘&amp;’为合取联结词&quot;)
-print(&quot;定义‘-’为析取联结词&quot;)
-print(&quot;定义‘&gt;’为蕴含联结词&quot;)
-print(&quot;定义‘~’为等价联结词&quot;)
-print(&quot;如果公式错误，会指出哪里错误；如果公式正确，则什么也不输出&quot;)
-S =input(&quot;请输入需要判断的公式：&quot;)
-T = list(S)
-if S[0] in [&#39;&amp;&#39;,&#39;-&#39;,&#39;)&#39;,&#39;~&#39;,&#39;&gt;&#39;] :
-    print(&quot;不是合式公式&quot;)
-a ,b,c,d,f =&quot;!&quot; , &quot;&amp;&quot; ,&quot;-&quot; , &quot;&gt;&quot; , &quot;~&quot;
-if a in T:
-        Q = [m.start() for m in re.finditer(a, S)]
-        for i in Q :
-            if S[-1] == &#39;!&#39; :
-                print (&quot;‘!’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[i+1] in [&#39;&amp;&#39;,&#39;!&#39;,&#39;-&#39;,&#39;)&#39;,&#39;~&#39;,&#39;&gt;&#39;]:
-                print(&quot;‘!’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[i-1] in [&#39;!&#39;]:
-                print(&quot;‘!’联结词使用错误，不是合式公式！&quot;)
-                break
-if b in T:
-        W = [m.start() for m in re.finditer(b, S)]
-        for y in W :
-            if S[-1] == &#39;&amp;&#39; :
-                print (&quot;‘&amp;’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[y+1] in [&#39;-&#39;,&#39;)&#39;,&#39;~&#39;,&#39;&gt;&#39;,&#39;&amp;&#39;] :
-                print(&quot;‘&amp;’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[y-1] in [&#39;-&#39;,&#39;(&#39;,&#39;~&#39;,&#39;&gt;&#39;,&#39;&amp;&#39;] :
-                print(&quot;‘&amp;’联结词使用错误，不是合式公式&quot;)
-                break
-if c in T:
-        E = [m.start() for m in re.finditer(c, S)]
-        for h in E :
-            if S[-1] == &#39;-&#39; :
-                print(&quot;‘-’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[h+1] in (&#39;)&#39;,&#39;&gt;&#39;,&#39;~&#39;,&#39;-&#39;) :
-                print(&quot;‘-’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[h-1] in (&#39;&amp;&#39;,&#39;-&#39;,&#39;&gt;&#39;,&#39;~&#39;) :
-                print(&quot;‘-’联结词使用错误，不是合式公式&quot;)
-                break
-if d in T:
-        R = [m.start() for m in re.finditer(d, S)]
-        for k in R :
-            if S[-1] == &#39;&gt;&#39; :
-                print (&quot;‘&gt;’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[k+1] in [&#39;)&#39;,&#39;&gt;&#39;] :
-                print(&quot;‘&gt;’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[k-1] in  [&#39;(&#39;,&#39;&gt;&#39;] :
-                print(&quot;‘&gt;’联结词使用错误，不是合式公式&quot;)
-                break
-if f in T:
-        O = [m.start() for m in re.finditer(f, S)]
-        for v in O :
-            if S[-1] == &#39;~&#39; :
-                print(&quot;‘~’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[v+1] in [&#39;)&#39;,&#39;~&#39;] :
-                print(&quot;‘~’联结词使用错误，不是合式公式&quot;)
-                break
-            if S[v-1] in [&#39;(&#39;,&#39;~&#39;] :
-                print(&quot;‘~’联结词使用错误，不是合式公式&quot;)
-                break
-if &#39;(&#39; or &#39;)&#39; in S :
-        e = 0
-        klb =[]
-        for i in S :
-            if i == &#39;(&#39;:
-                klb.append(i)
-            if i == &#39;)&#39;:
-                if len(klb)==0:
-                    e=1
-                    break
-                else :
-                    klb.pop()
-        if len(klb)!=0 :
-            e = 1
-        if e==1:
-            print(&quot;括号使用错误，不是合式公式&quot;)
-
-
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我也是小白，程序哪里可能有些不足之处，请多多指教，如果你有更好的解题方法或思路，可以联系我，大家可以一起学习，一起进步的！😊</p>
-]]></content>
-      <categories>
-        <category>python</category>
-        <category>离散</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>离散</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>KNN算法及python实现</title>
     <url>/2019/07/20/k-zui-jin-lin-fen-lei-suan-fa-knn-ji-python-shi-xian/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN算法即K-Nearest Neighbor，也是机器学习十大经典算法之一。前文讲解了K-means算法，今天我们就继续讲KNN算法，两者看起来挺相似的，但区别还是很大的，看完本片文章你就会明白了。</p>
@@ -253,51 +147,9 @@ if __name__ == &#39;__main__&#39;:
         <category>python</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>机器学习</tag>
         <tag>KNN</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>while(scanf(&quot;%d&quot;,&amp;n)!=EOF)</title>
-    <url>/2019/03/21/oj/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“测试输入包含若干测试实例。当N为0时，输入结束，该实例不被处理。”这句话 是最早我对OJ的印象 以前也没见过这种输入要求， 做第一道题的时候就卡住了 上网看别人的代码 都有一句 while(scanf(“%d”,&amp;n)!=EOF)”scanf 函数还能放while里啊… EOF是什么玩意儿呢…”</p>
-<blockquote>
-<h2 id="什么是OJ？"><a href="#什么是OJ？" class="headerlink" title="什么是OJ？"></a>什么是OJ？</h2></blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先先介绍下什么是OJ吧(知道的同学可以跳过此部分)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Online Judge系统（简称OJ）是一个在线的判题系统。用户可以在线提交程序多种程序（如C、C++）源代码，系统对源代码进行编译和执行，并通过预先设计的测试数据来检验程序源代码的正确性。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一个用户提交的程序在Online Judge系统下执行时将受到比较严格的限制，包括运行时间限制，内存使用限制和安全限制等。用户程序执行的结果将被Online Judge系统捕捉并保存，然后再转交给一个裁判程序。该裁判程序或者比较用户程序的输出数据和标准输出样例的差别，或者检验用户程序的输出数据是否满足一定的逻辑条件。最后系统返回给用户一个状态：通过（Accepted,AC）、答案错误(Wrong Answer,WA)、超时(Time Limit Exceed,TLE)、超过输出限制（Output Limit Exceed,OLE)、超内存（Memory Limit Exceed,MLE）、运行时错误（Runtime Error,RE）、格式错误（Presentation Error,PE)、或是无法编译（Compile Error,CE），并返回程序使用的内存、运行时间等信息。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Online Judge系统最初使用于ACM-ICPC国际大学生程序设计竞赛和OI信息学奥林匹克竞赛中的自动判题和排名。现广泛应用于世界各地高校学生程序设计的训练、参赛队员的训练和选拔、各种程序设计竞赛以及数据结构和算法的学习和作业的自动提交判断中。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;知名的OJ有：RQNOJ,URAL,SPOJ,vijos,tyvj,USACO,sgu,pku(poj),zju(toj),tju,uva，HDU(HDOJ)等。</p>
-<blockquote>
-<h2 id="EOF是什么东东？"><a href="#EOF是什么东东？" class="headerlink" title="EOF是什么东东？"></a>EOF是什么东东？</h2></blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EOF 是一个宏 ，一般定义为-1。<br>1.EOF用来判断文件结束的标记(end of file) 用在文件操作中,可以查下msdn 看它的定义:EOF is returned by       an I/O routine when the end-of-file (or in some cases, an error) is encountered<br>2.EOF表示输入流的结束。<br>3.在发送端套接字关闭后，接收端读套接字的read函数也会返回EOF.</p>
-<blockquote>
-<h2 id="while-scanf-EOF-流程图"><a href="#while-scanf-EOF-流程图" class="headerlink" title="while(scanf()!=EOF)流程图"></a>while(scanf()!=EOF)流程图</h2></blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们学过的有三种循环：for，while，do-while。但while (scanf(“%d”, &amp;n) != EOF)不像以上的任何一种，接下来看一下它的流程图：<br><img src="/2019/03/21/oj/while-1/20140502221756328.png" alt="流程图"></p>
-<blockquote>
-<h2 id="OnlineJuge的评判时，该语句的作用"><a href="#OnlineJuge的评判时，该语句的作用" class="headerlink" title="OnlineJuge的评判时，该语句的作用"></a>OnlineJuge的评判时，该语句的作用</h2></blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OJ评判的原理应该是这样的：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入：通过管道命令，将一个包含若干测试用例的文件作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为【标准输入流】，所以需要while(scanf() != EOF)来判断测试文件是否读完。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输出：通过管道命令，将【标准输出流】，输出到一个文件中。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评判：将程序的【输出文件】与【正确答案文件】进行比对：如果一样，则返回程序正确提示；否则返回程序错误的提示。</p>
-<blockquote>
-<h2 id="使用原理"><a href="#使用原理" class="headerlink" title="使用原理"></a>使用原理</h2></blockquote>
-<p>有人说 EOF等于-1 其实就是scanf函数的返回值 不等于-1时 继续进行循环</p>
-<p>有人说 EOF是处理到文件结束 不用EOF也可以</p>
-<p>……….</p>
-<p>很多天后终于把这个弄明白了</p>
-<p>scanf的返回值由后面的参数决定</p>
-<p>scanf(“%d%d”, &amp;a, &amp;b);</p>
-<p>如果a和b都被成功读入，那么scanf的返回值就是2</p>
-<p>如果只有a被成功读入，返回值为1</p>
-<p>如果a和b都未被成功读入，返回值为0</p>
-<p>如果遇到错误或遇到end of file，返回值为EOF，且返回值为int型.</p>
-<blockquote>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2></blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上是我个人所述，若有什么不对的地方或者有补充的地方，还希望各位指点指点，大家可以一起学习，一起进步！</p>
-]]></content>
-      <categories>
-        <category>OJ</category>
-      </categories>
-      <tags>
-        <tag>OJ</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -412,9 +264,255 @@ if __name__==&#39;__main__&#39;:
         <category>python</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>机器学习</tag>
+        <tag>python</tag>
         <tag>K-means</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python判断合式公式</title>
+    <url>/2019/03/17/python-pan-duan-chi-san-shu-xue-de-he-shi-gong-shi/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你没有听错，用python程序来解决离散数学的逻辑推理问题，我当我第一次听老师说的时候也很吃惊（再说上学期的Python学的也不咋地…..😩)，但经老师讲解后才知道，使用python解题不仅效率高，而且准确性也很强的，所以还是有必要学习一下的。</p>
+<h2 id="判断是否为合式公式"><a href="#判断是否为合式公式" class="headerlink" title="判断是否为合式公式"></a>判断是否为合式公式</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一个题目就是判断一个公式是否为合式公式，这也是最基础的，因为只有当在输入的合式公式正确的情况下，才能进一步的运算解题，所以先讲解一下怎么判断合式公式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先要知道<strong>什么是合式公式</strong>？<br>(1)原子命题常项或变项是合式公式；<br>(2)如果A是合式公式，则（-A）也是合式公式（- 表示非）；<br>(3)如果A，B是合式公式，则（A<em>B）、（A+B）、（A &lt; B）、（ A ~ B）也是合式公式；(此处 </em> 合取 + 析取 &lt; 代表条件 ~ 代表双条件)<br>(4)只有有限次地应用(1)～(3)所包含的命题变元，联结词和括号的符号串才是合式公式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>个人思路</strong>：<br>输入字符串，扫描字符串，把所含的各关联词分区出来，在判断每个关联词使用是否正确<br>比如不合规则的情况：<br>(1) 关联词所处位置不对<br>(2) 关联词的连续使用<br>(3) 括号不匹配<br>(4) ……..<br>程序中可能会有bug，希望大佬们多多指教</p>
+<h2 id="这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。"><a href="#这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。" class="headerlink" title="这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。"></a>这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。</h2><h4 id="废话不多说，直接上代码😎"><a href="#废话不多说，直接上代码😎" class="headerlink" title="废话不多说，直接上代码😎"></a>废话不多说，直接上代码😎</h4><pre><code>import re
+print(&quot;定义‘!’为否定联结词&quot;)
+print(&quot;定义‘&amp;’为合取联结词&quot;)
+print(&quot;定义‘-’为析取联结词&quot;)
+print(&quot;定义‘&gt;’为蕴含联结词&quot;)
+print(&quot;定义‘~’为等价联结词&quot;)
+print(&quot;如果公式错误，会指出哪里错误；如果公式正确，则什么也不输出&quot;)
+S =input(&quot;请输入需要判断的公式：&quot;)
+T = list(S)
+if S[0] in [&#39;&amp;&#39;,&#39;-&#39;,&#39;)&#39;,&#39;~&#39;,&#39;&gt;&#39;] :
+    print(&quot;不是合式公式&quot;)
+a ,b,c,d,f =&quot;!&quot; , &quot;&amp;&quot; ,&quot;-&quot; , &quot;&gt;&quot; , &quot;~&quot;
+if a in T:
+        Q = [m.start() for m in re.finditer(a, S)]
+        for i in Q :
+            if S[-1] == &#39;!&#39; :
+                print (&quot;‘!’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[i+1] in [&#39;&amp;&#39;,&#39;!&#39;,&#39;-&#39;,&#39;)&#39;,&#39;~&#39;,&#39;&gt;&#39;]:
+                print(&quot;‘!’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[i-1] in [&#39;!&#39;]:
+                print(&quot;‘!’联结词使用错误，不是合式公式！&quot;)
+                break
+if b in T:
+        W = [m.start() for m in re.finditer(b, S)]
+        for y in W :
+            if S[-1] == &#39;&amp;&#39; :
+                print (&quot;‘&amp;’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[y+1] in [&#39;-&#39;,&#39;)&#39;,&#39;~&#39;,&#39;&gt;&#39;,&#39;&amp;&#39;] :
+                print(&quot;‘&amp;’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[y-1] in [&#39;-&#39;,&#39;(&#39;,&#39;~&#39;,&#39;&gt;&#39;,&#39;&amp;&#39;] :
+                print(&quot;‘&amp;’联结词使用错误，不是合式公式&quot;)
+                break
+if c in T:
+        E = [m.start() for m in re.finditer(c, S)]
+        for h in E :
+            if S[-1] == &#39;-&#39; :
+                print(&quot;‘-’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[h+1] in (&#39;)&#39;,&#39;&gt;&#39;,&#39;~&#39;,&#39;-&#39;) :
+                print(&quot;‘-’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[h-1] in (&#39;&amp;&#39;,&#39;-&#39;,&#39;&gt;&#39;,&#39;~&#39;) :
+                print(&quot;‘-’联结词使用错误，不是合式公式&quot;)
+                break
+if d in T:
+        R = [m.start() for m in re.finditer(d, S)]
+        for k in R :
+            if S[-1] == &#39;&gt;&#39; :
+                print (&quot;‘&gt;’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[k+1] in [&#39;)&#39;,&#39;&gt;&#39;] :
+                print(&quot;‘&gt;’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[k-1] in  [&#39;(&#39;,&#39;&gt;&#39;] :
+                print(&quot;‘&gt;’联结词使用错误，不是合式公式&quot;)
+                break
+if f in T:
+        O = [m.start() for m in re.finditer(f, S)]
+        for v in O :
+            if S[-1] == &#39;~&#39; :
+                print(&quot;‘~’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[v+1] in [&#39;)&#39;,&#39;~&#39;] :
+                print(&quot;‘~’联结词使用错误，不是合式公式&quot;)
+                break
+            if S[v-1] in [&#39;(&#39;,&#39;~&#39;] :
+                print(&quot;‘~’联结词使用错误，不是合式公式&quot;)
+                break
+if &#39;(&#39; or &#39;)&#39; in S :
+        e = 0
+        klb =[]
+        for i in S :
+            if i == &#39;(&#39;:
+                klb.append(i)
+            if i == &#39;)&#39;:
+                if len(klb)==0:
+                    e=1
+                    break
+                else :
+                    klb.pop()
+        if len(klb)!=0 :
+            e = 1
+        if e==1:
+            print(&quot;括号使用错误，不是合式公式&quot;)
+
+
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我也是小白，程序哪里可能有些不足之处，请多多指教，如果你有更好的解题方法或思路，可以联系我，大家可以一起学习，一起进步的！😊</p>
+]]></content>
+      <categories>
+        <category>python</category>
+        <category>离散</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>离散</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python+离散数学→逻辑演算</title>
+    <url>/2019/04/02/python-chi-san-shu-xue-luo-ji-yan-suan/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇探讨的是一道逻辑演算推理题。有两种方法，一种是常规的离散数学逻辑演算，另一种则是用python程序来解决。本篇将探究两种方法： python+离散数学→逻辑演算。</p>
+<blockquote>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在某次研讨会的中间休息时间，3名与会者根据王教授的口音对他是哪个省市的人判断如下：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲:王教授不是苏州人，是上海人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙:王教授不是上海人，是苏州人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙:王教授既不是上海人，也不是杭州人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;听完这3人的判断后，王教授笑着说，你们3人中有一人说得全对，有一人说对了一半，另一人全不对。试用逻辑演算分析王教授到底是哪里人.</p>
+</blockquote>
+<blockquote>
+<h2 id="常规推理"><a href="#常规推理" class="headerlink" title="常规推理"></a>常规推理</h2></blockquote>
+<p>设命题&nbsp;&nbsp;&nbsp;&nbsp;p:王教授是苏州人；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q:王教授是上海人；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r:王教授是杭州人；</p>
+<p>用p,q,r表示甲乙丙的观点如下：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲：￢p∧q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙：p∧￢q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙：￢q∧￢r              </p>
+<p>其中一人全对，一人对一半，另一人全错。</p>
+<p>即其中一个真命题，两个假命题。先找真命题</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲全对：B1=￢p∧q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲对一半：B2=(￢p∧￢q) ∨(p∧q)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲全错：B3=p∧￢q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙全对：C1= p∧￢q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙对一半：C2=(￢p∧￢q) ∨(p∧q)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙全错：C3=￢p∧q</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙全对：D1=￢q∧￢r</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙对一半：D2=(q∧￢r) ∨( ￢q∧r)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙全错：D3=q∧r</p>
+<p>有王教授那句话可以写：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E=（B1∧C2∧D3）∨(B1∧C3∧D2) ∨(B2∧C1∧D3) ∨(B2∧C3∧D1) ∨(B3∧C1∧D2) ∨(B3∧C2∧D1)</p>
+<p>是真命题</p>
+<p>而B1∧C2∧D3⇔(￢p∧q) ∧((￢p∧￢q) ∨(p∧q)) ∧(q∧r)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q) ∧((￢p∧￢q) ∧(q∧r) ∨ (p∧q) ∧(q∧r))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q) ∧(0∨(p∧q∧r))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q)∧(p∧q∧r)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔0</p>
+<p>其他同理类似可得：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B1C3D2⇔￢p∧q∧￢r</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B2C1D3⇔0</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B2C3D1⇔0</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B3C1D2⇔p∧￢q∧r</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B3C2D1⇔0</p>
+<p>所以E⇔(￢p∧q∧￢r) ∨(p∧￢q∧r)</p>
+<p>而pqr中只能有一个是真的，所以p∧q⇔0，p∧r⇔0，q∧r⇔0</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E⇔(￢p∧q∧￢r) ∨0</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔￢p∧q∧￢r</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔1</p>
+<p>所以p为假，q为真，r为假，王教授是上海人。</p>
+<blockquote>
+<h2 id="python程序实现"><a href="#python程序实现" class="headerlink" title="python程序实现"></a>python程序实现</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以下是上述过程的代码实现，并附有代码详解，有兴趣的小伙伴可以看一看。</p>
+</blockquote>
+<pre><code>for p in range(2):                                  #p:王教授是苏州人
+    for q in range(2):                              #q:王教授是上海人
+        for r in range(2):                          #r:王教授是杭州人
+         #以下三行表示p,q,r不可能同时为真的情况
+         if (p == 1 and q == 1): continue
+         if (p == 1 and r == 1): continue
+         if (q == 1 and r == 1): continue
+
+         Jia = (not p) and q                        #甲的判断
+         Yi = p and (not q)                         #乙的判断
+         Bing = (not q) and (not r)                 #丙的判断
+
+         B1 = (not p) and q                         #甲的判断全对
+         B2 = ((not p) and (not q))or (p and q)     #甲的判断一半对
+         B3 = p and (not q)                         #甲的判断全错
+
+         C1 = p and (not q)                         #乙的判断全对
+         C2 = (p and q) or ((not p) and (not q))    #乙的判断一半对
+         C3 = (not p) and q                         #乙的判断全错
+
+         D1 = (not q) and (not r)                   #丙的判断全对
+         D2 = ((not q) and r) or (q and(not r))     #丙的判断一半对
+         D3 = q and r                               #丙的判断全错
+
+         #王教授所说的话
+         E = (B1 and C2 and D3) \
+           or(B1 and C3 and D2) \
+           or(B2 and C1 and D3) \
+           or(B2 and C3 and D1) \
+           or(B3 and C1 and D2) \
+           or(B3 and C2 and D1)
+
+         #符合王教授所的E值
+         if E==1 :
+           print(&quot;%d,%d,%d E=%d,Jia=%d,Yi=%d,Bing=%d&quot;%(p,q,r,E,Jia,Yi,Bing))
+
+
+</code></pre><blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其实用python解决离散数学的逻辑推理题比直接推理效率更高而且准确性也高，并且在遇到复杂的逻辑推理时，很容易把自己绕晕，半天也解不出来，倒不如我们可以让计算机帮我们解决，只需写几十行代码，就可以罗列出复杂的关系，何乐而不为呢，所以我们可以多学学这种解题方法！😁</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>python</category>
+        <category>离散</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>离散</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>while(scanf(&quot;%d&quot;,&amp;n)!=EOF)</title>
+    <url>/2019/03/21/oj/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“测试输入包含若干测试实例。当N为0时，输入结束，该实例不被处理。”这句话 是最早我对OJ的印象 以前也没见过这种输入要求， 做第一道题的时候就卡住了 上网看别人的代码 都有一句 while(scanf(“%d”,&amp;n)!=EOF)”scanf 函数还能放while里啊… EOF是什么玩意儿呢…”</p>
+<blockquote>
+<h2 id="什么是OJ？"><a href="#什么是OJ？" class="headerlink" title="什么是OJ？"></a>什么是OJ？</h2></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先先介绍下什么是OJ吧(知道的同学可以跳过此部分)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Online Judge系统（简称OJ）是一个在线的判题系统。用户可以在线提交程序多种程序（如C、C++）源代码，系统对源代码进行编译和执行，并通过预先设计的测试数据来检验程序源代码的正确性。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一个用户提交的程序在Online Judge系统下执行时将受到比较严格的限制，包括运行时间限制，内存使用限制和安全限制等。用户程序执行的结果将被Online Judge系统捕捉并保存，然后再转交给一个裁判程序。该裁判程序或者比较用户程序的输出数据和标准输出样例的差别，或者检验用户程序的输出数据是否满足一定的逻辑条件。最后系统返回给用户一个状态：通过（Accepted,AC）、答案错误(Wrong Answer,WA)、超时(Time Limit Exceed,TLE)、超过输出限制（Output Limit Exceed,OLE)、超内存（Memory Limit Exceed,MLE）、运行时错误（Runtime Error,RE）、格式错误（Presentation Error,PE)、或是无法编译（Compile Error,CE），并返回程序使用的内存、运行时间等信息。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Online Judge系统最初使用于ACM-ICPC国际大学生程序设计竞赛和OI信息学奥林匹克竞赛中的自动判题和排名。现广泛应用于世界各地高校学生程序设计的训练、参赛队员的训练和选拔、各种程序设计竞赛以及数据结构和算法的学习和作业的自动提交判断中。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;知名的OJ有：RQNOJ,URAL,SPOJ,vijos,tyvj,USACO,sgu,pku(poj),zju(toj),tju,uva，HDU(HDOJ)等。</p>
+<blockquote>
+<h2 id="EOF是什么东东？"><a href="#EOF是什么东东？" class="headerlink" title="EOF是什么东东？"></a>EOF是什么东东？</h2></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EOF 是一个宏 ，一般定义为-1。<br>1.EOF用来判断文件结束的标记(end of file) 用在文件操作中,可以查下msdn 看它的定义:EOF is returned by       an I/O routine when the end-of-file (or in some cases, an error) is encountered<br>2.EOF表示输入流的结束。<br>3.在发送端套接字关闭后，接收端读套接字的read函数也会返回EOF.</p>
+<blockquote>
+<h2 id="while-scanf-EOF-流程图"><a href="#while-scanf-EOF-流程图" class="headerlink" title="while(scanf()!=EOF)流程图"></a>while(scanf()!=EOF)流程图</h2></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们学过的有三种循环：for，while，do-while。但while (scanf(“%d”, &amp;n) != EOF)不像以上的任何一种，接下来看一下它的流程图：<br><img src="/2019/03/21/oj/while-1/20140502221756328.png" alt="流程图"></p>
+<blockquote>
+<h2 id="OnlineJuge的评判时，该语句的作用"><a href="#OnlineJuge的评判时，该语句的作用" class="headerlink" title="OnlineJuge的评判时，该语句的作用"></a>OnlineJuge的评判时，该语句的作用</h2></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OJ评判的原理应该是这样的：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入：通过管道命令，将一个包含若干测试用例的文件作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为【标准输入流】，所以需要while(scanf() != EOF)来判断测试文件是否读完。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输出：通过管道命令，将【标准输出流】，输出到一个文件中。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评判：将程序的【输出文件】与【正确答案文件】进行比对：如果一样，则返回程序正确提示；否则返回程序错误的提示。</p>
+<blockquote>
+<h2 id="使用原理"><a href="#使用原理" class="headerlink" title="使用原理"></a>使用原理</h2></blockquote>
+<p>有人说 EOF等于-1 其实就是scanf函数的返回值 不等于-1时 继续进行循环</p>
+<p>有人说 EOF是处理到文件结束 不用EOF也可以</p>
+<p>……….</p>
+<p>很多天后终于把这个弄明白了</p>
+<p>scanf的返回值由后面的参数决定</p>
+<p>scanf(“%d%d”, &amp;a, &amp;b);</p>
+<p>如果a和b都被成功读入，那么scanf的返回值就是2</p>
+<p>如果只有a被成功读入，返回值为1</p>
+<p>如果a和b都未被成功读入，返回值为0</p>
+<p>如果遇到错误或遇到end of file，返回值为EOF，且返回值为int型.</p>
+<blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2></blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上是我个人所述，若有什么不对的地方或者有补充的地方，还希望各位指点指点，大家可以一起学习，一起进步！</p>
+]]></content>
+      <categories>
+        <category>OJ</category>
+      </categories>
+      <tags>
+        <tag>OJ</tag>
       </tags>
   </entry>
   <entry>
@@ -547,312 +645,146 @@ targets <span class="token operator">=</span> soup<span class="token punctuation
       </tags>
   </entry>
   <entry>
-    <title>Python+离散数学→逻辑演算</title>
-    <url>/2019/04/02/python-chi-san-shu-xue-luo-ji-yan-suan/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇探讨的是一道逻辑演算推理题。有两种方法，一种是常规的离散数学逻辑演算，另一种则是用python程序来解决。本篇将探究两种方法： python+离散数学→逻辑演算。</p>
-<blockquote>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在某次研讨会的中间休息时间，3名与会者根据王教授的口音对他是哪个省市的人判断如下：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲:王教授不是苏州人，是上海人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙:王教授不是上海人，是苏州人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙:王教授既不是上海人，也不是杭州人<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;听完这3人的判断后，王教授笑着说，你们3人中有一人说得全对，有一人说对了一半，另一人全不对。试用逻辑演算分析王教授到底是哪里人.</p>
-</blockquote>
-<blockquote>
-<h2 id="常规推理"><a href="#常规推理" class="headerlink" title="常规推理"></a>常规推理</h2></blockquote>
-<p>设命题&nbsp;&nbsp;&nbsp;&nbsp;p:王教授是苏州人；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q:王教授是上海人；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r:王教授是杭州人；</p>
-<p>用p,q,r表示甲乙丙的观点如下：</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲：￢p∧q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙：p∧￢q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙：￢q∧￢r              </p>
-<p>其中一人全对，一人对一半，另一人全错。</p>
-<p>即其中一个真命题，两个假命题。先找真命题</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲全对：B1=￢p∧q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲对一半：B2=(￢p∧￢q) ∨(p∧q)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲全错：B3=p∧￢q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙全对：C1= p∧￢q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙对一半：C2=(￢p∧￢q) ∨(p∧q)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙全错：C3=￢p∧q</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙全对：D1=￢q∧￢r</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙对一半：D2=(q∧￢r) ∨( ￢q∧r)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;丙全错：D3=q∧r</p>
-<p>有王教授那句话可以写：</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E=（B1∧C2∧D3）∨(B1∧C3∧D2) ∨(B2∧C1∧D3) ∨(B2∧C3∧D1) ∨(B3∧C1∧D2) ∨(B3∧C2∧D1)</p>
-<p>是真命题</p>
-<p>而B1∧C2∧D3⇔(￢p∧q) ∧((￢p∧￢q) ∨(p∧q)) ∧(q∧r)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q) ∧((￢p∧￢q) ∧(q∧r) ∨ (p∧q) ∧(q∧r))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q) ∧(0∨(p∧q∧r))</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔(￢p∧q)∧(p∧q∧r)</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔0</p>
-<p>其他同理类似可得：</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B1C3D2⇔￢p∧q∧￢r</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B2C1D3⇔0</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B2C3D1⇔0</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B3C1D2⇔p∧￢q∧r</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B3C2D1⇔0</p>
-<p>所以E⇔(￢p∧q∧￢r) ∨(p∧￢q∧r)</p>
-<p>而pqr中只能有一个是真的，所以p∧q⇔0，p∧r⇔0，q∧r⇔0</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E⇔(￢p∧q∧￢r) ∨0</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔￢p∧q∧￢r</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇔1</p>
-<p>所以p为假，q为真，r为假，王教授是上海人。</p>
-<blockquote>
-<h2 id="python程序实现"><a href="#python程序实现" class="headerlink" title="python程序实现"></a>python程序实现</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以下是上述过程的代码实现，并附有代码详解，有兴趣的小伙伴可以看一看。</p>
-</blockquote>
-<pre><code>for p in range(2):                                  #p:王教授是苏州人
-    for q in range(2):                              #q:王教授是上海人
-        for r in range(2):                          #r:王教授是杭州人
-         #以下三行表示p,q,r不可能同时为真的情况
-         if (p == 1 and q == 1): continue
-         if (p == 1 and r == 1): continue
-         if (q == 1 and r == 1): continue
-
-         Jia = (not p) and q                        #甲的判断
-         Yi = p and (not q)                         #乙的判断
-         Bing = (not q) and (not r)                 #丙的判断
-
-         B1 = (not p) and q                         #甲的判断全对
-         B2 = ((not p) and (not q))or (p and q)     #甲的判断一半对
-         B3 = p and (not q)                         #甲的判断全错
-
-         C1 = p and (not q)                         #乙的判断全对
-         C2 = (p and q) or ((not p) and (not q))    #乙的判断一半对
-         C3 = (not p) and q                         #乙的判断全错
-
-         D1 = (not q) and (not r)                   #丙的判断全对
-         D2 = ((not q) and r) or (q and(not r))     #丙的判断一半对
-         D3 = q and r                               #丙的判断全错
-
-         #王教授所说的话
-         E = (B1 and C2 and D3) \
-           or(B1 and C3 and D2) \
-           or(B2 and C1 and D3) \
-           or(B2 and C3 and D1) \
-           or(B3 and C1 and D2) \
-           or(B3 and C2 and D1)
-
-         #符合王教授所的E值
-         if E==1 :
-           print(&quot;%d,%d,%d E=%d,Jia=%d,Yi=%d,Bing=%d&quot;%(p,q,r,E,Jia,Yi,Bing))
-
-
-</code></pre><blockquote>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其实用python解决离散数学的逻辑推理题比直接推理效率更高而且准确性也高，并且在遇到复杂的逻辑推理时，很容易把自己绕晕，半天也解不出来，倒不如我们可以让计算机帮我们解决，只需写几十行代码，就可以罗列出复杂的关系，何乐而不为呢，所以我们可以多学学这种解题方法！😁</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>python</category>
-        <category>离散</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>离散</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【小王子】摘录</title>
-    <url>/2020/03/18/xiao-wang-zi-zheng-yin-wei-ni-wei-ni-de-mei-gui-hua-fei-liao-shi-jian-zhe-cai-shi-ni-de-mei-gui-bian-de-ru-ci-chong-yao/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这是法国名著《小王子》中一个有名的寓言故事，这个童话，实在太有智慧灵性了。人与人之间，不也是一样道理吗？我不得不承认，我被触动了。</p>
-<h2 id="【小王子】"><a href="#【小王子】" class="headerlink" title="【小王子】"></a>【小王子】</h2><p> 有一天，小王子的星球上，不知从哪里来了一颗种子，后来忽然发了芽。小王子小心翼翼地监护着这株与众不同的嫩芽。小王子看到嫩芽长出一个巨大的花蕾，感到从中一定会产生奇迹。但是，这朵花儿却躲在她那绿茵茵的房间里，梳妆打扮没个完。一天清晨，正好当太阳升起的时候，她露面了。</p>
-<p>   她，精心做了那么许多的准备，却伸着懒腰打着呵欠说：“哎呀！我刚刚睡醒。。。请原谅。。。瞧我的头发还是乱蓬蓬的。。。”</p>
-<p>   小王子此时抑制不住自己那爱慕之情。</p>
-<p>“你真美！”</p>
-<p>“是么？你可知道，太阳是和我同时诞生的。。。”</p>
-<p>   小王子看得出，这花儿很不谦虚，不过，她确实楚楚动人。</p>
-<p>“我想，是该吃早点的时候了吧？”她随后又说，“请您记得我需要。。。”</p>
-<p>   小王子感到十分惭愧，于是去提了一壶清水来给她浇灌。</p>
-<p>   不久，她就以她的多疑的虚荣心来折磨小王子。例如，有一天，她谈起她身上长着的四根刺时，她对小王子说：“老虎么，让它们带着它们的利抓来吧！”</p>
-<p>“我的星球上根本没有老虎，”小王子反驳说，“而且老虎是不吃草的。”</p>
-<p>   花儿娇嗔地说：“我可不是草。”</p>
-<p>“请原谅！”</p>
-<p>“我不怕什么老虎，可是我受不了穿堂风，您没有屏风吗？”</p>
-<p>   小王子思忖着：“受不了穿堂风。。。这对一株植物来说，太不幸了。这朵花儿有点难弄…”</p>
-<p>   这时，她故意咳得更响，好使他良心受责备。</p>
-<p>   尽管小王子真心诚意爱这朵花儿，这样一来，他开始对她产生怀疑了。小王子对一些无关紧要的话，看得过分认真，结果使自己很苦恼。</p>
-<p>   小王子选择了离开，去旅行。</p>
-<p>   临行那天早上，当小王子最后一次浇花，准备为她盖上玻璃罩子时，他觉得自己想哭出来。</p>
-<p>“再见了！”他对花儿说。</p>
-<p>   花儿咳嗽起来，但并不是由于感冒。她终于开口说：“我真傻，我请求你的原谅。祝你幸福。”她居然没有一句责备他的话，这实在使他感到意外。他站在那里手足无措，玻璃罩举在半空。他不懂得这份脉脉的柔情。</p>
-<p>   “的确，我爱你。”花儿对他说，“但是你一点儿都没体会到，这实在是我的错。再说也没有用了。不过，你过去也和我一样的傻。希望你今后幸福。。。把罩子放到一边去吧，我用不着它了。”</p>
-<p>“要是风。。。”</p>
-<p>“我的感冒并没有那么厉害。。。晚间的凉风对我有好处。我是花儿呀。”</p>
-<p>“要是虫子野兽。。。”</p>
-<p>“我要是想结识蝴蝶，我就应当忍受得了两三只小毛虫在身上爬。据说，这很美妙。如果没有蝴蝶和毛虫，还有谁来看我呢？你么，你又远在天边。至于大动物，我并不怕，我有爪子。”</p>
-<p>   她天真地伸出她那四根刺，随后又说：“别这样磨磨蹭蹭啦，这挺叫人烦心！你既然决定走，那就快走吧！” </p>
-<p> 她是怕小王子看见她哭。这是一朵有傲气的花。。。 </p>
-<p>   有一天，小王子对我倾诉：“我当时什么也不懂！我应该根据她的行动，而不是根据她的话判断她。她对我散发芳香，她使我的生活充满阳光。我真不该离开她。我本应看得出她耍的那些小花招后面隐藏着的一片柔情。花儿是多么里外不一致！我当时年纪太小，不懂得爱她。”</p>
-<p>   小王子走着走着，这时候，一只狐狸出现了。</p>
-<p>“你好！”狐狸说。</p>
-<p>“你好！”小王子彬彬有礼地回答。但回头一看，什么也没有看见。</p>
-<p>“我就在这儿。”那声音说，“在苹果树下。”</p>
-<p>“你是谁？”小王子说，“你真漂亮。”</p>
-<p>“我是狐狸。”狐狸说。</p>
-<p>“来跟我玩玩吧。”小王子建议说，“我很不开心。。。”</p>
-<p>“我不能跟你玩，”狐狸说，“我还没经过驯养。”</p>
-<p>“啊，对不起！”小王子说。但是，想了一想后，他又说：“什么叫做驯养？”</p>
-<p>   狐狸说：“意思就是：建立一种关系。”</p>
-<p>“建立关系？”</p>
-<p>   “一点不错，”狐狸说，“在我看来，你只不过是一个小男孩，跟成千上万的男孩毫无两样。我不需要你，你也不需要我。对你来说我只不过是一只狐狸，跟成千上万的狐狸毫无两样。但是，你如果驯养了我，那么我们俩就彼此相互需要。对我来说，你是世界上独一无二的；我在你看来，也是世界上独一无二的。。。”</p>
-<p>   狐狸叹口气说：“世上没有十全十美的事，我的生活很单调枯燥，但是，如果你驯养了我，我的生活就会充满阳光。我会听得出一种与众不同的脚步声。别的脚步声会使我往洞里钻，你的脚步声却像音乐一般，把我从洞里召唤出来。还有，你看！那边的麦田，你看见了吗？我不吃面包，麦子对我来说，一点也没用。麦田不能引起我什么联想，这真使人扫兴！但是，你有金色的头发。一旦你驯养了我，那就会十分美妙！麦子，黄澄澄，会使我联想到你，而且我甚至会喜欢风吹麦浪的沙沙声。。。”</p>
-<p>   狐狸没说下去，盯着小王子看了好久。</p>
-<p>“请你。。。驯养我吧！”他说。</p>
-<p>   “我是很愿意的，”小王子回答道，“可是我的时间不多。我还要认识一些新朋友，了解许许多多的事。”</p>
-<p>   “人们只能了解自己所驯养的东西，”狐狸说，“人们不会有时间去了解任何东西。他们想要什么东西，都往商店去买现成的。可是，世界上没有可以购买朋友的商店，所以人也就得不到朋友。你要朋友，就请驯养我吧！”</p>
-<p>“要驯养，该怎样做呢？”小王子说。</p>
-<p>   “必须非常耐心。”狐狸回答道，“首先，你离我远一点，像这样，坐在草地上。我用眼梢瞅着你，你一句话也别说。话语往往是误会的根源。不过，每天你坐得更靠近我一些。。。”</p>
-<p>   第二天，小王子又来了。</p>
-<p>   “最好还是在同一时间来，”狐狸说，“比如说，你在下午四点钟来，一到三点钟我就开始感到幸福了。时间越接近，我就越感到幸福。到了四点钟，我就会坐立不安，焦虑重重；我就会发现幸福的代价。可是，你如果想什么时间来就什么时间来，我就不知道什么时候准备好我的心。。。应当有一定的常规。”</p>
-<p>“常规是什么？”小王子问道。</p>
-<p>   “这也是被人差不多忘得一干二净的事，”狐狸说，“这就是使某一天与其他日子不同，使某一时刻与其他时刻不同。比如说，猎人也有一种常规。他们每星期四都和乡村里的姑娘跳舞。星期四就成为我开心的日子！我甚至可以一直逛到葡萄园。要是猎人什么时候都去跳舞，这一天和其他日子没什么不同，那我就终年没放假的日子了。”</p>
-<p>   于是小王子驯养了狐狸。当小王子快要离开时，狐狸说：“哎！。。。我想哭。”</p>
-<p>   “这是你自己的错，我从未想过要使你难受，但是，你却要我驯养你。。。”小王子说。</p>
-<p>“是这样！”狐狸说。</p>
-<p>“可是你现在又要哭！”小王子说。</p>
-<p>“当然啦。”狐狸说。</p>
-<p>“这样对你有什么好处。”</p>
-<p>“对我有好处。”狐狸说，“有了麦子的颜色。”</p>
-<p>   小王子走了。路上他碰见满园的玫瑰花儿。</p>
-<p>   满园的玫瑰花儿向小王子用力点着头微笑，小王子说：“你们很美，但你们是空虚的。没有人会为你们去死。当然，我的那朵玫瑰，一个普通的过路人会认为她们和你们是一样的。可是，她单独一朵比你们全体更可贵，因为我给她浇过水，因为我为她盖过罩子，因为我给她用屏风挡风，因为我倾听过她的怨艾，她的夸口，有时甚至倾听她的沉默。因为她是我的玫瑰花。”</p>
-<p>   小王子又回到狐狸身旁：“再见了。。。狐狸”</p>
-<p>“再见了。”狐狸说，“本质的东西，眼睛是看不到的，只有用心灵看。”</p>
-<p>“本质的东西，眼睛是看不到的，只有用心灵看。”小王子重复这句话，以免忘记。</p>
-<p>“正是因为我对我的玫瑰，花费了时间，才使花儿变得那么重要。”小王子重复这句话，以免忘记。</p>
-<p>“这个真理，已经被人忘记了，”狐狸说，“但是你千万不要忘记。对你驯养的东西，你要永远负责。你必须对你的花儿负责。。。”</p>
-<p>“我要对我的花儿负责。”小王子又重复跟着说，为了牢牢记住。</p>
-<h4 id="摘自《小王子》"><a href="#摘自《小王子》" class="headerlink" title="摘自《小王子》"></a>摘自《小王子》</h4>]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于协同过滤（CF）算法的推荐系统</title>
-    <url>/2019/07/28/ji-yu-xie-tong-guo-lu-cf-suan-fa-de-tui-jian-xi-tong/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着计算机领域技术的高速发展，电子商务时代的普及，个性化的推荐系统深入生活应用的各个方面。个性化推荐算法是推荐系统中最核心的技术，在很大程度上决定了电子商务推荐系统性能的优劣。而协同过滤推荐是个性化推荐系统应用最为广泛的技术，协同过滤推荐主要分为基于用户的协同过滤推荐、基于项目的协同过滤推荐和基于模型的协同过滤推荐。</p>
-<h1 id="一、协同过滤算法描述"><a href="#一、协同过滤算法描述" class="headerlink" title="一、协同过滤算法描述"></a>一、协同过滤算法描述</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大数据时代产生了海量的数据，里面蕴含了丰富的价值。但是，大数据体量之大、种类之繁以及产生速率之快，海量的数据并不都是有价值的，用户从海量的数据中提取有用的、针对性的信息需要花费很大的时间成本。比如，当你面对如此多的电影列表，你想找到一部最符合自己兴趣的电影，因为电影数量之多，你不可能把所有的电影简介都看一遍。那么怎么解决这个问题呢？电影平台搜集你过去看过的全部电影，分析了解你对什么类型电影感兴趣，然后针对性的把你感兴趣的电影主动的罗列给你，你不用花费太多的精力便可快速找到满足自己需求的电影。推荐算法便是为解决这类实际需求而诞生了。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 推荐系统应用数据分析技术，找出用户最可能喜欢的东西推荐给用户，现在很多电子商务网站都有这个应用。目前用的比较多、比较成熟的推荐算法是协同过滤（Collaborative Filtering，简称CF）推荐算法，CF的基本思想是根据用户之前的喜好以及其他兴趣相近的用户的选择来给用户推荐物品。<br><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2hpLmNzZG4ubmV0L2F0dGFjaG1lbnQvMjAxMjAzLzE2LzBfMTMzMTkwOTY5MFhVcEkuZ2lm" alt><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如图所示，在CF中，用m×n的矩阵表示用户对物品的喜好情况，一般用打分表示用户对物品的喜好程度，分数越高表示越喜欢这个物品，0表示没有买过该物品。图中行表示一个用户，列表示一个物品，Uij表示用户i对物品j的打分情况。CF分为两个过程，一个为预测过程，另一个为推荐过程。预测过程是预测用户对没有购买过的物品的可能打分值，推荐是根据预测阶段的结果推荐用户最可能喜欢的一个或Top-N个物品。</p>
-<h1 id="二、协同过滤的实现"><a href="#二、协同过滤的实现" class="headerlink" title="二、协同过滤的实现"></a>二、协同过滤的实现</h1><p>要实现协同过滤的推荐算法，要进行以下三个步骤：</p>
-<ul>
-<li>收集数据</li>
-<li>找到相似用户或物品</li>
-<li>进行推荐</li>
-</ul>
-<h2 id="1、收集数据"><a href="#1、收集数据" class="headerlink" title="1、收集数据"></a>1、收集数据</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里的数据指的都是用户的历史行为数据，比如用户的购买历史，关注，收藏行为，或者发表了某些评论，给某个物品打了多少分等等，这些都可以用来作为数据供推荐算法使用，服务于推荐算法。需要特别指出的在于，不同的数据准确性不同，在使用时需要考虑到噪音所带来的影响。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要从用户的行为和偏好中发现规律，并基于此给予推荐，如何收集用户的偏好信息成为系统推荐效果最基础的决定因素。用户有很多方式向系统提供自己的偏好信息，而且不同的应用也可能大不相同，如下图：<br><img src="https://img-blog.csdnimg.cn/20190813212211411.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="2、找到相似用户或物品"><a href="#2、找到相似用户或物品" class="headerlink" title="2、找到相似用户或物品"></a>2、找到相似用户或物品</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这一步其实就是计算用户间以及物品间的相似度。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关于相似度的计算，现有的几种基本方法都是基于向量（Vector）的，其实也就是计算两个向量的距离，距离越近相似度越大。在推荐的场景中，在用户 - 物品偏好的二维矩阵中，我们可以将一个用户对所有物品的偏好作为一个向量来计算用户之间的相似度，或者将所有用户对某个物品的偏好作为一个向量来计算物品之间的相似度。下面我们详细介绍几种常用的相似度计算方法：<br><img src="https://img-blog.csdnimg.cn/20190813212300649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<p>下一步是作出预测。你可以运用下面的公式做一个预测：<br><img src="https://img-blog.csdn.net/20180408164703642" alt></p>
-<h2 id="3、进行推荐"><a href="#3、进行推荐" class="headerlink" title="3、进行推荐"></a>3、进行推荐</h2><h3 id="3-1、基于用户的协同过滤推荐-User-based-Collaborative-Filtering-Recommendation"><a href="#3-1、基于用户的协同过滤推荐-User-based-Collaborative-Filtering-Recommendation" class="headerlink" title="3.1、基于用户的协同过滤推荐(User-based Collaborative Filtering Recommendation)"></a>3.1、基于用户的协同过滤推荐(User-based Collaborative Filtering Recommendation)</h3><p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基于用户的协同过滤推荐算法先使用统计技术寻找与目标用户有相同喜好的邻居，然后根据目标用户的邻居的喜好产生向目标用户的推荐。基本原理就是利用用户访问行为的相似性来互相推荐用户可能感兴趣的资源，如图所示：</p>
-<p><img src="https://img-blog.csdn.net/20161020214409502" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图示意出基于用户的协同过滤推荐机制的基本原理，假设用户 A 喜欢物品 A、物品 C，用户 B 喜欢物品 B，用户 C 喜欢物品 A 、物品 C 和物品 D；从这些用户的历史喜好信息中，我们可以发现用户 A 和用户 C 的口味和偏好是比较类似的，同时用户 C 还喜欢物品 D，那么我们可以推断用户 A 可能也喜欢物品 D，因此可以将物品 D 推荐给用户 A。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基于用户的协同过滤推荐机制和基于人口统计学的推荐机制都是计算用户的相似度，并基于“邻居”用户群计算推荐，但它们所不同的是如何计算用户的相似度，基于人口统计学的机制只考虑用户本身的特征，而基于用户的协同过滤机制可是在用户的历史偏好的数据上计算用户的相似度，它的基本假设是，喜欢类似物品的用户可能有相同或者相似的口味和偏好。</p>
-<h3 id="3-2、基于项目的协同过滤推荐-Item-based-Collaborative-Filtering-Recommendation"><a href="#3-2、基于项目的协同过滤推荐-Item-based-Collaborative-Filtering-Recommendation" class="headerlink" title="3.2、基于项目的协同过滤推荐(Item-based Collaborative Filtering Recommendation)"></a>3.2、基于项目的协同过滤推荐(Item-based Collaborative Filtering Recommendation)</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据所有用户对物品或者信息的评价，发现物品和物品之间的相似度，然后根据用户的历史偏好信息将类似的物品推荐给该用户，如图所示：<br><img src="https://img-blog.csdn.net/20160821160630777" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图表明基于项目的协同过滤推荐的基本原理，用户A喜欢物品A和物品C，用户B喜欢物品A、物品B和物品C，用户C喜欢物品A，从这些用户的历史喜好中可以认为物品A与物品C比较类似，喜欢物品A的都喜欢物品C，基于这个判断用户C可能也喜欢物品C，所以推荐系统将物品C推荐给用户C。<br>       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 基于项目的协同过滤推荐和基于内容的协同过滤推荐都是基于物品相似度预测推荐，只是相似度度量的方法不一样，前者是从用户历史的偏好推断，而后者是基于物品本身的属性特征信息。</p>
-<h3 id="3-3、UserCF和ItemCF的区别"><a href="#3-3、UserCF和ItemCF的区别" class="headerlink" title="3.3、UserCF和ItemCF的区别"></a>3.3、UserCF和ItemCF的区别</h3><p><img src="https://img-blog.csdn.net/20170107105218959" alt></p>
-<h1 id="三、算法实例"><a href="#三、算法实例" class="headerlink" title="三、算法实例"></a>三、算法实例</h1><p>以ItemCF为例子具体介绍下整个算法流程。<br><strong>算法流程：</strong></p>
+    <title>人工神经网络（ANN）</title>
+    <url>/2019/07/26/ren-gong-shen-jing-wang-luo-ann/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初学人工智能不久，今天碰上了人工神经网（ANN），开始学的时候很懵，一大堆理论、公式、推导…..作为一名小白，还是很痛苦的，不过经过摸索，大概了 解了什么是ANN，公式的推导以及一些其他问题，下面我就总结下自己的理解，一方面作为自己的笔记，日后方便巩固；另一方面，也可以分享给其他有意者。</p>
+<h1 id="一、什么是神经网络"><a href="#一、什么是神经网络" class="headerlink" title="一、什么是神经网络"></a>一、什么是神经网络</h1><h2 id="1-单层神经网络"><a href="#1-单层神经网络" class="headerlink" title="1.单层神经网络"></a>1.单层神经网络</h2><p>首先以单层神经元为例解释人工神经元是如何工作的<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjMwMjYzZC5wbmc" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x1,x2,…, xN：神经元的输入。这些可以从输入层实际观测或者是一个隐藏层的中间值（隐藏层即介于输入与输出之间的所有节点组成的一层。后面讲到多层神经网络是会再跟大家解释的）。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X0：偏置单元。这是常值添加到激活函数的输入（类似数学里y＝ax+b中使直线不过原点的常数b）。即截距项，通常有＋1值。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w0,w1,w2,…,wN：对应每个输入的权重。甚至偏置单元也是有权重的。</p>
+<p>a:神经元的输出。计算如下：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjQ2NzM2Zi5wbmc" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;式子里的f是已知的激活函数，f使神经网络（单层乃至多层）非常灵活并且具有能估计复杂的非线性关系的能力。在简单情况下可以是一个高斯函数、逻辑函数、双曲线函数或者甚至上是一个线性函数。利用神经网络可让其实现三个基本功能：与、或、非（AND, OR, NOT）。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里引入一个例子：and功能实现如下<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjc3YjA2Yy5wbmc" alt><br>神经元输出：a = f( -1.5 + x1 + x2 )</p>
+<p>这样大家就很容易理解其工作原理，其实就是对输入值赋予不同权重，经过激活函数输出的过程。</p>
+<h2 id="2-多层神经网络"><a href="#2-多层神经网络" class="headerlink" title="2.多层神经网络"></a>2.多层神经网络</h2><h3 id="2-1-网络结构"><a href="#2-1-网络结构" class="headerlink" title="2.1 网络结构"></a>2.1 网络结构</h3><p>清楚了单层神经网络，多层神经网络也好理解了，就相当于多个单层的叠加成多层的过程。<br><img src="https://img-blog.csdnimg.cn/20190811204232448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br><strong>神经网络分为三种类型的层</strong>：</p>
+<p>输入层：神经网络最左边的一层，通过这些神经元输入需要训练观察的样本，即初始输入数据的一层。</p>
+<p>隐藏层：介于输入与输出之间的所有节点组成的一层。帮助神经网络学习数据间的复杂关系，即对数据进行处理的层。</p>
+<p>输出层：由前两层得到神经网络最后一层，即最后结果输出的一层。</p>
+<h3 id="2-2-传递函数-激活函数"><a href="#2-2-传递函数-激活函数" class="headerlink" title="2.2 传递函数/激活函数"></a>2.2 传递函数/激活函数</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前面每一层输入经过线性变换wx+b后还用到了sigmoid函数，在神经网络的结构中被称为传递函数或者激活函数。除了sigmoid，还有tanh、relu等别的激活函数。激活函数使线性的结果非线性化。</p>
+<h3 id="2-3-为什么需要传递函数"><a href="#2-3-为什么需要传递函数" class="headerlink" title="2.3 为什么需要传递函数"></a>2.3 为什么需要传递函数</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单理解上，如果不加激活函数，无论多少层隐层，最终的结果还是原始输入的线性变化，这样一层隐层就可以达到结果，就没有多层感知器的意义了。所以每个隐层都会配一个激活函数，提供非线性变化。</p>
+<h1 id="二、BP算法"><a href="#二、BP算法" class="headerlink" title="二、BP算法"></a>二、BP算法</h1><h2 id="1-BP算法基本思想"><a href="#1-BP算法基本思想" class="headerlink" title="1.BP算法基本思想"></a>1.BP算法基本思想</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP算法全称叫作误差反向传播(error Back Propagation，或者也叫作误差逆传播)算法。其算法基本思想为：在上述的前馈网络中，输入信号经输入层输入，通过隐层计算由输出层输出，输出值与标记值比较，若有误差，将误差反向由输出层向输入层传播，在这个过程中，利用梯度下降算法对神经元权值进行调整。</p>
+<h2 id="2-BP算法的推导"><a href="#2-BP算法的推导" class="headerlink" title="2.BP算法的推导"></a>2.BP算法的推导</h2><h3 id="2-1-数学基础理论"><a href="#2-1-数学基础理论" class="headerlink" title="2.1 数学基础理论"></a>2.1 数学基础理论</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP算法中核心的数学工具就是微积分的<strong>链式求导法则</strong>。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMjQxMzk3LWMwN2Q1ODFjOTJkYWViZWMucG5n" alt></p>
+<h3 id="2-2推导过程"><a href="#2-2推导过程" class="headerlink" title="2.2推导过程"></a>2.2推导过程</h3><p><img src="https://img-blog.csdnimg.cn/20190811205148228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
 <ol>
-<li>构建用户–&gt;物品的倒排；</li>
-<li>构建物品与物品的同现矩阵；</li>
-<li>计算物品之间的相似度，即计算相似矩阵；</li>
-<li>根据用户的历史记录，给用户推荐物品；</li>
+<li><strong>正向传播求损失，反向传播回传误差</strong></li>
+<li>根据误差信号修正每层的权重 </li>
+<li>f是激活函数；f(netj)是隐层的输出； f(netk）是输出层的输出O; d是target</li>
 </ol>
-<h2 id="算法流程1"><a href="#算法流程1" class="headerlink" title="算法流程1"></a>算法流程1</h2><p>构建用户–&gt;物品的倒排<br>如下表，行表示用户，列表示物品，1表示用户喜欢该物品<br><img src="https://img-blog.csdnimg.cn/20190814085502109.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<pre><code>例如python构建的数据格式如下
-{
-&#39;A&#39;: {&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;}, 
-&#39;B&#39;: {&#39;c&#39;: &#39;1&#39;, &#39;b&#39;: &#39;1&#39;, &#39;e&#39;: &#39;1&#39;}, 
-&#39;C&#39;: {&#39;c&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;}, 
-&#39;D&#39;: {&#39;c&#39;: &#39;1&#39;, &#39;b&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;},
-&#39;E&#39;: {&#39;a&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;}
-}
-</code></pre><h2 id="算法流程2"><a href="#算法流程2" class="headerlink" title="算法流程2"></a>算法流程2</h2><p>构建物品与物品的同现矩阵</p>
-<p>共现矩阵C表示同时喜欢两个物品的用户数，是根据用户物品倒排表计算出来的。如根据上面的用户物品倒排表可以计算出如下的共现矩阵C：<br><img src="https://img-blog.csdnimg.cn/20190814085654185.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="算法流程3"><a href="#算法流程3" class="headerlink" title="算法流程3"></a>算法流程3</h2><p>计算物品之间的相似度，即计算相似矩阵</p>
-<p>其中两个物品之间的相似度如何计算？<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设|N(i)|表示喜欢物品i的用户数，|N(i)⋂N(j)|表示同时喜欢物品i，j的用户数，则物品i与物品j的相似度为： </p>
-<p><img src="https://img-blog.csdnimg.cn/20190814090106195.png" alt></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1)式有一个问题，当物品j是一个很热门的商品时，人人都喜欢，那么wijwij就会很接近于1，即(1)式会让很多物品都和热门商品有一个很大的相似度，所以可以改进一下公式：</p>
-<p><img src="https://img-blog.csdnimg.cn/2019081409030146.png" alt></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;算法流程2中的共现矩阵C其实就是式(2)的分子，矩阵N（用于计算分母）表示喜欢某物品的用户数（是总的用户数），则(2)式中的分母便很容易求解出来了。</p>
-<p>矩阵N如下所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/20190814090318574.png" alt></p>
-<p>利用式（2）便能计算物品之间的余弦相似矩阵如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/2019081409034757.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="算法流程4"><a href="#算法流程4" class="headerlink" title="算法流程4"></a>算法流程4</h2><p>根据用户的历史记录，给用户推荐物品；</p>
-<p>最终推荐的是什么物品，是由预测兴趣度决定的。</p>
-<p><strong>物品j预测兴趣度=用户喜欢的物品i的兴趣度×物品i和物品j的相似度</strong></p>
-<p>例如：A用户喜欢a，b，d ，兴趣度分别为1,1,1</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;推荐c的预测兴趣度=1X0.67+1X0.58=1.25<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;推荐e的预测兴趣度=1X0.58=0.58</p>
-<h1 id="四、python实现案例"><a href="#四、python实现案例" class="headerlink" title="四、python实现案例"></a>四、python实现案例</h1><pre><code>from math import sqrt
-import operator
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结合BP网络结构，误差由输出展开至输入的过程如下：<br><img src="https://img-blog.csdnimg.cn/20190811205328707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>有了误差E，通过求偏导就可以求得最优的权重。（不要忘记学习率） </p>
+<p><img src="https://img-blog.csdnimg.cn/2019081120540142.png" alt></p>
+<h2 id="3-举例说明"><a href="#3-举例说明" class="headerlink" title="3. 举例说明"></a>3. 举例说明</h2><p><img src="https://img-blog.csdnimg.cn/20190811205641720.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>图中元素：<br>两个输入；<br>隐层: b1, w1, w2, w3, w4 (都有初始值）<br>输出层：b2, w5, w6, w7, w8（赋了初始值）</p>
+<h3 id="3-1-前向传播"><a href="#3-1-前向传播" class="headerlink" title="3.1 前向传播"></a>3.1 前向传播</h3><p><img src="https://img-blog.csdnimg.cn/20190811205743162.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>则误差：<br><img src="https://img-blog.csdnimg.cn/20190811205806851.png" alt></p>
+<h3 id="3-2-反向传播"><a href="#3-2-反向传播" class="headerlink" title="3.2 反向传播"></a>3.2 反向传播</h3><p><img src="https://img-blog.csdnimg.cn/20190811205859442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>参数更新：<br><img src="https://img-blog.csdnimg.cn/20190811205921617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>求误差对w1的偏导 ：<br><img src="https://img-blog.csdnimg.cn/20190811205940706.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>注意，w1对两个输出的误差都有影响<br>通过以上过程可以更新所有权重，就可以再次迭代更新了，直到满足条件。</p>
+<h1 id="三、python代码实现"><a href="#三、python代码实现" class="headerlink" title="三、python代码实现"></a>三、python代码实现</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上述例子，用python可写出如下代码，并附有详解：</p>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+import math
+a=np.array([0.05,0.1])           #a1,a2的输入值
+weight1=np.array([[0.15,0.25],[0.2,0.3]])   #a1对b1,b2的权重，a2对b1，b2的权重
+weight2=np.array([[0.4,0.5],[0.45,0.55]])     #b1对c1,c2的权重，b2对c1，c2的权重
+target=np.array([0.01,0.99])
+d1=0.35   #输入层的偏置（1）的权重
+d2=0.6    #隐藏层的偏置（1）的权重
+β=0.5    #学习效率
 
-#1.构建用户--&gt;物品的倒排
-def loadData(files):
-    data ={}
-    for line in files:
-        user,score,item=line.split(&quot;,&quot;)  #按&quot;,&quot;将每组数据单独分开,并将每组的数据赋予对应变量
-        data.setdefault(user,{})
-        data[user][item]=score
-    print (&quot;----1.用户：物品的倒排----&quot;)
-    print (data)
-    return data
+#一：前向传播
 
-#2.计算
-# 2.1 构造物品--&gt;物品的共现矩阵
-# 2.2 计算物品与物品的相似矩阵
-def similarity(data):
-    # 2.1 构造物品：物品的共现矩阵
-    N={};#喜欢物品i的总人数
-    C={};#喜欢物品i也喜欢物品j的人数
-    for user,item in data.items():
-        for i,score in item.items():
-            N.setdefault(i,0)
-            N[i]+=1
-            C.setdefault(i,{})
-            for j,scores in item.items():
-                if j not in i:
-                    C[i].setdefault(j,0)
-                    C[i][j]+=1
+#计算输入层到隐藏层的输入值，得矩阵netb1,netb2
+netb=np.dot(a,weight1)+d1
 
-    print (&quot;---2.构造的共现矩阵---&quot;)
-    print (&#39;N:&#39;,N)
-    print (&#39;C:&#39;,C)
+#计算隐藏层的输出值,得到矩阵outb1,outb2
+m=[]
+for i in range(len(netb)):
+    outb=1.0 / (1.0 + math.exp(-netb[i]))
+    m.append(outb)
+m=np.array(m)
 
-    #2.2 计算物品与物品的相似矩阵
-    W={};
-    for i,item in C.items():
-        W.setdefault(i,{})
-        for j,item2 in item.items():
-            W[i].setdefault(j,0)
-            W[i][j]=C[i][j]/sqrt(N[i]*N[j])
-    print (&quot;---3.构造的相似矩阵---&quot;)
-    print (W)
-    return W
+#计算隐藏层到输出层的输入值，得矩阵netc1,netc2
+netc=np.dot(m,weight2)+d2
 
-#3.根据用户的历史记录，给用户推荐物品
-def recommandList(data,W,user,k=3,N=10):
-    rank={}
-    for i,score in data[user].items():#获得用户user历史记录，如A用户的历史记录为{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;}
-        for j,w in sorted(W[i].items(),key=operator.itemgetter(1),reverse=True)[0:k]:#获得与物品i相似的k个物品
-            if j not in data[user].keys():#该相似的物品不在用户user的记录里
-                rank.setdefault(j,0)
-                rank[j]+=float(score) * w
+#计算隐藏层的输出值,得到矩阵outc1,outc2
+n=[]
+for i in range(len(netc)):
+    outc=1.0 / (1.0 + math.exp(-netc[i]))
+    n.append(outc)
+n=np.array(n)
 
-    print (&quot;---4.推荐----&quot;)
-    print (sorted(rank.items(),key=operator.itemgetter(1),reverse=True)[0:N])
-    return sorted(rank.items(),key=operator.itemgetter(1),reverse=True)[0:N]
+#二：反向传播
+count=0 #计数
+e=0     #误差  
+E=[]    #统计误差
+#梯度下降
+while True:
+  count+=1
 
-if __name__==&#39;__main__&#39;:
-    #用户，兴趣度，物品
-    uid_score_bid = [&#39;A,1,a&#39;, &#39;A,1,b&#39;, &#39;A,1,d&#39;, &#39;B,1,b&#39;, &#39;B,1,c&#39;, &#39;B,1,e&#39;, &#39;C,1,c&#39;, &#39;C,1,d&#39;, &#39;D,1,b&#39;, &#39;D,1,c&#39;, &#39;D,1,d&#39;,
-                     &#39;E,1,a&#39;, &#39;E,1,d&#39;]
-    data=loadData(uid_score_bid)#获得数据
-    W=similarity(data)#计算物品相似矩阵
-    recommandList(data,W,&#39;A&#39;,3,10)#推荐
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了方便理解python的实现过程，这里只用了少数数据集并是手输上去的，具体情况运用可再加段代码用于读取并处理数据文件。</p>
-<h1 id="五、算法的优缺点"><a href="#五、算法的优缺点" class="headerlink" title="五、算法的优缺点"></a>五、算法的优缺点</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个算法实现起来也比较简单，但是在实际应用中有时候也会有问题的。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如一些非常流行的商品可能很多人都喜欢，这种商品推荐给你就没什么意义了，所以计算的时候需要对这种商品加一个权重或者把这种商品完全去掉也行。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;再有，对于一些通用的东西，比如买书的时候的工具书，如现代汉语词典，新华字典神马的，通用性太强了，推荐也没什么必要了。</p>
-<p><strong>UserCF和ItemCF优缺点的对比</strong><br><img src="https://img-blog.csdnimg.cn/20190814083729968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+  #总误差对w1-w4的偏导
+  pd1=(-(target[0]-n[0])*n[0]*(1-n[0])*weight2[0][0]-(target[1]-n[1])*n[1]*(1-n[1])*weight2[0][1])*m[0]*(1-m[0])*a[0]
+  pd2=(-(target[0]-n[0])*n[0]*(1-n[0])*weight2[0][0]-(target[1]-n[1])*n[1]*(1-n[1])*weight2[0][1])*m[0]*(1-m[0])*a[1]
+  pd3=(-(target[0]-n[0])*n[0]*(1-n[0])*weight2[1][0]-(target[1]-n[1])*n[1]*(1-n[1])*weight2[0][1])*m[0]*(1-m[0])*a[0]                          
+  pd4=(-(target[0]-n[0])*n[0]*(1-n[0])*weight2[1][1]-(target[1]-n[1])*n[1]*(1-n[1])*weight2[0][1])*m[0]*(1-m[0])*a[1]
+  weight1[0][0]=weight1[0][0]-β*pd1
+  weight1[1][0]=weight1[1][0]-β*pd2
+  weight1[0][1]=weight1[0][1]-β*pd3
+  weight1[1][1]=weight1[1][1]-β*pd4
+
+  #总误差对w5-w8的偏导
+  pd5=-(target[0]-n[0])*n[0]*(1-n[0])*m[0]
+  pd6=-(target[0]-n[0])*n[0]*(1-n[0])*m[1]
+  pd7=-(target[1]-n[1])*n[1]*(1-n[1])*m[0]
+  pd8=-(target[1]-n[1])*n[1]*(1-n[1])*m[1]
+  weight2[0][0]=weight2[0][0]-β*pd5
+  weight2[1][0]=weight2[1][0]-β*pd6
+  weight2[0][1]=weight2[0][1]-β*pd7
+  weight2[1][1]=weight2[1][1]-β*pd8
+
+  netb=np.dot(a,weight1)+d1
+  m=[]
+  for i in range(len(netb)):
+    outb=1.0 / (1.0 + math.exp(-netb[i]))
+    m.append(outb)
+  m=np.array(m)
+  netc=np.dot(m,weight2)+d2
+  n=[]
+  for i in range(len(netc)):
+    outc=1.0 / (1.0 + math.exp(-netc[i]))
+    n.append(outc)
+  n=np.array(n)
+
+  #计算总误差
+  for j in range(len(n)):
+    e += (target[j]-n[j])**2/2
+  E.append(e)
+  #判断
+  if e&lt;0.0000001:
+    break
+  else:
+      e=0
+print(count)
+print(e)
+print(n)
+plt.plot(range(len(E)),E,label=&#39;error&#39;)
+plt.legend() 
+plt.xlabel(&#39;time&#39;)
+plt.ylabel(&#39;error&#39;)
+plt.show()
+</code></pre><h1 id="四、BP神经网络的优缺点"><a href="#四、BP神经网络的优缺点" class="headerlink" title="四、BP神经网络的优缺点"></a>四、BP神经网络的优缺点</h1><p><strong>BP神经网络的优点：</strong></p>
+<ol>
+<li>非线性映射能力</li>
+<li>泛化能力  </li>
+<li>容错能力，允许输入样本中带有较大误差甚至个别错误。反应正确规律的知识来自全体样本，个别样本中的误差不能左右对权矩阵的调整</li>
+</ol>
+<p><strong>BP神经网络的缺陷：</strong></p>
+<ol>
+<li>需要的参数过多，而且参数的选择没有有效的方法。确定一个BP神经网络需要知道：网络的层数、每一层神经元的个数和权值。权值可以通过学习得到，如果，隐层神经元数量太多会引起过学习，如果隐层神经元个数太少会引起欠学习。此外学习率的选择也是需要考虑。目前来说，对于参数的确定缺少一个简单有效的方法，所以导致算法很不稳定；</li>
+<li>属于监督学习，对于样本有较大依赖性，网络学习的逼近和推广能力与样本有很大关系，如果样本集合代表性差，样本矛盾多，存在冗余样本，网络就很难达到预期的性能；</li>
+<li>由于权值是随机给定的，所以BP神经网络具有不可重现性；</li>
+</ol>
 ]]></content>
       <categories>
         <category>机器学习</category>
       </categories>
       <tags>
         <tag>机器学习</tag>
-        <tag>协同过滤（CF）</tag>
-        <tag>推荐系统</tag>
+        <tag>BP算法</tag>
+        <tag>人工神经网络（ANN）</tag>
       </tags>
   </entry>
   <entry>
@@ -930,61 +862,6 @@ printmatrix<span class="token punctuation">(</span><span class="token number">0<
       <tags>
         <tag>python</tag>
         <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数据集的划分</title>
-    <url>/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。</p>
-<h2 id="为什么要划分数据集为训练集、验证集和测试集？"><a href="#为什么要划分数据集为训练集、验证集和测试集？" class="headerlink" title="为什么要划分数据集为训练集、验证集和测试集？"></a>为什么要划分数据集为训练集、验证集和测试集？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;做科研，就要提出问题，找到解决方法，并证明其有效性。这里的工作有3个部分，一个是提出问题，一个是找到解决方法，另一个是证明有效性。每一个部分都可以作为科研的对象，研究的越靠前，则越偏向科学，越靠后，则越偏向技术，因此叫做科学与技术。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在人工智能领域，证明一个模型的有效性，就是对于某一问题，有一些数据，而我们提出的模型可以（部分）解决这个问题，那如何来证明呢？这和我们平时的考试也是一样的，证明我们掌握了某类知识，就是去参加考试。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;好，那么如何设计考试，让这个考试可以较为客观的考察出每个人的能力呢（注意，不是让每个人都得最高分）？回想我们的高中阶段，有一些教材，让我们平时学习其基本知识（训练集），有一些模拟考试，让我们知道我们到底掌握的怎么样，然后再改进我们的学习（验证集），最后的高考决定我们的去向（测试集）。这样的类比，是不是就很清楚了。</p>
-<h2 id="训练集、验证集和测试集"><a href="#训练集、验证集和测试集" class="headerlink" title="训练集、验证集和测试集"></a>训练集、验证集和测试集</h2><pre><code>1. **训练集**：顾名思义指的是用于训练的样本集合,主要用来训练神经网络中的参数。
-
-2. **验证集**：从字面意思理解即为用于验证模型性能的样本集合.不同神经网络在训练集上训练结束后,通过验证集来比较判断各个模型的性能.这里的不同模型主要是指对应不同超参数的神经网络,也可以指完全不同结构的神经网络。
-
-3. **测试集**：对于训练完成的神经网络,测试集用于客观的评价神经网络的性能。
-</code></pre><h2 id="如何划分训练集、验证集和测试集"><a href="#如何划分训练集、验证集和测试集" class="headerlink" title="如何划分训练集、验证集和测试集"></a>如何划分训练集、验证集和测试集</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个问题其实非常基础，也非常明确，在Scikit-learn里提供了各种各样的划分方法。无论是单一的训练集、验证集和测试集，还是进行交叉验证，你都会找到调用的方法，因此我们这里主要介绍两种常见的方法。</p>
-<pre><code>1. 前人给出训练集、验证集和测试集
-  对于这种情况，那么只能跟随前人的数据划分进行，一般的比赛也是如此。一定不要使用测试集来调整性能（测试集已知的情况下），尽管存在使用这种方法来提升模型的性能的行为，但是我们并不推荐这么做。最正常的做法应当是使用训练集来学习，并使用验证集来调整超参数。当在验证集上取得最优的模型时，此时就可以使用此模型的超参数来重新训练（训练集+验证集），并用测试集评估最终的性能。
-    我们首先说明加入验证集重新训练和不加有啥区别，从理论上讲，一方面学习的样本增多，应当是会提升模型性能的，第二，其在验证集上取得最优的模型与验证集的分布的契合度是最高的，因此最终的模型会更接近验证集的分布。
-    其次再说明验证集和测试集上的性能差异。事实上，在验证集上取得最优的模型，未必在测试集上取得最优。其原因就是训练的模型是否对于该问题有着较好的泛化能力，即没有对验证集产生过拟合现象。正因为有这种情况的发生，才会有人使用测试集的最优值作为最终的结果（而不管验证集的好坏）。
-
-2. 前人没有明确给出数据集的划分
-  这时候可以采取第一种划分方法，对于样本数较小的数据集，同样可以采取交叉验证的方法。
-    交叉验证的方法的使用场景有很多，我们这里是针对不同的模型的性能好坏进行评估。
-    使用交叉验证，可以获得更为客观的性能差异。当使用第一种方法时，我们更建议使用P值来做显著性检验，从而保证性能差异的客观性。而使用第二种方法，即交叉验证时，我们选取其性能表现的均值作为最终的结果，更能体现该模型的泛化能力。
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.存在验证集<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里五倍交叉验证是用于进行调参，此时不接触测试集。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据集首先划分出训练集与测试集（可以是4:1或者9:1）。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其次，在训练集中，再划分出验证集（通常也是4:1或者9：1）<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后对于训练集和验证集进行5折交叉验证，选取出最优的超参数，然后把训练集和验证集一起训练出最终的模型。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.不存在验证集<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该情况通常是对比不同的模型，如自己的模型和别人的模型的性能好坏。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只需要把数据集划分为训练集和测试集即可，然后选取5次试验的平均值作为最终的性能评价。</p>
-<h2 id="验证集和测试集的区别"><a href="#验证集和测试集的区别" class="headerlink" title="验证集和测试集的区别"></a>验证集和测试集的区别</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;那么,训练集、校验集和测试集之间又有什么区别呢?一般而言,训练集与后两者之间较易分辨,校验集和测试集之间的概念较易混淆.个人是从下面的角度来理解的:</p>
-<ul>
-<li><p>神经网络在网络结构确定的情况下,有两部分影响模型最终的性能,一是普通参数(比如权重w和偏置b),另一个是超参数(例如学习率,网络层数).普通参数我们在训练集上进行训练,超参数我们一般人工指定(比较不同超参数的模型在校验集上的性能).那为什么我们不像普通参数一样在训练集上训练超参数呢?(花书给出了解答)一是：超参数一般难以优化(无法像普通参数一样通过梯度下降的方式进行优化).二是：超参数很多时候不适合在训练集上进行训练,例如,如果在训练集上训练能控制模型容量的超参数,这些超参数总会被训练成使得模型容量最大的参数(因为模型容量越大,训练误差越小),所以训练集上训练超参数的结果就是模型绝对过拟合.</p>
-</li>
-<li><p>正因为超参数无法在训练集上进行训练,因此我们单独设立了一个验证集,用于选择(人工训练)最优的超参数.因为验证集是用于选择超参数的,因此校验集和训练集是独立不重叠的.</p>
-</li>
-<li><p>测试集是用于在完成神经网络训练过程后,为了<strong>客观评价模型</strong>在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,因此测试与验证集和训练集之间也是独立不重叠的,而且测试集不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标.</p>
-</li>
-</ul>
-<p>为了方便清楚直观的了解，上一个表格：<br><img src="https://img-blog.csdnimg.cn/20190724110042475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至此,我们可以将神经网络完整的训练过程归结为一下两个步骤:</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.训练普通参数.在训练集(给定超参数)上利用学习算法,训练普通参数,使得模型在训练集上的误差降低到可接受的程度(一般接近人类的水平).</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.’训练’超参数.在验证集上验证网络的generalization error(泛化能力),并根据模型性能对超参数进行调整.</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重复1和2两个步骤,直至网络在验证集上取得较低的generalization error.此时完整的训练过程结束.在完成参数和超参数的训练后,在测试集上测试网络的性能.</p>
-<h2 id="附言"><a href="#附言" class="headerlink" title="附言"></a>附言</h2><p>说到底：</p>
-<ul>
-<li><p>验证集是一定需要的；</p>
-</li>
-<li><p>如果验证集具有足够泛化代表性，是不需要再整出什么测试集的；</p>
-</li>
-<li><p>整个测试集往往就是为了在验证集只是非训练集一个小子集的情况下，好奇一下那个靠训练集（训练）和验证集（调参）多次接力训练出来的模型是不是具有了泛化性能，因而加试一下图个确定。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>数据集</tag>
       </tags>
   </entry>
   <entry>
@@ -1070,45 +947,87 @@ print manhattan(p,q)
         <category>python</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>机器学习</tag>
+        <tag>python</tag>
         <tag>相似度</tag>
       </tags>
   </entry>
   <entry>
-    <title>暑期培训第一次测试题总结</title>
-    <url>/2019/07/22/shu-qi-pei-xun-di-yi-ci-ce-shi-ti-zong-jie/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里是一些暑期培训第一次测试题的部分解释，经过这次测试的摧残，总结备录一下，方便日后回顾复习。</p>
-<h2 id="Feeling"><a href="#Feeling" class="headerlink" title="Feeling"></a>Feeling</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经过几天的学习，7月22日下午，进行了第一次检测。开始以为会让我们推导一些公式什么的，结果当拿到测试题的时候，一首凉凉送给自己……开始的选择题和填空题还能接受，看到简答题，这都是什么，有种似曾相识的感觉，但就是写不出来。为时四十分钟的考试结束后，不到半个小时成绩就出来了，虽然成绩不那么好，但排名还行，然后学长给我们进行了讲解答疑，发现自己学的有点粗糙，没有注意那些细节性问题和概念，学以致用这方面也是有点差的。</p>
-<h2 id="Test-1"><a href="#Test-1" class="headerlink" title="Test 1"></a>Test 1</h2><h3 id="为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set"><a href="#为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set" class="headerlink" title="为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?"></a>为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校验集是用于调整超参数的，从而更好的优化训练模型。测试集是用于在完成神经网络训练过程后,为了客观评价模型在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,而且测试集<strong>不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标</strong>。</p>
-<p>（备注：不清楚这三个数据集概念及其作用的，可看下我以前写的关于这些的一篇文章。传送门：）</p>
-<h2 id="Test-2"><a href="#Test-2" class="headerlink" title="Test 2"></a>Test 2</h2><h3 id="批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？"><a href="#批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？" class="headerlink" title="批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？"></a>批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们要先知道什么是BGD和SGD，从两者的运算方法上，我们就可以得知不同之处。</p>
-<p>（1）批量梯度下降法（Batch Gradient Descent） ：在更新参数时都使用所有的样本来进行更新。</p>
-<ul>
-<li>优点：<strong>全局最优解</strong>，能保证每一次更新权值，都能降低损失函数；易于并行实现。</li>
-<li>缺点：当样本数目很多时，训练过程会很慢。</li>
-</ul>
-<p>（2）随机梯度下降法（Stochastic Gradient Descent）：在更新参数时都使用一个样本来进行更新。每一次跟新参数都用一个样本，更新很多次。如果样本量很大的情况（例如几十万），那么可能只用其中几万条或者几千条的样本，就已经将参数迭代到最优解了，对比上面的批量梯度下降，迭代一次需要用到十几万训练样本，一次迭代不可能最优，如果迭代10次的话就需要遍历训练样本10次，这种方式计算复杂度太高。</p>
-<ul>
-<li>优点：训练速度快；</li>
-<li>缺点：准确度下降，<strong>并不是全局最优</strong>；不易于并行实现。从迭代的次数上来看，随机梯度下降法迭代的次数较多，在解空间的搜索过程看起来很盲目。噪音很多，使得它并不是每次迭代都向着整体最优化方向。</li>
-</ul>
-<h2 id="Test-3"><a href="#Test-3" class="headerlink" title="Test 3"></a>Test 3</h2><h3 id="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"><a href="#当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？" class="headerlink" title="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"></a>当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;废话不多说，直接上图：<br><img src="https://img-blog.csdnimg.cn/20190722174826448.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="Test-4"><a href="#Test-4" class="headerlink" title="Test 4"></a>Test 4</h2><h3 id="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"><a href="#假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？" class="headerlink" title="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"></a>假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于逻辑回归，把权重初始化为0当然也是可以的，但是对于一个神经网络，如果你把权重或者参数都初始化为0，那么梯度下降将不会起作用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果权值全初始化为0，则<strong>无法更新权值</strong>。这是由于前向传播中，所有节点输出值均相同，由于此处使用了sigmod激活函数，所以此处所有神经节点输出都为1/2，而在反向传播每个节点输出值对损失函数的偏导时，涉及到对权值相乘后的求和，该项永远为0，故所乘的结果也必然为0，这样在计算权值对算是函数的偏导时，其偏导必然为0，所有权值偏导都为0，那么就不要指望使用梯度下降法能更新权值了，自然神经网络的训练也就无法进行下去了。</p>
-<h2 id="Test-5"><a href="#Test-5" class="headerlink" title="Test 5"></a>Test 5</h2><h3 id="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"><a href="#在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？" class="headerlink" title="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"></a>在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;神经网络中的梯度不稳定指的是<strong>梯度消失</strong>和<strong>梯度爆炸</strong>问题。<br>（备注：对于这两种问题的具体解释和为什么会出现这种问题，以及解决方法，这里不具体讨论了，我会在以后的文章中具体解释到的。）</p>
-<h2 id="Test-6"><a href="#Test-6" class="headerlink" title="Test 6"></a>Test 6</h2><h3 id="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"><a href="#为什么在神经网络中使用交叉熵而不是均方差作为误差函数？" class="headerlink" title="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"></a>为什么在神经网络中使用交叉熵而不是均方差作为误差函数？</h3><pre><code>1. 神经网络中如果预测值与实际值的误差越大，那么在反向传播训练的过程中，各种参数调整的幅度就要更大，从而使训练更快收敛，如果预测值与实际值的误差小，各种参数调整的幅度就要小，从而减少震荡。
-
-2. 使用平方误差损失函数，误差增大参数的梯度会增大，但是当误差很大时，参数的梯度就会又减小了。
-
-3. 使用交叉熵损失是函数，误差越大参数的梯度也越大，能够快速收敛。
-</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（备注：对于结论的推导过程会总结在另一篇文章里。）</p>
-]]></content>
+    <title>【小王子】摘录</title>
+    <url>/2020/03/18/xiao-wang-zi-zheng-yin-wei-ni-wei-ni-de-mei-gui-hua-fei-liao-shi-jian-zhe-cai-shi-ni-de-mei-gui-bian-de-ru-ci-chong-yao/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这是法国名著《小王子》中一个有名的寓言故事，这个童话，实在太有智慧灵性了。人与人之间，不也是一样道理吗？我不得不承认，我被触动了。</p>
+<h2 id="【小王子】"><a href="#【小王子】" class="headerlink" title="【小王子】"></a>【小王子】</h2><p> 有一天，小王子的星球上，不知从哪里来了一颗种子，后来忽然发了芽。小王子小心翼翼地监护着这株与众不同的嫩芽。小王子看到嫩芽长出一个巨大的花蕾，感到从中一定会产生奇迹。但是，这朵花儿却躲在她那绿茵茵的房间里，梳妆打扮没个完。一天清晨，正好当太阳升起的时候，她露面了。</p>
+<p>   她，精心做了那么许多的准备，却伸着懒腰打着呵欠说：“哎呀！我刚刚睡醒。。。请原谅。。。瞧我的头发还是乱蓬蓬的。。。”</p>
+<p>   小王子此时抑制不住自己那爱慕之情。</p>
+<p>“你真美！”</p>
+<p>“是么？你可知道，太阳是和我同时诞生的。。。”</p>
+<p>   小王子看得出，这花儿很不谦虚，不过，她确实楚楚动人。</p>
+<p>“我想，是该吃早点的时候了吧？”她随后又说，“请您记得我需要。。。”</p>
+<p>   小王子感到十分惭愧，于是去提了一壶清水来给她浇灌。</p>
+<p>   不久，她就以她的多疑的虚荣心来折磨小王子。例如，有一天，她谈起她身上长着的四根刺时，她对小王子说：“老虎么，让它们带着它们的利抓来吧！”</p>
+<p>“我的星球上根本没有老虎，”小王子反驳说，“而且老虎是不吃草的。”</p>
+<p>   花儿娇嗔地说：“我可不是草。”</p>
+<p>“请原谅！”</p>
+<p>“我不怕什么老虎，可是我受不了穿堂风，您没有屏风吗？”</p>
+<p>   小王子思忖着：“受不了穿堂风。。。这对一株植物来说，太不幸了。这朵花儿有点难弄…”</p>
+<p>   这时，她故意咳得更响，好使他良心受责备。</p>
+<p>   尽管小王子真心诚意爱这朵花儿，这样一来，他开始对她产生怀疑了。小王子对一些无关紧要的话，看得过分认真，结果使自己很苦恼。</p>
+<p>   小王子选择了离开，去旅行。</p>
+<p>   临行那天早上，当小王子最后一次浇花，准备为她盖上玻璃罩子时，他觉得自己想哭出来。</p>
+<p>“再见了！”他对花儿说。</p>
+<p>   花儿咳嗽起来，但并不是由于感冒。她终于开口说：“我真傻，我请求你的原谅。祝你幸福。”她居然没有一句责备他的话，这实在使他感到意外。他站在那里手足无措，玻璃罩举在半空。他不懂得这份脉脉的柔情。</p>
+<p>   “的确，我爱你。”花儿对他说，“但是你一点儿都没体会到，这实在是我的错。再说也没有用了。不过，你过去也和我一样的傻。希望你今后幸福。。。把罩子放到一边去吧，我用不着它了。”</p>
+<p>“要是风。。。”</p>
+<p>“我的感冒并没有那么厉害。。。晚间的凉风对我有好处。我是花儿呀。”</p>
+<p>“要是虫子野兽。。。”</p>
+<p>“我要是想结识蝴蝶，我就应当忍受得了两三只小毛虫在身上爬。据说，这很美妙。如果没有蝴蝶和毛虫，还有谁来看我呢？你么，你又远在天边。至于大动物，我并不怕，我有爪子。”</p>
+<p>   她天真地伸出她那四根刺，随后又说：“别这样磨磨蹭蹭啦，这挺叫人烦心！你既然决定走，那就快走吧！” </p>
+<p> 她是怕小王子看见她哭。这是一朵有傲气的花。。。 </p>
+<p>   有一天，小王子对我倾诉：“我当时什么也不懂！我应该根据她的行动，而不是根据她的话判断她。她对我散发芳香，她使我的生活充满阳光。我真不该离开她。我本应看得出她耍的那些小花招后面隐藏着的一片柔情。花儿是多么里外不一致！我当时年纪太小，不懂得爱她。”</p>
+<p>   小王子走着走着，这时候，一只狐狸出现了。</p>
+<p>“你好！”狐狸说。</p>
+<p>“你好！”小王子彬彬有礼地回答。但回头一看，什么也没有看见。</p>
+<p>“我就在这儿。”那声音说，“在苹果树下。”</p>
+<p>“你是谁？”小王子说，“你真漂亮。”</p>
+<p>“我是狐狸。”狐狸说。</p>
+<p>“来跟我玩玩吧。”小王子建议说，“我很不开心。。。”</p>
+<p>“我不能跟你玩，”狐狸说，“我还没经过驯养。”</p>
+<p>“啊，对不起！”小王子说。但是，想了一想后，他又说：“什么叫做驯养？”</p>
+<p>   狐狸说：“意思就是：建立一种关系。”</p>
+<p>“建立关系？”</p>
+<p>   “一点不错，”狐狸说，“在我看来，你只不过是一个小男孩，跟成千上万的男孩毫无两样。我不需要你，你也不需要我。对你来说我只不过是一只狐狸，跟成千上万的狐狸毫无两样。但是，你如果驯养了我，那么我们俩就彼此相互需要。对我来说，你是世界上独一无二的；我在你看来，也是世界上独一无二的。。。”</p>
+<p>   狐狸叹口气说：“世上没有十全十美的事，我的生活很单调枯燥，但是，如果你驯养了我，我的生活就会充满阳光。我会听得出一种与众不同的脚步声。别的脚步声会使我往洞里钻，你的脚步声却像音乐一般，把我从洞里召唤出来。还有，你看！那边的麦田，你看见了吗？我不吃面包，麦子对我来说，一点也没用。麦田不能引起我什么联想，这真使人扫兴！但是，你有金色的头发。一旦你驯养了我，那就会十分美妙！麦子，黄澄澄，会使我联想到你，而且我甚至会喜欢风吹麦浪的沙沙声。。。”</p>
+<p>   狐狸没说下去，盯着小王子看了好久。</p>
+<p>“请你。。。驯养我吧！”他说。</p>
+<p>   “我是很愿意的，”小王子回答道，“可是我的时间不多。我还要认识一些新朋友，了解许许多多的事。”</p>
+<p>   “人们只能了解自己所驯养的东西，”狐狸说，“人们不会有时间去了解任何东西。他们想要什么东西，都往商店去买现成的。可是，世界上没有可以购买朋友的商店，所以人也就得不到朋友。你要朋友，就请驯养我吧！”</p>
+<p>“要驯养，该怎样做呢？”小王子说。</p>
+<p>   “必须非常耐心。”狐狸回答道，“首先，你离我远一点，像这样，坐在草地上。我用眼梢瞅着你，你一句话也别说。话语往往是误会的根源。不过，每天你坐得更靠近我一些。。。”</p>
+<p>   第二天，小王子又来了。</p>
+<p>   “最好还是在同一时间来，”狐狸说，“比如说，你在下午四点钟来，一到三点钟我就开始感到幸福了。时间越接近，我就越感到幸福。到了四点钟，我就会坐立不安，焦虑重重；我就会发现幸福的代价。可是，你如果想什么时间来就什么时间来，我就不知道什么时候准备好我的心。。。应当有一定的常规。”</p>
+<p>“常规是什么？”小王子问道。</p>
+<p>   “这也是被人差不多忘得一干二净的事，”狐狸说，“这就是使某一天与其他日子不同，使某一时刻与其他时刻不同。比如说，猎人也有一种常规。他们每星期四都和乡村里的姑娘跳舞。星期四就成为我开心的日子！我甚至可以一直逛到葡萄园。要是猎人什么时候都去跳舞，这一天和其他日子没什么不同，那我就终年没放假的日子了。”</p>
+<p>   于是小王子驯养了狐狸。当小王子快要离开时，狐狸说：“哎！。。。我想哭。”</p>
+<p>   “这是你自己的错，我从未想过要使你难受，但是，你却要我驯养你。。。”小王子说。</p>
+<p>“是这样！”狐狸说。</p>
+<p>“可是你现在又要哭！”小王子说。</p>
+<p>“当然啦。”狐狸说。</p>
+<p>“这样对你有什么好处。”</p>
+<p>“对我有好处。”狐狸说，“有了麦子的颜色。”</p>
+<p>   小王子走了。路上他碰见满园的玫瑰花儿。</p>
+<p>   满园的玫瑰花儿向小王子用力点着头微笑，小王子说：“你们很美，但你们是空虚的。没有人会为你们去死。当然，我的那朵玫瑰，一个普通的过路人会认为她们和你们是一样的。可是，她单独一朵比你们全体更可贵，因为我给她浇过水，因为我为她盖过罩子，因为我给她用屏风挡风，因为我倾听过她的怨艾，她的夸口，有时甚至倾听她的沉默。因为她是我的玫瑰花。”</p>
+<p>   小王子又回到狐狸身旁：“再见了。。。狐狸”</p>
+<p>“再见了。”狐狸说，“本质的东西，眼睛是看不到的，只有用心灵看。”</p>
+<p>“本质的东西，眼睛是看不到的，只有用心灵看。”小王子重复这句话，以免忘记。</p>
+<p>“正是因为我对我的玫瑰，花费了时间，才使花儿变得那么重要。”小王子重复这句话，以免忘记。</p>
+<p>“这个真理，已经被人忘记了，”狐狸说，“但是你千万不要忘记。对你驯养的东西，你要永远负责。你必须对你的花儿负责。。。”</p>
+<p>“我要对我的花儿负责。”小王子又重复跟着说，为了牢牢记住。</p>
+<h4 id="摘自《小王子》"><a href="#摘自《小王子》" class="headerlink" title="摘自《小王子》"></a>摘自《小王子》</h4>]]></content>
       <categories>
-        <category>机器学习</category>
+        <category>生活</category>
       </categories>
       <tags>
-        <tag>机器学习</tag>
-        <tag>测试题</tag>
+        <tag>生活</tag>
       </tags>
   </entry>
   <entry>
@@ -1268,6 +1187,175 @@ print manhattan(p,q)
       </tags>
   </entry>
   <entry>
+    <title>基于协同过滤（CF）算法的推荐系统</title>
+    <url>/2019/07/28/ji-yu-xie-tong-guo-lu-cf-suan-fa-de-tui-jian-xi-tong/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着计算机领域技术的高速发展，电子商务时代的普及，个性化的推荐系统深入生活应用的各个方面。个性化推荐算法是推荐系统中最核心的技术，在很大程度上决定了电子商务推荐系统性能的优劣。而协同过滤推荐是个性化推荐系统应用最为广泛的技术，协同过滤推荐主要分为基于用户的协同过滤推荐、基于项目的协同过滤推荐和基于模型的协同过滤推荐。</p>
+<h1 id="一、协同过滤算法描述"><a href="#一、协同过滤算法描述" class="headerlink" title="一、协同过滤算法描述"></a>一、协同过滤算法描述</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大数据时代产生了海量的数据，里面蕴含了丰富的价值。但是，大数据体量之大、种类之繁以及产生速率之快，海量的数据并不都是有价值的，用户从海量的数据中提取有用的、针对性的信息需要花费很大的时间成本。比如，当你面对如此多的电影列表，你想找到一部最符合自己兴趣的电影，因为电影数量之多，你不可能把所有的电影简介都看一遍。那么怎么解决这个问题呢？电影平台搜集你过去看过的全部电影，分析了解你对什么类型电影感兴趣，然后针对性的把你感兴趣的电影主动的罗列给你，你不用花费太多的精力便可快速找到满足自己需求的电影。推荐算法便是为解决这类实际需求而诞生了。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 推荐系统应用数据分析技术，找出用户最可能喜欢的东西推荐给用户，现在很多电子商务网站都有这个应用。目前用的比较多、比较成熟的推荐算法是协同过滤（Collaborative Filtering，简称CF）推荐算法，CF的基本思想是根据用户之前的喜好以及其他兴趣相近的用户的选择来给用户推荐物品。<br><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2hpLmNzZG4ubmV0L2F0dGFjaG1lbnQvMjAxMjAzLzE2LzBfMTMzMTkwOTY5MFhVcEkuZ2lm" alt><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如图所示，在CF中，用m×n的矩阵表示用户对物品的喜好情况，一般用打分表示用户对物品的喜好程度，分数越高表示越喜欢这个物品，0表示没有买过该物品。图中行表示一个用户，列表示一个物品，Uij表示用户i对物品j的打分情况。CF分为两个过程，一个为预测过程，另一个为推荐过程。预测过程是预测用户对没有购买过的物品的可能打分值，推荐是根据预测阶段的结果推荐用户最可能喜欢的一个或Top-N个物品。</p>
+<h1 id="二、协同过滤的实现"><a href="#二、协同过滤的实现" class="headerlink" title="二、协同过滤的实现"></a>二、协同过滤的实现</h1><p>要实现协同过滤的推荐算法，要进行以下三个步骤：</p>
+<ul>
+<li>收集数据</li>
+<li>找到相似用户或物品</li>
+<li>进行推荐</li>
+</ul>
+<h2 id="1、收集数据"><a href="#1、收集数据" class="headerlink" title="1、收集数据"></a>1、收集数据</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里的数据指的都是用户的历史行为数据，比如用户的购买历史，关注，收藏行为，或者发表了某些评论，给某个物品打了多少分等等，这些都可以用来作为数据供推荐算法使用，服务于推荐算法。需要特别指出的在于，不同的数据准确性不同，在使用时需要考虑到噪音所带来的影响。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要从用户的行为和偏好中发现规律，并基于此给予推荐，如何收集用户的偏好信息成为系统推荐效果最基础的决定因素。用户有很多方式向系统提供自己的偏好信息，而且不同的应用也可能大不相同，如下图：<br><img src="https://img-blog.csdnimg.cn/20190813212211411.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="2、找到相似用户或物品"><a href="#2、找到相似用户或物品" class="headerlink" title="2、找到相似用户或物品"></a>2、找到相似用户或物品</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这一步其实就是计算用户间以及物品间的相似度。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关于相似度的计算，现有的几种基本方法都是基于向量（Vector）的，其实也就是计算两个向量的距离，距离越近相似度越大。在推荐的场景中，在用户 - 物品偏好的二维矩阵中，我们可以将一个用户对所有物品的偏好作为一个向量来计算用户之间的相似度，或者将所有用户对某个物品的偏好作为一个向量来计算物品之间的相似度。下面我们详细介绍几种常用的相似度计算方法：<br><img src="https://img-blog.csdnimg.cn/20190813212300649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<p>下一步是作出预测。你可以运用下面的公式做一个预测：<br><img src="https://img-blog.csdn.net/20180408164703642" alt></p>
+<h2 id="3、进行推荐"><a href="#3、进行推荐" class="headerlink" title="3、进行推荐"></a>3、进行推荐</h2><h3 id="3-1、基于用户的协同过滤推荐-User-based-Collaborative-Filtering-Recommendation"><a href="#3-1、基于用户的协同过滤推荐-User-based-Collaborative-Filtering-Recommendation" class="headerlink" title="3.1、基于用户的协同过滤推荐(User-based Collaborative Filtering Recommendation)"></a>3.1、基于用户的协同过滤推荐(User-based Collaborative Filtering Recommendation)</h3><p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基于用户的协同过滤推荐算法先使用统计技术寻找与目标用户有相同喜好的邻居，然后根据目标用户的邻居的喜好产生向目标用户的推荐。基本原理就是利用用户访问行为的相似性来互相推荐用户可能感兴趣的资源，如图所示：</p>
+<p><img src="https://img-blog.csdn.net/20161020214409502" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图示意出基于用户的协同过滤推荐机制的基本原理，假设用户 A 喜欢物品 A、物品 C，用户 B 喜欢物品 B，用户 C 喜欢物品 A 、物品 C 和物品 D；从这些用户的历史喜好信息中，我们可以发现用户 A 和用户 C 的口味和偏好是比较类似的，同时用户 C 还喜欢物品 D，那么我们可以推断用户 A 可能也喜欢物品 D，因此可以将物品 D 推荐给用户 A。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基于用户的协同过滤推荐机制和基于人口统计学的推荐机制都是计算用户的相似度，并基于“邻居”用户群计算推荐，但它们所不同的是如何计算用户的相似度，基于人口统计学的机制只考虑用户本身的特征，而基于用户的协同过滤机制可是在用户的历史偏好的数据上计算用户的相似度，它的基本假设是，喜欢类似物品的用户可能有相同或者相似的口味和偏好。</p>
+<h3 id="3-2、基于项目的协同过滤推荐-Item-based-Collaborative-Filtering-Recommendation"><a href="#3-2、基于项目的协同过滤推荐-Item-based-Collaborative-Filtering-Recommendation" class="headerlink" title="3.2、基于项目的协同过滤推荐(Item-based Collaborative Filtering Recommendation)"></a>3.2、基于项目的协同过滤推荐(Item-based Collaborative Filtering Recommendation)</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据所有用户对物品或者信息的评价，发现物品和物品之间的相似度，然后根据用户的历史偏好信息将类似的物品推荐给该用户，如图所示：<br><img src="https://img-blog.csdn.net/20160821160630777" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图表明基于项目的协同过滤推荐的基本原理，用户A喜欢物品A和物品C，用户B喜欢物品A、物品B和物品C，用户C喜欢物品A，从这些用户的历史喜好中可以认为物品A与物品C比较类似，喜欢物品A的都喜欢物品C，基于这个判断用户C可能也喜欢物品C，所以推荐系统将物品C推荐给用户C。<br>       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 基于项目的协同过滤推荐和基于内容的协同过滤推荐都是基于物品相似度预测推荐，只是相似度度量的方法不一样，前者是从用户历史的偏好推断，而后者是基于物品本身的属性特征信息。</p>
+<h3 id="3-3、UserCF和ItemCF的区别"><a href="#3-3、UserCF和ItemCF的区别" class="headerlink" title="3.3、UserCF和ItemCF的区别"></a>3.3、UserCF和ItemCF的区别</h3><p><img src="https://img-blog.csdn.net/20170107105218959" alt></p>
+<h1 id="三、算法实例"><a href="#三、算法实例" class="headerlink" title="三、算法实例"></a>三、算法实例</h1><p>以ItemCF为例子具体介绍下整个算法流程。<br><strong>算法流程：</strong></p>
+<ol>
+<li>构建用户–&gt;物品的倒排；</li>
+<li>构建物品与物品的同现矩阵；</li>
+<li>计算物品之间的相似度，即计算相似矩阵；</li>
+<li>根据用户的历史记录，给用户推荐物品；</li>
+</ol>
+<h2 id="算法流程1"><a href="#算法流程1" class="headerlink" title="算法流程1"></a>算法流程1</h2><p>构建用户–&gt;物品的倒排<br>如下表，行表示用户，列表示物品，1表示用户喜欢该物品<br><img src="https://img-blog.csdnimg.cn/20190814085502109.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<pre><code>例如python构建的数据格式如下
+{
+&#39;A&#39;: {&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;}, 
+&#39;B&#39;: {&#39;c&#39;: &#39;1&#39;, &#39;b&#39;: &#39;1&#39;, &#39;e&#39;: &#39;1&#39;}, 
+&#39;C&#39;: {&#39;c&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;}, 
+&#39;D&#39;: {&#39;c&#39;: &#39;1&#39;, &#39;b&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;},
+&#39;E&#39;: {&#39;a&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;}
+}
+</code></pre><h2 id="算法流程2"><a href="#算法流程2" class="headerlink" title="算法流程2"></a>算法流程2</h2><p>构建物品与物品的同现矩阵</p>
+<p>共现矩阵C表示同时喜欢两个物品的用户数，是根据用户物品倒排表计算出来的。如根据上面的用户物品倒排表可以计算出如下的共现矩阵C：<br><img src="https://img-blog.csdnimg.cn/20190814085654185.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="算法流程3"><a href="#算法流程3" class="headerlink" title="算法流程3"></a>算法流程3</h2><p>计算物品之间的相似度，即计算相似矩阵</p>
+<p>其中两个物品之间的相似度如何计算？<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设|N(i)|表示喜欢物品i的用户数，|N(i)⋂N(j)|表示同时喜欢物品i，j的用户数，则物品i与物品j的相似度为： </p>
+<p><img src="https://img-blog.csdnimg.cn/20190814090106195.png" alt></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1)式有一个问题，当物品j是一个很热门的商品时，人人都喜欢，那么wijwij就会很接近于1，即(1)式会让很多物品都和热门商品有一个很大的相似度，所以可以改进一下公式：</p>
+<p><img src="https://img-blog.csdnimg.cn/2019081409030146.png" alt></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;算法流程2中的共现矩阵C其实就是式(2)的分子，矩阵N（用于计算分母）表示喜欢某物品的用户数（是总的用户数），则(2)式中的分母便很容易求解出来了。</p>
+<p>矩阵N如下所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190814090318574.png" alt></p>
+<p>利用式（2）便能计算物品之间的余弦相似矩阵如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/2019081409034757.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="算法流程4"><a href="#算法流程4" class="headerlink" title="算法流程4"></a>算法流程4</h2><p>根据用户的历史记录，给用户推荐物品；</p>
+<p>最终推荐的是什么物品，是由预测兴趣度决定的。</p>
+<p><strong>物品j预测兴趣度=用户喜欢的物品i的兴趣度×物品i和物品j的相似度</strong></p>
+<p>例如：A用户喜欢a，b，d ，兴趣度分别为1,1,1</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;推荐c的预测兴趣度=1X0.67+1X0.58=1.25<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;推荐e的预测兴趣度=1X0.58=0.58</p>
+<h1 id="四、python实现案例"><a href="#四、python实现案例" class="headerlink" title="四、python实现案例"></a>四、python实现案例</h1><pre><code>from math import sqrt
+import operator
+
+#1.构建用户--&gt;物品的倒排
+def loadData(files):
+    data ={}
+    for line in files:
+        user,score,item=line.split(&quot;,&quot;)  #按&quot;,&quot;将每组数据单独分开,并将每组的数据赋予对应变量
+        data.setdefault(user,{})
+        data[user][item]=score
+    print (&quot;----1.用户：物品的倒排----&quot;)
+    print (data)
+    return data
+
+#2.计算
+# 2.1 构造物品--&gt;物品的共现矩阵
+# 2.2 计算物品与物品的相似矩阵
+def similarity(data):
+    # 2.1 构造物品：物品的共现矩阵
+    N={};#喜欢物品i的总人数
+    C={};#喜欢物品i也喜欢物品j的人数
+    for user,item in data.items():
+        for i,score in item.items():
+            N.setdefault(i,0)
+            N[i]+=1
+            C.setdefault(i,{})
+            for j,scores in item.items():
+                if j not in i:
+                    C[i].setdefault(j,0)
+                    C[i][j]+=1
+
+    print (&quot;---2.构造的共现矩阵---&quot;)
+    print (&#39;N:&#39;,N)
+    print (&#39;C:&#39;,C)
+
+    #2.2 计算物品与物品的相似矩阵
+    W={};
+    for i,item in C.items():
+        W.setdefault(i,{})
+        for j,item2 in item.items():
+            W[i].setdefault(j,0)
+            W[i][j]=C[i][j]/sqrt(N[i]*N[j])
+    print (&quot;---3.构造的相似矩阵---&quot;)
+    print (W)
+    return W
+
+#3.根据用户的历史记录，给用户推荐物品
+def recommandList(data,W,user,k=3,N=10):
+    rank={}
+    for i,score in data[user].items():#获得用户user历史记录，如A用户的历史记录为{&#39;a&#39;: &#39;1&#39;, &#39;b&#39;: &#39;1&#39;, &#39;d&#39;: &#39;1&#39;}
+        for j,w in sorted(W[i].items(),key=operator.itemgetter(1),reverse=True)[0:k]:#获得与物品i相似的k个物品
+            if j not in data[user].keys():#该相似的物品不在用户user的记录里
+                rank.setdefault(j,0)
+                rank[j]+=float(score) * w
+
+    print (&quot;---4.推荐----&quot;)
+    print (sorted(rank.items(),key=operator.itemgetter(1),reverse=True)[0:N])
+    return sorted(rank.items(),key=operator.itemgetter(1),reverse=True)[0:N]
+
+if __name__==&#39;__main__&#39;:
+    #用户，兴趣度，物品
+    uid_score_bid = [&#39;A,1,a&#39;, &#39;A,1,b&#39;, &#39;A,1,d&#39;, &#39;B,1,b&#39;, &#39;B,1,c&#39;, &#39;B,1,e&#39;, &#39;C,1,c&#39;, &#39;C,1,d&#39;, &#39;D,1,b&#39;, &#39;D,1,c&#39;, &#39;D,1,d&#39;,
+                     &#39;E,1,a&#39;, &#39;E,1,d&#39;]
+    data=loadData(uid_score_bid)#获得数据
+    W=similarity(data)#计算物品相似矩阵
+    recommandList(data,W,&#39;A&#39;,3,10)#推荐
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了方便理解python的实现过程，这里只用了少数数据集并是手输上去的，具体情况运用可再加段代码用于读取并处理数据文件。</p>
+<h1 id="五、算法的优缺点"><a href="#五、算法的优缺点" class="headerlink" title="五、算法的优缺点"></a>五、算法的优缺点</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个算法实现起来也比较简单，但是在实际应用中有时候也会有问题的。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如一些非常流行的商品可能很多人都喜欢，这种商品推荐给你就没什么意义了，所以计算的时候需要对这种商品加一个权重或者把这种商品完全去掉也行。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;再有，对于一些通用的东西，比如买书的时候的工具书，如现代汉语词典，新华字典神马的，通用性太强了，推荐也没什么必要了。</p>
+<p><strong>UserCF和ItemCF优缺点的对比</strong><br><img src="https://img-blog.csdnimg.cn/20190814083729968.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>协同过滤（CF）</tag>
+        <tag>推荐系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>暑期培训第一次测试题总结</title>
+    <url>/2019/07/22/shu-qi-pei-xun-di-yi-ci-ce-shi-ti-zong-jie/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里是一些暑期培训第一次测试题的部分解释，经过这次测试的摧残，总结备录一下，方便日后回顾复习。</p>
+<h2 id="Feeling"><a href="#Feeling" class="headerlink" title="Feeling"></a>Feeling</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经过几天的学习，7月22日下午，进行了第一次检测。开始以为会让我们推导一些公式什么的，结果当拿到测试题的时候，一首凉凉送给自己……开始的选择题和填空题还能接受，看到简答题，这都是什么，有种似曾相识的感觉，但就是写不出来。为时四十分钟的考试结束后，不到半个小时成绩就出来了，虽然成绩不那么好，但排名还行，然后学长给我们进行了讲解答疑，发现自己学的有点粗糙，没有注意那些细节性问题和概念，学以致用这方面也是有点差的。</p>
+<h2 id="Test-1"><a href="#Test-1" class="headerlink" title="Test 1"></a>Test 1</h2><h3 id="为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set"><a href="#为什么一般需要划分出额外的校验集-validation-set-用于超参数调整，而不选择直接使用测试集-test-set" class="headerlink" title="为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?"></a>为什么一般需要划分出额外的校验集(validation set)用于超参数调整，而不选择直接使用测试集(test set)?</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校验集是用于调整超参数的，从而更好的优化训练模型。测试集是用于在完成神经网络训练过程后,为了客观评价模型在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,而且测试集<strong>不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标</strong>。</p>
+<p>（备注：不清楚这三个数据集概念及其作用的，可看下我以前写的关于这些的一篇文章。传送门：）</p>
+<h2 id="Test-2"><a href="#Test-2" class="headerlink" title="Test 2"></a>Test 2</h2><h3 id="批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？"><a href="#批量梯度下降-Batch-Gradient-Descent-和随机梯度下降-Stochastic-Gradient-Descent-在应对鞍点时有何不同表现？" class="headerlink" title="批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？"></a>批量梯度下降(Batch Gradient Descent)和随机梯度下降(Stochastic Gradient Descent)在应对鞍点时有何不同表现？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们要先知道什么是BGD和SGD，从两者的运算方法上，我们就可以得知不同之处。</p>
+<p>（1）批量梯度下降法（Batch Gradient Descent） ：在更新参数时都使用所有的样本来进行更新。</p>
+<ul>
+<li>优点：<strong>全局最优解</strong>，能保证每一次更新权值，都能降低损失函数；易于并行实现。</li>
+<li>缺点：当样本数目很多时，训练过程会很慢。</li>
+</ul>
+<p>（2）随机梯度下降法（Stochastic Gradient Descent）：在更新参数时都使用一个样本来进行更新。每一次跟新参数都用一个样本，更新很多次。如果样本量很大的情况（例如几十万），那么可能只用其中几万条或者几千条的样本，就已经将参数迭代到最优解了，对比上面的批量梯度下降，迭代一次需要用到十几万训练样本，一次迭代不可能最优，如果迭代10次的话就需要遍历训练样本10次，这种方式计算复杂度太高。</p>
+<ul>
+<li>优点：训练速度快；</li>
+<li>缺点：准确度下降，<strong>并不是全局最优</strong>；不易于并行实现。从迭代的次数上来看，随机梯度下降法迭代的次数较多，在解空间的搜索过程看起来很盲目。噪音很多，使得它并不是每次迭代都向着整体最优化方向。</li>
+</ul>
+<h2 id="Test-3"><a href="#Test-3" class="headerlink" title="Test 3"></a>Test 3</h2><h3 id="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"><a href="#当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？" class="headerlink" title="当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？"></a>当一个模型训练完后若在训练集上的loss非常高，请问如何在不对代码进行全面排查的前提下，以最快速度定位是模型本身的拟合能力不足还是代码的实现存在某种错误？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;废话不多说，直接上图：<br><img src="https://img-blog.csdnimg.cn/20190722174826448.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="Test-4"><a href="#Test-4" class="headerlink" title="Test 4"></a>Test 4</h2><h3 id="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"><a href="#假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？" class="headerlink" title="假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？"></a>假设我们在训练一个使用Sigmoid激活函数的全连接神经网络。在对其权重进行初始化时，为什么一般会倾向于让初始值的绝对值偏小？如果需要这样，为何不直接使用0进行初始化？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于逻辑回归，把权重初始化为0当然也是可以的，但是对于一个神经网络，如果你把权重或者参数都初始化为0，那么梯度下降将不会起作用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果权值全初始化为0，则<strong>无法更新权值</strong>。这是由于前向传播中，所有节点输出值均相同，由于此处使用了sigmod激活函数，所以此处所有神经节点输出都为1/2，而在反向传播每个节点输出值对损失函数的偏导时，涉及到对权值相乘后的求和，该项永远为0，故所乘的结果也必然为0，这样在计算权值对算是函数的偏导时，其偏导必然为0，所有权值偏导都为0，那么就不要指望使用梯度下降法能更新权值了，自然神经网络的训练也就无法进行下去了。</p>
+<h2 id="Test-5"><a href="#Test-5" class="headerlink" title="Test 5"></a>Test 5</h2><h3 id="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"><a href="#在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？" class="headerlink" title="在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？"></a>在CNN中梯度不稳定指的是什么？在神经网络训练过程中，为什么会出现梯度消失的问题？如何解决？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;神经网络中的梯度不稳定指的是<strong>梯度消失</strong>和<strong>梯度爆炸</strong>问题。<br>（备注：对于这两种问题的具体解释和为什么会出现这种问题，以及解决方法，这里不具体讨论了，我会在以后的文章中具体解释到的。）</p>
+<h2 id="Test-6"><a href="#Test-6" class="headerlink" title="Test 6"></a>Test 6</h2><h3 id="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"><a href="#为什么在神经网络中使用交叉熵而不是均方差作为误差函数？" class="headerlink" title="为什么在神经网络中使用交叉熵而不是均方差作为误差函数？"></a>为什么在神经网络中使用交叉熵而不是均方差作为误差函数？</h3><pre><code>1. 神经网络中如果预测值与实际值的误差越大，那么在反向传播训练的过程中，各种参数调整的幅度就要更大，从而使训练更快收敛，如果预测值与实际值的误差小，各种参数调整的幅度就要小，从而减少震荡。
+
+2. 使用平方误差损失函数，误差增大参数的梯度会增大，但是当误差很大时，参数的梯度就会又减小了。
+
+3. 使用交叉熵损失是函数，误差越大参数的梯度也越大，能够快速收敛。
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（备注：对于结论的推导过程会总结在另一篇文章里。）</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>测试题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>推荐系统之矩阵分解(MF)及其python实现</title>
     <url>/2019/07/23/tui-jian-xi-tong-zhi-ju-zhen-fen-jie-mf-ji-qi-python-shi-xian/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目前推荐系统中用的最多的就是矩阵分解方法，在Netflix Prize推荐系统大赛中取得突出效果。以用户-项目评分矩阵为例，矩阵分解就是预测出评分矩阵中的缺失值，然后根据预测值以某种方式向用户推荐。今天以“用户-项目评分矩阵R（M×N）”说明矩阵分解方式的原理以及python实现。</p>
@@ -1355,153 +1443,10 @@ if __name__ == &#39;__main__&#39;:   #主函数
         <category>python</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>机器学习</tag>
+        <tag>python</tag>
         <tag>推荐系统</tag>
         <tag>矩阵分解</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>人工神经网络（ANN）</title>
-    <url>/2019/07/26/ren-gong-shen-jing-wang-luo-ann/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初学人工智能不久，今天碰上了人工神经网（ANN），开始学的时候很懵，一大堆理论、公式、推导…..作为一名小白，还是很痛苦的，不过经过摸索，大概了 解了什么是ANN，公式的推导以及一些其他问题，下面我就总结下自己的理解，一方面作为自己的笔记，日后方便巩固；另一方面，也可以分享给其他有意者。</p>
-<h1 id="一、什么是神经网络"><a href="#一、什么是神经网络" class="headerlink" title="一、什么是神经网络"></a>一、什么是神经网络</h1><h2 id="1-单层神经网络"><a href="#1-单层神经网络" class="headerlink" title="1.单层神经网络"></a>1.单层神经网络</h2><p>首先以单层神经元为例解释人工神经元是如何工作的<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjMwMjYzZC5wbmc" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x1,x2,…, xN：神经元的输入。这些可以从输入层实际观测或者是一个隐藏层的中间值（隐藏层即介于输入与输出之间的所有节点组成的一层。后面讲到多层神经网络是会再跟大家解释的）。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X0：偏置单元。这是常值添加到激活函数的输入（类似数学里y＝ax+b中使直线不过原点的常数b）。即截距项，通常有＋1值。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w0,w1,w2,…,wN：对应每个输入的权重。甚至偏置单元也是有权重的。</p>
-<p>a:神经元的输出。计算如下：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjQ2NzM2Zi5wbmc" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;式子里的f是已知的激活函数，f使神经网络（单层乃至多层）非常灵活并且具有能估计复杂的非线性关系的能力。在简单情况下可以是一个高斯函数、逻辑函数、双曲线函数或者甚至上是一个线性函数。利用神经网络可让其实现三个基本功能：与、或、非（AND, OR, NOT）。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里引入一个例子：and功能实现如下<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9zdGF0aWMubGVpcGhvbmUuY29tL3VwbG9hZHMvbmV3L2FydGljbGUvNzQwXzc0MC8yMDE2MDgvNTdiZDUyZjc3YjA2Yy5wbmc" alt><br>神经元输出：a = f( -1.5 + x1 + x2 )</p>
-<p>这样大家就很容易理解其工作原理，其实就是对输入值赋予不同权重，经过激活函数输出的过程。</p>
-<h2 id="2-多层神经网络"><a href="#2-多层神经网络" class="headerlink" title="2.多层神经网络"></a>2.多层神经网络</h2><h3 id="2-1-网络结构"><a href="#2-1-网络结构" class="headerlink" title="2.1 网络结构"></a>2.1 网络结构</h3><p>清楚了单层神经网络，多层神经网络也好理解了，就相当于多个单层的叠加成多层的过程。<br><img src="https://img-blog.csdnimg.cn/20190811204232448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br><strong>神经网络分为三种类型的层</strong>：</p>
-<p>输入层：神经网络最左边的一层，通过这些神经元输入需要训练观察的样本，即初始输入数据的一层。</p>
-<p>隐藏层：介于输入与输出之间的所有节点组成的一层。帮助神经网络学习数据间的复杂关系，即对数据进行处理的层。</p>
-<p>输出层：由前两层得到神经网络最后一层，即最后结果输出的一层。</p>
-<h3 id="2-2-传递函数-激活函数"><a href="#2-2-传递函数-激活函数" class="headerlink" title="2.2 传递函数/激活函数"></a>2.2 传递函数/激活函数</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前面每一层输入经过线性变换wx+b后还用到了sigmoid函数，在神经网络的结构中被称为传递函数或者激活函数。除了sigmoid，还有tanh、relu等别的激活函数。激活函数使线性的结果非线性化。</p>
-<h3 id="2-3-为什么需要传递函数"><a href="#2-3-为什么需要传递函数" class="headerlink" title="2.3 为什么需要传递函数"></a>2.3 为什么需要传递函数</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单理解上，如果不加激活函数，无论多少层隐层，最终的结果还是原始输入的线性变化，这样一层隐层就可以达到结果，就没有多层感知器的意义了。所以每个隐层都会配一个激活函数，提供非线性变化。</p>
-<h1 id="二、BP算法"><a href="#二、BP算法" class="headerlink" title="二、BP算法"></a>二、BP算法</h1><h2 id="1-BP算法基本思想"><a href="#1-BP算法基本思想" class="headerlink" title="1.BP算法基本思想"></a>1.BP算法基本思想</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP算法全称叫作误差反向传播(error Back Propagation，或者也叫作误差逆传播)算法。其算法基本思想为：在上述的前馈网络中，输入信号经输入层输入，通过隐层计算由输出层输出，输出值与标记值比较，若有误差，将误差反向由输出层向输入层传播，在这个过程中，利用梯度下降算法对神经元权值进行调整。</p>
-<h2 id="2-BP算法的推导"><a href="#2-BP算法的推导" class="headerlink" title="2.BP算法的推导"></a>2.BP算法的推导</h2><h3 id="2-1-数学基础理论"><a href="#2-1-数学基础理论" class="headerlink" title="2.1 数学基础理论"></a>2.1 数学基础理论</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP算法中核心的数学工具就是微积分的<strong>链式求导法则</strong>。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMjQxMzk3LWMwN2Q1ODFjOTJkYWViZWMucG5n" alt></p>
-<h3 id="2-2推导过程"><a href="#2-2推导过程" class="headerlink" title="2.2推导过程"></a>2.2推导过程</h3><p><img src="https://img-blog.csdnimg.cn/20190811205148228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
-<ol>
-<li><strong>正向传播求损失，反向传播回传误差</strong></li>
-<li>根据误差信号修正每层的权重 </li>
-<li>f是激活函数；f(netj)是隐层的输出； f(netk）是输出层的输出O; d是target</li>
-</ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结合BP网络结构，误差由输出展开至输入的过程如下：<br><img src="https://img-blog.csdnimg.cn/20190811205328707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>有了误差E，通过求偏导就可以求得最优的权重。（不要忘记学习率） </p>
-<p><img src="https://img-blog.csdnimg.cn/2019081120540142.png" alt></p>
-<h2 id="3-举例说明"><a href="#3-举例说明" class="headerlink" title="3. 举例说明"></a>3. 举例说明</h2><p><img src="https://img-blog.csdnimg.cn/20190811205641720.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>图中元素：<br>两个输入；<br>隐层: b1, w1, w2, w3, w4 (都有初始值）<br>输出层：b2, w5, w6, w7, w8（赋了初始值）</p>
-<h3 id="3-1-前向传播"><a href="#3-1-前向传播" class="headerlink" title="3.1 前向传播"></a>3.1 前向传播</h3><p><img src="https://img-blog.csdnimg.cn/20190811205743162.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>则误差：<br><img src="https://img-blog.csdnimg.cn/20190811205806851.png" alt></p>
-<h3 id="3-2-反向传播"><a href="#3-2-反向传播" class="headerlink" title="3.2 反向传播"></a>3.2 反向传播</h3><p><img src="https://img-blog.csdnimg.cn/20190811205859442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>参数更新：<br><img src="https://img-blog.csdnimg.cn/20190811205921617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>求误差对w1的偏导 ：<br><img src="https://img-blog.csdnimg.cn/20190811205940706.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>注意，w1对两个输出的误差都有影响<br>通过以上过程可以更新所有权重，就可以再次迭代更新了，直到满足条件。</p>
-<h1 id="三、python代码实现"><a href="#三、python代码实现" class="headerlink" title="三、python代码实现"></a>三、python代码实现</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上述例子，用python可写出如下代码，并附有详解：</p>
-<pre><code>import numpy as np
-import matplotlib.pyplot as plt
-import math
-a=np.array([0.05,0.1])           #a1,a2的输入值
-weight1=np.array([[0.15,0.25],[0.2,0.3]])   #a1对b1,b2的权重，a2对b1，b2的权重
-weight2=np.array([[0.4,0.5],[0.45,0.55]])     #b1对c1,c2的权重，b2对c1，c2的权重
-target=np.array([0.01,0.99])
-d1=0.35   #输入层的偏置（1）的权重
-d2=0.6    #隐藏层的偏置（1）的权重
-β=0.5    #学习效率
-
-#一：前向传播
-
-#计算输入层到隐藏层的输入值，得矩阵netb1,netb2
-netb=np.dot(a,weight1)+d1
-
-#计算隐藏层的输出值,得到矩阵outb1,outb2
-m=[]
-for i in range(len(netb)):
-    outb=1.0 / (1.0 + math.exp(-netb[i]))
-    m.append(outb)
-m=np.array(m)
-
-#计算隐藏层到输出层的输入值，得矩阵netc1,netc2
-netc=np.dot(m,weight2)+d2
-
-#计算隐藏层的输出值,得到矩阵outc1,outc2
-n=[]
-for i in range(len(netc)):
-    outc=1.0 / (1.0 + math.exp(-netc[i]))
-    n.append(outc)
-n=np.array(n)
-
-#二：反向传播
-count=0 #计数
-e=0     #误差  
-E=[]    #统计误差
-#梯度下降
-while True:
-  count+=1
-
-  #总误差对w1-w4的偏导
-  pd1=(-(target[0]-n[0])*n[0]*(1-n[0])*weight2[0][0]-(target[1]-n[1])*n[1]*(1-n[1])*weight2[0][1])*m[0]*(1-m[0])*a[0]
-  pd2=(-(target[0]-n[0])*n[0]*(1-n[0])*weight2[0][0]-(target[1]-n[1])*n[1]*(1-n[1])*weight2[0][1])*m[0]*(1-m[0])*a[1]
-  pd3=(-(target[0]-n[0])*n[0]*(1-n[0])*weight2[1][0]-(target[1]-n[1])*n[1]*(1-n[1])*weight2[0][1])*m[0]*(1-m[0])*a[0]                          
-  pd4=(-(target[0]-n[0])*n[0]*(1-n[0])*weight2[1][1]-(target[1]-n[1])*n[1]*(1-n[1])*weight2[0][1])*m[0]*(1-m[0])*a[1]
-  weight1[0][0]=weight1[0][0]-β*pd1
-  weight1[1][0]=weight1[1][0]-β*pd2
-  weight1[0][1]=weight1[0][1]-β*pd3
-  weight1[1][1]=weight1[1][1]-β*pd4
-
-  #总误差对w5-w8的偏导
-  pd5=-(target[0]-n[0])*n[0]*(1-n[0])*m[0]
-  pd6=-(target[0]-n[0])*n[0]*(1-n[0])*m[1]
-  pd7=-(target[1]-n[1])*n[1]*(1-n[1])*m[0]
-  pd8=-(target[1]-n[1])*n[1]*(1-n[1])*m[1]
-  weight2[0][0]=weight2[0][0]-β*pd5
-  weight2[1][0]=weight2[1][0]-β*pd6
-  weight2[0][1]=weight2[0][1]-β*pd7
-  weight2[1][1]=weight2[1][1]-β*pd8
-
-  netb=np.dot(a,weight1)+d1
-  m=[]
-  for i in range(len(netb)):
-    outb=1.0 / (1.0 + math.exp(-netb[i]))
-    m.append(outb)
-  m=np.array(m)
-  netc=np.dot(m,weight2)+d2
-  n=[]
-  for i in range(len(netc)):
-    outc=1.0 / (1.0 + math.exp(-netc[i]))
-    n.append(outc)
-  n=np.array(n)
-
-  #计算总误差
-  for j in range(len(n)):
-    e += (target[j]-n[j])**2/2
-  E.append(e)
-  #判断
-  if e&lt;0.0000001:
-    break
-  else:
-      e=0
-print(count)
-print(e)
-print(n)
-plt.plot(range(len(E)),E,label=&#39;error&#39;)
-plt.legend() 
-plt.xlabel(&#39;time&#39;)
-plt.ylabel(&#39;error&#39;)
-plt.show()
-</code></pre><h1 id="四、BP神经网络的优缺点"><a href="#四、BP神经网络的优缺点" class="headerlink" title="四、BP神经网络的优缺点"></a>四、BP神经网络的优缺点</h1><p><strong>BP神经网络的优点：</strong></p>
-<ol>
-<li>非线性映射能力</li>
-<li>泛化能力  </li>
-<li>容错能力，允许输入样本中带有较大误差甚至个别错误。反应正确规律的知识来自全体样本，个别样本中的误差不能左右对权矩阵的调整</li>
-</ol>
-<p><strong>BP神经网络的缺陷：</strong></p>
-<ol>
-<li>需要的参数过多，而且参数的选择没有有效的方法。确定一个BP神经网络需要知道：网络的层数、每一层神经元的个数和权值。权值可以通过学习得到，如果，隐层神经元数量太多会引起过学习，如果隐层神经元个数太少会引起欠学习。此外学习率的选择也是需要考虑。目前来说，对于参数的确定缺少一个简单有效的方法，所以导致算法很不稳定；</li>
-<li>属于监督学习，对于样本有较大依赖性，网络学习的逼近和推广能力与样本有很大关系，如果样本集合代表性差，样本矛盾多，存在冗余样本，网络就很难达到预期的性能；</li>
-<li>由于权值是随机给定的，所以BP神经网络具有不可重现性；</li>
-</ol>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>BP算法</tag>
-        <tag>人工神经网络（ANN）</tag>
       </tags>
   </entry>
   <entry>
@@ -1660,9 +1605,64 @@ plt.show()
         <category>python</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>机器学习</tag>
+        <tag>python</tag>
         <tag>梯度下降</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据集的划分</title>
+    <url>/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。</p>
+<h2 id="为什么要划分数据集为训练集、验证集和测试集？"><a href="#为什么要划分数据集为训练集、验证集和测试集？" class="headerlink" title="为什么要划分数据集为训练集、验证集和测试集？"></a>为什么要划分数据集为训练集、验证集和测试集？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;做科研，就要提出问题，找到解决方法，并证明其有效性。这里的工作有3个部分，一个是提出问题，一个是找到解决方法，另一个是证明有效性。每一个部分都可以作为科研的对象，研究的越靠前，则越偏向科学，越靠后，则越偏向技术，因此叫做科学与技术。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在人工智能领域，证明一个模型的有效性，就是对于某一问题，有一些数据，而我们提出的模型可以（部分）解决这个问题，那如何来证明呢？这和我们平时的考试也是一样的，证明我们掌握了某类知识，就是去参加考试。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;好，那么如何设计考试，让这个考试可以较为客观的考察出每个人的能力呢（注意，不是让每个人都得最高分）？回想我们的高中阶段，有一些教材，让我们平时学习其基本知识（训练集），有一些模拟考试，让我们知道我们到底掌握的怎么样，然后再改进我们的学习（验证集），最后的高考决定我们的去向（测试集）。这样的类比，是不是就很清楚了。</p>
+<h2 id="训练集、验证集和测试集"><a href="#训练集、验证集和测试集" class="headerlink" title="训练集、验证集和测试集"></a>训练集、验证集和测试集</h2><pre><code>1. **训练集**：顾名思义指的是用于训练的样本集合,主要用来训练神经网络中的参数。
+
+2. **验证集**：从字面意思理解即为用于验证模型性能的样本集合.不同神经网络在训练集上训练结束后,通过验证集来比较判断各个模型的性能.这里的不同模型主要是指对应不同超参数的神经网络,也可以指完全不同结构的神经网络。
+
+3. **测试集**：对于训练完成的神经网络,测试集用于客观的评价神经网络的性能。
+</code></pre><h2 id="如何划分训练集、验证集和测试集"><a href="#如何划分训练集、验证集和测试集" class="headerlink" title="如何划分训练集、验证集和测试集"></a>如何划分训练集、验证集和测试集</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个问题其实非常基础，也非常明确，在Scikit-learn里提供了各种各样的划分方法。无论是单一的训练集、验证集和测试集，还是进行交叉验证，你都会找到调用的方法，因此我们这里主要介绍两种常见的方法。</p>
+<pre><code>1. 前人给出训练集、验证集和测试集
+  对于这种情况，那么只能跟随前人的数据划分进行，一般的比赛也是如此。一定不要使用测试集来调整性能（测试集已知的情况下），尽管存在使用这种方法来提升模型的性能的行为，但是我们并不推荐这么做。最正常的做法应当是使用训练集来学习，并使用验证集来调整超参数。当在验证集上取得最优的模型时，此时就可以使用此模型的超参数来重新训练（训练集+验证集），并用测试集评估最终的性能。
+    我们首先说明加入验证集重新训练和不加有啥区别，从理论上讲，一方面学习的样本增多，应当是会提升模型性能的，第二，其在验证集上取得最优的模型与验证集的分布的契合度是最高的，因此最终的模型会更接近验证集的分布。
+    其次再说明验证集和测试集上的性能差异。事实上，在验证集上取得最优的模型，未必在测试集上取得最优。其原因就是训练的模型是否对于该问题有着较好的泛化能力，即没有对验证集产生过拟合现象。正因为有这种情况的发生，才会有人使用测试集的最优值作为最终的结果（而不管验证集的好坏）。
+
+2. 前人没有明确给出数据集的划分
+  这时候可以采取第一种划分方法，对于样本数较小的数据集，同样可以采取交叉验证的方法。
+    交叉验证的方法的使用场景有很多，我们这里是针对不同的模型的性能好坏进行评估。
+    使用交叉验证，可以获得更为客观的性能差异。当使用第一种方法时，我们更建议使用P值来做显著性检验，从而保证性能差异的客观性。而使用第二种方法，即交叉验证时，我们选取其性能表现的均值作为最终的结果，更能体现该模型的泛化能力。
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.存在验证集<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里五倍交叉验证是用于进行调参，此时不接触测试集。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据集首先划分出训练集与测试集（可以是4:1或者9:1）。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其次，在训练集中，再划分出验证集（通常也是4:1或者9：1）<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后对于训练集和验证集进行5折交叉验证，选取出最优的超参数，然后把训练集和验证集一起训练出最终的模型。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.不存在验证集<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该情况通常是对比不同的模型，如自己的模型和别人的模型的性能好坏。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只需要把数据集划分为训练集和测试集即可，然后选取5次试验的平均值作为最终的性能评价。</p>
+<h2 id="验证集和测试集的区别"><a href="#验证集和测试集的区别" class="headerlink" title="验证集和测试集的区别"></a>验证集和测试集的区别</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;那么,训练集、校验集和测试集之间又有什么区别呢?一般而言,训练集与后两者之间较易分辨,校验集和测试集之间的概念较易混淆.个人是从下面的角度来理解的:</p>
+<ul>
+<li><p>神经网络在网络结构确定的情况下,有两部分影响模型最终的性能,一是普通参数(比如权重w和偏置b),另一个是超参数(例如学习率,网络层数).普通参数我们在训练集上进行训练,超参数我们一般人工指定(比较不同超参数的模型在校验集上的性能).那为什么我们不像普通参数一样在训练集上训练超参数呢?(花书给出了解答)一是：超参数一般难以优化(无法像普通参数一样通过梯度下降的方式进行优化).二是：超参数很多时候不适合在训练集上进行训练,例如,如果在训练集上训练能控制模型容量的超参数,这些超参数总会被训练成使得模型容量最大的参数(因为模型容量越大,训练误差越小),所以训练集上训练超参数的结果就是模型绝对过拟合.</p>
+</li>
+<li><p>正因为超参数无法在训练集上进行训练,因此我们单独设立了一个验证集,用于选择(人工训练)最优的超参数.因为验证集是用于选择超参数的,因此校验集和训练集是独立不重叠的.</p>
+</li>
+<li><p>测试集是用于在完成神经网络训练过程后,为了<strong>客观评价模型</strong>在其未见过(未曾影响普通参数和超参数选择)的数据上的性能,因此测试与验证集和训练集之间也是独立不重叠的,而且测试集不能提出对参数或者超参数的修改意见,只能作为评价网络性能的一个指标.</p>
+</li>
+</ul>
+<p>为了方便清楚直观的了解，上一个表格：<br><img src="https://img-blog.csdnimg.cn/20190724110042475.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至此,我们可以将神经网络完整的训练过程归结为一下两个步骤:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.训练普通参数.在训练集(给定超参数)上利用学习算法,训练普通参数,使得模型在训练集上的误差降低到可接受的程度(一般接近人类的水平).</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.’训练’超参数.在验证集上验证网络的generalization error(泛化能力),并根据模型性能对超参数进行调整.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重复1和2两个步骤,直至网络在验证集上取得较低的generalization error.此时完整的训练过程结束.在完成参数和超参数的训练后,在测试集上测试网络的性能.</p>
+<h2 id="附言"><a href="#附言" class="headerlink" title="附言"></a>附言</h2><p>说到底：</p>
+<ul>
+<li><p>验证集是一定需要的；</p>
+</li>
+<li><p>如果验证集具有足够泛化代表性，是不需要再整出什么测试集的；</p>
+</li>
+<li><p>整个测试集往往就是为了在验证集只是非训练集一个小子集的情况下，好奇一下那个靠训练集（训练）和验证集（调参）多次接力训练出来的模型是不是具有了泛化性能，因而加试一下图个确定。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>数据集</tag>
       </tags>
   </entry>
   <entry>
@@ -1726,6 +1726,30 @@ plt.show()
       </tags>
   </entry>
   <entry>
+    <title>浅谈机器学习-回归与分类的区别</title>
+    <url>/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习的主要任务便是聚焦于两个问题：分类和回归。本文将浅谈下两者的区别。</p>
+<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归会给出一个具体的结果，例如房价的数据，根据位置、周边、配套等等这些维度，给出一个房价的预测。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类相信大家都不会陌生，生活中会见到很多的应用，比如垃圾邮件识别、信用卡发放等等，就是基于数据集，作出二分类或者多分类的选择。</p>
+<p>浅层： 两者的的预测目标变量类型不同，回归问题是连续变量，分类问题离散变量。<br>中层： 回归问题是定量问题，分类问题是定性问题。<br>高层： 回归与分类的根本区别在于输出空间是否为一个度量空间。<br><img src="https://img-blog.csdnimg.cn/20190318195051810.png" alt></p>
+<h1 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h1><p>分类和回归的区别在于输出变量的类型。</p>
+<p>定量输出称为回归，或者说是连续变量预测；<br>定性输出称为分类，或者说是离散变量预测。</p>
+<p>举个例子：<br>预测明天的气温是多少度，这是一个回归任务；<br>预测明天是阴、晴还是雨，就是一个分类任务。</p>
+<h1 id="应用场景不同"><a href="#应用场景不同" class="headerlink" title="应用场景不同"></a>应用场景不同</h1><p>1.回归问题的应用场景</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归问题通常是用来预测一个值，如预测房价、未来的天气情况等等，例如一个产品的实际价格为500元，通过回归分析预测值为499元，我们认为这是一个比较好的回归分析。一个比较常见的回归算法是线性回归算法（LR）。另外，回归分析用在神经网络上，其最上层是不需要加上softmax函数的，而是直接对前一层累加即可。回归是对真实值的一种逼近预测。</p>
+<p>2.分类问题的应用场景</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类问题是用于将事物打上一个标签，通常结果为离散值。例如判断一幅图片上的动物是一只猫还是一只狗，分类通常是建立在回归之上，分类的最后一层通常要使用softmax函数进行判断其所属类别。分类并没有逼近的概念，最终正确结果只有一个，错误的就是错误的，不会有相近的概念。最常见的分类方法是逻辑回归，或者叫逻辑分类。</p>
+<h1 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类模型和回归模型本质一样，都是要建立映射关系。在实际操作中，我们确实常常将回归问题和分类问题互相转化，即分类模型可将回归模型的输出离散化，回归模型也可将分类模型的输出连续化。（分类问题回归化：逻辑回归；回归问题分类化：年龄预测问题——&gt;年龄段分类问题）</p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>回归</tag>
+        <tag>分类</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>浅谈机器学习-分类和聚类的区别</title>
     <url>/2019/08/01/qian-tan-ji-qi-xue-xi-fen-lei-he-ju-lei-de-qu-bie/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习中有两类的大问题，一个是分类，一个是聚类。在我们的生活中，我们常常没有过多的去区分这两个概念，觉得聚类就是分类，分类也差不多就是聚类，下面，我们就具体来研究下分类与聚类之间在数据挖掘中本质的区别。</p>
@@ -1759,30 +1783,6 @@ plt.show()
         <tag>机器学习</tag>
         <tag>分类</tag>
         <tag>聚类</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>浅谈机器学习-回归与分类的区别</title>
-    <url>/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习的主要任务便是聚焦于两个问题：分类和回归。本文将浅谈下两者的区别。</p>
-<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归会给出一个具体的结果，例如房价的数据，根据位置、周边、配套等等这些维度，给出一个房价的预测。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类相信大家都不会陌生，生活中会见到很多的应用，比如垃圾邮件识别、信用卡发放等等，就是基于数据集，作出二分类或者多分类的选择。</p>
-<p>浅层： 两者的的预测目标变量类型不同，回归问题是连续变量，分类问题离散变量。<br>中层： 回归问题是定量问题，分类问题是定性问题。<br>高层： 回归与分类的根本区别在于输出空间是否为一个度量空间。<br><img src="https://img-blog.csdnimg.cn/20190318195051810.png" alt></p>
-<h1 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h1><p>分类和回归的区别在于输出变量的类型。</p>
-<p>定量输出称为回归，或者说是连续变量预测；<br>定性输出称为分类，或者说是离散变量预测。</p>
-<p>举个例子：<br>预测明天的气温是多少度，这是一个回归任务；<br>预测明天是阴、晴还是雨，就是一个分类任务。</p>
-<h1 id="应用场景不同"><a href="#应用场景不同" class="headerlink" title="应用场景不同"></a>应用场景不同</h1><p>1.回归问题的应用场景</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归问题通常是用来预测一个值，如预测房价、未来的天气情况等等，例如一个产品的实际价格为500元，通过回归分析预测值为499元，我们认为这是一个比较好的回归分析。一个比较常见的回归算法是线性回归算法（LR）。另外，回归分析用在神经网络上，其最上层是不需要加上softmax函数的，而是直接对前一层累加即可。回归是对真实值的一种逼近预测。</p>
-<p>2.分类问题的应用场景</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类问题是用于将事物打上一个标签，通常结果为离散值。例如判断一幅图片上的动物是一只猫还是一只狗，分类通常是建立在回归之上，分类的最后一层通常要使用softmax函数进行判断其所属类别。分类并没有逼近的概念，最终正确结果只有一个，错误的就是错误的，不会有相近的概念。最常见的分类方法是逻辑回归，或者叫逻辑分类。</p>
-<h1 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类模型和回归模型本质一样，都是要建立映射关系。在实际操作中，我们确实常常将回归问题和分类问题互相转化，即分类模型可将回归模型的输出离散化，回归模型也可将分类模型的输出连续化。（分类问题回归化：逻辑回归；回归问题分类化：年龄预测问题——&gt;年龄段分类问题）</p>
-]]></content>
-      <categories>
-        <category>机器学习</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>分类</tag>
-        <tag>回归</tag>
       </tags>
   </entry>
 </search>
