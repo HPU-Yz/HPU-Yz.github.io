@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Flaneur</title>
   
-  <subtitle>Welocme</subtitle>
+  <subtitle>　</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hpu-yz.github.io/"/>
@@ -451,35 +451,6 @@
   </entry>
   
   <entry>
-    <title>数据集的划分</title>
-    <link href="https://hpu-yz.github.io/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/"/>
-    <id>https://hpu-yz.github.io/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/</id>
-    <published>2019-07-17T16:00:00.000Z</published>
-    <updated>2020-04-08T09:02:55.502Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://hpu-yz.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="数据集" scheme="https://hpu-yz.github.io/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/"/>
-    
-  </entry>
-  
-  <entry>
     <title>梯度下降法</title>
     <link href="https://hpu-yz.github.io/2019/07/18/ti-du-xia-jiang-fa-de-san-chong-xing-shi-bgd-sgd-mbgd-ji-python-shi-xian/"/>
     <id>https://hpu-yz.github.io/2019/07/18/ti-du-xia-jiang-fa-de-san-chong-xing-shi-bgd-sgd-mbgd-ji-python-shi-xian/</id>
@@ -509,6 +480,35 @@
       <category term="python" scheme="https://hpu-yz.github.io/tags/python/"/>
     
       <category term="梯度下降" scheme="https://hpu-yz.github.io/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据集的划分</title>
+    <link href="https://hpu-yz.github.io/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/"/>
+    <id>https://hpu-yz.github.io/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/</id>
+    <published>2019-07-17T16:00:00.000Z</published>
+    <updated>2020-04-08T09:02:55.502Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://hpu-yz.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="数据集" scheme="https://hpu-yz.github.io/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/"/>
     
   </entry>
   
