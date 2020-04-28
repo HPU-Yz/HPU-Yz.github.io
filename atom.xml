@@ -83,7 +83,7 @@
     <link href="https://hpu-yz.github.io/2020/03/18/xiao-wang-zi-zheng-yin-wei-ni-wei-ni-de-mei-gui-hua-fei-liao-shi-jian-zhe-cai-shi-ni-de-mei-gui-bian-de-ru-ci-chong-yao/"/>
     <id>https://hpu-yz.github.io/2020/03/18/xiao-wang-zi-zheng-yin-wei-ni-wei-ni-de-mei-gui-hua-fei-liao-shi-jian-zhe-cai-shi-ni-de-mei-gui-bian-de-ru-ci-chong-yao/</id>
     <published>2020-03-17T16:00:00.000Z</published>
-    <updated>2020-04-08T08:59:59.730Z</updated>
+    <updated>2020-04-28T06:48:17.612Z</updated>
     
     <summary type="html">
     
@@ -166,6 +166,37 @@
   </entry>
   
   <entry>
+    <title>浅谈机器学习-回归与分类的区别</title>
+    <link href="https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/"/>
+    <id>https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/</id>
+    <published>2019-07-31T16:00:00.000Z</published>
+    <updated>2020-04-08T09:02:42.464Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://hpu-yz.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="回归" scheme="https://hpu-yz.github.io/tags/%E5%9B%9E%E5%BD%92/"/>
+    
+      <category term="分类" scheme="https://hpu-yz.github.io/tags/%E5%88%86%E7%B1%BB/"/>
+    
+  </entry>
+  
+  <entry>
     <title>浅谈机器学习-分类和聚类的区别</title>
     <link href="https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-fen-lei-he-ju-lei-de-qu-bie/"/>
     <id>https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-fen-lei-he-ju-lei-de-qu-bie/</id>
@@ -193,37 +224,6 @@
       <category term="分类" scheme="https://hpu-yz.github.io/tags/%E5%88%86%E7%B1%BB/"/>
     
       <category term="聚类" scheme="https://hpu-yz.github.io/tags/%E8%81%9A%E7%B1%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>浅谈机器学习-回归与分类的区别</title>
-    <link href="https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/"/>
-    <id>https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/</id>
-    <published>2019-07-31T16:00:00.000Z</published>
-    <updated>2020-04-08T09:02:42.464Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://hpu-yz.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="分类" scheme="https://hpu-yz.github.io/tags/%E5%88%86%E7%B1%BB/"/>
-    
-      <category term="回归" scheme="https://hpu-yz.github.io/tags/%E5%9B%9E%E5%BD%92/"/>
     
   </entry>
   
@@ -281,9 +281,9 @@
     
       <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="协同过滤（CF）" scheme="https://hpu-yz.github.io/tags/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%EF%BC%88CF%EF%BC%89/"/>
-    
       <category term="推荐系统" scheme="https://hpu-yz.github.io/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
+    
+      <category term="协同过滤（CF）" scheme="https://hpu-yz.github.io/tags/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%EF%BC%88CF%EF%BC%89/"/>
     
   </entry>
   
@@ -343,9 +343,9 @@
       <category term="python" scheme="https://hpu-yz.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/python/"/>
     
     
-      <category term="python" scheme="https://hpu-yz.github.io/tags/python/"/>
-    
       <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="python" scheme="https://hpu-yz.github.io/tags/python/"/>
     
       <category term="相似度" scheme="https://hpu-yz.github.io/tags/%E7%9B%B8%E4%BC%BC%E5%BA%A6/"/>
     
@@ -376,9 +376,9 @@
       <category term="python" scheme="https://hpu-yz.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/python/"/>
     
     
-      <category term="python" scheme="https://hpu-yz.github.io/tags/python/"/>
-    
       <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="python" scheme="https://hpu-yz.github.io/tags/python/"/>
     
       <category term="推荐系统" scheme="https://hpu-yz.github.io/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
     
@@ -440,9 +440,9 @@
       <category term="python" scheme="https://hpu-yz.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/python/"/>
     
     
-      <category term="python" scheme="https://hpu-yz.github.io/tags/python/"/>
-    
       <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="python" scheme="https://hpu-yz.github.io/tags/python/"/>
     
       <category term="KNN" scheme="https://hpu-yz.github.io/tags/KNN/"/>
     
@@ -473,11 +473,44 @@
       <category term="python" scheme="https://hpu-yz.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/python/"/>
     
     
-      <category term="python" scheme="https://hpu-yz.github.io/tags/python/"/>
-    
       <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="K-means" scheme="https://hpu-yz.github.io/tags/K-means/"/>
+    
+      <category term="python" scheme="https://hpu-yz.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>梯度下降法</title>
+    <link href="https://hpu-yz.github.io/2019/07/18/ti-du-xia-jiang-fa-de-san-chong-xing-shi-bgd-sgd-mbgd-ji-python-shi-xian/"/>
+    <id>https://hpu-yz.github.io/2019/07/18/ti-du-xia-jiang-fa-de-san-chong-xing-shi-bgd-sgd-mbgd-ji-python-shi-xian/</id>
+    <published>2019-07-17T16:00:00.000Z</published>
+    <updated>2020-04-08T09:03:11.513Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://hpu-yz.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="python" scheme="https://hpu-yz.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/python/"/>
+    
+    
+      <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="python" scheme="https://hpu-yz.github.io/tags/python/"/>
+    
+      <category term="梯度下降" scheme="https://hpu-yz.github.io/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/"/>
     
   </entry>
   
@@ -507,39 +540,6 @@
       <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="数据集" scheme="https://hpu-yz.github.io/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>梯度下降法</title>
-    <link href="https://hpu-yz.github.io/2019/07/18/ti-du-xia-jiang-fa-de-san-chong-xing-shi-bgd-sgd-mbgd-ji-python-shi-xian/"/>
-    <id>https://hpu-yz.github.io/2019/07/18/ti-du-xia-jiang-fa-de-san-chong-xing-shi-bgd-sgd-mbgd-ji-python-shi-xian/</id>
-    <published>2019-07-17T16:00:00.000Z</published>
-    <updated>2020-04-08T09:03:11.513Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="https://hpu-yz.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="python" scheme="https://hpu-yz.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/python/"/>
-    
-    
-      <category term="python" scheme="https://hpu-yz.github.io/tags/python/"/>
-    
-      <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="梯度下降" scheme="https://hpu-yz.github.io/tags/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/"/>
     
   </entry>
   
