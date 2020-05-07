@@ -533,7 +533,7 @@
         },
         xAxis: {
             type: 'category',
-            data: ["2019-04","2019-05","2019-06","2019-07","2019-08","2019-09","2019-10","2019-11","2019-12","2020-01","2020-02","2020-03","2020-04"]
+            data: ["2019-05","2019-06","2019-07","2019-08","2019-09","2019-10","2019-11","2019-12","2020-01","2020-02","2020-03","2020-04","2020-05"]
         },
         yAxis: {
             type: 'value',
@@ -543,7 +543,7 @@
                 name: '文章篇数',
                 type: 'line',
                 color: ['#6772e5'],
-                data: [1,0,0,10,3,0,0,0,0,0,0,3,1],
+                data: [0,0,10,3,0,0,0,0,0,0,3,1,0],
                 markPoint: {
                     symbolSize: 45,
                     color: ['#fa755a','#3ecf8e','#82d3f4'],
@@ -585,7 +585,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"Hexo","value":1},{"name":"机器学习","value":13},{"name":"python","value":5},{"name":"OJ","value":1},{"name":"python","value":5},{"name":"爬虫","value":1},{"name":"算法","value":2},{"name":"离散","value":2},{"name":"生活","value":1}],
+                data: [{"name":"python","value":5},{"name":"机器学习","value":13},{"name":"Hexo","value":1},{"name":"算法","value":2},{"name":"OJ","value":1},{"name":"爬虫","value":1},{"name":"python","value":5},{"name":"离散","value":2},{"name":"生活","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -609,7 +609,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["机器学习","python","离散","推荐系统","分类","Hexo","博客搭建","K-means","A-Star算法","OJ"]
+                data: ["机器学习","python","离散","推荐系统","分类","A-Star算法","K-means","Hexo","博客搭建","KNN"]
             }
         ],
         yAxis: [
@@ -664,30 +664,30 @@
         
         <div class="col s12 m6 l6" data-aos="fade-up">
             <div class="skillbar">
-                <div class="skillbar-title" style="background: linear-gradient(to right, #FF0066 0%, #FF00CC 100%); width: 35%">
+                <div class="skillbar-title" style="background: linear-gradient(to right, #FF0066 0%, #FF00CC 100%); width: 25%">
                     <span>C</span>
                 </div>
-                <div class="skill-bar-percent">35%</div>
+                <div class="skill-bar-percent">25%</div>
             </div>
         </div>
         
         
         <div class="col s12 m6 l6" data-aos="fade-up">
             <div class="skillbar">
-                <div class="skillbar-title" style="background: linear-gradient(to right, #9900FF 0%, #CC66FF 100%); width: 35%">
+                <div class="skillbar-title" style="background: linear-gradient(to right, #9900FF 0%, #CC66FF 100%); width: 25%">
                     <span>python</span>
                 </div>
-                <div class="skill-bar-percent">35%</div>
+                <div class="skill-bar-percent">25%</div>
             </div>
         </div>
         
         
         <div class="col s12 m6 l6" data-aos="fade-up">
             <div class="skillbar">
-                <div class="skillbar-title" style="background: linear-gradient(to right, #00BCD4 0%, #80DEEA 100%); width: 15%">
+                <div class="skillbar-title" style="background: linear-gradient(to right, #00BCD4 0%, #80DEEA 100%); width: 10%">
                     <span>html</span>
                 </div>
-                <div class="skill-bar-percent">15%</div>
+                <div class="skill-bar-percent">10%</div>
             </div>
         </div>
         
@@ -712,14 +712,10 @@
         <div class="tag-chips center-align">
             
             
-            <a href="/tags/Hexo/">
-                <span class="chip center-align waves-effect waves-light chip-default">Hexo</span>
-            </a>
             
             
-            
-            <a href="/tags/博客搭建/">
-                <span class="chip center-align waves-effect waves-light chip-default">博客搭建</span>
+            <a href="/tags/A-Star算法/">
+                <span class="chip center-align waves-effect waves-light chip-default">A-Star算法</span>
             </a>
             
             
@@ -736,16 +732,14 @@
             
             
             
-            
-            
-            <a href="/tags/A-Star算法/">
-                <span class="chip center-align waves-effect waves-light chip-default">A-Star算法</span>
+            <a href="/tags/Hexo/">
+                <span class="chip center-align waves-effect waves-light chip-default">Hexo</span>
             </a>
             
             
             
-            <a href="/tags/OJ/">
-                <span class="chip center-align waves-effect waves-light chip-default">OJ</span>
+            <a href="/tags/博客搭建/">
+                <span class="chip center-align waves-effect waves-light chip-default">博客搭建</span>
             </a>
             
             
@@ -756,14 +750,32 @@
             
             
             
-            <a href="/tags/离散/">
-                <span class="chip center-align waves-effect waves-light chip-default">离散</span>
+            <a href="/tags/OJ/">
+                <span class="chip center-align waves-effect waves-light chip-default">OJ</span>
             </a>
             
             
             
             <a href="/tags/爬虫/">
                 <span class="chip center-align waves-effect waves-light chip-default">爬虫</span>
+            </a>
+            
+            
+            
+            <a href="/tags/动态规划/">
+                <span class="chip center-align waves-effect waves-light chip-default">动态规划</span>
+            </a>
+            
+            
+            
+            <a href="/tags/离散/">
+                <span class="chip center-align waves-effect waves-light chip-default">离散</span>
+            </a>
+            
+            
+            
+            <a href="/tags/生活/">
+                <span class="chip center-align waves-effect waves-light chip-default">生活</span>
             </a>
             
             
@@ -780,12 +792,6 @@
             
             
             
-            <a href="/tags/动态规划/">
-                <span class="chip center-align waves-effect waves-light chip-default">动态规划</span>
-            </a>
-            
-            
-            
             <a href="/tags/BP算法/">
                 <span class="chip center-align waves-effect waves-light chip-default">BP算法</span>
             </a>
@@ -798,26 +804,8 @@
             
             
             
-            <a href="/tags/生活/">
-                <span class="chip center-align waves-effect waves-light chip-default">生活</span>
-            </a>
-            
-            
-            
-            <a href="/tags/卷积神经网络（CNN）/">
-                <span class="chip center-align waves-effect waves-light chip-default">卷积神经网络（CNN）</span>
-            </a>
-            
-            
-            
             <a href="/tags/协同过滤（CF）/">
                 <span class="chip center-align waves-effect waves-light chip-default">协同过滤（CF）</span>
-            </a>
-            
-            
-            
-            <a href="/tags/测试题/">
-                <span class="chip center-align waves-effect waves-light chip-default">测试题</span>
             </a>
             
             
@@ -828,8 +816,38 @@
             
             
             
+            <a href="/tags/卷积神经网络（CNN）/">
+                <span class="chip center-align waves-effect waves-light chip-default">卷积神经网络（CNN）</span>
+            </a>
+            
+            
+            
+            <a href="/tags/分类/">
+                <span class="chip center-align waves-effect waves-light chip-default">分类</span>
+            </a>
+            
+            
+            
+            <a href="/tags/聚类/">
+                <span class="chip center-align waves-effect waves-light chip-default">聚类</span>
+            </a>
+            
+            
+            
             <a href="/tags/朴素贝叶斯算法/">
                 <span class="chip center-align waves-effect waves-light chip-default">朴素贝叶斯算法</span>
+            </a>
+            
+            
+            
+            <a href="/tags/数据集/">
+                <span class="chip center-align waves-effect waves-light chip-default">数据集</span>
+            </a>
+            
+            
+            
+            <a href="/tags/测试题/">
+                <span class="chip center-align waves-effect waves-light chip-default">测试题</span>
             </a>
             
             
@@ -842,24 +860,6 @@
             
             <a href="/tags/回归/">
                 <span class="chip center-align waves-effect waves-light chip-default">回归</span>
-            </a>
-            
-            
-            
-            <a href="/tags/分类/">
-                <span class="chip center-align waves-effect waves-light chip-default">分类</span>
-            </a>
-            
-            
-            
-            <a href="/tags/数据集/">
-                <span class="chip center-align waves-effect waves-light chip-default">数据集</span>
-            </a>
-            
-            
-            
-            <a href="/tags/聚类/">
-                <span class="chip center-align waves-effect waves-light chip-default">聚类</span>
             </a>
             
             
@@ -934,6 +934,14 @@
             
             
             
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv" class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv" class="white-color"></span>&nbsp;人
+            </span>
             
             <br>
             
