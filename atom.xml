@@ -281,9 +281,9 @@
     
       <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="推荐系统" scheme="https://hpu-yz.github.io/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
-    
       <category term="协同过滤（CF）" scheme="https://hpu-yz.github.io/tags/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%EF%BC%88CF%EF%BC%89/"/>
+    
+      <category term="推荐系统" scheme="https://hpu-yz.github.io/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
