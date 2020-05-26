@@ -103,29 +103,6 @@
     
     
     <entry>
-      <title>浅谈机器学习-回归与分类的区别</title>
-      <link href="/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/"/>
-      <url>/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/</url>
-      
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习的主要任务便是聚焦于两个问题：分类和回归。本文将浅谈下两者的区别。</p><h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归会给出一个具体的结果，例如房价的数据，根据位置、周边、配套等等这些维度，给出一个房价的预测。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类相信大家都不会陌生，生活中会见到很多的应用，比如垃圾邮件识别、信用卡发放等等，就是基于数据集，作出二分类或者多分类的选择。</p><p>浅层： 两者的的预测目标变量类型不同，回归问题是连续变量，分类问题离散变量。<br>中层： 回归问题是定量问题，分类问题是定性问题。<br>高层： 回归与分类的根本区别在于输出空间是否为一个度量空间。<br><img src="https://img-blog.csdnimg.cn/20190318195051810.png" alt></p><h1 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h1><p>分类和回归的区别在于输出变量的类型。</p><p>定量输出称为回归，或者说是连续变量预测；<br>定性输出称为分类，或者说是离散变量预测。</p><p>举个例子：<br>预测明天的气温是多少度，这是一个回归任务；<br>预测明天是阴、晴还是雨，就是一个分类任务。</p><h1 id="应用场景不同"><a href="#应用场景不同" class="headerlink" title="应用场景不同"></a>应用场景不同</h1><p>1.回归问题的应用场景</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归问题通常是用来预测一个值，如预测房价、未来的天气情况等等，例如一个产品的实际价格为500元，通过回归分析预测值为499元，我们认为这是一个比较好的回归分析。一个比较常见的回归算法是线性回归算法（LR）。另外，回归分析用在神经网络上，其最上层是不需要加上softmax函数的，而是直接对前一层累加即可。回归是对真实值的一种逼近预测。</p><p>2.分类问题的应用场景</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类问题是用于将事物打上一个标签，通常结果为离散值。例如判断一幅图片上的动物是一只猫还是一只狗，分类通常是建立在回归之上，分类的最后一层通常要使用softmax函数进行判断其所属类别。分类并没有逼近的概念，最终正确结果只有一个，错误的就是错误的，不会有相近的概念。最常见的分类方法是逻辑回归，或者叫逻辑分类。</p><h1 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类模型和回归模型本质一样，都是要建立映射关系。在实际操作中，我们确实常常将回归问题和分类问题互相转化，即分类模型可将回归模型的输出离散化，回归模型也可将分类模型的输出连续化。（分类问题回归化：逻辑回归；回归问题分类化：年龄预测问题——&gt;年龄段分类问题）</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 机器学习 </tag>
-            
-            <tag> 回归 </tag>
-            
-            <tag> 分类 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>浅谈机器学习-分类和聚类的区别</title>
       <link href="/2019/08/01/qian-tan-ji-qi-xue-xi-fen-lei-he-ju-lei-de-qu-bie/"/>
       <url>/2019/08/01/qian-tan-ji-qi-xue-xi-fen-lei-he-ju-lei-de-qu-bie/</url>
@@ -141,6 +118,29 @@
             <tag> 分类 </tag>
             
             <tag> 聚类 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>浅谈机器学习-回归与分类的区别</title>
+      <link href="/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/"/>
+      <url>/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习的主要任务便是聚焦于两个问题：分类和回归。本文将浅谈下两者的区别。</p><h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归会给出一个具体的结果，例如房价的数据，根据位置、周边、配套等等这些维度，给出一个房价的预测。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类相信大家都不会陌生，生活中会见到很多的应用，比如垃圾邮件识别、信用卡发放等等，就是基于数据集，作出二分类或者多分类的选择。</p><p>浅层： 两者的的预测目标变量类型不同，回归问题是连续变量，分类问题离散变量。<br>中层： 回归问题是定量问题，分类问题是定性问题。<br>高层： 回归与分类的根本区别在于输出空间是否为一个度量空间。<br><img src="https://img-blog.csdnimg.cn/20190318195051810.png" alt></p><h1 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h1><p>分类和回归的区别在于输出变量的类型。</p><p>定量输出称为回归，或者说是连续变量预测；<br>定性输出称为分类，或者说是离散变量预测。</p><p>举个例子：<br>预测明天的气温是多少度，这是一个回归任务；<br>预测明天是阴、晴还是雨，就是一个分类任务。</p><h1 id="应用场景不同"><a href="#应用场景不同" class="headerlink" title="应用场景不同"></a>应用场景不同</h1><p>1.回归问题的应用场景</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归问题通常是用来预测一个值，如预测房价、未来的天气情况等等，例如一个产品的实际价格为500元，通过回归分析预测值为499元，我们认为这是一个比较好的回归分析。一个比较常见的回归算法是线性回归算法（LR）。另外，回归分析用在神经网络上，其最上层是不需要加上softmax函数的，而是直接对前一层累加即可。回归是对真实值的一种逼近预测。</p><p>2.分类问题的应用场景</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类问题是用于将事物打上一个标签，通常结果为离散值。例如判断一幅图片上的动物是一只猫还是一只狗，分类通常是建立在回归之上，分类的最后一层通常要使用softmax函数进行判断其所属类别。分类并没有逼近的概念，最终正确结果只有一个，错误的就是错误的，不会有相近的概念。最常见的分类方法是逻辑回归，或者叫逻辑分类。</p><h1 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类模型和回归模型本质一样，都是要建立映射关系。在实际操作中，我们确实常常将回归问题和分类问题互相转化，即分类模型可将回归模型的输出离散化，回归模型也可将分类模型的输出连续化。（分类问题回归化：逻辑回归；回归问题分类化：年龄预测问题——&gt;年龄段分类问题）</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 机器学习 </tag>
+            
+            <tag> 分类 </tag>
+            
+            <tag> 回归 </tag>
             
         </tags>
       
@@ -182,9 +182,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 协同过滤（CF） </tag>
-            
             <tag> 推荐系统 </tag>
+            
+            <tag> 协同过滤（CF） </tag>
             
         </tags>
       
