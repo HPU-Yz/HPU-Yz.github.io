@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hpu-yz.github.io/"/>
-  <updated>2020-05-28T07:19:53.203Z</updated>
+  <updated>2020-06-03T00:09:50.266Z</updated>
   <id>https://hpu-yz.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://hpu-yz.github.io/2020/05/28/lun-wen-bi-ji/"/>
     <id>https://hpu-yz.github.io/2020/05/28/lun-wen-bi-ji/</id>
     <published>2020-05-27T16:00:00.000Z</published>
-    <updated>2020-05-28T07:19:53.203Z</updated>
+    <updated>2020-06-03T00:09:50.266Z</updated>
     
     <summary type="html">
     
@@ -39,7 +39,9 @@
     
       <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="深度学习 - 论文" scheme="https://hpu-yz.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E8%AE%BA%E6%96%87/"/>
+      <category term="深度学习" scheme="https://hpu-yz.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="论文" scheme="https://hpu-yz.github.io/tags/%E8%AE%BA%E6%96%87/"/>
     
   </entry>
   
@@ -198,35 +200,6 @@
   </entry>
   
   <entry>
-    <title>浅谈机器学习-回归与分类的区别</title>
-    <link href="https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/"/>
-    <id>https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/</id>
-    <published>2019-07-31T16:00:00.000Z</published>
-    <updated>2020-05-25T08:03:09.655Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
-        
-      
-    
-    </summary>
-    
-    
-    
-      <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="回归" scheme="https://hpu-yz.github.io/tags/%E5%9B%9E%E5%BD%92/"/>
-    
-      <category term="分类" scheme="https://hpu-yz.github.io/tags/%E5%88%86%E7%B1%BB/"/>
-    
-  </entry>
-  
-  <entry>
     <title>浅谈机器学习-分类和聚类的区别</title>
     <link href="https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-fen-lei-he-ju-lei-de-qu-bie/"/>
     <id>https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-fen-lei-he-ju-lei-de-qu-bie/</id>
@@ -252,6 +225,35 @@
       <category term="分类" scheme="https://hpu-yz.github.io/tags/%E5%88%86%E7%B1%BB/"/>
     
       <category term="聚类" scheme="https://hpu-yz.github.io/tags/%E8%81%9A%E7%B1%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈机器学习-回归与分类的区别</title>
+    <link href="https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/"/>
+    <id>https://hpu-yz.github.io/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/</id>
+    <published>2019-07-31T16:00:00.000Z</published>
+    <updated>2020-05-25T08:03:09.655Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="机器学习" scheme="https://hpu-yz.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="分类" scheme="https://hpu-yz.github.io/tags/%E5%88%86%E7%B1%BB/"/>
+    
+      <category term="回归" scheme="https://hpu-yz.github.io/tags/%E5%9B%9E%E5%BD%92/"/>
     
   </entry>
   
