@@ -1,55 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hexo博客搭建</title>
-    <url>/2019/03/15/hexo-bo-ke-da-jian/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇文章用于介绍Hexo个人博客的搭建过程，这也是我搭建本博客后的第一篇文章，分享一下搭建方法，有兴趣的小伙伴也可以自主搭建一个属于自己的博客！<br>   首先<strong>感谢大家的来访支持</strong>！<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自己本来开始做的是html网页，网页做完之后需要购买服务器和域名（价格不便宜）才能运营，还要定期维护它，对于我个人只是感兴趣做个自己的网页，单单做个html网页就很费力气了，实在是没有精力和时间运营它，所以也没有必要去购买服务器和域名（性价比低），但我做的html网页在我自己的电脑上还是可以运营的（感兴趣的小伙伴可以联系我，一起探讨做html网页的方法）。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其次，现在市面上的博客有很多，如CSDN，博客园等平台，可以直接在上面发表，也有很多优点，但缺点是比较不自由，会受到各种限制和恶心的广告。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以我选择了直接在github page平台上托管我的博客，这样可以安心写作，也不需要定期维护，而且hexo作为一个快速简洁的博客框架，用它来搭建博客也很简单。我在两天内完成了Hexo-Github个人博客的基本搭建（其实搭建不难，自己脑子笨，做的慢些了……）<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这里记录一下我的第搭建一个博客，并给大家分享一下搭建的流程，以及在搭建过程中遇到的问题和解决方案。如果你也有搭建个人博客的想法，希望能给你一点经验帮助。 大家都是新手，可以分享经验，互相交流学习的。</p>
-<h2 id="搭建经历"><a href="#搭建经历" class="headerlink" title="搭建经历"></a>搭建经历</h2><ul>
-<li>❤2019-3-13：初次看到Hexo-Github搭建个人博客，很感兴趣，便开始了自己博客的搭建；</li>
-<li>❤2019-3-14：完成了博客的基本搭建（可以运营），并上传了第一篇文章； </li>
-<li>❤2019-3-17：博客搭建工作全部完结（主题优化，程序添加，分类管理……）;</li>
-<li>❤未完待续……</li>
-</ul>
-<h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><pre><code>1. 安装Git
-2. 安装Node.js
-3. 安装Hexo
-4. 注册Github账号并创建新仓库
-5. 生产SSH添加到Github
-6. 将Hexo部署到Github
-7. 修改主题
-8. 优化主题
-</code></pre><h3 id="1-安装Git"><a href="#1-安装Git" class="headerlink" title="1.安装Git"></a>1.安装Git</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直接到<a href="https://git-scm.com/" target="_blank" rel="noopener">Git官网</a>下载就行了，右键点击软件使用Git Bash的命令行工具，以后就用这个工具来使用Git</p>
-<h3 id="2-安装Node-js"><a href="#2-安装Node-js" class="headerlink" title="2.安装Node.js"></a>2.安装Node.js</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装同Git一样，也是到<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网</a>下载就可以了。</p>
-<h3 id="3-安装Hexo"><a href="#3-安装Hexo" class="headerlink" title="3.安装Hexo"></a>3.安装Hexo</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用下载好的Git Bash来下载Hexo，代码如下：</p>
-<figure class="highlight avrasm"><table><tr><td class="code"><pre><span class="line">npm install hexo-<span class="keyword">cli</span> -g</span><br></pre></td></tr></table></figure>
-<h3 id="4-注册Github账号并创建一个新的仓库"><a href="#4-注册Github账号并创建一个新的仓库" class="headerlink" title="4.注册Github账号并创建一个新的仓库"></a>4.注册Github账号并创建一个新的仓库</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/" target="_blank" rel="noopener">Github</a>是一个很好的开源项目托管平台，大部分人应该都注册的有账号（有账号的小伙伴可以跳过这步），即使没有注册过也没有关系，只需现在注册下就行了，请参考<a href="https://www.jianshu.com/p/f51062941573" target="_blank" rel="noopener">Github基础设置及使用详解</a>，里面的有详细的注册过程,过程也很简单。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注册过账号后，先创建一个新的仓库（创建的具体方法上面的那个网站也有详细过程，但这里需要注意的是，创建的仓库名一定要是 <code>name.github.io</code>,其中name为你注册的Github的用户名，修改成你自己的。</p>
-<h3 id="5-生成SSH添加到Github"><a href="#5-生成SSH添加到Github" class="headerlink" title="5.生成SSH添加到Github"></a>5.生成SSH添加到Github</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先配置SSH，同样使用Git Bash,输入一下代码：</p>
-<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">ssh-keygen -<span class="built_in">t</span> rsa -C <span class="string">"邮件地址"</span></span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中”邮件地址”是你注册Github时填写的邮箱（输入时双引号要带上），输入后要连续按回车键，再等待回应。它会回复：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line">Enter <span class="built_in">file</span> <span class="keyword">in</span> which <span class="built_in">to</span> save <span class="keyword">the</span> key (/c/Users/lenovo/.ssh/id_rsa):</span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后进入<code>(/c/Users/lenovo/.ssh/id_rsa.pub)</code>,将里面的内容复制下来，再进入Github官网，到GitHub设置-&gt;SSH and GPG keys-&gt;New SSH key，粘贴此处并确定。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;再回到Git Bash,输入一下代码：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">ssh</span> <span class="selector-tag">-T</span> <span class="selector-tag">git</span>@<span class="keyword">github</span>.<span class="keyword">com</span></span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用于测试SSH是否配置好，看到<code>You&#39;ve successfully authenticated, but GitHub does not provide shell access.</code>则说明配置好了，否则无法使用hexo d。</p>
-<h3 id="6-将Hexo部署到Github"><a href="#6-将Hexo部署到Github" class="headerlink" title="6. 将Hexo部署到Github"></a>6. 将Hexo部署到Github</h3><h4 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-初始化Hexo"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-初始化Hexo" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初始化Hexo"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初始化Hexo</h4><figure class="highlight pf"><table><tr><td class="code"><pre><span class="line">hexo init B<span class="keyword">log</span>					</span><br><span class="line">cd B<span class="keyword">log</span></span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blog可修该城其他名字；cd Blog 指打开Blog文件夹。</p>
-<h4 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-安装Hexo扩展"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-安装Hexo扩展" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装Hexo扩展"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装Hexo扩展</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
-<h4 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-本地调试"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-本地调试" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本地调试"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本地调试</h4><figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">hexo</span> <span class="string">clean</span></span><br><span class="line"><span class="attr">hexo</span> <span class="string">g						</span></span><br><span class="line"><span class="attr">hexo</span> <span class="string">s</span></span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexo s是开启本地预览服务，打开浏览器访问<a href="http://localhost:4000" target="_blank" rel="noopener"> http://localhost:4000</a> 即可看到内容。</p>
-<h4 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-上传到Github-Pages"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-上传到Github-Pages" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传到Github Pages"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传到Github Pages</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传之前，打开站点配置文件_config.yml，位于站点根目录下，修改最后一部分为如下部分。</p>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">  <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repository</span>: git<span class="variable">@github</span>.<span class="attribute">com</span>:name/name.github.io.git    #name修改为你的Github用户名</span><br><span class="line">  <span class="attribute">branch</span>: master</span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传到Github</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">hexo</span> <span class="string">clean</span></span><br><span class="line"><span class="attr">hexo</span> <span class="string">g						</span></span><br><span class="line"><span class="attr">hexo</span> <span class="string">d</span></span><br></pre></td></tr></table></figure>
-<h3 id="7-修改主题"><a href="#7-修改主题" class="headerlink" title="7.修改主题"></a>7.修改主题</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主题位置在themes目录下，默认为landscape主题。可从官网<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a>选择各种下载（得看个人喜好了），推荐NexT主题，以下为安装方法。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装过程就一行代码，站点根目录下运行。</p>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/theme-<span class="keyword">next</span>/hexo-theme-<span class="keyword">next</span> themes/<span class="keyword">next</span></span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后打开站点配置文件_config.yml，找到theme： landscape，把landscape修改为next就可以了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;到现在你就已经搭建好了一个属于你自己的博客平台了，赶紧去熟悉熟悉它吧。👍</p>
-<h3 id="8-主题优化"><a href="#8-主题优化" class="headerlink" title="8.主题优化"></a>8.主题优化</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其实刚才我们已经搭建好了，并且也可以使用了，但我们仍可以使我们的博客变得更加好看吸引人，以及添加更多的小功能，使我们有更好的体验，也就是进行主题优化。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但由于主题优化内容比较多，所以在这就先不讲解了，不用担心，我会在后续的博客文章中持续更新关于如何进行主题优化，使我们的博客变得“高大上”。🤞</p>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>博客搭建</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>A-Star算法求解N数码问题</title>
     <url>/2020/04/24/a-star-suan-fa-qiu-jie-n-shu-ma-wen-ti/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N数码问题和A-Star  算法的介绍，网上讲解的有很多，基本意思都是一样的，所以在这里就不再做详细的介绍了，本文主要是讲解python实现A-Star算法对N数码问题的求解过程。</p>
@@ -58,6 +9,54 @@
 ]]></content>
       <tags>
         <tag>机器学习 - A-Star</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KNN算法及python实现</title>
+    <url>/2019/07/20/k-zui-jin-lin-fen-lei-suan-fa-knn-ji-python-shi-xian/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN算法即K-Nearest Neighbor，也是机器学习十大经典算法之一。前文讲解了K-means算法，今天我们就继续讲KNN算法，两者看起来挺相似的，但区别还是很大的，看完本片文章你就会明白了。</p>
+<h1 id="一、引入"><a href="#一、引入" class="headerlink" title="一、引入"></a>一、引入</h1><p>问题：确定绿色圆是属于红色三角形、还是蓝色正方形？<br><img src="https://img-blog.csdnimg.cn/20190729110829508.png" alt><br>KNN的思想：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从上图中我们可以看到，图中的数据集是良好的数据，即都打好了label，一类是蓝色的正方形，一类是红色的三角形，那个绿色的圆形是我们待分类的数据。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果K=3，那么离绿色点最近的有2个红色三角形和1个蓝色的正方形，这3个点投票，于是绿色的这个待分类点属于红色的三角形<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果K=5，那么离绿色点最近的有2个红色三角形和3个蓝色的正方形，这5个点投票，于是绿色的这个待分类点属于蓝色的正方形<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;即如果一个样本在特征空间中的k个最相邻的样本中，大多数属于某一个类别，则该样本也属于这个类别。我们可以看到，KNN本质是基于一种数据统计的方法！其实很多机器学习算法也是基于数据统计的。</p>
+<h1 id="二、KNN算法"><a href="#二、KNN算法" class="headerlink" title="二、KNN算法"></a>二、KNN算法</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN即K-最近邻分类算法（K-Nearest Neighbor），是一种memory-based learning，也叫instance-based learning，属于lazy learning。即它没有明显的前期训练过程，而是程序开始运行时，把数据集加载到内存后，不需要进行训练，就可以开始分类了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN也是一种监督学习算法，通过计算新数据与训练数据特征值之间的距离，然后选取K(K&gt;=1)个距离最近的邻居进行分类判(投票法)或者回归。若K=1，新数据被简单分配给其近邻的类。</p>
+<h2 id="2-步骤"><a href="#2-步骤" class="headerlink" title="2.步骤"></a>2.步骤</h2><p>1）计算测试数据与各个训练数据之间的距离；</p>
+<blockquote>
+<p>(计算距离的方式前文讲k-means时说过，不清楚的可以去查看以下➡<a href="https://hpu-yz.github.io/2019/07/19/K-means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8Apython%E5%AE%9E%E7%8E%B0/">传送门</a>)</p>
+</blockquote>
+<p>2）按照距离的递增关系进行排序；</p>
+<p>3）选取距离最小的K个点；</p>
+<blockquote>
+<p>K值是由自己来确定的</p>
+</blockquote>
+<p>4）确定前K个点所在类别的出现频率；</p>
+<p>5）返回前K个点中出现频率最高的类别作为测试数据的预测分类。</p>
+<blockquote>
+<p>说明：对于步骤5的预测分类有以下两种方法</p>
+<ol>
+<li>多数表决法：多数表决法类似于投票的过程，也就是在 K 个邻居中选择类别最多的种类作为测试样本的类别。</li>
+<li>加权表决法：根据距离的远近，对近邻的投票进行加权，距离越近则权重越大，通过权重计算结果最大值的类为测试样本的类别。</li>
+</ol>
+</blockquote>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>1)  非参数统计方法：不需要引入参数<br>2)  K的选择：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K = 1时，将待分类样本划入与其最接近的样本的类。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K = |X|时，仅根据训练样本进行频率统计，将待分类样本划入最多的类。<br>K需要合理选择，太小容易受干扰，太大增加计算复杂性。<br>3)  算法的复杂度：维度灾难，当维数增加时，所需的训练样本数急剧增加，一般采用降维处理。</p>
+<h1 id="三、算法优缺点"><a href="#三、算法优缺点" class="headerlink" title="三、算法优缺点"></a>三、算法优缺点</h1><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
+<li>简单、有效。 </li>
+<li>重新训练的代价较低(类别体系的变化和训练集的变化，在Web环境和电子商务应用中是很常见的)。 </li>
+<li>计算时间和空间线性于训练集的规模(在一些场合不算太大)。 </li>
+<li>由于KNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因此对于类域的交叉或重叠较多的待分样本集来说，KNN方法较其他方法更为适合。 </li>
+<li>该算法比较适用于样本容量比较大的类域的自动分类，而那些样本容量较小的类域采用这种算法比较容易产生误分。 </li>
+</ol>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
+<li>KNN算法是懒散学习方法(lazy learning)，而一些积极学习的算法要快很多。 </li>
+<li>需要存储全部的训练样本 </li>
+<li>输出的可解释性不强，例如决策树的可解释性较强。 </li>
+<li>该算法在分类时有个主要的不足是，当样本不平衡时，如一个类的样本容量很大，而其他类样本容量很小时，有可能导致当输入一个新样本时，该样本的K个邻居中大容量类的样本占多数。该算法只计算最近的邻居样本，某一类的样本数量很大，那么或者这类样本并不接近目标样本，或者这类样本很靠近目标样本。无论怎样，数量并不能影响运行结果。可以采用权值的方法(和该样本距离小的邻居权值大)来改进。 </li>
+<li>计算量较大。目前常用的解决方法是事先对已知样本点进行剪辑，事先去除对分类作用不大的样本。</li>
+</ol>
+<h1 id="四、KNN与K-means的区别"><a href="#四、KNN与K-means的区别" class="headerlink" title="四、KNN与K-means的区别"></a>四、KNN与K-means的区别</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;废话不多说，咱直接上图：<br><img src="https://img-blog.csdnimg.cn/2019072911370194.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>相似点：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虽然两者有很大且别，但两者也有共同之处。都包含了一个过程：给定一个点，在数据集找离它最近的点，即都用到了NN(Nearest Neighbor)算法。</p>
+<h1 id="五、python实例实现"><a href="#五、python实例实现" class="headerlink" title="五、python实例实现"></a>五、python实例实现</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下面引入一个实例，通过python代码具体看下KNN算法的流程。</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"></span><br><span class="line">dataSet = <span class="built_in">array</span>([[<span class="number">1.0</span>,<span class="number">1.1</span>],[<span class="number">1.0</span>,<span class="number">1.0</span>],[<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0.1</span>]])</span><br><span class="line">labels = [<span class="string">'A'</span>,<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'B'</span>]</span><br><span class="line"></span><br><span class="line">def classify0(inX,dataSet,labels,k):</span><br><span class="line"></span><br><span class="line">    #求出样本集的行数，也就是labels标签的数目</span><br><span class="line">    dataSetSize = dataSet.shape[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    #构造输入值和样本集的差值矩阵</span><br><span class="line">    diffMat = tile(inX,(dataSetSize,<span class="number">1</span>)) - dataSet</span><br><span class="line"></span><br><span class="line">    #计算欧式距离</span><br><span class="line">    sqDiffMat = diffMat**<span class="number">2</span></span><br><span class="line">    sqDistances = sqDiffMat.sum(axis=<span class="number">1</span>)</span><br><span class="line">    distances = sqDistances**<span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">    #求距离从小到大排序的序号</span><br><span class="line">    sortedDistIndicies = distances.argsort()</span><br><span class="line"></span><br><span class="line">    #对距离最小的k个点统计对应的样本标签</span><br><span class="line">    classCount = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">        #取第i+<span class="number">1</span>邻近的样本对应的类别标签</span><br><span class="line">        voteIlabel = labels[sortedDistIndicies[i]]</span><br><span class="line">        #以标签为key，标签出现的次数为value将统计到的标签及出现次数写进字典</span><br><span class="line">        classCount[voteIlabel] = classCount.<span class="keyword">get</span>(voteIlabel,<span class="number">0</span>) + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    #对字典按value从大到小排序</span><br><span class="line">    sortedClassCount = sorted(classCount.items(),key=operator.itemgetter(<span class="number">1</span>),reverse=True)</span><br><span class="line"></span><br><span class="line">    #返回排序后字典中最大value对应的key</span><br><span class="line">    <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(classify0([<span class="number">1.1</span>,<span class="number">0</span>],dataSet,labels,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>KNN</tag>
       </tags>
   </entry>
   <entry>
@@ -143,54 +142,6 @@
       </tags>
   </entry>
   <entry>
-    <title>KNN算法及python实现</title>
-    <url>/2019/07/20/k-zui-jin-lin-fen-lei-suan-fa-knn-ji-python-shi-xian/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN算法即K-Nearest Neighbor，也是机器学习十大经典算法之一。前文讲解了K-means算法，今天我们就继续讲KNN算法，两者看起来挺相似的，但区别还是很大的，看完本片文章你就会明白了。</p>
-<h1 id="一、引入"><a href="#一、引入" class="headerlink" title="一、引入"></a>一、引入</h1><p>问题：确定绿色圆是属于红色三角形、还是蓝色正方形？<br><img src="https://img-blog.csdnimg.cn/20190729110829508.png" alt><br>KNN的思想：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从上图中我们可以看到，图中的数据集是良好的数据，即都打好了label，一类是蓝色的正方形，一类是红色的三角形，那个绿色的圆形是我们待分类的数据。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果K=3，那么离绿色点最近的有2个红色三角形和1个蓝色的正方形，这3个点投票，于是绿色的这个待分类点属于红色的三角形<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果K=5，那么离绿色点最近的有2个红色三角形和3个蓝色的正方形，这5个点投票，于是绿色的这个待分类点属于蓝色的正方形<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;即如果一个样本在特征空间中的k个最相邻的样本中，大多数属于某一个类别，则该样本也属于这个类别。我们可以看到，KNN本质是基于一种数据统计的方法！其实很多机器学习算法也是基于数据统计的。</p>
-<h1 id="二、KNN算法"><a href="#二、KNN算法" class="headerlink" title="二、KNN算法"></a>二、KNN算法</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN即K-最近邻分类算法（K-Nearest Neighbor），是一种memory-based learning，也叫instance-based learning，属于lazy learning。即它没有明显的前期训练过程，而是程序开始运行时，把数据集加载到内存后，不需要进行训练，就可以开始分类了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KNN也是一种监督学习算法，通过计算新数据与训练数据特征值之间的距离，然后选取K(K&gt;=1)个距离最近的邻居进行分类判(投票法)或者回归。若K=1，新数据被简单分配给其近邻的类。</p>
-<h2 id="2-步骤"><a href="#2-步骤" class="headerlink" title="2.步骤"></a>2.步骤</h2><p>1）计算测试数据与各个训练数据之间的距离；</p>
-<blockquote>
-<p>(计算距离的方式前文讲k-means时说过，不清楚的可以去查看以下➡<a href="https://hpu-yz.github.io/2019/07/19/K-means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%8F%8Apython%E5%AE%9E%E7%8E%B0/">传送门</a>)</p>
-</blockquote>
-<p>2）按照距离的递增关系进行排序；</p>
-<p>3）选取距离最小的K个点；</p>
-<blockquote>
-<p>K值是由自己来确定的</p>
-</blockquote>
-<p>4）确定前K个点所在类别的出现频率；</p>
-<p>5）返回前K个点中出现频率最高的类别作为测试数据的预测分类。</p>
-<blockquote>
-<p>说明：对于步骤5的预测分类有以下两种方法</p>
-<ol>
-<li>多数表决法：多数表决法类似于投票的过程，也就是在 K 个邻居中选择类别最多的种类作为测试样本的类别。</li>
-<li>加权表决法：根据距离的远近，对近邻的投票进行加权，距离越近则权重越大，通过权重计算结果最大值的类为测试样本的类别。</li>
-</ol>
-</blockquote>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>1)  非参数统计方法：不需要引入参数<br>2)  K的选择：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K = 1时，将待分类样本划入与其最接近的样本的类。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K = |X|时，仅根据训练样本进行频率统计，将待分类样本划入最多的类。<br>K需要合理选择，太小容易受干扰，太大增加计算复杂性。<br>3)  算法的复杂度：维度灾难，当维数增加时，所需的训练样本数急剧增加，一般采用降维处理。</p>
-<h1 id="三、算法优缺点"><a href="#三、算法优缺点" class="headerlink" title="三、算法优缺点"></a>三、算法优缺点</h1><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
-<li>简单、有效。 </li>
-<li>重新训练的代价较低(类别体系的变化和训练集的变化，在Web环境和电子商务应用中是很常见的)。 </li>
-<li>计算时间和空间线性于训练集的规模(在一些场合不算太大)。 </li>
-<li>由于KNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因此对于类域的交叉或重叠较多的待分样本集来说，KNN方法较其他方法更为适合。 </li>
-<li>该算法比较适用于样本容量比较大的类域的自动分类，而那些样本容量较小的类域采用这种算法比较容易产生误分。 </li>
-</ol>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
-<li>KNN算法是懒散学习方法(lazy learning)，而一些积极学习的算法要快很多。 </li>
-<li>需要存储全部的训练样本 </li>
-<li>输出的可解释性不强，例如决策树的可解释性较强。 </li>
-<li>该算法在分类时有个主要的不足是，当样本不平衡时，如一个类的样本容量很大，而其他类样本容量很小时，有可能导致当输入一个新样本时，该样本的K个邻居中大容量类的样本占多数。该算法只计算最近的邻居样本，某一类的样本数量很大，那么或者这类样本并不接近目标样本，或者这类样本很靠近目标样本。无论怎样，数量并不能影响运行结果。可以采用权值的方法(和该样本距离小的邻居权值大)来改进。 </li>
-<li>计算量较大。目前常用的解决方法是事先对已知样本点进行剪辑，事先去除对分类作用不大的样本。</li>
-</ol>
-<h1 id="四、KNN与K-means的区别"><a href="#四、KNN与K-means的区别" class="headerlink" title="四、KNN与K-means的区别"></a>四、KNN与K-means的区别</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;废话不多说，咱直接上图：<br><img src="https://img-blog.csdnimg.cn/2019072911370194.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNzQxMzEy,size_16,color_FFFFFF,t_70" alt><br>相似点：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虽然两者有很大且别，但两者也有共同之处。都包含了一个过程：给定一个点，在数据集找离它最近的点，即都用到了NN(Nearest Neighbor)算法。</p>
-<h1 id="五、python实例实现"><a href="#五、python实例实现" class="headerlink" title="五、python实例实现"></a>五、python实例实现</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下面引入一个实例，通过python代码具体看下KNN算法的流程。</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"></span><br><span class="line">dataSet = <span class="built_in">array</span>([[<span class="number">1.0</span>,<span class="number">1.1</span>],[<span class="number">1.0</span>,<span class="number">1.0</span>],[<span class="number">0</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0.1</span>]])</span><br><span class="line">labels = [<span class="string">'A'</span>,<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'B'</span>]</span><br><span class="line"></span><br><span class="line">def classify0(inX,dataSet,labels,k):</span><br><span class="line"></span><br><span class="line">    #求出样本集的行数，也就是labels标签的数目</span><br><span class="line">    dataSetSize = dataSet.shape[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    #构造输入值和样本集的差值矩阵</span><br><span class="line">    diffMat = tile(inX,(dataSetSize,<span class="number">1</span>)) - dataSet</span><br><span class="line"></span><br><span class="line">    #计算欧式距离</span><br><span class="line">    sqDiffMat = diffMat**<span class="number">2</span></span><br><span class="line">    sqDistances = sqDiffMat.sum(axis=<span class="number">1</span>)</span><br><span class="line">    distances = sqDistances**<span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">    #求距离从小到大排序的序号</span><br><span class="line">    sortedDistIndicies = distances.argsort()</span><br><span class="line"></span><br><span class="line">    #对距离最小的k个点统计对应的样本标签</span><br><span class="line">    classCount = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">        #取第i+<span class="number">1</span>邻近的样本对应的类别标签</span><br><span class="line">        voteIlabel = labels[sortedDistIndicies[i]]</span><br><span class="line">        #以标签为key，标签出现的次数为value将统计到的标签及出现次数写进字典</span><br><span class="line">        classCount[voteIlabel] = classCount.<span class="keyword">get</span>(voteIlabel,<span class="number">0</span>) + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    #对字典按value从大到小排序</span><br><span class="line">    sortedClassCount = sorted(classCount.items(),key=operator.itemgetter(<span class="number">1</span>),reverse=True)</span><br><span class="line"></span><br><span class="line">    #返回排序后字典中最大value对应的key</span><br><span class="line">    <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print(classify0([<span class="number">1.1</span>,<span class="number">0</span>],dataSet,labels,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>KNN</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Python爬虫~豆瓣电影排行榜</title>
     <url>/2020/03/20/python-pa-chong-pa-qu-dou-ban-top250-dian-ying-pai-xing-bang/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇讲介绍一个简单的Python爬虫案例–爬取豆瓣 TOP250 电影排行榜。</p>
@@ -232,6 +183,95 @@
       <tags>
         <tag>python</tag>
         <tag>爬虫</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo博客搭建</title>
+    <url>/2019/03/15/hexo-bo-ke-da-jian/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本篇文章用于介绍Hexo个人博客的搭建过程，这也是我搭建本博客后的第一篇文章，分享一下搭建方法，有兴趣的小伙伴也可以自主搭建一个属于自己的博客！<br>   首先<strong>感谢大家的来访支持</strong>！<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自己本来开始做的是html网页，网页做完之后需要购买服务器和域名（价格不便宜）才能运营，还要定期维护它，对于我个人只是感兴趣做个自己的网页，单单做个html网页就很费力气了，实在是没有精力和时间运营它，所以也没有必要去购买服务器和域名（性价比低），但我做的html网页在我自己的电脑上还是可以运营的（感兴趣的小伙伴可以联系我，一起探讨做html网页的方法）。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其次，现在市面上的博客有很多，如CSDN，博客园等平台，可以直接在上面发表，也有很多优点，但缺点是比较不自由，会受到各种限制和恶心的广告。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以我选择了直接在github page平台上托管我的博客，这样可以安心写作，也不需要定期维护，而且hexo作为一个快速简洁的博客框架，用它来搭建博客也很简单。我在两天内完成了Hexo-Github个人博客的基本搭建（其实搭建不难，自己脑子笨，做的慢些了……）<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这里记录一下我的第搭建一个博客，并给大家分享一下搭建的流程，以及在搭建过程中遇到的问题和解决方案。如果你也有搭建个人博客的想法，希望能给你一点经验帮助。 大家都是新手，可以分享经验，互相交流学习的。</p>
+<h2 id="搭建经历"><a href="#搭建经历" class="headerlink" title="搭建经历"></a>搭建经历</h2><ul>
+<li>❤2019-3-13：初次看到Hexo-Github搭建个人博客，很感兴趣，便开始了自己博客的搭建；</li>
+<li>❤2019-3-14：完成了博客的基本搭建（可以运营），并上传了第一篇文章； </li>
+<li>❤2019-3-17：博客搭建工作全部完结（主题优化，程序添加，分类管理……）;</li>
+<li>❤未完待续……</li>
+</ul>
+<h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><pre><code>1. 安装Git
+2. 安装Node.js
+3. 安装Hexo
+4. 注册Github账号并创建新仓库
+5. 生产SSH添加到Github
+6. 将Hexo部署到Github
+7. 修改主题
+8. 优化主题
+</code></pre><h3 id="1-安装Git"><a href="#1-安装Git" class="headerlink" title="1.安装Git"></a>1.安装Git</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直接到<a href="https://git-scm.com/" target="_blank" rel="noopener">Git官网</a>下载就行了，右键点击软件使用Git Bash的命令行工具，以后就用这个工具来使用Git</p>
+<h3 id="2-安装Node-js"><a href="#2-安装Node-js" class="headerlink" title="2.安装Node.js"></a>2.安装Node.js</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装同Git一样，也是到<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网</a>下载就可以了。</p>
+<h3 id="3-安装Hexo"><a href="#3-安装Hexo" class="headerlink" title="3.安装Hexo"></a>3.安装Hexo</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用下载好的Git Bash来下载Hexo，代码如下：</p>
+<figure class="highlight avrasm"><table><tr><td class="code"><pre><span class="line">npm install hexo-<span class="keyword">cli</span> -g</span><br></pre></td></tr></table></figure>
+<h3 id="4-注册Github账号并创建一个新的仓库"><a href="#4-注册Github账号并创建一个新的仓库" class="headerlink" title="4.注册Github账号并创建一个新的仓库"></a>4.注册Github账号并创建一个新的仓库</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/" target="_blank" rel="noopener">Github</a>是一个很好的开源项目托管平台，大部分人应该都注册的有账号（有账号的小伙伴可以跳过这步），即使没有注册过也没有关系，只需现在注册下就行了，请参考<a href="https://www.jianshu.com/p/f51062941573" target="_blank" rel="noopener">Github基础设置及使用详解</a>，里面的有详细的注册过程,过程也很简单。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注册过账号后，先创建一个新的仓库（创建的具体方法上面的那个网站也有详细过程，但这里需要注意的是，创建的仓库名一定要是 <code>name.github.io</code>,其中name为你注册的Github的用户名，修改成你自己的。</p>
+<h3 id="5-生成SSH添加到Github"><a href="#5-生成SSH添加到Github" class="headerlink" title="5.生成SSH添加到Github"></a>5.生成SSH添加到Github</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先配置SSH，同样使用Git Bash,输入一下代码：</p>
+<figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">ssh-keygen -<span class="built_in">t</span> rsa -C <span class="string">"邮件地址"</span></span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中”邮件地址”是你注册Github时填写的邮箱（输入时双引号要带上），输入后要连续按回车键，再等待回应。它会回复：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line">Enter <span class="built_in">file</span> <span class="keyword">in</span> which <span class="built_in">to</span> save <span class="keyword">the</span> key (/c/Users/lenovo/.ssh/id_rsa):</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后进入<code>(/c/Users/lenovo/.ssh/id_rsa.pub)</code>,将里面的内容复制下来，再进入Github官网，到GitHub设置-&gt;SSH and GPG keys-&gt;New SSH key，粘贴此处并确定。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;再回到Git Bash,输入一下代码：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">ssh</span> <span class="selector-tag">-T</span> <span class="selector-tag">git</span>@<span class="keyword">github</span>.<span class="keyword">com</span></span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用于测试SSH是否配置好，看到<code>You&#39;ve successfully authenticated, but GitHub does not provide shell access.</code>则说明配置好了，否则无法使用hexo d。</p>
+<h3 id="6-将Hexo部署到Github"><a href="#6-将Hexo部署到Github" class="headerlink" title="6. 将Hexo部署到Github"></a>6. 将Hexo部署到Github</h3><h4 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-初始化Hexo"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-初始化Hexo" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初始化Hexo"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初始化Hexo</h4><figure class="highlight pf"><table><tr><td class="code"><pre><span class="line">hexo init B<span class="keyword">log</span>					</span><br><span class="line">cd B<span class="keyword">log</span></span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blog可修该城其他名字；cd Blog 指打开Blog文件夹。</p>
+<h4 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-安装Hexo扩展"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-安装Hexo扩展" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装Hexo扩展"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装Hexo扩展</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></span><br><span class="line">npm <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
+<h4 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-本地调试"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-本地调试" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本地调试"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本地调试</h4><figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">hexo</span> <span class="string">clean</span></span><br><span class="line"><span class="attr">hexo</span> <span class="string">g						</span></span><br><span class="line"><span class="attr">hexo</span> <span class="string">s</span></span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexo s是开启本地预览服务，打开浏览器访问<a href="http://localhost:4000" target="_blank" rel="noopener"> http://localhost:4000</a> 即可看到内容。</p>
+<h4 id="nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-上传到Github-Pages"><a href="#nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-nbsp-上传到Github-Pages" class="headerlink" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传到Github Pages"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传到Github Pages</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传之前，打开站点配置文件_config.yml，位于站点根目录下，修改最后一部分为如下部分。</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">  <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repository</span>: git<span class="variable">@github</span>.<span class="attribute">com</span>:name/name.github.io.git    #name修改为你的Github用户名</span><br><span class="line">  <span class="attribute">branch</span>: master</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传到Github</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">hexo</span> <span class="string">clean</span></span><br><span class="line"><span class="attr">hexo</span> <span class="string">g						</span></span><br><span class="line"><span class="attr">hexo</span> <span class="string">d</span></span><br></pre></td></tr></table></figure>
+<h3 id="7-修改主题"><a href="#7-修改主题" class="headerlink" title="7.修改主题"></a>7.修改主题</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主题位置在themes目录下，默认为landscape主题。可从官网<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a>选择各种下载（得看个人喜好了），推荐NexT主题，以下为安装方法。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装过程就一行代码，站点根目录下运行。</p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/theme-<span class="keyword">next</span>/hexo-theme-<span class="keyword">next</span> themes/<span class="keyword">next</span></span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;然后打开站点配置文件_config.yml，找到theme： landscape，把landscape修改为next就可以了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;到现在你就已经搭建好了一个属于你自己的博客平台了，赶紧去熟悉熟悉它吧。👍</p>
+<h3 id="8-主题优化"><a href="#8-主题优化" class="headerlink" title="8.主题优化"></a>8.主题优化</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其实刚才我们已经搭建好了，并且也可以使用了，但我们仍可以使我们的博客变得更加好看吸引人，以及添加更多的小功能，使我们有更好的体验，也就是进行主题优化。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但由于主题优化内容比较多，所以在这就先不讲解了，不用担心，我会在后续的博客文章中持续更新关于如何进行主题优化，使我们的博客变得“高大上”。🤞</p>
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>博客搭建</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python判断合式公式</title>
+    <url>/2019/03/17/python-pan-duan-chi-san-shu-xue-de-he-shi-gong-shi/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你没有听错，用python程序来解决离散数学的逻辑推理问题，我当我第一次听老师说的时候也很吃惊（再说上学期的Python学的也不咋地…..😩)，但经老师讲解后才知道，使用python解题不仅效率高，而且准确性也很强的，所以还是有必要学习一下的。</p>
+<h2 id="判断是否为合式公式"><a href="#判断是否为合式公式" class="headerlink" title="判断是否为合式公式"></a>判断是否为合式公式</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一个题目就是判断一个公式是否为合式公式，这也是最基础的，因为只有当在输入的合式公式正确的情况下，才能进一步的运算解题，所以先讲解一下怎么判断合式公式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先要知道<strong>什么是合式公式</strong>？<br>(1)原子命题常项或变项是合式公式；<br>(2)如果A是合式公式，则（-A）也是合式公式（- 表示非）；<br>(3)如果A，B是合式公式，则（A<em>B）、（A+B）、（A &lt; B）、（ A ~ B）也是合式公式；(此处 </em> 合取 + 析取 &lt; 代表条件 ~ 代表双条件)<br>(4)只有有限次地应用(1)～(3)所包含的命题变元，联结词和括号的符号串才是合式公式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>个人思路</strong>：<br>输入字符串，扫描字符串，把所含的各关联词分区出来，在判断每个关联词使用是否正确<br>比如不合规则的情况：<br>(1) 关联词所处位置不对<br>(2) 关联词的连续使用<br>(3) 括号不匹配<br>(4) ……..<br>程序中可能会有bug，希望大佬们多多指教</p>
+<h2 id="这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。"><a href="#这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。" class="headerlink" title="这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。"></a>这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。</h2><h4 id="废话不多说，直接上代码😎"><a href="#废话不多说，直接上代码😎" class="headerlink" title="废话不多说，直接上代码😎"></a>废话不多说，直接上代码😎</h4><figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">import re</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"定义‘!’为否定联结词"</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"定义‘&amp;’为合取联结词"</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"定义‘-’为析取联结词"</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"定义‘&gt;’为蕴含联结词"</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"定义‘~’为等价联结词"</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"如果公式错误，会指出哪里错误；如果公式正确，则什么也不输出"</span>)</span><br><span class="line">S =<span class="built_in">input</span>(<span class="string">"请输入需要判断的公式："</span>)</span><br><span class="line">T = list(S)</span><br><span class="line"><span class="keyword">if</span> S[<span class="number">0</span>] <span class="keyword">in</span> [<span class="string">'&amp;'</span>,<span class="string">'-'</span>,<span class="string">')'</span>,<span class="string">'~'</span>,<span class="string">'&gt;'</span>] :</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"不是合式公式"</span>)</span><br><span class="line">a ,b,c,d,f =<span class="string">"!"</span> , <span class="string">"&amp;"</span> ,<span class="string">"-"</span> , <span class="string">"&gt;"</span> , <span class="string">"~"</span></span><br><span class="line"><span class="keyword">if</span> a <span class="keyword">in</span> T:</span><br><span class="line">        Q = [m.start() <span class="keyword">for</span> m <span class="keyword">in</span> re.finditer(a, S)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> Q :</span><br><span class="line">            <span class="keyword">if</span> S[<span class="number">-1</span>] == <span class="string">'!'</span> :</span><br><span class="line">                <span class="built_in">print</span> (<span class="string">"‘!’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[i+<span class="number">1</span>] <span class="keyword">in</span> [<span class="string">'&amp;'</span>,<span class="string">'!'</span>,<span class="string">'-'</span>,<span class="string">')'</span>,<span class="string">'~'</span>,<span class="string">'&gt;'</span>]:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘!’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[i<span class="number">-1</span>] <span class="keyword">in</span> [<span class="string">'!'</span>]:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘!’联结词使用错误，不是合式公式！"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"><span class="keyword">if</span> b <span class="keyword">in</span> T:</span><br><span class="line">        W = [m.start() <span class="keyword">for</span> m <span class="keyword">in</span> re.finditer(b, S)]</span><br><span class="line">        <span class="keyword">for</span> y <span class="keyword">in</span> W :</span><br><span class="line">            <span class="keyword">if</span> S[<span class="number">-1</span>] == <span class="string">'&amp;'</span> :</span><br><span class="line">                <span class="built_in">print</span> (<span class="string">"‘&amp;’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[y+<span class="number">1</span>] <span class="keyword">in</span> [<span class="string">'-'</span>,<span class="string">')'</span>,<span class="string">'~'</span>,<span class="string">'&gt;'</span>,<span class="string">'&amp;'</span>] :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘&amp;’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[y<span class="number">-1</span>] <span class="keyword">in</span> [<span class="string">'-'</span>,<span class="string">'('</span>,<span class="string">'~'</span>,<span class="string">'&gt;'</span>,<span class="string">'&amp;'</span>] :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘&amp;’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"><span class="keyword">if</span> c <span class="keyword">in</span> T:</span><br><span class="line">        E = [m.start() <span class="keyword">for</span> m <span class="keyword">in</span> re.finditer(c, S)]</span><br><span class="line">        <span class="keyword">for</span> h <span class="keyword">in</span> E :</span><br><span class="line">            <span class="keyword">if</span> S[<span class="number">-1</span>] == <span class="string">'-'</span> :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘-’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[h+<span class="number">1</span>] <span class="keyword">in</span> (<span class="string">')'</span>,<span class="string">'&gt;'</span>,<span class="string">'~'</span>,<span class="string">'-'</span>) :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘-’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[h<span class="number">-1</span>] <span class="keyword">in</span> (<span class="string">'&amp;'</span>,<span class="string">'-'</span>,<span class="string">'&gt;'</span>,<span class="string">'~'</span>) :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘-’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"><span class="keyword">if</span> d <span class="keyword">in</span> T:</span><br><span class="line">        R = [m.start() <span class="keyword">for</span> m <span class="keyword">in</span> re.finditer(d, S)]</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> R :</span><br><span class="line">            <span class="keyword">if</span> S[<span class="number">-1</span>] == <span class="string">'&gt;'</span> :</span><br><span class="line">                <span class="built_in">print</span> (<span class="string">"‘&gt;’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[k+<span class="number">1</span>] <span class="keyword">in</span> [<span class="string">')'</span>,<span class="string">'&gt;'</span>] :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘&gt;’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[k<span class="number">-1</span>] <span class="keyword">in</span>  [<span class="string">'('</span>,<span class="string">'&gt;'</span>] :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘&gt;’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"><span class="keyword">if</span> f <span class="keyword">in</span> T:</span><br><span class="line">        O = [m.start() <span class="keyword">for</span> m <span class="keyword">in</span> re.finditer(f, S)]</span><br><span class="line">        <span class="keyword">for</span> v <span class="keyword">in</span> O :</span><br><span class="line">            <span class="keyword">if</span> S[<span class="number">-1</span>] == <span class="string">'~'</span> :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘~’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[v+<span class="number">1</span>] <span class="keyword">in</span> [<span class="string">')'</span>,<span class="string">'~'</span>] :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘~’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[v<span class="number">-1</span>] <span class="keyword">in</span> [<span class="string">'('</span>,<span class="string">'~'</span>] :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘~’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">'('</span> <span class="keyword">or</span> <span class="string">')'</span> <span class="keyword">in</span> S :</span><br><span class="line">        e = <span class="number">0</span></span><br><span class="line">        klb =[]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> S :</span><br><span class="line">            <span class="keyword">if</span> i == <span class="string">'('</span>:</span><br><span class="line">                klb.append(i)</span><br><span class="line">            <span class="keyword">if</span> i == <span class="string">')'</span>:</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(klb)==<span class="number">0</span>:</span><br><span class="line">                    e=<span class="number">1</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">else</span> :</span><br><span class="line">                    klb.pop()</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(klb)!=<span class="number">0</span> :</span><br><span class="line">            e = <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> e==<span class="number">1</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"括号使用错误，不是合式公式"</span>)</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我也是小白，程序哪里可能有些不足之处，请多多指教，如果你有更好的解题方法或思路，可以联系我，大家可以一起学习，一起进步的！😊</p>
+]]></content>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>动态规划解决矩阵连乘</title>
+    <url>/2020/03/05/python-dong-tai-gui-hua-jie-jue-ju-zhen-lian-cheng/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划算法与分治法类似，其基本思想也就是将待求解的问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解，简单概括为自顶向下分解，自底向上求解。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与分治法不同的是，适合于用动态规划法求解的问题，经分解得到的子问题往往不是相互独立的，换句话说，就是前面解决过的子问题，在后面的子问题中又碰到了前面解决过的子问题，子问题之间是有联系的。如果用分治法，有些同样的子问题会被重复计算几次，这样就很浪费时间了。所以动态规划是为了解决分治法的弊端而提出的，动态规划的基本思想就是，用一个表来记录所有已经解决过的子问题的答案，不管该子问题在以后是否会被用到，只要它被计算过，就将其结果填入表中，以后碰到同样的子问题，就可以从表中直接调用该子问题的答案，而不需要再计算一次。具体的动态规划的算法多种多样，但他们都具有相同的填表式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划的适用场合，一般适用于解最优化问题，例如矩阵连乘问题、最长公共子序列、背包问题等等。</p>
+<h2 id="矩阵连乘问题描述"><a href="#矩阵连乘问题描述" class="headerlink" title="矩阵连乘问题描述"></a>矩阵连乘问题描述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;给定n个矩阵：A1,A2,…,An，其中Ai与Ai+1是可乘的，i=1，2…，n-1。确定计算矩阵连乘积的计算次序，使得依此次序计算矩阵连乘积需要的数乘次数最少。输入数据为矩阵个数和每个矩阵规模，输出结果为计算矩阵连乘积的计算次序和最少数乘次数。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若A是一个p × q的矩阵，B是一个q × r的矩阵，则其乘积C=AB是一个p × r的矩阵。数乘次数是p × q × r.</p>
+<h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>A(3 × 5)A(5 × 7)A(7 × 2)的连乘次数和括号划分有关系吗？</p>
+<blockquote>
+<p>(A(3 × 5)A(5 × 7))A(7 × 2)             相乘次数： (3 × 5 <em> 7)+(3 × 7 × 2) = 147<br>A(3 × 5)(A(5 × 7)A(7 × 2))             相乘次数： (5 × 7 </em> 2)+(3 × 5 × 2) = 100</p>
+</blockquote>
+<p>答案很明显是有关系的。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><blockquote>
+<p>求 A1A2A3…An 定义   AiAi+1…Ak…Aj-1Aj   子列， 可看成是Ai…Ak，Ak…Aj<br>确定k的位置，然后按照递归的思想来逐步解决 求得结果后，使i=1，j=n原问题即可求解。</p>
+</blockquote>
+<p>建立递归关系（状态转移方程）</p>
+<blockquote>
+<p>设 Ai…Aj相乘 的最小数乘次数存储于m[i][j]中。<br>S[i][j]存储最佳断开位置。<br>A1：P0 × P1<br>A2：P1 × P2<br>A3：P2 × P3<br>…<br>Ai：Pi-1 × Pi<br>Ai+1：Pi × Pi+1<br> …<br> An：Pn-1 × Pn<br> P0 × P1 × P2 … × Pn——n+1个</p>
+</blockquote>
+<p>当i=j时，m[i][j] = 0;<br>当i&lt;j时，m[i][j] = m[i][k]+m[k+1][j]+Pi-1PkPj<br>k在i，j之间取值，取值范围为i&lt;=k&lt;j<br>有递推关系如下：<br><img src="https://img-blog.csdnimg.cn/20200305183034898.png" alt><br>动态规划的最优子结构性质是：</p>
+<blockquote>
+<p>问题的最优解包含了其子问题的最优解。<br>最优子结构性质是问题可用动态规划法求解的显著特征。<br>Ai…Ak，Ak+1…Aj的最优划分也包含在Ai…Aj的最优划分中</p>
+</blockquote>
+<p>在计算出最优值m[i][j]后，可递归地由s[i][j]构造出相应的最优解。</p>
+<h2 id="python代码实现"><a href="#python代码实现" class="headerlink" title="python代码实现"></a>python代码实现</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> *</span><br><span class="line"> </span><br><span class="line">input = int(input(<span class="string">"输入矩阵数："</span>))</span><br><span class="line">matrix = [[<span class="number">0</span>] * <span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(input)]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(input):                         <span class="comment">#生成矩阵</span></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        matrix[i][<span class="number">0</span>] = random.randrange(<span class="number">100</span>)</span><br><span class="line">        matrix[i][<span class="number">1</span>] = random.randrange(<span class="number">100</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        matrix[i][<span class="number">0</span>] = matrix[i<span class="number">-1</span>][<span class="number">1</span>]</span><br><span class="line">        matrix[i][<span class="number">1</span>] = random.randrange(<span class="number">100</span>)</span><br><span class="line">m = [[<span class="number">0</span>] * input <span class="keyword">for</span> i <span class="keyword">in</span> range(input)]         <span class="comment">#记录连乘次数</span></span><br><span class="line">s = [[<span class="number">0</span>] * input <span class="keyword">for</span> j <span class="keyword">in</span> range(input)]         <span class="comment">#记录括号位置</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">MatrixMultiplication</span><span class="params">(inp)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(inp):</span><br><span class="line">        m[i][i] = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> range(<span class="number">1</span>, inp):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(inp-r):</span><br><span class="line">            j = i + r</span><br><span class="line">            m[i][j] = m[i+<span class="number">1</span>][j] + matrix[i][<span class="number">0</span>] * matrix[i][<span class="number">1</span>] * matrix[j][<span class="number">1</span>]</span><br><span class="line">            s[i][j] = i+<span class="number">1</span></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(i+<span class="number">1</span>, j):</span><br><span class="line">                judge = m[i][k] + m[k+<span class="number">1</span>][j] + matrix[i][<span class="number">0</span>] * matrix[k][<span class="number">1</span>] * matrix[j][<span class="number">1</span>]</span><br><span class="line">                <span class="keyword">if</span> judge &lt; m[i][j]:</span><br><span class="line">                    m[i][j] = judge</span><br><span class="line">                    s[i][j] = k+<span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">printmatrix</span><span class="params">(left, right)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> left == right:</span><br><span class="line">        print(<span class="string">"A"</span>+str(left+<span class="number">1</span>), end=<span class="string">''</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"("</span>, end=<span class="string">''</span>)</span><br><span class="line">        printmatrix(left, s[left][right]<span class="number">-1</span>)</span><br><span class="line">        printmatrix(s[left][right], right)</span><br><span class="line">        print(<span class="string">")"</span>, end=<span class="string">''</span>)</span><br><span class="line">MatrixMultiplication(input)</span><br><span class="line">dm = DataFrame(m, index=list(range(<span class="number">1</span>, input+<span class="number">1</span>)), columns=list(range(<span class="number">1</span>, input+<span class="number">1</span>)))</span><br><span class="line">ds = DataFrame(s, index=list(range(<span class="number">1</span>, input+<span class="number">1</span>)), columns=list(range(<span class="number">1</span>, input+<span class="number">1</span>)))</span><br><span class="line">print(matrix)</span><br><span class="line">print(<span class="string">"数乘次数：\n"</span>, dm)</span><br><span class="line">print(<span class="string">"括号位置：\n"</span>, ds)</span><br><span class="line">print(<span class="string">"最终结果："</span>)</span><br><span class="line">printmatrix(<span class="number">0</span>, input<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -364,46 +404,6 @@
 <h4 id="摘自《小王子》"><a href="#摘自《小王子》" class="headerlink" title="摘自《小王子》"></a>摘自《小王子》</h4>]]></content>
       <tags>
         <tag>生活</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Python判断合式公式</title>
-    <url>/2019/03/17/python-pan-duan-chi-san-shu-xue-de-he-shi-gong-shi/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你没有听错，用python程序来解决离散数学的逻辑推理问题，我当我第一次听老师说的时候也很吃惊（再说上学期的Python学的也不咋地…..😩)，但经老师讲解后才知道，使用python解题不仅效率高，而且准确性也很强的，所以还是有必要学习一下的。</p>
-<h2 id="判断是否为合式公式"><a href="#判断是否为合式公式" class="headerlink" title="判断是否为合式公式"></a>判断是否为合式公式</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一个题目就是判断一个公式是否为合式公式，这也是最基础的，因为只有当在输入的合式公式正确的情况下，才能进一步的运算解题，所以先讲解一下怎么判断合式公式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先要知道<strong>什么是合式公式</strong>？<br>(1)原子命题常项或变项是合式公式；<br>(2)如果A是合式公式，则（-A）也是合式公式（- 表示非）；<br>(3)如果A，B是合式公式，则（A<em>B）、（A+B）、（A &lt; B）、（ A ~ B）也是合式公式；(此处 </em> 合取 + 析取 &lt; 代表条件 ~ 代表双条件)<br>(4)只有有限次地应用(1)～(3)所包含的命题变元，联结词和括号的符号串才是合式公式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>个人思路</strong>：<br>输入字符串，扫描字符串，把所含的各关联词分区出来，在判断每个关联词使用是否正确<br>比如不合规则的情况：<br>(1) 关联词所处位置不对<br>(2) 关联词的连续使用<br>(3) 括号不匹配<br>(4) ……..<br>程序中可能会有bug，希望大佬们多多指教</p>
-<h2 id="这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。"><a href="#这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。" class="headerlink" title="这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。"></a>这道题应该有很多好的方法，但我不太会用，我这里只能暴力判断了。</h2><h4 id="废话不多说，直接上代码😎"><a href="#废话不多说，直接上代码😎" class="headerlink" title="废话不多说，直接上代码😎"></a>废话不多说，直接上代码😎</h4><figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">import re</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"定义‘!’为否定联结词"</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"定义‘&amp;’为合取联结词"</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"定义‘-’为析取联结词"</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"定义‘&gt;’为蕴含联结词"</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"定义‘~’为等价联结词"</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"如果公式错误，会指出哪里错误；如果公式正确，则什么也不输出"</span>)</span><br><span class="line">S =<span class="built_in">input</span>(<span class="string">"请输入需要判断的公式："</span>)</span><br><span class="line">T = list(S)</span><br><span class="line"><span class="keyword">if</span> S[<span class="number">0</span>] <span class="keyword">in</span> [<span class="string">'&amp;'</span>,<span class="string">'-'</span>,<span class="string">')'</span>,<span class="string">'~'</span>,<span class="string">'&gt;'</span>] :</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"不是合式公式"</span>)</span><br><span class="line">a ,b,c,d,f =<span class="string">"!"</span> , <span class="string">"&amp;"</span> ,<span class="string">"-"</span> , <span class="string">"&gt;"</span> , <span class="string">"~"</span></span><br><span class="line"><span class="keyword">if</span> a <span class="keyword">in</span> T:</span><br><span class="line">        Q = [m.start() <span class="keyword">for</span> m <span class="keyword">in</span> re.finditer(a, S)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> Q :</span><br><span class="line">            <span class="keyword">if</span> S[<span class="number">-1</span>] == <span class="string">'!'</span> :</span><br><span class="line">                <span class="built_in">print</span> (<span class="string">"‘!’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[i+<span class="number">1</span>] <span class="keyword">in</span> [<span class="string">'&amp;'</span>,<span class="string">'!'</span>,<span class="string">'-'</span>,<span class="string">')'</span>,<span class="string">'~'</span>,<span class="string">'&gt;'</span>]:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘!’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[i<span class="number">-1</span>] <span class="keyword">in</span> [<span class="string">'!'</span>]:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘!’联结词使用错误，不是合式公式！"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"><span class="keyword">if</span> b <span class="keyword">in</span> T:</span><br><span class="line">        W = [m.start() <span class="keyword">for</span> m <span class="keyword">in</span> re.finditer(b, S)]</span><br><span class="line">        <span class="keyword">for</span> y <span class="keyword">in</span> W :</span><br><span class="line">            <span class="keyword">if</span> S[<span class="number">-1</span>] == <span class="string">'&amp;'</span> :</span><br><span class="line">                <span class="built_in">print</span> (<span class="string">"‘&amp;’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[y+<span class="number">1</span>] <span class="keyword">in</span> [<span class="string">'-'</span>,<span class="string">')'</span>,<span class="string">'~'</span>,<span class="string">'&gt;'</span>,<span class="string">'&amp;'</span>] :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘&amp;’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[y<span class="number">-1</span>] <span class="keyword">in</span> [<span class="string">'-'</span>,<span class="string">'('</span>,<span class="string">'~'</span>,<span class="string">'&gt;'</span>,<span class="string">'&amp;'</span>] :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘&amp;’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"><span class="keyword">if</span> c <span class="keyword">in</span> T:</span><br><span class="line">        E = [m.start() <span class="keyword">for</span> m <span class="keyword">in</span> re.finditer(c, S)]</span><br><span class="line">        <span class="keyword">for</span> h <span class="keyword">in</span> E :</span><br><span class="line">            <span class="keyword">if</span> S[<span class="number">-1</span>] == <span class="string">'-'</span> :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘-’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[h+<span class="number">1</span>] <span class="keyword">in</span> (<span class="string">')'</span>,<span class="string">'&gt;'</span>,<span class="string">'~'</span>,<span class="string">'-'</span>) :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘-’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[h<span class="number">-1</span>] <span class="keyword">in</span> (<span class="string">'&amp;'</span>,<span class="string">'-'</span>,<span class="string">'&gt;'</span>,<span class="string">'~'</span>) :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘-’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"><span class="keyword">if</span> d <span class="keyword">in</span> T:</span><br><span class="line">        R = [m.start() <span class="keyword">for</span> m <span class="keyword">in</span> re.finditer(d, S)]</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> R :</span><br><span class="line">            <span class="keyword">if</span> S[<span class="number">-1</span>] == <span class="string">'&gt;'</span> :</span><br><span class="line">                <span class="built_in">print</span> (<span class="string">"‘&gt;’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[k+<span class="number">1</span>] <span class="keyword">in</span> [<span class="string">')'</span>,<span class="string">'&gt;'</span>] :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘&gt;’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[k<span class="number">-1</span>] <span class="keyword">in</span>  [<span class="string">'('</span>,<span class="string">'&gt;'</span>] :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘&gt;’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"><span class="keyword">if</span> f <span class="keyword">in</span> T:</span><br><span class="line">        O = [m.start() <span class="keyword">for</span> m <span class="keyword">in</span> re.finditer(f, S)]</span><br><span class="line">        <span class="keyword">for</span> v <span class="keyword">in</span> O :</span><br><span class="line">            <span class="keyword">if</span> S[<span class="number">-1</span>] == <span class="string">'~'</span> :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘~’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[v+<span class="number">1</span>] <span class="keyword">in</span> [<span class="string">')'</span>,<span class="string">'~'</span>] :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘~’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> S[v<span class="number">-1</span>] <span class="keyword">in</span> [<span class="string">'('</span>,<span class="string">'~'</span>] :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">"‘~’联结词使用错误，不是合式公式"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">'('</span> <span class="keyword">or</span> <span class="string">')'</span> <span class="keyword">in</span> S :</span><br><span class="line">        e = <span class="number">0</span></span><br><span class="line">        klb =[]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> S :</span><br><span class="line">            <span class="keyword">if</span> i == <span class="string">'('</span>:</span><br><span class="line">                klb.append(i)</span><br><span class="line">            <span class="keyword">if</span> i == <span class="string">')'</span>:</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(klb)==<span class="number">0</span>:</span><br><span class="line">                    e=<span class="number">1</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">else</span> :</span><br><span class="line">                    klb.pop()</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(klb)!=<span class="number">0</span> :</span><br><span class="line">            e = <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> e==<span class="number">1</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"括号使用错误，不是合式公式"</span>)</span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我也是小白，程序哪里可能有些不足之处，请多多指教，如果你有更好的解题方法或思路，可以联系我，大家可以一起学习，一起进步的！😊</p>
-]]></content>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>动态规划解决矩阵连乘</title>
-    <url>/2020/03/05/python-dong-tai-gui-hua-jie-jue-ju-zhen-lian-cheng/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划算法与分治法类似，其基本思想也就是将待求解的问题分解成若干个子问题，先求解子问题，然后从这些子问题的解得到原问题的解，简单概括为自顶向下分解，自底向上求解。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与分治法不同的是，适合于用动态规划法求解的问题，经分解得到的子问题往往不是相互独立的，换句话说，就是前面解决过的子问题，在后面的子问题中又碰到了前面解决过的子问题，子问题之间是有联系的。如果用分治法，有些同样的子问题会被重复计算几次，这样就很浪费时间了。所以动态规划是为了解决分治法的弊端而提出的，动态规划的基本思想就是，用一个表来记录所有已经解决过的子问题的答案，不管该子问题在以后是否会被用到，只要它被计算过，就将其结果填入表中，以后碰到同样的子问题，就可以从表中直接调用该子问题的答案，而不需要再计算一次。具体的动态规划的算法多种多样，但他们都具有相同的填表式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;动态规划的适用场合，一般适用于解最优化问题，例如矩阵连乘问题、最长公共子序列、背包问题等等。</p>
-<h2 id="矩阵连乘问题描述"><a href="#矩阵连乘问题描述" class="headerlink" title="矩阵连乘问题描述"></a>矩阵连乘问题描述</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;给定n个矩阵：A1,A2,…,An，其中Ai与Ai+1是可乘的，i=1，2…，n-1。确定计算矩阵连乘积的计算次序，使得依此次序计算矩阵连乘积需要的数乘次数最少。输入数据为矩阵个数和每个矩阵规模，输出结果为计算矩阵连乘积的计算次序和最少数乘次数。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若A是一个p × q的矩阵，B是一个q × r的矩阵，则其乘积C=AB是一个p × r的矩阵。数乘次数是p × q × r.</p>
-<h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>A(3 × 5)A(5 × 7)A(7 × 2)的连乘次数和括号划分有关系吗？</p>
-<blockquote>
-<p>(A(3 × 5)A(5 × 7))A(7 × 2)             相乘次数： (3 × 5 <em> 7)+(3 × 7 × 2) = 147<br>A(3 × 5)(A(5 × 7)A(7 × 2))             相乘次数： (5 × 7 </em> 2)+(3 × 5 × 2) = 100</p>
-</blockquote>
-<p>答案很明显是有关系的。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><blockquote>
-<p>求 A1A2A3…An 定义   AiAi+1…Ak…Aj-1Aj   子列， 可看成是Ai…Ak，Ak…Aj<br>确定k的位置，然后按照递归的思想来逐步解决 求得结果后，使i=1，j=n原问题即可求解。</p>
-</blockquote>
-<p>建立递归关系（状态转移方程）</p>
-<blockquote>
-<p>设 Ai…Aj相乘 的最小数乘次数存储于m[i][j]中。<br>S[i][j]存储最佳断开位置。<br>A1：P0 × P1<br>A2：P1 × P2<br>A3：P2 × P3<br>…<br>Ai：Pi-1 × Pi<br>Ai+1：Pi × Pi+1<br> …<br> An：Pn-1 × Pn<br> P0 × P1 × P2 … × Pn——n+1个</p>
-</blockquote>
-<p>当i=j时，m[i][j] = 0;<br>当i&lt;j时，m[i][j] = m[i][k]+m[k+1][j]+Pi-1PkPj<br>k在i，j之间取值，取值范围为i&lt;=k&lt;j<br>有递推关系如下：<br><img src="https://img-blog.csdnimg.cn/20200305183034898.png" alt><br>动态规划的最优子结构性质是：</p>
-<blockquote>
-<p>问题的最优解包含了其子问题的最优解。<br>最优子结构性质是问题可用动态规划法求解的显著特征。<br>Ai…Ak，Ak+1…Aj的最优划分也包含在Ai…Aj的最优划分中</p>
-</blockquote>
-<p>在计算出最优值m[i][j]后，可递归地由s[i][j]构造出相应的最优解。</p>
-<h2 id="python代码实现"><a href="#python代码实现" class="headerlink" title="python代码实现"></a>python代码实现</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> *</span><br><span class="line"> </span><br><span class="line">input = int(input(<span class="string">"输入矩阵数："</span>))</span><br><span class="line">matrix = [[<span class="number">0</span>] * <span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(input)]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(input):                         <span class="comment">#生成矩阵</span></span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        matrix[i][<span class="number">0</span>] = random.randrange(<span class="number">100</span>)</span><br><span class="line">        matrix[i][<span class="number">1</span>] = random.randrange(<span class="number">100</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        matrix[i][<span class="number">0</span>] = matrix[i<span class="number">-1</span>][<span class="number">1</span>]</span><br><span class="line">        matrix[i][<span class="number">1</span>] = random.randrange(<span class="number">100</span>)</span><br><span class="line">m = [[<span class="number">0</span>] * input <span class="keyword">for</span> i <span class="keyword">in</span> range(input)]         <span class="comment">#记录连乘次数</span></span><br><span class="line">s = [[<span class="number">0</span>] * input <span class="keyword">for</span> j <span class="keyword">in</span> range(input)]         <span class="comment">#记录括号位置</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">MatrixMultiplication</span><span class="params">(inp)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(inp):</span><br><span class="line">        m[i][i] = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> range(<span class="number">1</span>, inp):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(inp-r):</span><br><span class="line">            j = i + r</span><br><span class="line">            m[i][j] = m[i+<span class="number">1</span>][j] + matrix[i][<span class="number">0</span>] * matrix[i][<span class="number">1</span>] * matrix[j][<span class="number">1</span>]</span><br><span class="line">            s[i][j] = i+<span class="number">1</span></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(i+<span class="number">1</span>, j):</span><br><span class="line">                judge = m[i][k] + m[k+<span class="number">1</span>][j] + matrix[i][<span class="number">0</span>] * matrix[k][<span class="number">1</span>] * matrix[j][<span class="number">1</span>]</span><br><span class="line">                <span class="keyword">if</span> judge &lt; m[i][j]:</span><br><span class="line">                    m[i][j] = judge</span><br><span class="line">                    s[i][j] = k+<span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">printmatrix</span><span class="params">(left, right)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> left == right:</span><br><span class="line">        print(<span class="string">"A"</span>+str(left+<span class="number">1</span>), end=<span class="string">''</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"("</span>, end=<span class="string">''</span>)</span><br><span class="line">        printmatrix(left, s[left][right]<span class="number">-1</span>)</span><br><span class="line">        printmatrix(s[left][right], right)</span><br><span class="line">        print(<span class="string">")"</span>, end=<span class="string">''</span>)</span><br><span class="line">MatrixMultiplication(input)</span><br><span class="line">dm = DataFrame(m, index=list(range(<span class="number">1</span>, input+<span class="number">1</span>)), columns=list(range(<span class="number">1</span>, input+<span class="number">1</span>)))</span><br><span class="line">ds = DataFrame(s, index=list(range(<span class="number">1</span>, input+<span class="number">1</span>)), columns=list(range(<span class="number">1</span>, input+<span class="number">1</span>)))</span><br><span class="line">print(matrix)</span><br><span class="line">print(<span class="string">"数乘次数：\n"</span>, dm)</span><br><span class="line">print(<span class="string">"括号位置：\n"</span>, ds)</span><br><span class="line">print(<span class="string">"最终结果："</span>)</span><br><span class="line">printmatrix(<span class="number">0</span>, input<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -609,6 +609,31 @@
       </tags>
   </entry>
   <entry>
+    <title>多种相似度计算方法</title>
+    <url>/2019/07/24/duo-chong-xiang-si-du-ji-suan-de-python-shi-xian/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中有很多地方要计算相似度，比如聚类分析和协同过滤。计算相似度的有许多方法，其中有欧几里德距离(欧式距离)、曼哈顿距离、Jaccard系数和皮尔逊相关度等等。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们这里把一些常用的相似度计算方法，用python进行实现以下。大家都是初学者，我认为把公式先写下来，然后再写代码去实现比较好。 </p>
+<h2 id="欧几里德距离-欧式距离"><a href="#欧几里德距离-欧式距离" class="headerlink" title="欧几里德距离(欧式距离)"></a>欧几里德距离(欧式距离)</h2><p>几个数据集之间的相似度一般是基于每对对象间的距离计算。最常用的当然是欧几里德距离，其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204320390.png" alt><br><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">#-*-coding:utf<span class="number">-8</span> -*-</span><br><span class="line"></span><br><span class="line">#计算欧几里德距离：</span><br><span class="line">def euclidean(p,q):</span><br><span class="line">#如果两数据集数目不同，计算两者之间都对应有的数</span><br><span class="line">same = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> p:</span><br><span class="line">    <span class="keyword">if</span> i <span class="keyword">in</span> q:</span><br><span class="line">        same +=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">#计算欧几里德距离,并将其标准化</span><br><span class="line">e = sum([(p[i] - q[i])**<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(same)])</span><br><span class="line"><span class="keyword">return</span> <span class="number">1</span>/(<span class="number">1</span>+e**<span class="number">.5</span>)</span><br></pre></td></tr></table></figure></p>
+<p>我们用数据集可以去算一下： </p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">p = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>]</span><br><span class="line">q = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>]</span><br><span class="line">print euclidean(p,q)</span><br></pre></td></tr></table></figure>
+<p>得出结果是：0.261203874964</p>
+<h2 id="皮尔逊相关度"><a href="#皮尔逊相关度" class="headerlink" title="皮尔逊相关度"></a>皮尔逊相关度</h2><p>几个数据集中出现异常值的时候，欧几里德距离就不如皮尔逊相关度‘稳定’，它会在出现偏差时倾向于给出更好的结果。其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204538985.png" alt></p>
+<figure class="highlight perl"><table><tr><td class="code"><pre><span class="line">-*-coding:utf-<span class="number">8</span> -*-</span><br><span class="line"></span><br><span class="line"><span class="comment">#计算皮尔逊相关度：</span></span><br><span class="line">def pearson(p,<span class="keyword">q</span>):</span><br><span class="line"><span class="comment">#只计算两者共同有的</span></span><br><span class="line">    same = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i in p:</span><br><span class="line">        <span class="keyword">if</span> i in <span class="keyword">q</span>:</span><br><span class="line">            same +=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    n = same</span><br><span class="line">    <span class="comment">#分别求p，q的和</span></span><br><span class="line">    sumx = sum([p[i] <span class="keyword">for</span> i in range(n)])</span><br><span class="line">    sumy = sum([<span class="string">q[i]</span> <span class="keyword">for</span> i in range(n)])</span><br><span class="line">    <span class="comment">#分别求出p，q的平方和</span></span><br><span class="line">    sumxsq = sum([p[i]**<span class="number">2</span> <span class="keyword">for</span> i in range(n)])</span><br><span class="line">    sumysq = sum([<span class="string">q[i]</span>**<span class="number">2</span> <span class="keyword">for</span> i in range(n)])</span><br><span class="line">    <span class="comment">#求出p，q的乘积和</span></span><br><span class="line">    sumxy = sum([p[i]*<span class="string">q[i]</span> <span class="keyword">for</span> i in range(n)])</span><br><span class="line">    <span class="comment"># print sumxy</span></span><br><span class="line">    <span class="comment">#求出pearson相关系数</span></span><br><span class="line">    up = sumxy - sumx*sumy/n</span><br><span class="line">    down = ((sumxsq - pow(sumxsq,<span class="number">2</span>)/n)*(sumysq - pow(sumysq,<span class="number">2</span>)/n))**.<span class="number">5</span></span><br><span class="line">    <span class="comment">#若down为零则不能计算，return 0</span></span><br><span class="line">    <span class="keyword">if</span> down == <span class="number">0</span> :<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    r = up/down</span><br><span class="line">    <span class="keyword">return</span> r</span><br></pre></td></tr></table></figure>
+<p>用同样的数据集去计算：</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">p = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>]</span><br><span class="line">q = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>]</span><br><span class="line">print pearson(p,q)</span><br></pre></td></tr></table></figure>
+<p>得出结果是：0.00595238095238</p>
+<h2 id="曼哈顿距离"><a href="#曼哈顿距离" class="headerlink" title="曼哈顿距离"></a>曼哈顿距离</h2><p>曼哈顿距离是另一种相似度计算方法，不是经常需要，但是我们仍然学会如何用python去实现，其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204709370.png" alt></p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="comment">#-*-coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#计算曼哈顿距离：</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">manhattan</span><span class="params">(p,q)</span></span><span class="symbol">:</span></span><br><span class="line"><span class="comment">#只计算两者共同有的</span></span><br><span class="line">    same = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="symbol">p:</span></span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">in</span> <span class="symbol">q:</span></span><br><span class="line">        same += <span class="number">1</span></span><br><span class="line"><span class="comment">#计算曼哈顿距离</span></span><br><span class="line">    n = same</span><br><span class="line">    vals = range(n)</span><br><span class="line">    distance = sum(abs(p[i] - q[i]) <span class="keyword">for</span> i <span class="keyword">in</span> vals)</span><br><span class="line">    <span class="keyword">return</span> distance</span><br></pre></td></tr></table></figure>
+<p>用以上的数据集去计算：</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">p = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>]</span><br><span class="line">q = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>]</span><br><span class="line">print manhattan(p,q)</span><br></pre></td></tr></table></figure>
+<p>得出结果为4</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里只讲述了三种相似度的计算方法，事实上还有很多种，由于我也是刚学，其他的方法还不是很了解，以后碰到了再补上。一般情况下，这三种方法是最常用的，足够我们使用了。</p>
+]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>相似度</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基于协同过滤（CF）算法的推荐系统</title>
     <url>/2019/07/28/ji-yu-xie-tong-guo-lu-cf-suan-fa-de-tui-jian-xi-tong/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着计算机领域技术的高速发展，电子商务时代的普及，个性化的推荐系统深入生活应用的各个方面。个性化推荐算法是推荐系统中最核心的技术，在很大程度上决定了电子商务推荐系统性能的优劣。而协同过滤推荐是个性化推荐系统应用最为广泛的技术，协同过滤推荐主要分为基于用户的协同过滤推荐、基于项目的协同过滤推荐和基于模型的协同过滤推荐。</p>
@@ -691,109 +716,6 @@
       </tags>
   </entry>
   <entry>
-    <title>多种相似度计算方法</title>
-    <url>/2019/07/24/duo-chong-xiang-si-du-ji-suan-de-python-shi-xian/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中有很多地方要计算相似度，比如聚类分析和协同过滤。计算相似度的有许多方法，其中有欧几里德距离(欧式距离)、曼哈顿距离、Jaccard系数和皮尔逊相关度等等。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们这里把一些常用的相似度计算方法，用python进行实现以下。大家都是初学者，我认为把公式先写下来，然后再写代码去实现比较好。 </p>
-<h2 id="欧几里德距离-欧式距离"><a href="#欧几里德距离-欧式距离" class="headerlink" title="欧几里德距离(欧式距离)"></a>欧几里德距离(欧式距离)</h2><p>几个数据集之间的相似度一般是基于每对对象间的距离计算。最常用的当然是欧几里德距离，其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204320390.png" alt><br><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">#-*-coding:utf<span class="number">-8</span> -*-</span><br><span class="line"></span><br><span class="line">#计算欧几里德距离：</span><br><span class="line">def euclidean(p,q):</span><br><span class="line">#如果两数据集数目不同，计算两者之间都对应有的数</span><br><span class="line">same = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> p:</span><br><span class="line">    <span class="keyword">if</span> i <span class="keyword">in</span> q:</span><br><span class="line">        same +=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">#计算欧几里德距离,并将其标准化</span><br><span class="line">e = sum([(p[i] - q[i])**<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(same)])</span><br><span class="line"><span class="keyword">return</span> <span class="number">1</span>/(<span class="number">1</span>+e**<span class="number">.5</span>)</span><br></pre></td></tr></table></figure></p>
-<p>我们用数据集可以去算一下： </p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">p = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>]</span><br><span class="line">q = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>]</span><br><span class="line">print euclidean(p,q)</span><br></pre></td></tr></table></figure>
-<p>得出结果是：0.261203874964</p>
-<h2 id="皮尔逊相关度"><a href="#皮尔逊相关度" class="headerlink" title="皮尔逊相关度"></a>皮尔逊相关度</h2><p>几个数据集中出现异常值的时候，欧几里德距离就不如皮尔逊相关度‘稳定’，它会在出现偏差时倾向于给出更好的结果。其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204538985.png" alt></p>
-<figure class="highlight perl"><table><tr><td class="code"><pre><span class="line">-*-coding:utf-<span class="number">8</span> -*-</span><br><span class="line"></span><br><span class="line"><span class="comment">#计算皮尔逊相关度：</span></span><br><span class="line">def pearson(p,<span class="keyword">q</span>):</span><br><span class="line"><span class="comment">#只计算两者共同有的</span></span><br><span class="line">    same = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i in p:</span><br><span class="line">        <span class="keyword">if</span> i in <span class="keyword">q</span>:</span><br><span class="line">            same +=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    n = same</span><br><span class="line">    <span class="comment">#分别求p，q的和</span></span><br><span class="line">    sumx = sum([p[i] <span class="keyword">for</span> i in range(n)])</span><br><span class="line">    sumy = sum([<span class="string">q[i]</span> <span class="keyword">for</span> i in range(n)])</span><br><span class="line">    <span class="comment">#分别求出p，q的平方和</span></span><br><span class="line">    sumxsq = sum([p[i]**<span class="number">2</span> <span class="keyword">for</span> i in range(n)])</span><br><span class="line">    sumysq = sum([<span class="string">q[i]</span>**<span class="number">2</span> <span class="keyword">for</span> i in range(n)])</span><br><span class="line">    <span class="comment">#求出p，q的乘积和</span></span><br><span class="line">    sumxy = sum([p[i]*<span class="string">q[i]</span> <span class="keyword">for</span> i in range(n)])</span><br><span class="line">    <span class="comment"># print sumxy</span></span><br><span class="line">    <span class="comment">#求出pearson相关系数</span></span><br><span class="line">    up = sumxy - sumx*sumy/n</span><br><span class="line">    down = ((sumxsq - pow(sumxsq,<span class="number">2</span>)/n)*(sumysq - pow(sumysq,<span class="number">2</span>)/n))**.<span class="number">5</span></span><br><span class="line">    <span class="comment">#若down为零则不能计算，return 0</span></span><br><span class="line">    <span class="keyword">if</span> down == <span class="number">0</span> :<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    r = up/down</span><br><span class="line">    <span class="keyword">return</span> r</span><br></pre></td></tr></table></figure>
-<p>用同样的数据集去计算：</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">p = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>]</span><br><span class="line">q = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>]</span><br><span class="line">print pearson(p,q)</span><br></pre></td></tr></table></figure>
-<p>得出结果是：0.00595238095238</p>
-<h2 id="曼哈顿距离"><a href="#曼哈顿距离" class="headerlink" title="曼哈顿距离"></a>曼哈顿距离</h2><p>曼哈顿距离是另一种相似度计算方法，不是经常需要，但是我们仍然学会如何用python去实现，其公式为：<br><img src="https://img-blog.csdnimg.cn/20190724204709370.png" alt></p>
-<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="comment">#-*-coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#计算曼哈顿距离：</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">manhattan</span><span class="params">(p,q)</span></span><span class="symbol">:</span></span><br><span class="line"><span class="comment">#只计算两者共同有的</span></span><br><span class="line">    same = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="symbol">p:</span></span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">in</span> <span class="symbol">q:</span></span><br><span class="line">        same += <span class="number">1</span></span><br><span class="line"><span class="comment">#计算曼哈顿距离</span></span><br><span class="line">    n = same</span><br><span class="line">    vals = range(n)</span><br><span class="line">    distance = sum(abs(p[i] - q[i]) <span class="keyword">for</span> i <span class="keyword">in</span> vals)</span><br><span class="line">    <span class="keyword">return</span> distance</span><br></pre></td></tr></table></figure>
-<p>用以上的数据集去计算：</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">p = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>]</span><br><span class="line">q = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>]</span><br><span class="line">print manhattan(p,q)</span><br></pre></td></tr></table></figure>
-<p>得出结果为4</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里只讲述了三种相似度的计算方法，事实上还有很多种，由于我也是刚学，其他的方法还不是很了解，以后碰到了再补上。一般情况下，这三种方法是最常用的，足够我们使用了。</p>
-]]></content>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>相似度</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>朴素贝叶斯算法</title>
-    <url>/2019/08/05/po-su-bei-xie-si-suan-fa/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是流行的十大算法之一，该算法是有监督的学习算法，解决的是分类问题，如客户是否流失、是否值得投资、信用等级评定等多分类问题。<strong>该算法的优点在于简单易懂、学习效率高、在某些领域的分类问题中能够与决策树、神经网络相媲美。</strong>但由于该算法以自变量之间的独立（条件特征独立）性和连续变量的正态性假设为前提，就会导致算法精度在某种程度上受影响。</p>
-<h1 id="一、问题的提出"><a href="#一、问题的提出" class="headerlink" title="一、问题的提出"></a>一、问题的提出</h1><p>先举一个具体的例子：</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“一所学校里面有 60% 的男生，40% 的女生。男生总是穿长裤，女生则一半穿长裤一半穿裙子。有了这些信息之后我们可以容易地计算“随机选取一个学生，他（她）穿长裤的概率和穿裙子的概率是多大”，这个就是前面说的“正向概率”的计算。然而，假设你走在校园中，迎面走来一个穿长裤的学生（很不幸的是你高度近似，你只看得见他（她）穿的是否长裤，而无法确定他（她）的性别），你能够推断出他（她）是男生的概率是多大吗？”</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们来算一算：假设学校里面人的总数是 U 个。60% 的男生都穿长裤，于是我们得到了 U <em> P(Boy) </em> P(Pants|Boy) 个穿长裤的（男生）（其中 P(Boy) 是男生的概率 = 60%，这里可以简单的理解为男生的比例；P(Pants|Boy) 是条件概率，即在 Boy 这个条件下穿长裤的概率是多大，这里是 100% ，因为所有男生都穿长裤）。40% 的女生里面又有一半（50%）是穿长裤的，于是我们又得到了 U <em> P(Girl) </em> P(Pants|Girl) 个穿长裤的（女生）。加起来一共是 U <em> P(Boy) </em> P(Pants|Boy) + U <em> P(Girl) </em> P(Pants|Girl) 个穿长裤的，其中有 U <em> P(Girl) </em> P(Pants|Girl) 个女生。两者一比就是你要求的答案。<br>下面我们把这个答案形式化一下：我们要求的是 P(Girl|Pants) （穿长裤的人里面有多少女生），我们计算的结果是 U <em> P(Girl) </em> P(Pants|Girl) / [U <em> P(Boy) </em> P(Pants|Boy) + U <em> P(Girl) </em> P(Pants|Girl)] 。容易发现这里校园内人的总数是无关的，可以消去。于是得到</p>
-<p><strong>P(Girl|Pants) = P(Girl) <em> P(Pants|Girl) / [P(Boy) </em> P(Pants|Boy) + P(Girl) * P(Pants|Girl)]</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意，如果把上式收缩起来，分母其实就是 P(Pants) ，分子其实就是 P(Pants, Girl) 。而这个比例很自然地就读作：在穿长裤的人（ P(Pants) ）里面有多少（穿长裤）的女孩（ P(Pants, Girl) ）。<br>进一步得到公式的一般形式：</p>
-<p><strong>P(B|A) = P(A|B) <em> P(B) / [P(A|B) </em> P(B) + P(A|~B) * P(~B) ]</strong></p>
-<p>收缩起来就是：<strong>P(B|A) = P(AB) / P(A)</strong><br>其实这个就等于：<strong>P(B|A) * P(A) = P(AB)</strong></p>
-<h1 id="二、正式的定义"><a href="#二、正式的定义" class="headerlink" title="二、正式的定义"></a>二、正式的定义</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是基于贝叶斯定理与特征条件独立假设的分类方法，然后依据被分类项属于各个类的概率，概率最大者即为所划分的类别。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设输入空间X=（x1,x2,x3…xn），输出类标记为Y=（y1,y2,y3…yn）。x的集合记为X，称为属性集。一般X和Y的关系不确定的，你只能在某种程度上说x有多大可能性属于类y1，比如说x有80%的可能性属于类y1，这时可以把X和Y看做是随机变量，P(Y|X)称为Y的<strong>后验概率</strong>（posterior probability），与之相对的P(Y)称为Y的<strong>先验概率</strong>（prior probability），P(X=x|Y=y1)称之为<strong>条件概率</strong>。</p>
-<p><strong>先验概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过经验来判断事情发生的概率，比如说“贝叶死”的发病率是万分之一，就是先验概率。再比如南方的梅雨季是 6-7 月，就是通过往年的气候总结出来的经验，这个时候下雨的概率就比其他时间高出很多。</p>
-<p><strong>后验概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;后验概率就是发生结果之后，推测原因的概率。比如说某人查出来了患有“贝叶死”，那么患病的原因可能是 A、B 或 C。患有“贝叶死”是因为原因 A 的概率就是后验概率。它是属于条件概率的一种。</p>
-<p><strong>条件概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;事件 A 在另外一个事件 B 已经发生条件下的发生概率，表示为 P(A|B)，读作“在 B 发生的条件下 A 发生的概率”。比如原因 A 的条件下，患有“贝叶死”的概率，就是条件概率。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单说来就是：贝叶斯分类算法的理论基于贝叶斯公式：<br><img src="https://img-blog.csdnimg.cn/20190816085605498.png" alt></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中P(A|B)称为<strong>条件概率</strong>，P(B)<strong>先验概率</strong>，对应P(B|A)为<strong>后验概率</strong>。朴素贝叶斯分类器基于一个简单的假定，即给定的目标值属性之间是相互独立。贝叶斯公式之所以有用是因为在日常生活中，我们可以很容易得到P(A|B)，而很难得出P(B|A)，但我们更关心P(B|A)，所以就可以根据贝叶斯公式来计算。</p>
-<h1 id="三、应用举例"><a href="#三、应用举例" class="headerlink" title="三、应用举例"></a>三、应用举例</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如下表所示，训练数据学习一个朴素贝叶斯分类器并确定x=(2,S)T的类标记y。表中x1、x2为特征，取值的集合分别为X1={1,2,3}，X2={S,M,L}，类标记Y={1,-1}</p>
-<p><img src="https://img-blog.csdnimg.cn/20190816084258206.png" alt><br>根据贝叶斯算法得到如下概率：</p>
-<p>P(Y=1)=9/15，P(Y=-1)=6/15</p>
-<p>P(X1=1|Y=1)=2/9，P(X1=2|Y=1)=3/9，P(X1=3|Y=1)=4/9</p>
-<p>P(X2=S|Y=1)=1/9，P(X2=M|Y=1)=4/9，P(X2=L|Y=1)=4/9</p>
-<p>P(X1=1|Y=-1)=3/6，P(X1=2|Y=-1)=2/6，P(X1=3|Y=-1)=1/6</p>
-<p>P(X2=S|Y=-1)=3/6，P(X2=M|Y=-1)=2/6，P((X2=L|Y=-1)=1/6</p>
-<p>所以对于给定的x=(2,S)T计算：</p>
-<p>P(Y=1)P(X1=2|Y=1)P(X2=S|Y=1)=(9/15)(3/9)(1/9)=1/45</p>
-<p>P(Y=-1)P(X1=2|Y=-1)P(X2=S|Y=-1)=(6/15)(2/6)(1/6)=1/15</p>
-<p>所以分类结果为y=-1</p>
-<h1 id="四、朴素贝叶斯算法的优缺点"><a href="#四、朴素贝叶斯算法的优缺点" class="headerlink" title="四、朴素贝叶斯算法的优缺点"></a>四、朴素贝叶斯算法的优缺点</h1><p><strong>优点：</strong></p>
-<ol>
-<li>朴素贝叶斯模型发源于古典数学理论，有着坚实的数学基础，以及稳定的分类效率；</li>
-<li>对大数量训练和查询时具有较高的速度。即使使用超大规模的训练集，针对每个项目通常也只会有相对较少的特征数，并且对项目的训练和分类也仅仅是特征概率的数学运算而已；</li>
-<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练（即可以实时的对新增的样本进行训练）；</li>
-<li>对缺失数据不太敏感，算法也比较简单，常用于文本分类；</li>
-<li>朴素贝叶斯对结果解释容易理解。</li>
-</ol>
-<p> <strong>缺点</strong></p>
-<ol>
-<li>需要计算先验概率；</li>
-<li>分类决策存在错误率；</li>
-<li>对输入数据的表达形式很敏感；</li>
-<li>由于使用了样本属性独立性的假设，所以如果样本属性有关联时其效果不好。</li>
-</ol>
-<h1 id="五、应用领域"><a href="#五、应用领域" class="headerlink" title="五、应用领域"></a>五、应用领域</h1><ol>
-<li>欺诈检测中使用较多；</li>
-<li>一封电子邮件是否是垃圾邮件；</li>
-<li>一篇文章应该分到科技、政治，还是体育类；</li>
-<li>一段文字表达的是积极的情绪还是消极的情绪；</li>
-<li>人脸识别</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>朴素贝叶斯算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>浅谈机器学习-回归与分类的区别</title>
-    <url>/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习的主要任务便是聚焦于两个问题：分类和回归。本文将浅谈下两者的区别。</p>
-<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归会给出一个具体的结果，例如房价的数据，根据位置、周边、配套等等这些维度，给出一个房价的预测。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类相信大家都不会陌生，生活中会见到很多的应用，比如垃圾邮件识别、信用卡发放等等，就是基于数据集，作出二分类或者多分类的选择。</p>
-<p>浅层： 两者的的预测目标变量类型不同，回归问题是连续变量，分类问题离散变量。<br>中层： 回归问题是定量问题，分类问题是定性问题。<br>高层： 回归与分类的根本区别在于输出空间是否为一个度量空间。<br><img src="https://img-blog.csdnimg.cn/20190318195051810.png" alt></p>
-<h1 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h1><p>分类和回归的区别在于输出变量的类型。</p>
-<p>定量输出称为回归，或者说是连续变量预测；<br>定性输出称为分类，或者说是离散变量预测。</p>
-<p>举个例子：<br>预测明天的气温是多少度，这是一个回归任务；<br>预测明天是阴、晴还是雨，就是一个分类任务。</p>
-<h1 id="应用场景不同"><a href="#应用场景不同" class="headerlink" title="应用场景不同"></a>应用场景不同</h1><p>1.回归问题的应用场景</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归问题通常是用来预测一个值，如预测房价、未来的天气情况等等，例如一个产品的实际价格为500元，通过回归分析预测值为499元，我们认为这是一个比较好的回归分析。一个比较常见的回归算法是线性回归算法（LR）。另外，回归分析用在神经网络上，其最上层是不需要加上softmax函数的，而是直接对前一层累加即可。回归是对真实值的一种逼近预测。</p>
-<p>2.分类问题的应用场景</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类问题是用于将事物打上一个标签，通常结果为离散值。例如判断一幅图片上的动物是一只猫还是一只狗，分类通常是建立在回归之上，分类的最后一层通常要使用softmax函数进行判断其所属类别。分类并没有逼近的概念，最终正确结果只有一个，错误的就是错误的，不会有相近的概念。最常见的分类方法是逻辑回归，或者叫逻辑分类。</p>
-<h1 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类模型和回归模型本质一样，都是要建立映射关系。在实际操作中，我们确实常常将回归问题和分类问题互相转化，即分类模型可将回归模型的输出离散化，回归模型也可将分类模型的输出连续化。（分类问题回归化：逻辑回归；回归问题分类化：年龄预测问题——&gt;年龄段分类问题）</p>
-]]></content>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>回归</tag>
-        <tag>分类</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>推荐系统之矩阵分解(MF)及其python实现</title>
     <url>/2019/07/23/tui-jian-xi-tong-zhi-ju-zhen-fen-jie-mf-ji-qi-python-shi-xian/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目前推荐系统中用的最多的就是矩阵分解方法，在Netflix Prize推荐系统大赛中取得突出效果。以用户-项目评分矩阵为例，矩阵分解就是预测出评分矩阵中的缺失值，然后根据预测值以某种方式向用户推荐。今天以“用户-项目评分矩阵R（M×N）”说明矩阵分解方式的原理以及python实现。</p>
@@ -864,62 +786,6 @@
       </tags>
   </entry>
   <entry>
-    <title>【论文笔记】Adversarial Personalized Ranking for Recommendation (SIGIR2018)</title>
-    <url>/2020/05/28/lun-wen-bi-ji/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>前段时间看了一篇论文：<strong>Adversarial Personalized Ranking for Recommendation</strong>，也就是对抗训练在推荐中的应用。整篇论文的主要思想是：用<strong>BPR模型 + 对抗训练 –&gt; APR模型</strong>的方法提高原推荐模型的鲁棒性。为了加深自己的理解（主要是怕遗忘…），并帮助对此有兴趣的小伙伴，本文将写一些对这篇论文的<strong>重要段落</strong>的翻译和自己的理解。</p>
-<p>论文链接：<a href="http://staff.ustc.edu.cn/~hexn/papers/sigir18-adversarial-ranking.pdf" target="_blank" rel="noopener">http://staff.ustc.edu.cn/~hexn/papers/sigir18-adversarial-ranking.pdf</a></p>
-<h3 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h3><p>对抗性机器学习的最新进展表明，许多最先进的分类器实际上是<strong>非常脆弱</strong>的，容易受到<strong>对抗样本</strong>(adversarial examples)的影响，这些样本是在数据集输入样本中故意加入微小扰动所形成的。一个典型的例子可以在文献[15]的图1中找到，其中显示，通过向熊猫图像中添加小的对抗性扰动，人类肉眼人类很难察觉到扰动的影响，仍可以区分是熊猫，但一个训练有素的分类器会以很高的置信度将之分类为长臂猿。这就指出了仅仅<strong>根据静态标记数据训练模型的固有局限性</strong>。为了解决这一局限性并改进模型泛化，研究人员提出了对抗训练方法。</p>
-<p>然而对抗性机器学习的发展主要集中在计算机视觉领域，但是在信息检索领域并没有出现相关的研究。虽然信息检索的核心任务是排序，但我们指出，许多学习排序(L2R)方法实质上是通过优化分类函数来训练的，如贝叶斯个性化排序(<strong>BPR</strong>)等。这意味着潜在的IR模型也很可能<strong>缺乏稳健性</strong>，并且容易受到某些类型的“对抗性样本”的影响。（<code>底下设计实验证实了这一现象</code>）</p>
-<p>然而，直接嫁接图像领域生成对抗性样本的方式是不可行的，因为推荐者模型的输入主要是<strong>离散特征</strong>（用户ID，项目ID和其他分类变量）。显然，将噪声应用于离散特征是没有意义的，这可能会改变它们原本的语义。</p>
-<p>（小结：那么怎么解决这一问题呢？接下来，文中作者在物品推荐场景上探索了对抗训练的引入，并提出了APR(Adversarial Personalized Ranking)模型。）</p>
-<h3 id="二、准备工作"><a href="#二、准备工作" class="headerlink" title="二、准备工作"></a>二、准备工作</h3><p>简要介绍了矩阵分解推荐模型（MF）和 贝叶斯个性化排名（BPR）。这个地方的新贡献是通过实验证明了BPR(又称MF-BPR)优化的MF模型是不稳定的，并且容易受到参数的对抗扰动影响。</p>
-<h4 id="2-1-MF"><a href="#2-1-MF" class="headerlink" title="2.1 MF"></a>2.1 MF</h4><p>矩阵分解（MF）中将用户和项目分别表示成embedding向量。MF的核心思想就是通过用户和项目的内积当做用户对项目的喜好程度，即 <img src="https://slomoo.oss-cn-beijing.aliyuncs.com/2cd34286dbbd2af68ec619ade364fbf2.jpg" alt> ，其中 θ 表示参数。</p>
-<p>（对于MF不了解的，可以看下我以前写过的一篇文章–&gt;<a href="https://best-yz.cn/2019/07/23/tui-jian-xi-tong-zhi-ju-zhen-fen-jie-mf-ji-qi-python-shi-xian/" target="_blank" rel="noopener">推荐系统之矩阵分解(MF)</a>）</p>
-<h4 id="2-2-BPR"><a href="#2-2-BPR" class="headerlink" title="2.2 BPR"></a>2.2 BPR</h4><p>BPR算法是基于矩阵分解的排序算法，它的算法训练集是一个个的三元组&lt;u,i,j&gt;，表示对用户u来说，商品i的优先级要高于商品j。BPR的目标函数如下，</p>
-<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/1972c0b2c01e48fc1180e1d8a96f043f.md.jpg" alt></p>
-<p>（对于BPR不了解的，推荐看一下这位大佬的讲解–&gt;<a href="https://www.cnblogs.com/pinard/p/9128682.html" target="_blank" rel="noopener">贝叶斯个性化排序(BPR)算法小结</a>）</p>
-<h4 id="2-3-验证MF-BPR容易受对抗噪声干扰"><a href="#2-3-验证MF-BPR容易受对抗噪声干扰" class="headerlink" title="2.3 验证MF-BPR容易受对抗噪声干扰"></a>2.3 验证MF-BPR容易受对抗噪声干扰</h4><p>在图像领域直接在图像数据里增加小的噪声并不会改变图像的视觉内容，而在推荐场景中特征都是离散型的id类特征，如果我们把样本 <img src="https://www.zhihu.com/equation?tex=%28u%2Ci%2Cj%29" alt="[公式]"> 改成 <img src="https://www.zhihu.com/equation?tex=%28u%27%2Ci%2Cj%29" alt="[公式]"> 则样本的语义特征可能变化很大。故在样本级别引入噪声并不合适，于是作者决定在模型参数上引入扰动。作者设计了一个实验来验证BPR算法对于对抗扰动缺乏鲁棒性。</p>
-<p>首先使用通过随机梯度下降（SGD）训练一个MF-BPR直到收敛，然后我们比较添加随机扰动和对抗扰动对MF的嵌入的影响。对于对抗扰动，优化目标如下：</p>
-<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/3ebf38e999f0a206cd795d2653b81c06.jpg" alt></p>
-<p>实验结果如图：</p>
-<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/72e0ee3a294d8d038a6c8816bf06c3cf.md.jpg" alt></p>
-<p>结论1：在Pinterest和Gowalla两个数据集上，MF-BPR模型对随机噪声较为鲁棒，对设计好的特定扰动则较为脆弱，即<strong>添加对抗性噪声会导致性能下降比添加随机噪声更显著</strong>。虽然特定扰动的量级很小，但是模型效果依旧下降明显，说明模型泛化效果偏差，存在过拟合的可能。</p>
-<p>结论2：虽然对抗性扰动仅基于部分训练样本得出，但它对推荐性能具有显着的不利影响。</p>
-<p>（小结：此部分就是证明对抗扰动对推荐是有很明显的影响）</p>
-<h3 id="三、提出方法"><a href="#三、提出方法" class="headerlink" title="三、提出方法"></a>三、提出方法</h3><p>在这部分，我们首先介绍APR，一个个性化排名的对抗性学习框架。在此基础上，我们推导出一个基于SGD的APR通用求解器。最后，我们给出了AMF方法，一个使用MF作为推荐模型的APR实例。</p>
-<h4 id="3-1、APR（Adversarial-Personalized-Ranking）模型定义"><a href="#3-1、APR（Adversarial-Personalized-Ranking）模型定义" class="headerlink" title="3.1、APR（Adversarial Personalized Ranking）模型定义"></a>3.1、APR（Adversarial Personalized Ranking）模型定义</h4><p>我们的目标是设计一个新的目标函数，模型损失函数的设计要涵盖模型本身效果和对扰动鲁棒两个目标。即，既要能满足个性化排序，也要适应对抗扰动。设计了APR损失函数：</p>
-<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/d430c9c1989f40b42d9a1b1e66262a42.md.jpg" alt></p>
-<p>其中，<strong>损失函数第一项即常规的BPR损失，后半项则为加入扰动后的对抗损失</strong>， <img src="https://www.zhihu.com/equation?tex=%5CDelta" alt="[公式]"> 是模型参数上的扰动，而 <img src="https://www.zhihu.com/equation?tex=%5Cvarepsilon" alt="[公式]"> 控制扰动的量级， <img src="https://www.zhihu.com/equation?tex=%5Chat+%5CTheta" alt="[公式]"> 是当前的模型参数。</p>
-<p>上式中，对抗项 <img src="https://www.zhihu.com/equation?tex=L_%7BBPR%7D%28D%7C%5CTheta%2B%5CDelta_%7Badv%7D%29" alt="[公式]"> 可使模型函数更稳定，从而一定程度上可以看做正则化项，文中称作adversarial regularizer，而 <img src="https://www.zhihu.com/equation?tex=%5Clambda" alt="[公式]"> 控制其强度。由于整个过程是<strong>先对 <img src="https://www.zhihu.com/equation?tex=%5CTheta" alt="[公式]"> 进行优化使得损失函数最小，然后对 <img src="https://www.zhihu.com/equation?tex=%5CDelta" alt="[公式]"> 进行优化使得损失函数最大</strong>，所以APR的训练过程看做minimax game，形式化为：</p>
-<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/701b25d6fba2ff075ee5131363105b95.md.jpg" alt></p>
-<h4 id="3-2、APR模型求解"><a href="#3-2、APR模型求解" class="headerlink" title="3.2、APR模型求解"></a>3.2、APR模型求解</h4><p>APR是通用的学习框架， <img src="https://www.zhihu.com/equation?tex=%5Chat+y+_%7Bui%7D%28%5CTheta%29" alt="[公式]"> 具体的定义可变化，只要可导，整个APR框架可通过梯度下降求解。<strong>主体思路是：分步骤计算，先算出最大干扰项，再算在最大干扰项干扰下的最小APRloss.</strong></p>
-<p><strong>Step 1.构建对抗扰动</strong></p>
-<p>给定一个训练样本 <img src="https://www.zhihu.com/equation?tex=%28u%2Ci%2Cj%29" alt="[公式]"> ,构建对抗扰动 <img src="https://www.zhihu.com/equation?tex=%5CDelta_%7Badv%7D" alt="[公式]"> ，去掉不相关的项之后可以形式化为最大化：</p>
-<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/fc63e3d1728d48efff4d4f6c47775039.md.jpg" alt></p>
-<p>文章采用附录中提到的fast gradient method，对目标函数近似成一个线性函数，对 <img src="https://www.zhihu.com/equation?tex=%5CDelta" alt="[公式]"> 求导，然后往梯度方向移动，即有：</p>
-<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/31294dd71a1f23f402ec061a23cd3689.jpg" alt></p>
-<p><strong>Step 2.学习模型参数</strong></p>
-<p>此时，只需要最小化下式：</p>
-<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/50fc80e81bf4a27caa271016745d87c1.md.jpg" alt></p>
-<p>参数更新：<img src="https://slomoo.oss-cn-beijing.aliyuncs.com/d8d21a05278e948c6fa214d5b576ecbc.jpg" alt>，其中η是学习效率</p>
-<p>需要注意，模型的<strong>初始化参数是由BPR算法的训练结果，</strong>这是因为对抗扰动在模型参数开始过拟合的时候加才有意义。与原来常规的训练过程相比，本质相同，只是多了一个计算和添加扰动项的过程。</p>
-<h4 id="3-3、MF-BPR实例化的APR（AMF）"><a href="#3-3、MF-BPR实例化的APR（AMF）" class="headerlink" title="3.3、MF-BPR实例化的APR（AMF）"></a>3.3、MF-BPR实例化的APR（AMF）</h4><p>为了演示APR是如何工作的，我们现在提供了一个具体的推荐方法，一个基本但非常有效的推荐模型。解决方案简单而直接——我们首先用BPR训练MF，然后在我们的APR框架下进一步优化它。我们把这种方法称为对抗性矩阵分解(AMF)。</p>
-<p>由于MF的参数是用户和项目的嵌入向量，我们对嵌入向量加入了对抗性扰动。给定a (u,i)对，扰动下的预测模型定义为:</p>
-<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/2ef09f9c30c3a3c0ba6575907fca93eb.jpg" alt></p>
-<p>根据论文中的公式（8），对干扰项项求偏导：</p>
-<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/99dff97fea6f2e2e4e96c9c18fe29061.jpg" alt></p>
-<p>根据论文中的公式（11），把扰动项具体地代入到矩阵分解MF的表达公式中，对三个变量即扰动的三个方向计算偏导：</p>
-<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/edf5b4d74ffe4e7d8d34d9e209b1650c.md.jpg" alt></p>
-<p><strong>在计算得到最优扰动项后，再对模型的三个参数量进行偏导计算，已实现梯度更新</strong></p>
-<h3 id="四、实验"><a href="#四、实验" class="headerlink" title="四、实验"></a>四、实验</h3><p>具体实验就是用几个数据集来测试模型，根据评价指标来判断模型的效果怎么样，所以这里就不再细讲了。</p>
-]]></content>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>深度学习</tag>
-        <tag>论文</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>数据集的划分</title>
     <url>/2019/07/18/shu-ju-ji-de-hua-fen-xun-lian-ji-yan-zheng-ji-he-ce-shi-ji/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在机器学习中，经常提到训练集和测试集，验证集似有似无。感觉挺好奇的，就仔细查找了文献。以下谈谈训练集、验证集和测试集。</p>
@@ -969,6 +835,63 @@
       <tags>
         <tag>机器学习</tag>
         <tag>数据集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>朴素贝叶斯算法</title>
+    <url>/2019/08/05/po-su-bei-xie-si-suan-fa/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是流行的十大算法之一，该算法是有监督的学习算法，解决的是分类问题，如客户是否流失、是否值得投资、信用等级评定等多分类问题。<strong>该算法的优点在于简单易懂、学习效率高、在某些领域的分类问题中能够与决策树、神经网络相媲美。</strong>但由于该算法以自变量之间的独立（条件特征独立）性和连续变量的正态性假设为前提，就会导致算法精度在某种程度上受影响。</p>
+<h1 id="一、问题的提出"><a href="#一、问题的提出" class="headerlink" title="一、问题的提出"></a>一、问题的提出</h1><p>先举一个具体的例子：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“一所学校里面有 60% 的男生，40% 的女生。男生总是穿长裤，女生则一半穿长裤一半穿裙子。有了这些信息之后我们可以容易地计算“随机选取一个学生，他（她）穿长裤的概率和穿裙子的概率是多大”，这个就是前面说的“正向概率”的计算。然而，假设你走在校园中，迎面走来一个穿长裤的学生（很不幸的是你高度近似，你只看得见他（她）穿的是否长裤，而无法确定他（她）的性别），你能够推断出他（她）是男生的概率是多大吗？”</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们来算一算：假设学校里面人的总数是 U 个。60% 的男生都穿长裤，于是我们得到了 U <em> P(Boy) </em> P(Pants|Boy) 个穿长裤的（男生）（其中 P(Boy) 是男生的概率 = 60%，这里可以简单的理解为男生的比例；P(Pants|Boy) 是条件概率，即在 Boy 这个条件下穿长裤的概率是多大，这里是 100% ，因为所有男生都穿长裤）。40% 的女生里面又有一半（50%）是穿长裤的，于是我们又得到了 U <em> P(Girl) </em> P(Pants|Girl) 个穿长裤的（女生）。加起来一共是 U <em> P(Boy) </em> P(Pants|Boy) + U <em> P(Girl) </em> P(Pants|Girl) 个穿长裤的，其中有 U <em> P(Girl) </em> P(Pants|Girl) 个女生。两者一比就是你要求的答案。<br>下面我们把这个答案形式化一下：我们要求的是 P(Girl|Pants) （穿长裤的人里面有多少女生），我们计算的结果是 U <em> P(Girl) </em> P(Pants|Girl) / [U <em> P(Boy) </em> P(Pants|Boy) + U <em> P(Girl) </em> P(Pants|Girl)] 。容易发现这里校园内人的总数是无关的，可以消去。于是得到</p>
+<p><strong>P(Girl|Pants) = P(Girl) <em> P(Pants|Girl) / [P(Boy) </em> P(Pants|Boy) + P(Girl) * P(Pants|Girl)]</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意，如果把上式收缩起来，分母其实就是 P(Pants) ，分子其实就是 P(Pants, Girl) 。而这个比例很自然地就读作：在穿长裤的人（ P(Pants) ）里面有多少（穿长裤）的女孩（ P(Pants, Girl) ）。<br>进一步得到公式的一般形式：</p>
+<p><strong>P(B|A) = P(A|B) <em> P(B) / [P(A|B) </em> P(B) + P(A|~B) * P(~B) ]</strong></p>
+<p>收缩起来就是：<strong>P(B|A) = P(AB) / P(A)</strong><br>其实这个就等于：<strong>P(B|A) * P(A) = P(AB)</strong></p>
+<h1 id="二、正式的定义"><a href="#二、正式的定义" class="headerlink" title="二、正式的定义"></a>二、正式的定义</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;朴素贝叶斯算法是基于贝叶斯定理与特征条件独立假设的分类方法，然后依据被分类项属于各个类的概率，概率最大者即为所划分的类别。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设输入空间X=（x1,x2,x3…xn），输出类标记为Y=（y1,y2,y3…yn）。x的集合记为X，称为属性集。一般X和Y的关系不确定的，你只能在某种程度上说x有多大可能性属于类y1，比如说x有80%的可能性属于类y1，这时可以把X和Y看做是随机变量，P(Y|X)称为Y的<strong>后验概率</strong>（posterior probability），与之相对的P(Y)称为Y的<strong>先验概率</strong>（prior probability），P(X=x|Y=y1)称之为<strong>条件概率</strong>。</p>
+<p><strong>先验概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过经验来判断事情发生的概率，比如说“贝叶死”的发病率是万分之一，就是先验概率。再比如南方的梅雨季是 6-7 月，就是通过往年的气候总结出来的经验，这个时候下雨的概率就比其他时间高出很多。</p>
+<p><strong>后验概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;后验概率就是发生结果之后，推测原因的概率。比如说某人查出来了患有“贝叶死”，那么患病的原因可能是 A、B 或 C。患有“贝叶死”是因为原因 A 的概率就是后验概率。它是属于条件概率的一种。</p>
+<p><strong>条件概率</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;事件 A 在另外一个事件 B 已经发生条件下的发生概率，表示为 P(A|B)，读作“在 B 发生的条件下 A 发生的概率”。比如原因 A 的条件下，患有“贝叶死”的概率，就是条件概率。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单说来就是：贝叶斯分类算法的理论基于贝叶斯公式：<br><img src="https://img-blog.csdnimg.cn/20190816085605498.png" alt></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中P(A|B)称为<strong>条件概率</strong>，P(B)<strong>先验概率</strong>，对应P(B|A)为<strong>后验概率</strong>。朴素贝叶斯分类器基于一个简单的假定，即给定的目标值属性之间是相互独立。贝叶斯公式之所以有用是因为在日常生活中，我们可以很容易得到P(A|B)，而很难得出P(B|A)，但我们更关心P(B|A)，所以就可以根据贝叶斯公式来计算。</p>
+<h1 id="三、应用举例"><a href="#三、应用举例" class="headerlink" title="三、应用举例"></a>三、应用举例</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如下表所示，训练数据学习一个朴素贝叶斯分类器并确定x=(2,S)T的类标记y。表中x1、x2为特征，取值的集合分别为X1={1,2,3}，X2={S,M,L}，类标记Y={1,-1}</p>
+<p><img src="https://img-blog.csdnimg.cn/20190816084258206.png" alt><br>根据贝叶斯算法得到如下概率：</p>
+<p>P(Y=1)=9/15，P(Y=-1)=6/15</p>
+<p>P(X1=1|Y=1)=2/9，P(X1=2|Y=1)=3/9，P(X1=3|Y=1)=4/9</p>
+<p>P(X2=S|Y=1)=1/9，P(X2=M|Y=1)=4/9，P(X2=L|Y=1)=4/9</p>
+<p>P(X1=1|Y=-1)=3/6，P(X1=2|Y=-1)=2/6，P(X1=3|Y=-1)=1/6</p>
+<p>P(X2=S|Y=-1)=3/6，P(X2=M|Y=-1)=2/6，P((X2=L|Y=-1)=1/6</p>
+<p>所以对于给定的x=(2,S)T计算：</p>
+<p>P(Y=1)P(X1=2|Y=1)P(X2=S|Y=1)=(9/15)(3/9)(1/9)=1/45</p>
+<p>P(Y=-1)P(X1=2|Y=-1)P(X2=S|Y=-1)=(6/15)(2/6)(1/6)=1/15</p>
+<p>所以分类结果为y=-1</p>
+<h1 id="四、朴素贝叶斯算法的优缺点"><a href="#四、朴素贝叶斯算法的优缺点" class="headerlink" title="四、朴素贝叶斯算法的优缺点"></a>四、朴素贝叶斯算法的优缺点</h1><p><strong>优点：</strong></p>
+<ol>
+<li>朴素贝叶斯模型发源于古典数学理论，有着坚实的数学基础，以及稳定的分类效率；</li>
+<li>对大数量训练和查询时具有较高的速度。即使使用超大规模的训练集，针对每个项目通常也只会有相对较少的特征数，并且对项目的训练和分类也仅仅是特征概率的数学运算而已；</li>
+<li>对小规模的数据表现很好，能个处理多分类任务，适合增量式训练（即可以实时的对新增的样本进行训练）；</li>
+<li>对缺失数据不太敏感，算法也比较简单，常用于文本分类；</li>
+<li>朴素贝叶斯对结果解释容易理解。</li>
+</ol>
+<p> <strong>缺点</strong></p>
+<ol>
+<li>需要计算先验概率；</li>
+<li>分类决策存在错误率；</li>
+<li>对输入数据的表达形式很敏感；</li>
+<li>由于使用了样本属性独立性的假设，所以如果样本属性有关联时其效果不好。</li>
+</ol>
+<h1 id="五、应用领域"><a href="#五、应用领域" class="headerlink" title="五、应用领域"></a>五、应用领域</h1><ol>
+<li>欺诈检测中使用较多；</li>
+<li>一封电子邮件是否是垃圾邮件；</li>
+<li>一篇文章应该分到科技、政治，还是体育类；</li>
+<li>一段文字表达的是积极的情绪还是消极的情绪；</li>
+<li>人脸识别</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>朴素贝叶斯算法</tag>
       </tags>
   </entry>
   <entry>
@@ -1026,6 +949,83 @@
 ]]></content>
       <tags>
         <tag>机器学习 - 梯度下降</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浅谈机器学习-回归与分类的区别</title>
+    <url>/2019/08/01/qian-tan-ji-qi-xue-xi-hui-gui-yu-fen-lei-de-qu-bie/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机器学习的主要任务便是聚焦于两个问题：分类和回归。本文将浅谈下两者的区别。</p>
+<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归会给出一个具体的结果，例如房价的数据，根据位置、周边、配套等等这些维度，给出一个房价的预测。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类相信大家都不会陌生，生活中会见到很多的应用，比如垃圾邮件识别、信用卡发放等等，就是基于数据集，作出二分类或者多分类的选择。</p>
+<p>浅层： 两者的的预测目标变量类型不同，回归问题是连续变量，分类问题离散变量。<br>中层： 回归问题是定量问题，分类问题是定性问题。<br>高层： 回归与分类的根本区别在于输出空间是否为一个度量空间。<br><img src="https://img-blog.csdnimg.cn/20190318195051810.png" alt></p>
+<h1 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h1><p>分类和回归的区别在于输出变量的类型。</p>
+<p>定量输出称为回归，或者说是连续变量预测；<br>定性输出称为分类，或者说是离散变量预测。</p>
+<p>举个例子：<br>预测明天的气温是多少度，这是一个回归任务；<br>预测明天是阴、晴还是雨，就是一个分类任务。</p>
+<h1 id="应用场景不同"><a href="#应用场景不同" class="headerlink" title="应用场景不同"></a>应用场景不同</h1><p>1.回归问题的应用场景</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回归问题通常是用来预测一个值，如预测房价、未来的天气情况等等，例如一个产品的实际价格为500元，通过回归分析预测值为499元，我们认为这是一个比较好的回归分析。一个比较常见的回归算法是线性回归算法（LR）。另外，回归分析用在神经网络上，其最上层是不需要加上softmax函数的，而是直接对前一层累加即可。回归是对真实值的一种逼近预测。</p>
+<p>2.分类问题的应用场景</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类问题是用于将事物打上一个标签，通常结果为离散值。例如判断一幅图片上的动物是一只猫还是一只狗，分类通常是建立在回归之上，分类的最后一层通常要使用softmax函数进行判断其所属类别。分类并没有逼近的概念，最终正确结果只有一个，错误的就是错误的，不会有相近的概念。最常见的分类方法是逻辑回归，或者叫逻辑分类。</p>
+<h1 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分类模型和回归模型本质一样，都是要建立映射关系。在实际操作中，我们确实常常将回归问题和分类问题互相转化，即分类模型可将回归模型的输出离散化，回归模型也可将分类模型的输出连续化。（分类问题回归化：逻辑回归；回归问题分类化：年龄预测问题——&gt;年龄段分类问题）</p>
+]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>分类</tag>
+        <tag>回归</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【论文笔记】Adversarial Personalized Ranking for Recommendation (SIGIR2018)</title>
+    <url>/2020/05/28/lun-wen-bi-ji/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>前段时间看了一篇论文：<strong>Adversarial Personalized Ranking for Recommendation</strong>，也就是对抗训练在推荐中的应用。整篇论文的主要思想是：用<strong>BPR模型 + 对抗训练 –&gt; APR模型</strong>的方法提高原推荐模型的鲁棒性。为了加深自己的理解（主要是怕遗忘…），并帮助对此有兴趣的小伙伴，本文将写一些对这篇论文的<strong>重要段落</strong>的翻译和自己的理解。</p>
+<p>论文链接：<a href="http://staff.ustc.edu.cn/~hexn/papers/sigir18-adversarial-ranking.pdf" target="_blank" rel="noopener">http://staff.ustc.edu.cn/~hexn/papers/sigir18-adversarial-ranking.pdf</a></p>
+<h3 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h3><p>对抗性机器学习的最新进展表明，许多最先进的分类器实际上是<strong>非常脆弱</strong>的，容易受到<strong>对抗样本</strong>(adversarial examples)的影响，这些样本是在数据集输入样本中故意加入微小扰动所形成的。一个典型的例子可以在文献[15]的图1中找到，其中显示，通过向熊猫图像中添加小的对抗性扰动，人类肉眼人类很难察觉到扰动的影响，仍可以区分是熊猫，但一个训练有素的分类器会以很高的置信度将之分类为长臂猿。这就指出了仅仅<strong>根据静态标记数据训练模型的固有局限性</strong>。为了解决这一局限性并改进模型泛化，研究人员提出了对抗训练方法。</p>
+<p>然而对抗性机器学习的发展主要集中在计算机视觉领域，但是在信息检索领域并没有出现相关的研究。虽然信息检索的核心任务是排序，但我们指出，许多学习排序(L2R)方法实质上是通过优化分类函数来训练的，如贝叶斯个性化排序(<strong>BPR</strong>)等。这意味着潜在的IR模型也很可能<strong>缺乏稳健性</strong>，并且容易受到某些类型的“对抗性样本”的影响。（<code>底下设计实验证实了这一现象</code>）</p>
+<p>然而，直接嫁接图像领域生成对抗性样本的方式是不可行的，因为推荐者模型的输入主要是<strong>离散特征</strong>（用户ID，项目ID和其他分类变量）。显然，将噪声应用于离散特征是没有意义的，这可能会改变它们原本的语义。</p>
+<p>（小结：那么怎么解决这一问题呢？接下来，文中作者在物品推荐场景上探索了对抗训练的引入，并提出了APR(Adversarial Personalized Ranking)模型。）</p>
+<h3 id="二、准备工作"><a href="#二、准备工作" class="headerlink" title="二、准备工作"></a>二、准备工作</h3><p>简要介绍了矩阵分解推荐模型（MF）和 贝叶斯个性化排名（BPR）。这个地方的新贡献是通过实验证明了BPR(又称MF-BPR)优化的MF模型是不稳定的，并且容易受到参数的对抗扰动影响。</p>
+<h4 id="2-1-MF"><a href="#2-1-MF" class="headerlink" title="2.1 MF"></a>2.1 MF</h4><p>矩阵分解（MF）中将用户和项目分别表示成embedding向量。MF的核心思想就是通过用户和项目的内积当做用户对项目的喜好程度，即 <img src="https://slomoo.oss-cn-beijing.aliyuncs.com/2cd34286dbbd2af68ec619ade364fbf2.jpg" alt> ，其中 θ 表示参数。</p>
+<p>（对于MF不了解的，可以看下我以前写过的一篇文章–&gt;<a href="https://best-yz.cn/2019/07/23/tui-jian-xi-tong-zhi-ju-zhen-fen-jie-mf-ji-qi-python-shi-xian/" target="_blank" rel="noopener">推荐系统之矩阵分解(MF)</a>）</p>
+<h4 id="2-2-BPR"><a href="#2-2-BPR" class="headerlink" title="2.2 BPR"></a>2.2 BPR</h4><p>BPR算法是基于矩阵分解的排序算法，它的算法训练集是一个个的三元组&lt;u,i,j&gt;，表示对用户u来说，商品i的优先级要高于商品j。BPR的目标函数如下，</p>
+<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/1972c0b2c01e48fc1180e1d8a96f043f.md.jpg" alt></p>
+<p>（对于BPR不了解的，推荐看一下这位大佬的讲解–&gt;<a href="https://www.cnblogs.com/pinard/p/9128682.html" target="_blank" rel="noopener">贝叶斯个性化排序(BPR)算法小结</a>）</p>
+<h4 id="2-3-验证MF-BPR容易受对抗噪声干扰"><a href="#2-3-验证MF-BPR容易受对抗噪声干扰" class="headerlink" title="2.3 验证MF-BPR容易受对抗噪声干扰"></a>2.3 验证MF-BPR容易受对抗噪声干扰</h4><p>在图像领域直接在图像数据里增加小的噪声并不会改变图像的视觉内容，而在推荐场景中特征都是离散型的id类特征，如果我们把样本 <img src="https://www.zhihu.com/equation?tex=%28u%2Ci%2Cj%29" alt="[公式]"> 改成 <img src="https://www.zhihu.com/equation?tex=%28u%27%2Ci%2Cj%29" alt="[公式]"> 则样本的语义特征可能变化很大。故在样本级别引入噪声并不合适，于是作者决定在模型参数上引入扰动。作者设计了一个实验来验证BPR算法对于对抗扰动缺乏鲁棒性。</p>
+<p>首先使用通过随机梯度下降（SGD）训练一个MF-BPR直到收敛，然后我们比较添加随机扰动和对抗扰动对MF的嵌入的影响。对于对抗扰动，优化目标如下：</p>
+<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/3ebf38e999f0a206cd795d2653b81c06.jpg" alt></p>
+<p>实验结果如图：</p>
+<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/72e0ee3a294d8d038a6c8816bf06c3cf.md.jpg" alt></p>
+<p>结论1：在Pinterest和Gowalla两个数据集上，MF-BPR模型对随机噪声较为鲁棒，对设计好的特定扰动则较为脆弱，即<strong>添加对抗性噪声会导致性能下降比添加随机噪声更显著</strong>。虽然特定扰动的量级很小，但是模型效果依旧下降明显，说明模型泛化效果偏差，存在过拟合的可能。</p>
+<p>结论2：虽然对抗性扰动仅基于部分训练样本得出，但它对推荐性能具有显着的不利影响。</p>
+<p>（小结：此部分就是证明对抗扰动对推荐是有很明显的影响）</p>
+<h3 id="三、提出方法"><a href="#三、提出方法" class="headerlink" title="三、提出方法"></a>三、提出方法</h3><p>在这部分，我们首先介绍APR，一个个性化排名的对抗性学习框架。在此基础上，我们推导出一个基于SGD的APR通用求解器。最后，我们给出了AMF方法，一个使用MF作为推荐模型的APR实例。</p>
+<h4 id="3-1、APR（Adversarial-Personalized-Ranking）模型定义"><a href="#3-1、APR（Adversarial-Personalized-Ranking）模型定义" class="headerlink" title="3.1、APR（Adversarial Personalized Ranking）模型定义"></a>3.1、APR（Adversarial Personalized Ranking）模型定义</h4><p>我们的目标是设计一个新的目标函数，模型损失函数的设计要涵盖模型本身效果和对扰动鲁棒两个目标。即，既要能满足个性化排序，也要适应对抗扰动。设计了APR损失函数：</p>
+<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/d430c9c1989f40b42d9a1b1e66262a42.md.jpg" alt></p>
+<p>其中，<strong>损失函数第一项即常规的BPR损失，后半项则为加入扰动后的对抗损失</strong>， <img src="https://www.zhihu.com/equation?tex=%5CDelta" alt="[公式]"> 是模型参数上的扰动，而 <img src="https://www.zhihu.com/equation?tex=%5Cvarepsilon" alt="[公式]"> 控制扰动的量级， <img src="https://www.zhihu.com/equation?tex=%5Chat+%5CTheta" alt="[公式]"> 是当前的模型参数。</p>
+<p>上式中，对抗项 <img src="https://www.zhihu.com/equation?tex=L_%7BBPR%7D%28D%7C%5CTheta%2B%5CDelta_%7Badv%7D%29" alt="[公式]"> 可使模型函数更稳定，从而一定程度上可以看做正则化项，文中称作adversarial regularizer，而 <img src="https://www.zhihu.com/equation?tex=%5Clambda" alt="[公式]"> 控制其强度。由于整个过程是<strong>先对 <img src="https://www.zhihu.com/equation?tex=%5CTheta" alt="[公式]"> 进行优化使得损失函数最小，然后对 <img src="https://www.zhihu.com/equation?tex=%5CDelta" alt="[公式]"> 进行优化使得损失函数最大</strong>，所以APR的训练过程看做minimax game，形式化为：</p>
+<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/701b25d6fba2ff075ee5131363105b95.md.jpg" alt></p>
+<h4 id="3-2、APR模型求解"><a href="#3-2、APR模型求解" class="headerlink" title="3.2、APR模型求解"></a>3.2、APR模型求解</h4><p>APR是通用的学习框架， <img src="https://www.zhihu.com/equation?tex=%5Chat+y+_%7Bui%7D%28%5CTheta%29" alt="[公式]"> 具体的定义可变化，只要可导，整个APR框架可通过梯度下降求解。<strong>主体思路是：分步骤计算，先算出最大干扰项，再算在最大干扰项干扰下的最小APRloss.</strong></p>
+<p><strong>Step 1.构建对抗扰动</strong></p>
+<p>给定一个训练样本 <img src="https://www.zhihu.com/equation?tex=%28u%2Ci%2Cj%29" alt="[公式]"> ,构建对抗扰动 <img src="https://www.zhihu.com/equation?tex=%5CDelta_%7Badv%7D" alt="[公式]"> ，去掉不相关的项之后可以形式化为最大化：</p>
+<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/fc63e3d1728d48efff4d4f6c47775039.md.jpg" alt></p>
+<p>文章采用附录中提到的fast gradient method，对目标函数近似成一个线性函数，对 <img src="https://www.zhihu.com/equation?tex=%5CDelta" alt="[公式]"> 求导，然后往梯度方向移动，即有：</p>
+<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/31294dd71a1f23f402ec061a23cd3689.jpg" alt></p>
+<p><strong>Step 2.学习模型参数</strong></p>
+<p>此时，只需要最小化下式：</p>
+<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/50fc80e81bf4a27caa271016745d87c1.md.jpg" alt></p>
+<p>参数更新：<img src="https://slomoo.oss-cn-beijing.aliyuncs.com/d8d21a05278e948c6fa214d5b576ecbc.jpg" alt>，其中η是学习效率</p>
+<p>需要注意，模型的<strong>初始化参数是由BPR算法的训练结果，</strong>这是因为对抗扰动在模型参数开始过拟合的时候加才有意义。与原来常规的训练过程相比，本质相同，只是多了一个计算和添加扰动项的过程。</p>
+<h4 id="3-3、MF-BPR实例化的APR（AMF）"><a href="#3-3、MF-BPR实例化的APR（AMF）" class="headerlink" title="3.3、MF-BPR实例化的APR（AMF）"></a>3.3、MF-BPR实例化的APR（AMF）</h4><p>为了演示APR是如何工作的，我们现在提供了一个具体的推荐方法，一个基本但非常有效的推荐模型。解决方案简单而直接——我们首先用BPR训练MF，然后在我们的APR框架下进一步优化它。我们把这种方法称为对抗性矩阵分解(AMF)。</p>
+<p>由于MF的参数是用户和项目的嵌入向量，我们对嵌入向量加入了对抗性扰动。给定a (u,i)对，扰动下的预测模型定义为:</p>
+<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/2ef09f9c30c3a3c0ba6575907fca93eb.jpg" alt></p>
+<p>根据论文中的公式（8），对干扰项项求偏导：</p>
+<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/99dff97fea6f2e2e4e96c9c18fe29061.jpg" alt></p>
+<p>根据论文中的公式（11），把扰动项具体地代入到矩阵分解MF的表达公式中，对三个变量即扰动的三个方向计算偏导：</p>
+<p><img src="https://slomoo.oss-cn-beijing.aliyuncs.com/edf5b4d74ffe4e7d8d34d9e209b1650c.md.jpg" alt></p>
+<p><strong>在计算得到最优扰动项后，再对模型的三个参数量进行偏导计算，已实现梯度更新</strong></p>
+<h3 id="四、实验"><a href="#四、实验" class="headerlink" title="四、实验"></a>四、实验</h3><p>具体实验就是用几个数据集来测试模型，根据评价指标来判断模型的效果怎么样，所以这里就不再细讲了。</p>
+]]></content>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>深度学习</tag>
+        <tag>论文</tag>
       </tags>
   </entry>
 </search>
